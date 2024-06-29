@@ -3,13 +3,14 @@ const project = new cdk.JsiiProject({
   author: 'Dave Shepherd',
   authorAddress: 'dave.shepherd@endor.me.uk',
   defaultReleaseBranch: 'main',
+  gitignore: ['.npmrc', '.vscode'],
   jsiiVersion: '~5.4.0',
   name: 'projen-jsii',
+  projenrcTs: true,
   publishToPypi: {
     distName: 'projen_jsii',
     module: 'projen_jsii',
   },
-  projenrcTs: true,
   repositoryUrl: 'https://github.com/daveshepherd/projen-jsii.git',
 
   // deps: [],                /* Runtime dependencies of this module. */
