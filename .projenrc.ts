@@ -5,8 +5,12 @@ const project = new cdk.JsiiProject({
   defaultReleaseBranch: 'main',
   jsiiVersion: '~5.4.0',
   name: 'projen-jsii',
+  publishToPypi: {
+    distName: 'projen_jsii',
+    module: 'projen_jsii',
+  },
   projenrcTs: true,
-  repositoryUrl: 'https://github.com/dave.shepherd/projen-jsii.git',
+  repositoryUrl: 'https://github.com/daveshepherd/projen-jsii.git',
 
   // deps: [],                /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
