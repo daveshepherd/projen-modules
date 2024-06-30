@@ -3,9 +3,11 @@ const project = new cdk.JsiiProject({
   author: 'Dave Shepherd',
   authorAddress: 'dave.shepherd@endor.me.uk',
   defaultReleaseBranch: 'main',
+  devDeps: ['constructs', 'projen'],
   gitignore: ['.npmrc', '.vscode'],
   jsiiVersion: '~5.4.0',
   name: 'projen-jsii',
+  peerDeps: ['constructs', 'projen'],
   projenrcTs: true,
   publishToPypi: {
     distName: 'projen_jsii',
