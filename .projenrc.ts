@@ -1,5 +1,6 @@
-import { cdk } from 'projen';
-const project = new cdk.JsiiProject({
+import { JsiiProject } from './src/jsii';
+
+const project = new JsiiProject({
   author: 'Dave Shepherd',
   authorAddress: 'dave.shepherd@endor.me.uk',
   defaultReleaseBranch: 'main',
