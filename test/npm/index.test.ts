@@ -1,5 +1,5 @@
 import { synthSnapshot } from 'projen/lib/util/synth';
-import { NpmPackage } from '../src/npm';
+import { NpmPackage } from '../../src/npm';
 
 describe('NPM Package', () => {
   it('synthesizes', () => {

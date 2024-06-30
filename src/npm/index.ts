@@ -1,6 +1,6 @@
 import { typescript } from 'projen';
-import { NpmCircleCi } from './circleci';
-import { mergeOptions } from './utils/merge-options';
+import { NpmCircleCi } from '../circleci';
+import { mergeOptions } from '../utils/merge-options';
 
 export interface NpmPackageOptions
   extends typescript.TypeScriptProjectOptions {}
