@@ -1,7 +1,7 @@
 import { synthSnapshot } from 'projen/lib/util/synth';
 import { JsiiProject } from '../../src/jsii';
 
-describe('NPM Package', () => {
+describe('JSII Package', () => {
   it('synthesizes', () => {
     const project = new JsiiProject({
       defaultReleaseBranch: 'main',
