@@ -1,3 +1,4 @@
+import { github } from 'projen';
 import { JsiiProject } from './src/jsii';
 
 const project = new JsiiProject({
@@ -6,6 +7,9 @@ const project = new JsiiProject({
   defaultReleaseBranch: 'main',
   devDeps: ['constructs', 'projen'],
   gitignore: ['.npmrc', '.vscode'],
+  githubOptions: {
+    projenCredentials: github.GithubCredentials.fromApp({}),
+  },
   jsiiVersion: '~5.4.0',
   name: 'projen-jsii',
   peerDeps: ['constructs', 'projen'],
