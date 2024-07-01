@@ -8,11 +8,6 @@ function getOptions(options: PythonPackageOptions) {
 
   const defaults = {
     name,
-    autoMerge: false,
-    githubOptions: {
-      workflows: false,
-    },
-    projenrcTs: true,
     readme: {
       filename: 'README.md',
       contents: `# ${name}
