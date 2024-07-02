@@ -1,13 +1,29 @@
 import { PythonProject, PythonProjectOptions } from 'projen/lib/python';
 import { mergeOptions } from '../utils/merge-options';
 
-export interface PythonPackageOptions extends PythonProjectOptions {}
+export interface PythonPackageOptions extends PythonProjectOptions {
+  /**
+   * Include a GitHub pull request template.
+   *
+   * @default true
+   */
+  readonly pullRequestTemplate?: boolean;
+
+  /**
+   * The contents of the pull request template.
+   *
+   * @default - default content
+   */
+  readonly pullRequestTemplateContents?: string[];
+}
 
 function getOptions(options: PythonPackageOptions) {
   const { name } = options;
 
   const defaults = {
     name,
+    pullRequestTemplate: true,
+    pullRequestTemplateContents: ['Change me!'],
     readme: {
       filename: 'README.md',
       contents: `# ${name}
@@ -27,5 +43,11 @@ export class PythonPackage extends PythonProject {
     super({
       ...mergedOptions,
     });
+
+    if (mergedOptions.pullRequestTemplate ?? true) {
+      this.github?.addPullRequestTemplate(
+        ...(mergedOptions.pullRequestTemplateContents ?? []),
+      );
+    }
   }
 }

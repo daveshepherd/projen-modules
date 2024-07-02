@@ -8685,6 +8685,8 @@ const pythonPackageOptions: PythonPackageOptions = { ... }
 | <code><a href="#projen-jsii.PythonPackageOptions.property.setuptools">setuptools</a></code> | <code>boolean</code> | Use setuptools with a setup.py script for packaging and publishing. |
 | <code><a href="#projen-jsii.PythonPackageOptions.property.venv">venv</a></code> | <code>boolean</code> | Use venv to manage a virtual environment for installing dependencies inside. |
 | <code><a href="#projen-jsii.PythonPackageOptions.property.venvOptions">venvOptions</a></code> | <code>projen.python.VenvOptions</code> | Venv options. |
+| <code><a href="#projen-jsii.PythonPackageOptions.property.pullRequestTemplate">pullRequestTemplate</a></code> | <code>boolean</code> | Include a GitHub pull request template. |
+| <code><a href="#projen-jsii.PythonPackageOptions.property.pullRequestTemplateContents">pullRequestTemplateContents</a></code> | <code>string[]</code> | The contents of the pull request template. |
 
 ---
 
@@ -9480,6 +9482,32 @@ public readonly venvOptions: VenvOptions;
 - *Default:* defaults
 
 Venv options.
+
+---
+
+##### `pullRequestTemplate`<sup>Optional</sup> <a name="pullRequestTemplate" id="projen-jsii.PythonPackageOptions.property.pullRequestTemplate"></a>
+
+```typescript
+public readonly pullRequestTemplate: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Include a GitHub pull request template.
+
+---
+
+##### `pullRequestTemplateContents`<sup>Optional</sup> <a name="pullRequestTemplateContents" id="projen-jsii.PythonPackageOptions.property.pullRequestTemplateContents"></a>
+
+```typescript
+public readonly pullRequestTemplateContents: string[];
+```
+
+- *Type:* string[]
+- *Default:* default content
+
+The contents of the pull request template.
 
 ---
 
