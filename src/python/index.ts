@@ -1,4 +1,5 @@
 import { PythonProject, PythonProjectOptions } from 'projen/lib/python';
+import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../github/pull-request-template';
 import { mergeOptions } from '../utils/merge-options';
 
 export interface PythonPackageOptions extends PythonProjectOptions {
@@ -23,7 +24,7 @@ function getOptions(options: PythonPackageOptions) {
   const defaults = {
     name,
     pullRequestTemplate: true,
-    pullRequestTemplateContents: ['Change me!'],
+    pullRequestTemplateContents: DEFAULT_PULL_REQUEST_TEMPLATE,
     readme: {
       filename: 'README.md',
       contents: `# ${name}

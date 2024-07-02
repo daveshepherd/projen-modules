@@ -1,4 +1,5 @@
 import { cdk } from 'projen';
+import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../github/pull-request-template';
 import { mergeOptions } from '../utils/merge-options';
 
 export interface JsiiProjectOptions extends cdk.JsiiProjectOptions {}
@@ -11,19 +12,7 @@ function getOptions(options: JsiiProjectOptions) {
     autoMerge: false,
     defaultReleaseBranch: 'main',
     gitignore: ['.npmrc', '.vscode'],
-    pullRequestTemplateContents: [
-      '### Background',
-      '_Short description of issue being resolved or a feature being added._',
-      '',
-      '**JIRA TICKET**: [SAB-](https://unibuddy.atlassian.net/browse/SAB-)',
-      '',
-      '### Problems Encountered / Decisions Made / Potential Solutions Abandoned',
-      '_Any problems you had when working on the PR and what decisions or trade-offs you had to make._',
-      '',
-      '### Check List',
-      '* [ ] Added tests for all new code.',
-      '* [ ] Added comments and documentation for new code.',
-    ],
+    pullRequestTemplateContents: DEFAULT_PULL_REQUEST_TEMPLATE,
     projenrcTs: true,
     readme: {
       filename: 'README.md',
