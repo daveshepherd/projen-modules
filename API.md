@@ -4116,6 +4116,7 @@ const jsiiProjectOptions: JsiiProjectOptions = { ... }
 | <code><a href="#projen-modules.JsiiProjectOptions.property.publishToPypi">publishToPypi</a></code> | <code>projen.cdk.JsiiPythonTarget</code> | Publish to pypi. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.python">python</a></code> | <code>projen.cdk.JsiiPythonTarget</code> | *No description.* |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.rootdir">rootdir</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.codeOwners">codeOwners</a></code> | <code>string[]</code> | List of teams used to generate the CODEOWNERS file. |
 
 ---
 
@@ -6395,6 +6396,19 @@ public readonly rootdir: string;
 
 ---
 
+##### `codeOwners`<sup>Required</sup> <a name="codeOwners" id="projen-modules.JsiiProjectOptions.property.codeOwners"></a>
+
+```typescript
+public readonly codeOwners: string[];
+```
+
+- *Type:* string[]
+- *Default:* []
+
+List of teams used to generate the CODEOWNERS file.
+
+---
+
 ### NpmPackageOptions <a name="NpmPackageOptions" id="projen-modules.NpmPackageOptions"></a>
 
 #### Initializer <a name="Initializer" id="projen-modules.NpmPackageOptions.Initializer"></a>
@@ -6554,6 +6568,7 @@ const npmPackageOptions: NpmPackageOptions = { ... }
 | <code><a href="#projen-modules.NpmPackageOptions.property.tsconfigDevFile">tsconfigDevFile</a></code> | <code>string</code> | The name of the development tsconfig.json file. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.tsJestOptions">tsJestOptions</a></code> | <code>projen.typescript.TsJestOptions</code> | Options for ts-jest. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.typescriptVersion">typescriptVersion</a></code> | <code>string</code> | TypeScript version to use. |
+| <code><a href="#projen-modules.NpmPackageOptions.property.codeOwners">codeOwners</a></code> | <code>string[]</code> | List of teams used to generate the CODEOWNERS file. |
 
 ---
 
@@ -8614,6 +8629,19 @@ same minor, so we recommend using a `~` dependency (e.g. `~1.2.3`).
 
 ---
 
+##### `codeOwners`<sup>Required</sup> <a name="codeOwners" id="projen-modules.NpmPackageOptions.property.codeOwners"></a>
+
+```typescript
+public readonly codeOwners: string[];
+```
+
+- *Type:* string[]
+- *Default:* []
+
+List of teams used to generate the CODEOWNERS file.
+
+---
+
 ### PythonPackageOptions <a name="PythonPackageOptions" id="projen-modules.PythonPackageOptions"></a>
 
 #### Initializer <a name="Initializer" id="projen-modules.PythonPackageOptions.Initializer"></a>
@@ -8685,6 +8713,7 @@ const pythonPackageOptions: PythonPackageOptions = { ... }
 | <code><a href="#projen-modules.PythonPackageOptions.property.setuptools">setuptools</a></code> | <code>boolean</code> | Use setuptools with a setup.py script for packaging and publishing. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.venv">venv</a></code> | <code>boolean</code> | Use venv to manage a virtual environment for installing dependencies inside. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.venvOptions">venvOptions</a></code> | <code>projen.python.VenvOptions</code> | Venv options. |
+| <code><a href="#projen-modules.PythonPackageOptions.property.codeOwners">codeOwners</a></code> | <code>string[]</code> | List of teams used to generate the CODEOWNERS file. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.pullRequestTemplate">pullRequestTemplate</a></code> | <code>boolean</code> | Include a GitHub pull request template. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.pullRequestTemplateContents">pullRequestTemplateContents</a></code> | <code>string[]</code> | The contents of the pull request template. |
 
@@ -9482,6 +9511,19 @@ public readonly venvOptions: VenvOptions;
 - *Default:* defaults
 
 Venv options.
+
+---
+
+##### `codeOwners`<sup>Required</sup> <a name="codeOwners" id="projen-modules.PythonPackageOptions.property.codeOwners"></a>
+
+```typescript
+public readonly codeOwners: string[];
+```
+
+- *Type:* string[]
+- *Default:* []
+
+List of teams used to generate the CODEOWNERS file.
 
 ---
 

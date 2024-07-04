@@ -276,6 +276,7 @@ workflows:
 /.projen/deps.json linguist-generated
 /.projen/files.json linguist-generated
 /.projen/tasks.json linguist-generated
+/CODEOWNERS linguist-generated
 /LICENSE linguist-generated
 /package.json linguist-generated
 /tsconfig.dev.json linguist-generated
@@ -338,6 +339,7 @@ junit.xml
 /lib
 /dist/
 !/.eslintrc.json
+!/CODEOWNERS
 !/.circleci/config.yml
 !/.projenrc.ts
 ",
@@ -363,6 +365,7 @@ dist
 /.projenrc.js
 tsconfig.tsbuildinfo
 /.eslintrc.json
+CODEOWNERS
 /.gitattributes
 /.projenrc.ts
 /projenrc
@@ -451,6 +454,7 @@ tsconfig.tsbuildinfo
       ".projen/deps.json",
       ".projen/files.json",
       ".projen/tasks.json",
+      "CODEOWNERS",
       "LICENSE",
       "tsconfig.dev.json",
       "tsconfig.json",
@@ -714,6 +718,7 @@ tsconfig.tsbuildinfo
       },
     },
   },
+  "CODEOWNERS": "* @unibuddy/test",
   "LICENSE": "
                                  Apache License
                            Version 2.0, January 2004

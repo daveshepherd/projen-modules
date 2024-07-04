@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CodeOwners matches the snapshot and includes CODEOWNERS in the npmignore file 1`] = `"* @unibuddy/test-team"`;

@@ -12,6 +12,7 @@ exports[`Python Package synthesizes 1`] = `
 /.projen/deps.json linguist-generated
 /.projen/files.json linguist-generated
 /.projen/tasks.json linguist-generated
+/CODEOWNERS linguist-generated
 /requirements-dev.txt linguist-generated
 /requirements.txt linguist-generated",
   ".github/pull_request_template.md": "### Background
@@ -139,6 +140,7 @@ dmypy.json
 .pyre/
 .pytype/
 cython_debug/
+!/CODEOWNERS
 !/.github/pull_request_template.md
 !/.projenrc.py
 ",
@@ -167,6 +169,7 @@ cython_debug/
       ".projen/deps.json",
       ".projen/files.json",
       ".projen/tasks.json",
+      "CODEOWNERS",
       "requirements-dev.txt",
       "requirements.txt",
     ],
@@ -297,6 +300,7 @@ cython_debug/
       },
     },
   },
+  "CODEOWNERS": "* @unibuddy/test",
   "README.md": "# test
 
 Example README

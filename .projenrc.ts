@@ -4,6 +4,7 @@ import { JsiiProject } from './src/jsii';
 const project = new JsiiProject({
   author: 'Dave Shepherd',
   authorAddress: 'dave.shepherd@endor.me.uk',
+  codeOwners: ['sabre'],
   defaultReleaseBranch: 'main',
   devDeps: ['constructs', 'projen'],
   gitignore: ['.npmrc', '.vscode'],

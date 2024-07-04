@@ -4,15 +4,17 @@ import { JsiiProject } from '../../src/jsii';
 describe('JSII Package', () => {
   it('synthesizes', () => {
     const project = new JsiiProject({
-      defaultReleaseBranch: 'main',
-      name: 'test',
       author: 'Test',
       authorAddress: 'test@example.com',
+      codeOwners: ['test'],
+      defaultReleaseBranch: 'main',
+      name: 'test',
       repositoryUrl: 'test.com',
     });
 
     const output = synthSnapshot(project);
 
+    expect(output.CODEOWNERS).toBeDefined();
     expect(output).toMatchSnapshot();
   });
 });

@@ -1,8 +1,15 @@
 import { cdk } from 'projen';
+import { CodeOwners } from '../github/codeowners';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../github/pull-request-template';
 import { mergeOptions } from '../utils/merge-options';
 
-export interface JsiiProjectOptions extends cdk.JsiiProjectOptions {}
+export interface JsiiProjectOptions extends cdk.JsiiProjectOptions {
+  /**
+   * List of teams used to generate the CODEOWNERS file
+   * @defaultValue []
+   */
+  readonly codeOwners: Array<string>;
+}
 
 function getOptions(options: JsiiProjectOptions) {
   const { name } = options;
@@ -33,5 +40,7 @@ export class JsiiProject extends cdk.JsiiProject {
     super({
       ...mergedOptions,
     });
+
+    new CodeOwners(this, mergedOptions.codeOwners);
   }
 }

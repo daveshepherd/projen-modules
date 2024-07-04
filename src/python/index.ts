@@ -1,8 +1,14 @@
 import { PythonProject, PythonProjectOptions } from 'projen/lib/python';
+import { CodeOwners } from '../github/codeowners';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../github/pull-request-template';
 import { mergeOptions } from '../utils/merge-options';
 
 export interface PythonPackageOptions extends PythonProjectOptions {
+  /**
+   * List of teams used to generate the CODEOWNERS file
+   * @defaultValue []
+   */
+  readonly codeOwners: Array<string>;
   /**
    * Include a GitHub pull request template.
    *
@@ -45,6 +51,7 @@ export class PythonPackage extends PythonProject {
       ...mergedOptions,
     });
 
+    new CodeOwners(this, mergedOptions.codeOwners);
     if (mergedOptions.pullRequestTemplate ?? true) {
       this.github?.addPullRequestTemplate(
         ...(mergedOptions.pullRequestTemplateContents ?? []),
