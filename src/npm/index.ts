@@ -37,6 +37,12 @@ Example README
   return mergeOptions(defaults, options);
 }
 
+/**
+ * A NPM/node package in TypeScript
+ *
+ *
+ * @pjid npm-package
+ */
 export class NpmPackage extends typescript.TypeScriptProject {
   constructor(options: NpmPackageOptions) {
     const mergedOptions = getOptions(options);

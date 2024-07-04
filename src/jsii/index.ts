@@ -33,6 +33,12 @@ Example README
   return mergeOptions(defaults, options);
 }
 
+/**
+ * A JSII project in TypeScript
+ *
+ *
+ * @pjid jsii-project
+ */
 export class JsiiProject extends cdk.JsiiProject {
   constructor(options: JsiiProjectOptions) {
     const mergedOptions = getOptions(options);

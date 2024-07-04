@@ -43,6 +43,12 @@ Example README
   return mergeOptions(defaults, options);
 }
 
+/**
+ * A Python package
+ *
+ *
+ * @pjid python-package
+ */
 export class PythonPackage extends PythonProject {
   constructor(options: PythonPackageOptions) {
     const mergedOptions = getOptions(options);

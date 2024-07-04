@@ -4,6 +4,8 @@
 
 ### JsiiProject <a name="JsiiProject" id="projen-modules.JsiiProject"></a>
 
+A JSII project in TypeScript.
+
 #### Initializers <a name="Initializers" id="projen-modules.JsiiProject.Initializer"></a>
 
 ```typescript
@@ -1505,6 +1507,8 @@ public readonly DEFAULT_TS_JEST_TRANFORM_PATTERN: string;
 
 ### NpmPackage <a name="NpmPackage" id="projen-modules.NpmPackage"></a>
 
+A NPM/node package in TypeScript.
+
 #### Initializers <a name="Initializers" id="projen-modules.NpmPackage.Initializer"></a>
 
 ```typescript
@@ -3005,6 +3009,8 @@ public readonly DEFAULT_TS_JEST_TRANFORM_PATTERN: string;
 ---
 
 ### PythonPackage <a name="PythonPackage" id="projen-modules.PythonPackage"></a>
+
+A Python package.
 
 #### Initializers <a name="Initializers" id="projen-modules.PythonPackage.Initializer"></a>
 
