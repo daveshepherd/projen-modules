@@ -1,8 +1,8 @@
 {
-  "name": "projen-jsii",
+  "name": "projen-modules",
   "repository": {
     "type": "git",
-    "url": "https://github.com/daveshepherd/projen-jsii.git"
+    "url": "https://github.com/daveshepherd/projen-modules.git"
   },
   "scripts": {
     "build": "npx projen build",
@@ -115,8 +115,8 @@
     "outdir": "dist",
     "targets": {
       "python": {
-        "distName": "projen_jsii",
-        "module": "projen_jsii"
+        "distName": "projen_modules",
+        "module": "projen_modules"
       }
     },
     "tsc": {

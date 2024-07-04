@@ -11,14 +11,14 @@ const project = new JsiiProject({
     projenCredentials: github.GithubCredentials.fromApp({}),
   },
   jsiiVersion: '~5.4.0',
-  name: 'projen-jsii',
+  name: 'projen-modules',
   peerDeps: ['constructs', 'projen'],
   projenrcTs: true,
   publishToPypi: {
-    distName: 'projen_jsii',
-    module: 'projen_jsii',
+    distName: 'projen_modules',
+    module: 'projen_modules',
   },
-  repositoryUrl: 'https://github.com/daveshepherd/projen-jsii.git',
+  repositoryUrl: 'https://github.com/daveshepherd/projen-modules.git',
 
   // deps: [],                /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
