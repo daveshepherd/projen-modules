@@ -1,14 +1,28 @@
 import { cdk } from 'projen';
+import { JsiiProjectOptions } from './jsii-project-options';
+import { Readme } from '../components/readme';
 import { CodeOwners } from '../github/codeowners';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../github/pull-request-template';
 import { mergeOptions } from '../utils/merge-options';
 
-export interface JsiiProjectOptions extends cdk.JsiiProjectOptions {
+export interface ReadmeProps {
   /**
-   * List of teams used to generate the CODEOWNERS file
+   * If false, the README.md file will not be generated
+   * @defaultValue true
+   */
+  readonly enable?: boolean;
+  /**
+   * The name of the README.md file
+   *
+   * @defaultValue "README.md"
+   * @example "ANOTHER_README.md"
+   */
+  readonly filename?: string;
+  /**
+   * List lines to add to the README file
    * @defaultValue []
    */
-  readonly codeOwners: Array<string>;
+  readonly lines?: Array<string>;
 }
 
 function getOptions(options: JsiiProjectOptions) {
@@ -22,11 +36,9 @@ function getOptions(options: JsiiProjectOptions) {
     pullRequestTemplateContents: DEFAULT_PULL_REQUEST_TEMPLATE,
     projenrcTs: true,
     readme: {
+      enable: true,
       filename: 'README.md',
-      contents: `# ${name}
-
-Example README
-    `,
+      lines: [],
     },
   } satisfies Partial<JsiiProjectOptions>;
 
@@ -40,13 +52,23 @@ Example README
  * @pjid jsii-project
  */
 export class JsiiProject extends cdk.JsiiProject {
+  readme?: Readme;
+
   constructor(options: JsiiProjectOptions) {
     const mergedOptions = getOptions(options);
 
     super({
-      ...mergedOptions,
+      ...(mergedOptions as cdk.JsiiProjectOptions),
     });
+    if (mergedOptions.readme.enable) {
+      this.readme = new Readme(this, {
+        filename: mergedOptions.readme.filename,
+        lines: mergedOptions.readme.lines,
+      });
+    }
 
     new CodeOwners(this, mergedOptions.codeOwners);
   }
 }
+
+export * from './jsii-project-options';

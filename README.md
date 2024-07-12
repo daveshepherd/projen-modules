@@ -1,4 +1,4 @@
-# Projen Modules
+# projen-modules
 
 ## Creating a new project
 

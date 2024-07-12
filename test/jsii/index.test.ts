@@ -17,4 +17,22 @@ describe('JSII Package', () => {
     expect(output.CODEOWNERS).toBeDefined();
     expect(output).toMatchSnapshot();
   });
+  it('disable README', () => {
+    const project = new JsiiProject({
+      author: 'Test',
+      authorAddress: 'test@example.com',
+      codeOwners: ['test'],
+      defaultReleaseBranch: 'main',
+      name: 'test',
+      readme: {
+        enable: false,
+      },
+      repositoryUrl: 'test.com',
+    });
+
+    const output = synthSnapshot(project);
+
+    expect(output.CODEOWNERS).toBeDefined();
+    expect(output).toMatchSnapshot();
+  });
 });

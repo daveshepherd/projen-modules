@@ -50,5 +50,7 @@ junit.xml
 .jsii
 tsconfig.json
 !/API.md
+!/README.md
 !/CODEOWNERS
 !/.projenrc.ts
+!/src/jsii/jsii-project-options.ts

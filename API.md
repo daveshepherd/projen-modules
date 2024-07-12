@@ -722,6 +722,7 @@ When given a project, this it the project itself.
 | <code><a href="#projen-modules.JsiiProject.property.eslint">eslint</a></code> | <code>projen.javascript.Eslint</code> | *No description.* |
 | <code><a href="#projen-modules.JsiiProject.property.tsconfig">tsconfig</a></code> | <code>projen.javascript.TypescriptConfig</code> | *No description.* |
 | <code><a href="#projen-modules.JsiiProject.property.tsconfigEslint">tsconfigEslint</a></code> | <code>projen.javascript.TypescriptConfig</code> | *No description.* |
+| <code><a href="#projen-modules.JsiiProject.property.readme">readme</a></code> | <code><a href="#projen-modules.Readme">Readme</a></code> | *No description.* |
 
 ---
 
@@ -1468,6 +1469,16 @@ public readonly tsconfigEslint: TypescriptConfig;
 ```
 
 - *Type:* projen.javascript.TypescriptConfig
+
+---
+
+##### `readme`<sup>Optional</sup> <a name="readme" id="projen-modules.JsiiProject.property.readme"></a>
+
+```typescript
+public readonly readme: Readme;
+```
+
+- *Type:* <a href="#projen-modules.Readme">Readme</a>
 
 ---
 
@@ -3945,9 +3956,275 @@ this task should synthesize the project files.
 
 ---
 
+### Readme <a name="Readme" id="projen-modules.Readme"></a>
+
+#### Initializers <a name="Initializers" id="projen-modules.Readme.Initializer"></a>
+
+```typescript
+import { Readme } from 'projen-modules'
+
+new Readme(scope: IConstruct, options: ReadmeOptions)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#projen-modules.Readme.Initializer.parameter.scope">scope</a></code> | <code>constructs.IConstruct</code> | *No description.* |
+| <code><a href="#projen-modules.Readme.Initializer.parameter.options">options</a></code> | <code><a href="#projen-modules.ReadmeOptions">ReadmeOptions</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="projen-modules.Readme.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.IConstruct
+
+---
+
+##### `options`<sup>Required</sup> <a name="options" id="projen-modules.Readme.Initializer.parameter.options"></a>
+
+- *Type:* <a href="#projen-modules.ReadmeOptions">ReadmeOptions</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#projen-modules.Readme.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#projen-modules.Readme.postSynthesize">postSynthesize</a></code> | Called after synthesis. |
+| <code><a href="#projen-modules.Readme.preSynthesize">preSynthesize</a></code> | Called before synthesis. |
+| <code><a href="#projen-modules.Readme.synthesize">synthesize</a></code> | Writes the file to the project's output directory. |
+| <code><a href="#projen-modules.Readme.addLines">addLines</a></code> | Adds the specified lines to the README. |
+
+---
+
+##### `toString` <a name="toString" id="projen-modules.Readme.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `postSynthesize` <a name="postSynthesize" id="projen-modules.Readme.postSynthesize"></a>
+
+```typescript
+public postSynthesize(): void
+```
+
+Called after synthesis.
+
+Order is *not* guaranteed.
+
+##### `preSynthesize` <a name="preSynthesize" id="projen-modules.Readme.preSynthesize"></a>
+
+```typescript
+public preSynthesize(): void
+```
+
+Called before synthesis.
+
+##### `synthesize` <a name="synthesize" id="projen-modules.Readme.synthesize"></a>
+
+```typescript
+public synthesize(): void
+```
+
+Writes the file to the project's output directory.
+
+##### `addLines` <a name="addLines" id="projen-modules.Readme.addLines"></a>
+
+```typescript
+public addLines(lines: string): void
+```
+
+Adds the specified lines to the README.
+
+###### `lines`<sup>Required</sup> <a name="lines" id="projen-modules.Readme.addLines.parameter.lines"></a>
+
+- *Type:* string
+
+Lines of text.
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#projen-modules.Readme.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#projen-modules.Readme.isComponent">isComponent</a></code> | Test whether the given construct is a component. |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="projen-modules.Readme.isConstruct"></a>
+
+```typescript
+import { Readme } from 'projen-modules'
+
+Readme.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="projen-modules.Readme.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `isComponent` <a name="isComponent" id="projen-modules.Readme.isComponent"></a>
+
+```typescript
+import { Readme } from 'projen-modules'
+
+Readme.isComponent(x: any)
+```
+
+Test whether the given construct is a component.
+
+###### `x`<sup>Required</sup> <a name="x" id="projen-modules.Readme.isComponent.parameter.x"></a>
+
+- *Type:* any
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#projen-modules.Readme.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#projen-modules.Readme.property.project">project</a></code> | <code>projen.Project</code> | *No description.* |
+| <code><a href="#projen-modules.Readme.property.absolutePath">absolutePath</a></code> | <code>string</code> | The absolute path of this file. |
+| <code><a href="#projen-modules.Readme.property.path">path</a></code> | <code>string</code> | The file path, relative to the project's outdir. |
+| <code><a href="#projen-modules.Readme.property.changed">changed</a></code> | <code>boolean</code> | Indicates if the file has been changed during synthesis. |
+| <code><a href="#projen-modules.Readme.property.marker">marker</a></code> | <code>string</code> | The projen marker, used to identify files as projen-generated. |
+| <code><a href="#projen-modules.Readme.property.executable">executable</a></code> | <code>boolean</code> | Indicates if the file should be marked as executable. |
+| <code><a href="#projen-modules.Readme.property.readonly">readonly</a></code> | <code>boolean</code> | Indicates if the file should be read-only or read-write. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="projen-modules.Readme.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `project`<sup>Required</sup> <a name="project" id="projen-modules.Readme.property.project"></a>
+
+```typescript
+public readonly project: Project;
+```
+
+- *Type:* projen.Project
+
+---
+
+##### `absolutePath`<sup>Required</sup> <a name="absolutePath" id="projen-modules.Readme.property.absolutePath"></a>
+
+```typescript
+public readonly absolutePath: string;
+```
+
+- *Type:* string
+
+The absolute path of this file.
+
+---
+
+##### `path`<sup>Required</sup> <a name="path" id="projen-modules.Readme.property.path"></a>
+
+```typescript
+public readonly path: string;
+```
+
+- *Type:* string
+
+The file path, relative to the project's outdir.
+
+---
+
+##### `changed`<sup>Optional</sup> <a name="changed" id="projen-modules.Readme.property.changed"></a>
+
+```typescript
+public readonly changed: boolean;
+```
+
+- *Type:* boolean
+
+Indicates if the file has been changed during synthesis.
+
+This property is
+only available in `postSynthesize()` hooks. If this is `undefined`, the
+file has not been synthesized yet.
+
+---
+
+##### `marker`<sup>Optional</sup> <a name="marker" id="projen-modules.Readme.property.marker"></a>
+
+```typescript
+public readonly marker: string;
+```
+
+- *Type:* string
+
+The projen marker, used to identify files as projen-generated.
+
+Value is undefined if the project is being ejected.
+
+---
+
+##### `executable`<sup>Required</sup> <a name="executable" id="projen-modules.Readme.property.executable"></a>
+
+```typescript
+public readonly executable: boolean;
+```
+
+- *Type:* boolean
+
+Indicates if the file should be marked as executable.
+
+---
+
+##### `readonly`<sup>Required</sup> <a name="readonly" id="projen-modules.Readme.property.readonly"></a>
+
+```typescript
+public readonly readonly: boolean;
+```
+
+- *Type:* boolean
+
+Indicates if the file should be read-only or read-write.
+
+---
+
+
 ## Structs <a name="Structs" id="Structs"></a>
 
 ### JsiiProjectOptions <a name="JsiiProjectOptions" id="projen-modules.JsiiProjectOptions"></a>
+
+JsiiProjectOptions.
 
 #### Initializer <a name="Initializer" id="projen-modules.JsiiProjectOptions.Initializer"></a>
 
@@ -3961,168 +4238,219 @@ const jsiiProjectOptions: JsiiProjectOptions = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.author">author</a></code> | <code>string</code> | The name of the library author. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.authorAddress">authorAddress</a></code> | <code>string</code> | Email or URL of the library author. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.codeOwners">codeOwners</a></code> | <code>string[]</code> | List of teams used to generate the CODEOWNERS file. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.defaultReleaseBranch">defaultReleaseBranch</a></code> | <code>string</code> | The name of the main release branch. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.name">name</a></code> | <code>string</code> | This is the name of your project. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.commitGenerated">commitGenerated</a></code> | <code>boolean</code> | Whether to commit the managed files by default. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.gitIgnoreOptions">gitIgnoreOptions</a></code> | <code>projen.IgnoreFileOptions</code> | Configuration options for .gitignore file. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.gitOptions">gitOptions</a></code> | <code>projen.GitOptions</code> | Configuration options for git. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.logging">logging</a></code> | <code>projen.LoggerOptions</code> | Configure logging options such as verbosity. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.outdir">outdir</a></code> | <code>string</code> | The root directory of the project. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.parent">parent</a></code> | <code>projen.Project</code> | The parent project, if this project is part of a bigger project. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.projenCommand">projenCommand</a></code> | <code>string</code> | The shell command to use in order to run the projen CLI. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.projenrcJson">projenrcJson</a></code> | <code>boolean</code> | Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .projenrc.json generation. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.projenrcJsonOptions">projenrcJsonOptions</a></code> | <code>projen.ProjenrcJsonOptions</code> | Options for .projenrc.json. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.renovatebot">renovatebot</a></code> | <code>boolean</code> | Use renovatebot to handle dependency upgrades. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.renovatebotOptions">renovatebotOptions</a></code> | <code>projen.RenovatebotOptions</code> | Options for renovatebot. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.autoApproveOptions">autoApproveOptions</a></code> | <code>projen.github.AutoApproveOptions</code> | Enable and configure the 'auto approve' workflow. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.autoMerge">autoMerge</a></code> | <code>boolean</code> | Enable automatic merging on GitHub. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.autoMergeOptions">autoMergeOptions</a></code> | <code>projen.github.AutoMergeOptions</code> | Configure options for automatic merging on GitHub. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.clobber">clobber</a></code> | <code>boolean</code> | Add a `clobber` task which resets the repo to origin. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.devContainer">devContainer</a></code> | <code>boolean</code> | Add a VSCode development environment (used for GitHub Codespaces). |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.github">github</a></code> | <code>boolean</code> | Enable GitHub integration. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.githubOptions">githubOptions</a></code> | <code>projen.github.GitHubOptions</code> | Options for GitHub integration. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.gitpod">gitpod</a></code> | <code>boolean</code> | Add a Gitpod development environment. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.mergify">mergify</a></code> | <code>boolean</code> | Whether mergify should be enabled on this repository or not. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.mergifyOptions">mergifyOptions</a></code> | <code>projen.github.MergifyOptions</code> | Options for mergify. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.projectType">projectType</a></code> | <code>projen.ProjectType</code> | Which type of project this is (library/app). |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.projenCredentials">projenCredentials</a></code> | <code>projen.github.GithubCredentials</code> | Choose a method of providing GitHub API access for projen workflows. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.projenTokenSecret">projenTokenSecret</a></code> | <code>string</code> | The name of a secret which includes a GitHub Personal Access Token to be used by projen workflows. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.readme">readme</a></code> | <code>projen.SampleReadmeProps</code> | The README setup. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.stale">stale</a></code> | <code>boolean</code> | Auto-close of stale issues and pull request. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.staleOptions">staleOptions</a></code> | <code>projen.github.StaleOptions</code> | Auto-close stale issues and pull requests. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.vscode">vscode</a></code> | <code>boolean</code> | Enable VSCode integration. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.repositoryUrl">repositoryUrl</a></code> | <code>string</code> | Git repository URL. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.allowLibraryDependencies">allowLibraryDependencies</a></code> | <code>boolean</code> | Allow the project to include `peerDependencies` and `bundledDependencies`. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.artifactsDirectory">artifactsDirectory</a></code> | <code>string</code> | A directory which will contain build artifacts. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.authorEmail">authorEmail</a></code> | <code>string</code> | Author's e-mail. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.authorName">authorName</a></code> | <code>string</code> | Author's name. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.authorOrganization">authorOrganization</a></code> | <code>boolean</code> | Is the author an organization. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.authorUrl">authorUrl</a></code> | <code>string</code> | Author's URL / Website. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.autoApproveOptions">autoApproveOptions</a></code> | <code>projen.github.AutoApproveOptions</code> | Enable and configure the 'auto approve' workflow. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.autoApproveUpgrades">autoApproveUpgrades</a></code> | <code>boolean</code> | Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configued). |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.autoDetectBin">autoDetectBin</a></code> | <code>boolean</code> | Automatically add all executables under the `bin` directory to your `package.json` file under the `bin` section. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.autoMerge">autoMerge</a></code> | <code>boolean</code> | Enable automatic merging on GitHub. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.autoMergeOptions">autoMergeOptions</a></code> | <code>projen.github.AutoMergeOptions</code> | Configure options for automatic merging on GitHub. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.bin">bin</a></code> | <code>{[ key: string ]: string}</code> | Binary programs vended with your module. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.bugsEmail">bugsEmail</a></code> | <code>string</code> | The email address to which issues should be reported. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.bugsUrl">bugsUrl</a></code> | <code>string</code> | The url to your project's issue tracker. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.buildWorkflow">buildWorkflow</a></code> | <code>boolean</code> | Define a GitHub workflow for building PRs. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.buildWorkflowOptions">buildWorkflowOptions</a></code> | <code>projen.javascript.BuildWorkflowOptions</code> | Options for PR build workflow. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.buildWorkflowTriggers">buildWorkflowTriggers</a></code> | <code>projen.github.workflows.Triggers</code> | Build workflow triggers. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.bundledDeps">bundledDeps</a></code> | <code>string[]</code> | List of dependencies to bundle into this module. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.bundlerOptions">bundlerOptions</a></code> | <code>projen.javascript.BundlerOptions</code> | Options for `Bundler`. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.checkLicenses">checkLicenses</a></code> | <code>projen.javascript.LicenseCheckerOptions</code> | Configure which licenses should be deemed acceptable for use by dependencies. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.clobber">clobber</a></code> | <code>boolean</code> | Add a `clobber` task which resets the repo to origin. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.codeArtifactOptions">codeArtifactOptions</a></code> | <code>projen.javascript.CodeArtifactOptions</code> | Options for npm packages using AWS CodeArtifact. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.codeCov">codeCov</a></code> | <code>boolean</code> | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v4 A secret is required for private repos. Configured with `@codeCovTokenSecret`. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.codeCovTokenSecret">codeCovTokenSecret</a></code> | <code>string</code> | Define the secret name for a specified https://codecov.io/ token A secret is required to send coverage for private repositories. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.commitGenerated">commitGenerated</a></code> | <code>boolean</code> | Whether to commit the managed files by default. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.compat">compat</a></code> | <code>boolean</code> | Automatically run API compatibility test against the latest version published to npm after compilation. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.compatIgnore">compatIgnore</a></code> | <code>string</code> | Name of the ignore file for API compatibility tests. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.compressAssembly">compressAssembly</a></code> | <code>boolean</code> | Emit a compressed version of the assembly. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.copyrightOwner">copyrightOwner</a></code> | <code>string</code> | License copyright owner. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.copyrightPeriod">copyrightPeriod</a></code> | <code>string</code> | The copyright years to put in the LICENSE file. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.dependabot">dependabot</a></code> | <code>boolean</code> | Use dependabot to handle dependency upgrades. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.dependabotOptions">dependabotOptions</a></code> | <code>projen.github.DependabotOptions</code> | Options for dependabot. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.deps">deps</a></code> | <code>string[]</code> | Runtime dependencies of this module. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.depsUpgrade">depsUpgrade</a></code> | <code>boolean</code> | Use tasks and github workflows to handle dependency upgrades. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.depsUpgradeOptions">depsUpgradeOptions</a></code> | <code>projen.javascript.UpgradeDependenciesOptions</code> | Options for `UpgradeDependencies`. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.description">description</a></code> | <code>string</code> | The description is just a string that helps people understand the purpose of the package. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.devContainer">devContainer</a></code> | <code>boolean</code> | Add a VSCode development environment (used for GitHub Codespaces). |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.devDeps">devDeps</a></code> | <code>string[]</code> | Build dependencies for this module. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.entrypoint">entrypoint</a></code> | <code>string</code> | Module entrypoint (`main` in `package.json`). |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.disableTsconfig">disableTsconfig</a></code> | <code>boolean</code> | Do not generate a `tsconfig.json` file (used by jsii projects since tsconfig.json is generated by the jsii compiler). |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.disableTsconfigDev">disableTsconfigDev</a></code> | <code>boolean</code> | Do not generate a `tsconfig.dev.json` file. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.docgen">docgen</a></code> | <code>boolean</code> | Docgen by Typedoc. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.docgenFilePath">docgenFilePath</a></code> | <code>string</code> | File path for generated docs. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.docsDirectory">docsDirectory</a></code> | <code>string</code> | Docs directory. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.dotnet">dotnet</a></code> | <code>projen.cdk.JsiiDotNetTarget</code> | *No description.* |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.entrypoint">entrypoint</a></code> | <code>string</code> | Module entrypoint (`main` in `package.json`). Set to an empty string to not include `main` in your package.json. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.entrypointTypes">entrypointTypes</a></code> | <code>string</code> | The .d.ts file that includes the type declarations for this module. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.eslint">eslint</a></code> | <code>boolean</code> | Setup eslint. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.eslintOptions">eslintOptions</a></code> | <code>projen.javascript.EslintOptions</code> | Eslint options. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.excludeTypescript">excludeTypescript</a></code> | <code>string[]</code> | Accepts a list of glob patterns. Files matching any of those patterns will be excluded from the TypeScript compiler input. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.github">github</a></code> | <code>boolean</code> | Enable GitHub integration. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.githubOptions">githubOptions</a></code> | <code>projen.github.GitHubOptions</code> | Options for GitHub integration. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.gitignore">gitignore</a></code> | <code>string[]</code> | Additional entries to .gitignore. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.gitIgnoreOptions">gitIgnoreOptions</a></code> | <code>projen.IgnoreFileOptions</code> | Configuration options for .gitignore file. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.gitOptions">gitOptions</a></code> | <code>projen.GitOptions</code> | Configuration options for git. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.gitpod">gitpod</a></code> | <code>boolean</code> | Add a Gitpod development environment. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.homepage">homepage</a></code> | <code>string</code> | Package's Homepage / Website. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.jest">jest</a></code> | <code>boolean</code> | Setup jest unit tests. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.jestOptions">jestOptions</a></code> | <code>projen.javascript.JestOptions</code> | Jest options. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.jsiiReleaseVersion">jsiiReleaseVersion</a></code> | <code>string</code> | Version requirement of `publib` which is used to publish modules to npm. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.jsiiVersion">jsiiVersion</a></code> | <code>string</code> | Version of the jsii compiler to use. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.keywords">keywords</a></code> | <code>string[]</code> | Keywords to include in `package.json`. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.libdir">libdir</a></code> | <code>string</code> | Typescript  artifacts output directory. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.license">license</a></code> | <code>string</code> | License's SPDX identifier. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.licensed">licensed</a></code> | <code>boolean</code> | Indicates if a license should be added. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.logging">logging</a></code> | <code>projen.LoggerOptions</code> | Configure logging options such as verbosity. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.majorVersion">majorVersion</a></code> | <code>number</code> | Major version to release from the default branch. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.maxNodeVersion">maxNodeVersion</a></code> | <code>string</code> | Minimum node.js version to require via `engines` (inclusive). |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.mergify">mergify</a></code> | <code>boolean</code> | Whether mergify should be enabled on this repository or not. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.mergifyOptions">mergifyOptions</a></code> | <code>projen.github.MergifyOptions</code> | Options for mergify. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.minMajorVersion">minMajorVersion</a></code> | <code>number</code> | Minimal Major version to release. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.minNodeVersion">minNodeVersion</a></code> | <code>string</code> | Minimum Node.js version to require via package.json `engines` (inclusive). |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.mutableBuild">mutableBuild</a></code> | <code>boolean</code> | Automatically update files modified during builds to pull-request branches. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.npmAccess">npmAccess</a></code> | <code>projen.javascript.NpmAccess</code> | Access level of the npm package. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.npmDistTag">npmDistTag</a></code> | <code>string</code> | The npmDistTag to use when publishing from the default branch. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.npmignore">npmignore</a></code> | <code>string[]</code> | Additional entries to .npmignore. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.npmignoreEnabled">npmignoreEnabled</a></code> | <code>boolean</code> | Defines an .npmignore file. Normally this is only needed for libraries that are packaged as tarballs. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.npmIgnoreOptions">npmIgnoreOptions</a></code> | <code>projen.IgnoreFileOptions</code> | Configuration options for .npmignore file. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.npmProvenance">npmProvenance</a></code> | <code>boolean</code> | Should provenance statements be generated when the package is published. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.npmRegistry">npmRegistry</a></code> | <code>string</code> | The host name of the npm registry to publish to. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.npmRegistryUrl">npmRegistryUrl</a></code> | <code>string</code> | The base URL of the npm package registry. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.npmTokenSecret">npmTokenSecret</a></code> | <code>string</code> | GitHub secret which contains the NPM token to use when publishing packages. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.outdir">outdir</a></code> | <code>string</code> | The root directory of the project. Relative to this directory, all files are synthesized. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.package">package</a></code> | <code>boolean</code> | Defines a `package` task that will produce an npm tarball under the artifacts directory (e.g. `dist`). |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.packageManager">packageManager</a></code> | <code>projen.javascript.NodePackageManager</code> | The Node Package Manager used to execute scripts. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.packageName">packageName</a></code> | <code>string</code> | The "name" in package.json. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.parent">parent</a></code> | <code>projen.Project</code> | The parent project, if this project is part of a bigger project. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.peerDependencyOptions">peerDependencyOptions</a></code> | <code>projen.javascript.PeerDependencyOptions</code> | Options for `peerDeps`. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.peerDeps">peerDeps</a></code> | <code>string[]</code> | Peer dependencies for this module. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.pnpmVersion">pnpmVersion</a></code> | <code>string</code> | The version of PNPM to use if using PNPM as a package manager. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.repository">repository</a></code> | <code>string</code> | The repository is the location where the actual code for your package lives. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.repositoryDirectory">repositoryDirectory</a></code> | <code>string</code> | If the package.json for your package is not in the root directory (for example if it is part of a monorepo), you can specify the directory in which it lives. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.scopedPackagesOptions">scopedPackagesOptions</a></code> | <code>projen.javascript.ScopedPackagesOptions[]</code> | Options for privately hosted scoped packages. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.scripts">scripts</a></code> | <code>{[ key: string ]: string}</code> | npm scripts to include. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.stability">stability</a></code> | <code>string</code> | Package's Stability. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.yarnBerryOptions">yarnBerryOptions</a></code> | <code>projen.javascript.YarnBerryOptions</code> | Options for Yarn Berry. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.jsiiReleaseVersion">jsiiReleaseVersion</a></code> | <code>string</code> | Version requirement of `publib` which is used to publish modules to npm. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.majorVersion">majorVersion</a></code> | <code>number</code> | Major version to release from the default branch. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.minMajorVersion">minMajorVersion</a></code> | <code>number</code> | Minimal Major version to release. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.npmDistTag">npmDistTag</a></code> | <code>string</code> | The npmDistTag to use when publishing from the default branch. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.postBuildSteps">postBuildSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | Steps to execute after build as part of the release workflow. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.prerelease">prerelease</a></code> | <code>string</code> | Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pre"). |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.prettier">prettier</a></code> | <code>boolean</code> | Setup prettier. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.prettierOptions">prettierOptions</a></code> | <code>projen.javascript.PrettierOptions</code> | Prettier options. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.projectType">projectType</a></code> | <code>projen.ProjectType</code> | Which type of project this is (library/app). |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.projenCommand">projenCommand</a></code> | <code>string</code> | The shell command to use in order to run the projen CLI. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.projenCredentials">projenCredentials</a></code> | <code>projen.github.GithubCredentials</code> | Choose a method of providing GitHub API access for projen workflows. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.projenDevDependency">projenDevDependency</a></code> | <code>boolean</code> | Indicates of "projen" should be installed as a devDependency. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.projenrcJs">projenrcJs</a></code> | <code>boolean</code> | Generate (once) .projenrc.js (in JavaScript). Set to `false` in order to disable .projenrc.js generation. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.projenrcJson">projenrcJson</a></code> | <code>boolean</code> | Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .projenrc.json generation. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.projenrcJsonOptions">projenrcJsonOptions</a></code> | <code>projen.ProjenrcJsonOptions</code> | Options for .projenrc.json. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.projenrcJsOptions">projenrcJsOptions</a></code> | <code>projen.javascript.ProjenrcOptions</code> | Options for .projenrc.js. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.projenrcTs">projenrcTs</a></code> | <code>boolean</code> | Use TypeScript for your projenrc file (`.projenrc.ts`). |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.projenrcTsOptions">projenrcTsOptions</a></code> | <code>projen.typescript.ProjenrcOptions</code> | Options for .projenrc.ts. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.projenTokenSecret">projenTokenSecret</a></code> | <code>string</code> | The name of a secret which includes a GitHub Personal Access Token to be used by projen workflows. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.projenVersion">projenVersion</a></code> | <code>string</code> | Version of projen to install. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.publishDryRun">publishDryRun</a></code> | <code>boolean</code> | Instead of actually publishing to package managers, just print the publishing command. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.publishTasks">publishTasks</a></code> | <code>boolean</code> | Define publishing tasks that can be executed manually as well as workflows. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.publishToGo">publishToGo</a></code> | <code>projen.cdk.JsiiGoTarget</code> | Publish Go bindings to a git repository. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.publishToMaven">publishToMaven</a></code> | <code>projen.cdk.JsiiJavaTarget</code> | Publish to maven. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.publishToNuget">publishToNuget</a></code> | <code>projen.cdk.JsiiDotNetTarget</code> | Publish to NuGet. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.publishToPypi">publishToPypi</a></code> | <code>projen.cdk.JsiiPythonTarget</code> | Publish to pypi. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.pullRequestTemplate">pullRequestTemplate</a></code> | <code>boolean</code> | Include a GitHub pull request template. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.pullRequestTemplateContents">pullRequestTemplateContents</a></code> | <code>string[]</code> | The contents of the pull request template. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.python">python</a></code> | <code>projen.cdk.JsiiPythonTarget</code> | *No description.* |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.readme">readme</a></code> | <code><a href="#projen-modules.ReadmeProps">ReadmeProps</a></code> | Readme configuration. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.releasableCommits">releasableCommits</a></code> | <code>projen.ReleasableCommits</code> | Find commits that should be considered releasable Used to decide if a release is required. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.release">release</a></code> | <code>boolean</code> | Add release management to this project. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.releaseBranches">releaseBranches</a></code> | <code>{[ key: string ]: projen.release.BranchOptions}</code> | Defines additional release branches. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.releaseEveryCommit">releaseEveryCommit</a></code> | <code>boolean</code> | Automatically release new versions every commit to one of branches in `releaseBranches`. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.releaseFailureIssue">releaseFailureIssue</a></code> | <code>boolean</code> | Create a github issue on every failed publishing task. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.releaseFailureIssueLabel">releaseFailureIssueLabel</a></code> | <code>string</code> | The label to apply to issues indicating publish failures. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.releaseSchedule">releaseSchedule</a></code> | <code>string</code> | CRON schedule to trigger new releases. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.releaseTagPrefix">releaseTagPrefix</a></code> | <code>string</code> | Automatically add the given prefix to release tags. Useful if you are releasing on multiple branches with overlapping version numbers. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.releaseTagPrefix">releaseTagPrefix</a></code> | <code>string</code> | Automatically add the given prefix to release tags. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.releaseToNpm">releaseToNpm</a></code> | <code>boolean</code> | Automatically release to npm when new versions are introduced. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.releaseTrigger">releaseTrigger</a></code> | <code>projen.release.ReleaseTrigger</code> | The release trigger to use. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.releaseWorkflow">releaseWorkflow</a></code> | <code>boolean</code> | DEPRECATED: renamed to `release`. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.releaseWorkflowName">releaseWorkflowName</a></code> | <code>string</code> | The name of the default release workflow. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.releaseWorkflowSetupSteps">releaseWorkflowSetupSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | A set of workflow steps to execute in order to setup the workflow container. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.versionrcOptions">versionrcOptions</a></code> | <code>{[ key: string ]: any}</code> | Custom configuration used when creating changelog with standard-version package. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.workflowContainerImage">workflowContainerImage</a></code> | <code>string</code> | Container image to use for GitHub workflows. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.workflowRunsOn">workflowRunsOn</a></code> | <code>string[]</code> | Github Runner selection labels. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.workflowRunsOnGroup">workflowRunsOnGroup</a></code> | <code>projen.GroupRunnerOptions</code> | Github Runner Group selection options. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.defaultReleaseBranch">defaultReleaseBranch</a></code> | <code>string</code> | The name of the main release branch. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.artifactsDirectory">artifactsDirectory</a></code> | <code>string</code> | A directory which will contain build artifacts. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.autoApproveUpgrades">autoApproveUpgrades</a></code> | <code>boolean</code> | Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configued). |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.buildWorkflow">buildWorkflow</a></code> | <code>boolean</code> | Define a GitHub workflow for building PRs. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.buildWorkflowOptions">buildWorkflowOptions</a></code> | <code>projen.javascript.BuildWorkflowOptions</code> | Options for PR build workflow. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.buildWorkflowTriggers">buildWorkflowTriggers</a></code> | <code>projen.github.workflows.Triggers</code> | Build workflow triggers. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.bundlerOptions">bundlerOptions</a></code> | <code>projen.javascript.BundlerOptions</code> | Options for `Bundler`. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.checkLicenses">checkLicenses</a></code> | <code>projen.javascript.LicenseCheckerOptions</code> | Configure which licenses should be deemed acceptable for use by dependencies. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.codeCov">codeCov</a></code> | <code>boolean</code> | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v4 A secret is required for private repos. Configured with `@codeCovTokenSecret`. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.codeCovTokenSecret">codeCovTokenSecret</a></code> | <code>string</code> | Define the secret name for a specified https://codecov.io/ token A secret is required to send coverage for private repositories. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.copyrightOwner">copyrightOwner</a></code> | <code>string</code> | License copyright owner. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.copyrightPeriod">copyrightPeriod</a></code> | <code>string</code> | The copyright years to put in the LICENSE file. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.dependabot">dependabot</a></code> | <code>boolean</code> | Use dependabot to handle dependency upgrades. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.dependabotOptions">dependabotOptions</a></code> | <code>projen.github.DependabotOptions</code> | Options for dependabot. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.depsUpgrade">depsUpgrade</a></code> | <code>boolean</code> | Use tasks and github workflows to handle dependency upgrades. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.depsUpgradeOptions">depsUpgradeOptions</a></code> | <code>projen.javascript.UpgradeDependenciesOptions</code> | Options for `UpgradeDependencies`. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.gitignore">gitignore</a></code> | <code>string[]</code> | Additional entries to .gitignore. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.jest">jest</a></code> | <code>boolean</code> | Setup jest unit tests. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.jestOptions">jestOptions</a></code> | <code>projen.javascript.JestOptions</code> | Jest options. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.mutableBuild">mutableBuild</a></code> | <code>boolean</code> | Automatically update files modified during builds to pull-request branches. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.npmignore">npmignore</a></code> | <code>string[]</code> | Additional entries to .npmignore. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.npmignoreEnabled">npmignoreEnabled</a></code> | <code>boolean</code> | Defines an .npmignore file. Normally this is only needed for libraries that are packaged as tarballs. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.npmIgnoreOptions">npmIgnoreOptions</a></code> | <code>projen.IgnoreFileOptions</code> | Configuration options for .npmignore file. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.package">package</a></code> | <code>boolean</code> | Defines a `package` task that will produce an npm tarball under the artifacts directory (e.g. `dist`). |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.prettier">prettier</a></code> | <code>boolean</code> | Setup prettier. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.prettierOptions">prettierOptions</a></code> | <code>projen.javascript.PrettierOptions</code> | Prettier options. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.projenDevDependency">projenDevDependency</a></code> | <code>boolean</code> | Indicates of "projen" should be installed as a devDependency. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.projenrcJs">projenrcJs</a></code> | <code>boolean</code> | Generate (once) .projenrc.js (in JavaScript). Set to `false` in order to disable .projenrc.js generation. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.projenrcJsOptions">projenrcJsOptions</a></code> | <code>projen.javascript.ProjenrcOptions</code> | Options for .projenrc.js. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.projenVersion">projenVersion</a></code> | <code>string</code> | Version of projen to install. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.pullRequestTemplate">pullRequestTemplate</a></code> | <code>boolean</code> | Include a GitHub pull request template. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.pullRequestTemplateContents">pullRequestTemplateContents</a></code> | <code>string[]</code> | The contents of the pull request template. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.release">release</a></code> | <code>boolean</code> | Add release management to this project. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.releaseToNpm">releaseToNpm</a></code> | <code>boolean</code> | Automatically release to npm when new versions are introduced. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.releaseWorkflow">releaseWorkflow</a></code> | <code>boolean</code> | DEPRECATED: renamed to `release`. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.workflowBootstrapSteps">workflowBootstrapSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | Workflow steps to use in order to bootstrap this repo. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.workflowGitIdentity">workflowGitIdentity</a></code> | <code>projen.github.GitIdentity</code> | The git identity to use in workflows. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.workflowNodeVersion">workflowNodeVersion</a></code> | <code>string</code> | The node version to use in GitHub workflows. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.workflowPackageCache">workflowPackageCache</a></code> | <code>boolean</code> | Enable Node.js package cache in GitHub workflows. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.disableTsconfig">disableTsconfig</a></code> | <code>boolean</code> | Do not generate a `tsconfig.json` file (used by jsii projects since tsconfig.json is generated by the jsii compiler). |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.disableTsconfigDev">disableTsconfigDev</a></code> | <code>boolean</code> | Do not generate a `tsconfig.dev.json` file. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.docgen">docgen</a></code> | <code>boolean</code> | Docgen by Typedoc. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.docsDirectory">docsDirectory</a></code> | <code>string</code> | Docs directory. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.entrypointTypes">entrypointTypes</a></code> | <code>string</code> | The .d.ts file that includes the type declarations for this module. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.eslint">eslint</a></code> | <code>boolean</code> | Setup eslint. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.eslintOptions">eslintOptions</a></code> | <code>projen.javascript.EslintOptions</code> | Eslint options. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.libdir">libdir</a></code> | <code>string</code> | Typescript  artifacts output directory. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.projenrcTs">projenrcTs</a></code> | <code>boolean</code> | Use TypeScript for your projenrc file (`.projenrc.ts`). |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.projenrcTsOptions">projenrcTsOptions</a></code> | <code>projen.typescript.ProjenrcOptions</code> | Options for .projenrc.ts. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.renovatebot">renovatebot</a></code> | <code>boolean</code> | Use renovatebot to handle dependency upgrades. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.renovatebotOptions">renovatebotOptions</a></code> | <code>projen.RenovatebotOptions</code> | Options for renovatebot. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.repository">repository</a></code> | <code>string</code> | The repository is the location where the actual code for your package lives. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.repositoryDirectory">repositoryDirectory</a></code> | <code>string</code> | If the package.json for your package is not in the root directory (for example if it is part of a monorepo), you can specify the directory in which it lives. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.rootdir">rootdir</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.sampleCode">sampleCode</a></code> | <code>boolean</code> | Generate one-time sample in `src/` and `test/` if there are no files there. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.scopedPackagesOptions">scopedPackagesOptions</a></code> | <code>projen.javascript.ScopedPackagesOptions[]</code> | Options for privately hosted scoped packages. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.scripts">scripts</a></code> | <code>{[ key: string ]: string}</code> | npm scripts to include. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.srcdir">srcdir</a></code> | <code>string</code> | Typescript sources directory. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.testdir">testdir</a></code> | <code>string</code> | Jest tests directory. Tests files should be named `xxx.test.ts`. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.stability">stability</a></code> | <code>string</code> | Package's Stability. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.stale">stale</a></code> | <code>boolean</code> | Auto-close of stale issues and pull request. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.staleOptions">staleOptions</a></code> | <code>projen.github.StaleOptions</code> | Auto-close stale issues and pull requests. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.testdir">testdir</a></code> | <code>string</code> | Jest tests directory. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.tsconfig">tsconfig</a></code> | <code>projen.javascript.TypescriptConfigOptions</code> | Custom TSConfig. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.tsconfigDev">tsconfigDev</a></code> | <code>projen.javascript.TypescriptConfigOptions</code> | Custom tsconfig options for the development tsconfig.json file (used for testing). |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.tsconfigDevFile">tsconfigDevFile</a></code> | <code>string</code> | The name of the development tsconfig.json file. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.tsJestOptions">tsJestOptions</a></code> | <code>projen.typescript.TsJestOptions</code> | Options for ts-jest. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.typescriptVersion">typescriptVersion</a></code> | <code>string</code> | TypeScript version to use. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.author">author</a></code> | <code>string</code> | The name of the library author. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.authorAddress">authorAddress</a></code> | <code>string</code> | Email or URL of the library author. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.repositoryUrl">repositoryUrl</a></code> | <code>string</code> | Git repository URL. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.compat">compat</a></code> | <code>boolean</code> | Automatically run API compatibility test against the latest version published to npm after compilation. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.compatIgnore">compatIgnore</a></code> | <code>string</code> | Name of the ignore file for API compatibility tests. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.compressAssembly">compressAssembly</a></code> | <code>boolean</code> | Emit a compressed version of the assembly. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.docgenFilePath">docgenFilePath</a></code> | <code>string</code> | File path for generated docs. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.dotnet">dotnet</a></code> | <code>projen.cdk.JsiiDotNetTarget</code> | *No description.* |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.excludeTypescript">excludeTypescript</a></code> | <code>string[]</code> | Accepts a list of glob patterns. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.jsiiVersion">jsiiVersion</a></code> | <code>string</code> | Version of the jsii compiler to use. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.publishToGo">publishToGo</a></code> | <code>projen.cdk.JsiiGoTarget</code> | Publish Go bindings to a git repository. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.publishToMaven">publishToMaven</a></code> | <code>projen.cdk.JsiiJavaTarget</code> | Publish to maven. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.publishToNuget">publishToNuget</a></code> | <code>projen.cdk.JsiiDotNetTarget</code> | Publish to NuGet. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.publishToPypi">publishToPypi</a></code> | <code>projen.cdk.JsiiPythonTarget</code> | Publish to pypi. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.python">python</a></code> | <code>projen.cdk.JsiiPythonTarget</code> | *No description.* |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.rootdir">rootdir</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.codeOwners">codeOwners</a></code> | <code>string[]</code> | List of teams used to generate the CODEOWNERS file. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.versionrcOptions">versionrcOptions</a></code> | <code>{[ key: string ]: any}</code> | Custom configuration used when creating changelog with standard-version package. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.vscode">vscode</a></code> | <code>boolean</code> | Enable VSCode integration. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.workflowBootstrapSteps">workflowBootstrapSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | Workflow steps to use in order to bootstrap this repo. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.workflowContainerImage">workflowContainerImage</a></code> | <code>string</code> | Container image to use for GitHub workflows. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.workflowGitIdentity">workflowGitIdentity</a></code> | <code>projen.github.GitIdentity</code> | The git identity to use in workflows. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.workflowNodeVersion">workflowNodeVersion</a></code> | <code>string</code> | The node version to use in GitHub workflows. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.workflowPackageCache">workflowPackageCache</a></code> | <code>boolean</code> | Enable Node.js package cache in GitHub workflows. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.workflowRunsOn">workflowRunsOn</a></code> | <code>string[]</code> | Github Runner selection labels. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.workflowRunsOnGroup">workflowRunsOnGroup</a></code> | <code>projen.GroupRunnerOptions</code> | Github Runner Group selection options. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.yarnBerryOptions">yarnBerryOptions</a></code> | <code>projen.javascript.YarnBerryOptions</code> | Options for Yarn Berry. |
+
+---
+
+##### `author`<sup>Required</sup> <a name="author" id="projen-modules.JsiiProjectOptions.property.author"></a>
+
+```typescript
+public readonly author: string;
+```
+
+- *Type:* string
+- *Default:* $GIT_USER_NAME
+
+The name of the library author.
+
+---
+
+##### `authorAddress`<sup>Required</sup> <a name="authorAddress" id="projen-modules.JsiiProjectOptions.property.authorAddress"></a>
+
+```typescript
+public readonly authorAddress: string;
+```
+
+- *Type:* string
+- *Default:* $GIT_USER_EMAIL
+
+Email or URL of the library author.
+
+---
+
+##### `codeOwners`<sup>Required</sup> <a name="codeOwners" id="projen-modules.JsiiProjectOptions.property.codeOwners"></a>
+
+```typescript
+public readonly codeOwners: string[];
+```
+
+- *Type:* string[]
+
+List of teams used to generate the CODEOWNERS file.
+
+---
+
+##### `defaultReleaseBranch`<sup>Required</sup> <a name="defaultReleaseBranch" id="projen-modules.JsiiProjectOptions.property.defaultReleaseBranch"></a>
+
+```typescript
+public readonly defaultReleaseBranch: string;
+```
+
+- *Type:* string
+- *Default:* "main"
+
+The name of the main release branch.
 
 ---
 
@@ -4139,404 +4467,16 @@ This is the name of your project.
 
 ---
 
-##### `commitGenerated`<sup>Optional</sup> <a name="commitGenerated" id="projen-modules.JsiiProjectOptions.property.commitGenerated"></a>
+##### `repositoryUrl`<sup>Required</sup> <a name="repositoryUrl" id="projen-modules.JsiiProjectOptions.property.repositoryUrl"></a>
 
 ```typescript
-public readonly commitGenerated: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-Whether to commit the managed files by default.
-
----
-
-##### `gitIgnoreOptions`<sup>Optional</sup> <a name="gitIgnoreOptions" id="projen-modules.JsiiProjectOptions.property.gitIgnoreOptions"></a>
-
-```typescript
-public readonly gitIgnoreOptions: IgnoreFileOptions;
-```
-
-- *Type:* projen.IgnoreFileOptions
-
-Configuration options for .gitignore file.
-
----
-
-##### `gitOptions`<sup>Optional</sup> <a name="gitOptions" id="projen-modules.JsiiProjectOptions.property.gitOptions"></a>
-
-```typescript
-public readonly gitOptions: GitOptions;
-```
-
-- *Type:* projen.GitOptions
-
-Configuration options for git.
-
----
-
-##### `logging`<sup>Optional</sup> <a name="logging" id="projen-modules.JsiiProjectOptions.property.logging"></a>
-
-```typescript
-public readonly logging: LoggerOptions;
-```
-
-- *Type:* projen.LoggerOptions
-- *Default:* {}
-
-Configure logging options such as verbosity.
-
----
-
-##### `outdir`<sup>Optional</sup> <a name="outdir" id="projen-modules.JsiiProjectOptions.property.outdir"></a>
-
-```typescript
-public readonly outdir: string;
+public readonly repositoryUrl: string;
 ```
 
 - *Type:* string
-- *Default:* "."
+- *Default:* $GIT_REMOTE
 
-The root directory of the project.
-
-Relative to this directory, all files are synthesized.
-
-If this project has a parent, this directory is relative to the parent
-directory and it cannot be the same as the parent or any of it's other
-subprojects.
-
----
-
-##### `parent`<sup>Optional</sup> <a name="parent" id="projen-modules.JsiiProjectOptions.property.parent"></a>
-
-```typescript
-public readonly parent: Project;
-```
-
-- *Type:* projen.Project
-
-The parent project, if this project is part of a bigger project.
-
----
-
-##### `projenCommand`<sup>Optional</sup> <a name="projenCommand" id="projen-modules.JsiiProjectOptions.property.projenCommand"></a>
-
-```typescript
-public readonly projenCommand: string;
-```
-
-- *Type:* string
-- *Default:* "npx projen"
-
-The shell command to use in order to run the projen CLI.
-
-Can be used to customize in special environments.
-
----
-
-##### `projenrcJson`<sup>Optional</sup> <a name="projenrcJson" id="projen-modules.JsiiProjectOptions.property.projenrcJson"></a>
-
-```typescript
-public readonly projenrcJson: boolean;
-```
-
-- *Type:* boolean
-- *Default:* false
-
-Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .projenrc.json generation.
-
----
-
-##### `projenrcJsonOptions`<sup>Optional</sup> <a name="projenrcJsonOptions" id="projen-modules.JsiiProjectOptions.property.projenrcJsonOptions"></a>
-
-```typescript
-public readonly projenrcJsonOptions: ProjenrcJsonOptions;
-```
-
-- *Type:* projen.ProjenrcJsonOptions
-- *Default:* default options
-
-Options for .projenrc.json.
-
----
-
-##### `renovatebot`<sup>Optional</sup> <a name="renovatebot" id="projen-modules.JsiiProjectOptions.property.renovatebot"></a>
-
-```typescript
-public readonly renovatebot: boolean;
-```
-
-- *Type:* boolean
-- *Default:* false
-
-Use renovatebot to handle dependency upgrades.
-
----
-
-##### `renovatebotOptions`<sup>Optional</sup> <a name="renovatebotOptions" id="projen-modules.JsiiProjectOptions.property.renovatebotOptions"></a>
-
-```typescript
-public readonly renovatebotOptions: RenovatebotOptions;
-```
-
-- *Type:* projen.RenovatebotOptions
-- *Default:* default options
-
-Options for renovatebot.
-
----
-
-##### `autoApproveOptions`<sup>Optional</sup> <a name="autoApproveOptions" id="projen-modules.JsiiProjectOptions.property.autoApproveOptions"></a>
-
-```typescript
-public readonly autoApproveOptions: AutoApproveOptions;
-```
-
-- *Type:* projen.github.AutoApproveOptions
-- *Default:* auto approve is disabled
-
-Enable and configure the 'auto approve' workflow.
-
----
-
-##### `autoMerge`<sup>Optional</sup> <a name="autoMerge" id="projen-modules.JsiiProjectOptions.property.autoMerge"></a>
-
-```typescript
-public readonly autoMerge: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-Enable automatic merging on GitHub.
-
-Has no effect if `github.mergify`
-is set to false.
-
----
-
-##### `autoMergeOptions`<sup>Optional</sup> <a name="autoMergeOptions" id="projen-modules.JsiiProjectOptions.property.autoMergeOptions"></a>
-
-```typescript
-public readonly autoMergeOptions: AutoMergeOptions;
-```
-
-- *Type:* projen.github.AutoMergeOptions
-- *Default:* see defaults in `AutoMergeOptions`
-
-Configure options for automatic merging on GitHub.
-
-Has no effect if
-`github.mergify` or `autoMerge` is set to false.
-
----
-
-##### `clobber`<sup>Optional</sup> <a name="clobber" id="projen-modules.JsiiProjectOptions.property.clobber"></a>
-
-```typescript
-public readonly clobber: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true, but false for subprojects
-
-Add a `clobber` task which resets the repo to origin.
-
----
-
-##### `devContainer`<sup>Optional</sup> <a name="devContainer" id="projen-modules.JsiiProjectOptions.property.devContainer"></a>
-
-```typescript
-public readonly devContainer: boolean;
-```
-
-- *Type:* boolean
-- *Default:* false
-
-Add a VSCode development environment (used for GitHub Codespaces).
-
----
-
-##### `github`<sup>Optional</sup> <a name="github" id="projen-modules.JsiiProjectOptions.property.github"></a>
-
-```typescript
-public readonly github: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-Enable GitHub integration.
-
-Enabled by default for root projects. Disabled for non-root projects.
-
----
-
-##### `githubOptions`<sup>Optional</sup> <a name="githubOptions" id="projen-modules.JsiiProjectOptions.property.githubOptions"></a>
-
-```typescript
-public readonly githubOptions: GitHubOptions;
-```
-
-- *Type:* projen.github.GitHubOptions
-- *Default:* see GitHubOptions
-
-Options for GitHub integration.
-
----
-
-##### `gitpod`<sup>Optional</sup> <a name="gitpod" id="projen-modules.JsiiProjectOptions.property.gitpod"></a>
-
-```typescript
-public readonly gitpod: boolean;
-```
-
-- *Type:* boolean
-- *Default:* false
-
-Add a Gitpod development environment.
-
----
-
-##### ~~`mergify`~~<sup>Optional</sup> <a name="mergify" id="projen-modules.JsiiProjectOptions.property.mergify"></a>
-
-- *Deprecated:* use `githubOptions.mergify` instead
-
-```typescript
-public readonly mergify: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-Whether mergify should be enabled on this repository or not.
-
----
-
-##### ~~`mergifyOptions`~~<sup>Optional</sup> <a name="mergifyOptions" id="projen-modules.JsiiProjectOptions.property.mergifyOptions"></a>
-
-- *Deprecated:* use `githubOptions.mergifyOptions` instead
-
-```typescript
-public readonly mergifyOptions: MergifyOptions;
-```
-
-- *Type:* projen.github.MergifyOptions
-- *Default:* default options
-
-Options for mergify.
-
----
-
-##### ~~`projectType`~~<sup>Optional</sup> <a name="projectType" id="projen-modules.JsiiProjectOptions.property.projectType"></a>
-
-- *Deprecated:* no longer supported at the base project level
-
-```typescript
-public readonly projectType: ProjectType;
-```
-
-- *Type:* projen.ProjectType
-- *Default:* ProjectType.UNKNOWN
-
-Which type of project this is (library/app).
-
----
-
-##### `projenCredentials`<sup>Optional</sup> <a name="projenCredentials" id="projen-modules.JsiiProjectOptions.property.projenCredentials"></a>
-
-```typescript
-public readonly projenCredentials: GithubCredentials;
-```
-
-- *Type:* projen.github.GithubCredentials
-- *Default:* use a personal access token named PROJEN_GITHUB_TOKEN
-
-Choose a method of providing GitHub API access for projen workflows.
-
----
-
-##### ~~`projenTokenSecret`~~<sup>Optional</sup> <a name="projenTokenSecret" id="projen-modules.JsiiProjectOptions.property.projenTokenSecret"></a>
-
-- *Deprecated:* use `projenCredentials`
-
-```typescript
-public readonly projenTokenSecret: string;
-```
-
-- *Type:* string
-- *Default:* "PROJEN_GITHUB_TOKEN"
-
-The name of a secret which includes a GitHub Personal Access Token to be used by projen workflows.
-
-This token needs to have the `repo`, `workflows`
-and `packages` scope.
-
----
-
-##### `readme`<sup>Optional</sup> <a name="readme" id="projen-modules.JsiiProjectOptions.property.readme"></a>
-
-```typescript
-public readonly readme: SampleReadmeProps;
-```
-
-- *Type:* projen.SampleReadmeProps
-- *Default:* { filename: 'README.md', contents: '# replace this' }
-
-The README setup.
-
----
-
-*Example*
-
-```typescript
-"{ filename: 'readme.md', contents: '# title' }"
-```
-
-
-##### `stale`<sup>Optional</sup> <a name="stale" id="projen-modules.JsiiProjectOptions.property.stale"></a>
-
-```typescript
-public readonly stale: boolean;
-```
-
-- *Type:* boolean
-- *Default:* false
-
-Auto-close of stale issues and pull request.
-
-See `staleOptions` for options.
-
----
-
-##### `staleOptions`<sup>Optional</sup> <a name="staleOptions" id="projen-modules.JsiiProjectOptions.property.staleOptions"></a>
-
-```typescript
-public readonly staleOptions: StaleOptions;
-```
-
-- *Type:* projen.github.StaleOptions
-- *Default:* see defaults in `StaleOptions`
-
-Auto-close stale issues and pull requests.
-
-To disable set `stale` to `false`.
-
----
-
-##### `vscode`<sup>Optional</sup> <a name="vscode" id="projen-modules.JsiiProjectOptions.property.vscode"></a>
-
-```typescript
-public readonly vscode: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-Enable VSCode integration.
-
-Enabled by default for root projects. Disabled for non-root projects.
+Git repository URL.
 
 ---
 
@@ -4553,6 +4493,19 @@ Allow the project to include `peerDependencies` and `bundledDependencies`.
 
 This is normally only allowed for libraries. For apps, there's no meaning
 for specifying these.
+
+---
+
+##### `artifactsDirectory`<sup>Optional</sup> <a name="artifactsDirectory" id="projen-modules.JsiiProjectOptions.property.artifactsDirectory"></a>
+
+```typescript
+public readonly artifactsDirectory: string;
+```
+
+- *Type:* string
+- *Default:* "dist"
+
+A directory which will contain build artifacts.
 
 ---
 
@@ -4604,6 +4557,34 @@ Author's URL / Website.
 
 ---
 
+##### `autoApproveOptions`<sup>Optional</sup> <a name="autoApproveOptions" id="projen-modules.JsiiProjectOptions.property.autoApproveOptions"></a>
+
+```typescript
+public readonly autoApproveOptions: AutoApproveOptions;
+```
+
+- *Type:* projen.github.AutoApproveOptions
+- *Default:* auto approve is disabled
+
+Enable and configure the 'auto approve' workflow.
+
+---
+
+##### `autoApproveUpgrades`<sup>Optional</sup> <a name="autoApproveUpgrades" id="projen-modules.JsiiProjectOptions.property.autoApproveUpgrades"></a>
+
+```typescript
+public readonly autoApproveUpgrades: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configued).
+
+Throw if set to true but `autoApproveOptions` are not defined.
+
+---
+
 ##### `autoDetectBin`<sup>Optional</sup> <a name="autoDetectBin" id="projen-modules.JsiiProjectOptions.property.autoDetectBin"></a>
 
 ```typescript
@@ -4614,6 +4595,38 @@ public readonly autoDetectBin: boolean;
 - *Default:* true
 
 Automatically add all executables under the `bin` directory to your `package.json` file under the `bin` section.
+
+---
+
+##### `autoMerge`<sup>Optional</sup> <a name="autoMerge" id="projen-modules.JsiiProjectOptions.property.autoMerge"></a>
+
+```typescript
+public readonly autoMerge: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Enable automatic merging on GitHub.
+
+Has no effect if `github.mergify`
+is set to false.
+
+---
+
+##### `autoMergeOptions`<sup>Optional</sup> <a name="autoMergeOptions" id="projen-modules.JsiiProjectOptions.property.autoMergeOptions"></a>
+
+```typescript
+public readonly autoMergeOptions: AutoMergeOptions;
+```
+
+- *Type:* projen.github.AutoMergeOptions
+- *Default:* see defaults in `AutoMergeOptions`
+
+Configure options for automatic merging on GitHub.
+
+Has no effect if
+`github.mergify` or `autoMerge` is set to false.
 
 ---
 
@@ -4657,6 +4670,46 @@ The url to your project's issue tracker.
 
 ---
 
+##### `buildWorkflow`<sup>Optional</sup> <a name="buildWorkflow" id="projen-modules.JsiiProjectOptions.property.buildWorkflow"></a>
+
+```typescript
+public readonly buildWorkflow: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true if not a subproject
+
+Define a GitHub workflow for building PRs.
+
+---
+
+##### `buildWorkflowOptions`<sup>Optional</sup> <a name="buildWorkflowOptions" id="projen-modules.JsiiProjectOptions.property.buildWorkflowOptions"></a>
+
+```typescript
+public readonly buildWorkflowOptions: BuildWorkflowOptions;
+```
+
+- *Type:* projen.javascript.BuildWorkflowOptions
+
+Options for PR build workflow.
+
+---
+
+##### ~~`buildWorkflowTriggers`~~<sup>Optional</sup> <a name="buildWorkflowTriggers" id="projen-modules.JsiiProjectOptions.property.buildWorkflowTriggers"></a>
+
+- *Deprecated:* - Use `buildWorkflowOptions.workflowTriggers`
+
+```typescript
+public readonly buildWorkflowTriggers: Triggers;
+```
+
+- *Type:* projen.github.workflows.Triggers
+- *Default:* "{ pullRequest: {}, workflowDispatch: {} }"
+
+Build workflow triggers.
+
+---
+
 ##### `bundledDeps`<sup>Optional</sup> <a name="bundledDeps" id="projen-modules.JsiiProjectOptions.property.bundledDeps"></a>
 
 ```typescript
@@ -4680,6 +4733,46 @@ this will be what you `package.json` will eventually include.
 
 ---
 
+##### `bundlerOptions`<sup>Optional</sup> <a name="bundlerOptions" id="projen-modules.JsiiProjectOptions.property.bundlerOptions"></a>
+
+```typescript
+public readonly bundlerOptions: BundlerOptions;
+```
+
+- *Type:* projen.javascript.BundlerOptions
+
+Options for `Bundler`.
+
+---
+
+##### `checkLicenses`<sup>Optional</sup> <a name="checkLicenses" id="projen-modules.JsiiProjectOptions.property.checkLicenses"></a>
+
+```typescript
+public readonly checkLicenses: LicenseCheckerOptions;
+```
+
+- *Type:* projen.javascript.LicenseCheckerOptions
+- *Default:* no license checks are run during the build and all licenses will be accepted
+
+Configure which licenses should be deemed acceptable for use by dependencies.
+
+This setting will cause the build to fail, if any prohibited or not allowed licenses ares encountered.
+
+---
+
+##### `clobber`<sup>Optional</sup> <a name="clobber" id="projen-modules.JsiiProjectOptions.property.clobber"></a>
+
+```typescript
+public readonly clobber: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true, but false for subprojects
+
+Add a `clobber` task which resets the repo to origin.
+
+---
+
 ##### `codeArtifactOptions`<sup>Optional</sup> <a name="codeArtifactOptions" id="projen-modules.JsiiProjectOptions.property.codeArtifactOptions"></a>
 
 ```typescript
@@ -4692,6 +4785,141 @@ public readonly codeArtifactOptions: CodeArtifactOptions;
 Options for npm packages using AWS CodeArtifact.
 
 This is required if publishing packages to, or installing scoped packages from AWS CodeArtifact
+
+---
+
+##### `codeCov`<sup>Optional</sup> <a name="codeCov" id="projen-modules.JsiiProjectOptions.property.codeCov"></a>
+
+```typescript
+public readonly codeCov: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v4 A secret is required for private repos. Configured with `@codeCovTokenSecret`.
+
+---
+
+##### `codeCovTokenSecret`<sup>Optional</sup> <a name="codeCovTokenSecret" id="projen-modules.JsiiProjectOptions.property.codeCovTokenSecret"></a>
+
+```typescript
+public readonly codeCovTokenSecret: string;
+```
+
+- *Type:* string
+- *Default:* if this option is not specified, only public repositories are supported
+
+Define the secret name for a specified https://codecov.io/ token A secret is required to send coverage for private repositories.
+
+---
+
+##### `commitGenerated`<sup>Optional</sup> <a name="commitGenerated" id="projen-modules.JsiiProjectOptions.property.commitGenerated"></a>
+
+```typescript
+public readonly commitGenerated: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Whether to commit the managed files by default.
+
+---
+
+##### `compat`<sup>Optional</sup> <a name="compat" id="projen-modules.JsiiProjectOptions.property.compat"></a>
+
+```typescript
+public readonly compat: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Automatically run API compatibility test against the latest version published to npm after compilation.
+
+You can manually run compatibility tests using `yarn compat` if this feature is disabled.
+- You can ignore compatibility failures by adding lines to a ".compatignore" file.
+
+---
+
+##### `compatIgnore`<sup>Optional</sup> <a name="compatIgnore" id="projen-modules.JsiiProjectOptions.property.compatIgnore"></a>
+
+```typescript
+public readonly compatIgnore: string;
+```
+
+- *Type:* string
+- *Default:* ".compatignore"
+
+Name of the ignore file for API compatibility tests.
+
+---
+
+##### `compressAssembly`<sup>Optional</sup> <a name="compressAssembly" id="projen-modules.JsiiProjectOptions.property.compressAssembly"></a>
+
+```typescript
+public readonly compressAssembly: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Emit a compressed version of the assembly.
+
+---
+
+##### `copyrightOwner`<sup>Optional</sup> <a name="copyrightOwner" id="projen-modules.JsiiProjectOptions.property.copyrightOwner"></a>
+
+```typescript
+public readonly copyrightOwner: string;
+```
+
+- *Type:* string
+- *Default:* defaults to the value of authorName or "" if `authorName` is undefined.
+
+License copyright owner.
+
+---
+
+##### `copyrightPeriod`<sup>Optional</sup> <a name="copyrightPeriod" id="projen-modules.JsiiProjectOptions.property.copyrightPeriod"></a>
+
+```typescript
+public readonly copyrightPeriod: string;
+```
+
+- *Type:* string
+- *Default:* current year
+
+The copyright years to put in the LICENSE file.
+
+---
+
+##### `dependabot`<sup>Optional</sup> <a name="dependabot" id="projen-modules.JsiiProjectOptions.property.dependabot"></a>
+
+```typescript
+public readonly dependabot: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Use dependabot to handle dependency upgrades.
+
+Cannot be used in conjunction with `depsUpgrade`.
+
+---
+
+##### `dependabotOptions`<sup>Optional</sup> <a name="dependabotOptions" id="projen-modules.JsiiProjectOptions.property.dependabotOptions"></a>
+
+```typescript
+public readonly dependabotOptions: DependabotOptions;
+```
+
+- *Type:* projen.github.DependabotOptions
+- *Default:* default options
+
+Options for dependabot.
 
 ---
 
@@ -4715,12 +4943,33 @@ this will be what you `package.json` will eventually include.
 
 ---
 
-*Example*
+##### `depsUpgrade`<sup>Optional</sup> <a name="depsUpgrade" id="projen-modules.JsiiProjectOptions.property.depsUpgrade"></a>
 
 ```typescript
-[ 'express', 'lodash', 'foo@^2' ]
+public readonly depsUpgrade: boolean;
 ```
 
+- *Type:* boolean
+- *Default:* true
+
+Use tasks and github workflows to handle dependency upgrades.
+
+Cannot be used in conjunction with `dependabot`.
+
+---
+
+##### `depsUpgradeOptions`<sup>Optional</sup> <a name="depsUpgradeOptions" id="projen-modules.JsiiProjectOptions.property.depsUpgradeOptions"></a>
+
+```typescript
+public readonly depsUpgradeOptions: UpgradeDependenciesOptions;
+```
+
+- *Type:* projen.javascript.UpgradeDependenciesOptions
+- *Default:* default options
+
+Options for `UpgradeDependencies`.
+
+---
 
 ##### `description`<sup>Optional</sup> <a name="description" id="projen-modules.JsiiProjectOptions.property.description"></a>
 
@@ -4734,6 +4983,19 @@ The description is just a string that helps people understand the purpose of the
 
 It can be used when searching for packages in a package manager as well.
 See https://classic.yarnpkg.com/en/docs/package-json/#toc-description
+
+---
+
+##### `devContainer`<sup>Optional</sup> <a name="devContainer" id="projen-modules.JsiiProjectOptions.property.devContainer"></a>
+
+```typescript
+public readonly devContainer: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Add a VSCode development environment (used for GitHub Codespaces).
 
 ---
 
@@ -4761,12 +5023,82 @@ this will be what you `package.json` will eventually include.
 
 ---
 
-*Example*
+##### `disableTsconfig`<sup>Optional</sup> <a name="disableTsconfig" id="projen-modules.JsiiProjectOptions.property.disableTsconfig"></a>
 
 ```typescript
-[ 'typescript', '@types/express' ]
+public readonly disableTsconfig: boolean;
 ```
 
+- *Type:* boolean
+- *Default:* false
+
+Do not generate a `tsconfig.json` file (used by jsii projects since tsconfig.json is generated by the jsii compiler).
+
+---
+
+##### `disableTsconfigDev`<sup>Optional</sup> <a name="disableTsconfigDev" id="projen-modules.JsiiProjectOptions.property.disableTsconfigDev"></a>
+
+```typescript
+public readonly disableTsconfigDev: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Do not generate a `tsconfig.dev.json` file.
+
+---
+
+##### `docgen`<sup>Optional</sup> <a name="docgen" id="projen-modules.JsiiProjectOptions.property.docgen"></a>
+
+```typescript
+public readonly docgen: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Docgen by Typedoc.
+
+---
+
+##### `docgenFilePath`<sup>Optional</sup> <a name="docgenFilePath" id="projen-modules.JsiiProjectOptions.property.docgenFilePath"></a>
+
+```typescript
+public readonly docgenFilePath: string;
+```
+
+- *Type:* string
+- *Default:* "API.md"
+
+File path for generated docs.
+
+---
+
+##### `docsDirectory`<sup>Optional</sup> <a name="docsDirectory" id="projen-modules.JsiiProjectOptions.property.docsDirectory"></a>
+
+```typescript
+public readonly docsDirectory: string;
+```
+
+- *Type:* string
+- *Default:* "docs"
+
+Docs directory.
+
+---
+
+##### ~~`dotnet`~~<sup>Optional</sup> <a name="dotnet" id="projen-modules.JsiiProjectOptions.property.dotnet"></a>
+
+- *Deprecated:* use `publishToNuget`
+
+```typescript
+public readonly dotnet: JsiiDotNetTarget;
+```
+
+- *Type:* projen.cdk.JsiiDotNetTarget
+
+---
 
 ##### `entrypoint`<sup>Optional</sup> <a name="entrypoint" id="projen-modules.JsiiProjectOptions.property.entrypoint"></a>
 
@@ -4777,9 +5109,139 @@ public readonly entrypoint: string;
 - *Type:* string
 - *Default:* "lib/index.js"
 
-Module entrypoint (`main` in `package.json`).
+Module entrypoint (`main` in `package.json`). Set to an empty string to not include `main` in your package.json.
 
-Set to an empty string to not include `main` in your package.json
+---
+
+##### `entrypointTypes`<sup>Optional</sup> <a name="entrypointTypes" id="projen-modules.JsiiProjectOptions.property.entrypointTypes"></a>
+
+```typescript
+public readonly entrypointTypes: string;
+```
+
+- *Type:* string
+- *Default:* .d.ts file derived from the project's entrypoint (usually lib/index.d.ts)
+
+The .d.ts file that includes the type declarations for this module.
+
+---
+
+##### `eslint`<sup>Optional</sup> <a name="eslint" id="projen-modules.JsiiProjectOptions.property.eslint"></a>
+
+```typescript
+public readonly eslint: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Setup eslint.
+
+---
+
+##### `eslintOptions`<sup>Optional</sup> <a name="eslintOptions" id="projen-modules.JsiiProjectOptions.property.eslintOptions"></a>
+
+```typescript
+public readonly eslintOptions: EslintOptions;
+```
+
+- *Type:* projen.javascript.EslintOptions
+- *Default:* opinionated default options
+
+Eslint options.
+
+---
+
+##### `excludeTypescript`<sup>Optional</sup> <a name="excludeTypescript" id="projen-modules.JsiiProjectOptions.property.excludeTypescript"></a>
+
+```typescript
+public readonly excludeTypescript: string[];
+```
+
+- *Type:* string[]
+
+Accepts a list of glob patterns. Files matching any of those patterns will be excluded from the TypeScript compiler input.
+
+By default, jsii will include all *.ts files (except .d.ts files) in the TypeScript compiler input.
+This can be problematic for example when the package's build or test procedure generates .ts files
+that cannot be compiled with jsii's compiler settings.
+
+---
+
+##### `github`<sup>Optional</sup> <a name="github" id="projen-modules.JsiiProjectOptions.property.github"></a>
+
+```typescript
+public readonly github: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Enable GitHub integration.
+
+Enabled by default for root projects. Disabled for non-root projects.
+
+---
+
+##### `githubOptions`<sup>Optional</sup> <a name="githubOptions" id="projen-modules.JsiiProjectOptions.property.githubOptions"></a>
+
+```typescript
+public readonly githubOptions: GitHubOptions;
+```
+
+- *Type:* projen.github.GitHubOptions
+- *Default:* see GitHubOptions
+
+Options for GitHub integration.
+
+---
+
+##### `gitignore`<sup>Optional</sup> <a name="gitignore" id="projen-modules.JsiiProjectOptions.property.gitignore"></a>
+
+```typescript
+public readonly gitignore: string[];
+```
+
+- *Type:* string[]
+
+Additional entries to .gitignore.
+
+---
+
+##### `gitIgnoreOptions`<sup>Optional</sup> <a name="gitIgnoreOptions" id="projen-modules.JsiiProjectOptions.property.gitIgnoreOptions"></a>
+
+```typescript
+public readonly gitIgnoreOptions: IgnoreFileOptions;
+```
+
+- *Type:* projen.IgnoreFileOptions
+
+Configuration options for .gitignore file.
+
+---
+
+##### `gitOptions`<sup>Optional</sup> <a name="gitOptions" id="projen-modules.JsiiProjectOptions.property.gitOptions"></a>
+
+```typescript
+public readonly gitOptions: GitOptions;
+```
+
+- *Type:* projen.GitOptions
+
+Configuration options for git.
+
+---
+
+##### `gitpod`<sup>Optional</sup> <a name="gitpod" id="projen-modules.JsiiProjectOptions.property.gitpod"></a>
+
+```typescript
+public readonly gitpod: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Add a Gitpod development environment.
 
 ---
 
@@ -4795,6 +5257,65 @@ Package's Homepage / Website.
 
 ---
 
+##### `jest`<sup>Optional</sup> <a name="jest" id="projen-modules.JsiiProjectOptions.property.jest"></a>
+
+```typescript
+public readonly jest: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Setup jest unit tests.
+
+---
+
+##### `jestOptions`<sup>Optional</sup> <a name="jestOptions" id="projen-modules.JsiiProjectOptions.property.jestOptions"></a>
+
+```typescript
+public readonly jestOptions: JestOptions;
+```
+
+- *Type:* projen.javascript.JestOptions
+- *Default:* default options
+
+Jest options.
+
+---
+
+##### `jsiiReleaseVersion`<sup>Optional</sup> <a name="jsiiReleaseVersion" id="projen-modules.JsiiProjectOptions.property.jsiiReleaseVersion"></a>
+
+```typescript
+public readonly jsiiReleaseVersion: string;
+```
+
+- *Type:* string
+- *Default:* "latest"
+
+Version requirement of `publib` which is used to publish modules to npm.
+
+---
+
+##### `jsiiVersion`<sup>Optional</sup> <a name="jsiiVersion" id="projen-modules.JsiiProjectOptions.property.jsiiVersion"></a>
+
+```typescript
+public readonly jsiiVersion: string;
+```
+
+- *Type:* string
+- *Default:* "1.x"
+
+Version of the jsii compiler to use.
+
+Set to "*" if you want to manually manage the version of jsii in your
+project by managing updates to `package.json` on your own.
+
+NOTE: The jsii compiler releases since 5.0.0 are not semantically versioned
+and should remain on the same minor, so we recommend using a `~` dependency
+(e.g. `~5.0.0`).
+
+---
+
 ##### `keywords`<sup>Optional</sup> <a name="keywords" id="projen-modules.JsiiProjectOptions.property.keywords"></a>
 
 ```typescript
@@ -4804,6 +5325,19 @@ public readonly keywords: string[];
 - *Type:* string[]
 
 Keywords to include in `package.json`.
+
+---
+
+##### `libdir`<sup>Optional</sup> <a name="libdir" id="projen-modules.JsiiProjectOptions.property.libdir"></a>
+
+```typescript
+public readonly libdir: string;
+```
+
+- *Type:* string
+- *Default:* "lib"
+
+Typescript  artifacts output directory.
 
 ---
 
@@ -4836,6 +5370,35 @@ Indicates if a license should be added.
 
 ---
 
+##### `logging`<sup>Optional</sup> <a name="logging" id="projen-modules.JsiiProjectOptions.property.logging"></a>
+
+```typescript
+public readonly logging: LoggerOptions;
+```
+
+- *Type:* projen.LoggerOptions
+- *Default:* {}
+
+Configure logging options such as verbosity.
+
+---
+
+##### `majorVersion`<sup>Optional</sup> <a name="majorVersion" id="projen-modules.JsiiProjectOptions.property.majorVersion"></a>
+
+```typescript
+public readonly majorVersion: number;
+```
+
+- *Type:* number
+- *Default:* Major version is not enforced.
+
+Major version to release from the default branch.
+
+If this is specified, we bump the latest version of this major version line.
+If not specified, we bump the global latest version.
+
+---
+
 ##### `maxNodeVersion`<sup>Optional</sup> <a name="maxNodeVersion" id="projen-modules.JsiiProjectOptions.property.maxNodeVersion"></a>
 
 ```typescript
@@ -4846,6 +5409,54 @@ public readonly maxNodeVersion: string;
 - *Default:* no max
 
 Minimum node.js version to require via `engines` (inclusive).
+
+---
+
+##### ~~`mergify`~~<sup>Optional</sup> <a name="mergify" id="projen-modules.JsiiProjectOptions.property.mergify"></a>
+
+- *Deprecated:* use `githubOptions.mergify` instead
+
+```typescript
+public readonly mergify: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Whether mergify should be enabled on this repository or not.
+
+---
+
+##### ~~`mergifyOptions`~~<sup>Optional</sup> <a name="mergifyOptions" id="projen-modules.JsiiProjectOptions.property.mergifyOptions"></a>
+
+- *Deprecated:* use `githubOptions.mergifyOptions` instead
+
+```typescript
+public readonly mergifyOptions: MergifyOptions;
+```
+
+- *Type:* projen.github.MergifyOptions
+- *Default:* default options
+
+Options for mergify.
+
+---
+
+##### `minMajorVersion`<sup>Optional</sup> <a name="minMajorVersion" id="projen-modules.JsiiProjectOptions.property.minMajorVersion"></a>
+
+```typescript
+public readonly minMajorVersion: number;
+```
+
+- *Type:* number
+- *Default:* No minimum version is being enforced
+
+Minimal Major version to release.
+
+This can be useful to set to 1, as breaking changes before the 1.x major
+release are not incrementing the major version number.
+
+Can not be set together with `majorVersion`.
 
 ---
 
@@ -4862,6 +5473,27 @@ Minimum Node.js version to require via package.json `engines` (inclusive).
 
 ---
 
+##### ~~`mutableBuild`~~<sup>Optional</sup> <a name="mutableBuild" id="projen-modules.JsiiProjectOptions.property.mutableBuild"></a>
+
+- *Deprecated:* - Use `buildWorkflowOptions.mutableBuild`
+
+```typescript
+public readonly mutableBuild: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Automatically update files modified during builds to pull-request branches.
+
+This means
+that any files synthesized by projen or e.g. test snapshots will always be up-to-date
+before a PR is merged.
+
+Implies that PR builds do not have anti-tamper checks.
+
+---
+
 ##### `npmAccess`<sup>Optional</sup> <a name="npmAccess" id="projen-modules.JsiiProjectOptions.property.npmAccess"></a>
 
 ```typescript
@@ -4872,6 +5504,61 @@ public readonly npmAccess: NpmAccess;
 - *Default:* for scoped packages (e.g. `foo@bar`), the default is `NpmAccess.RESTRICTED`, for non-scoped packages, the default is `NpmAccess.PUBLIC`.
 
 Access level of the npm package.
+
+---
+
+##### `npmDistTag`<sup>Optional</sup> <a name="npmDistTag" id="projen-modules.JsiiProjectOptions.property.npmDistTag"></a>
+
+```typescript
+public readonly npmDistTag: string;
+```
+
+- *Type:* string
+- *Default:* "latest"
+
+The npmDistTag to use when publishing from the default branch.
+
+To set the npm dist-tag for release branches, set the `npmDistTag` property
+for each branch.
+
+---
+
+##### ~~`npmignore`~~<sup>Optional</sup> <a name="npmignore" id="projen-modules.JsiiProjectOptions.property.npmignore"></a>
+
+- *Deprecated:* - use `project.addPackageIgnore`
+
+```typescript
+public readonly npmignore: string[];
+```
+
+- *Type:* string[]
+
+Additional entries to .npmignore.
+
+---
+
+##### `npmignoreEnabled`<sup>Optional</sup> <a name="npmignoreEnabled" id="projen-modules.JsiiProjectOptions.property.npmignoreEnabled"></a>
+
+```typescript
+public readonly npmignoreEnabled: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Defines an .npmignore file. Normally this is only needed for libraries that are packaged as tarballs.
+
+---
+
+##### `npmIgnoreOptions`<sup>Optional</sup> <a name="npmIgnoreOptions" id="projen-modules.JsiiProjectOptions.property.npmIgnoreOptions"></a>
+
+```typescript
+public readonly npmIgnoreOptions: IgnoreFileOptions;
+```
+
+- *Type:* projen.IgnoreFileOptions
+
+Configuration options for .npmignore file.
 
 ---
 
@@ -4891,8 +5578,6 @@ you will need to use a supported CI/CD provider.
 
 Note that the projen `Release` and `Publisher` components are using `publib` to publish packages,
 which is using npm internally and supports provenance statements independently of the package manager used.
-
-> [https://docs.npmjs.com/generating-provenance-statements](https://docs.npmjs.com/generating-provenance-statements)
 
 ---
 
@@ -4940,6 +5625,36 @@ GitHub secret which contains the NPM token to use when publishing packages.
 
 ---
 
+##### `outdir`<sup>Optional</sup> <a name="outdir" id="projen-modules.JsiiProjectOptions.property.outdir"></a>
+
+```typescript
+public readonly outdir: string;
+```
+
+- *Type:* string
+- *Default:* "."
+
+The root directory of the project. Relative to this directory, all files are synthesized.
+
+If this project has a parent, this directory is relative to the parent
+directory and it cannot be the same as the parent or any of it's other
+subprojects.
+
+---
+
+##### `package`<sup>Optional</sup> <a name="package" id="projen-modules.JsiiProjectOptions.property.package"></a>
+
+```typescript
+public readonly package: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Defines a `package` task that will produce an npm tarball under the artifacts directory (e.g. `dist`).
+
+---
+
 ##### `packageManager`<sup>Optional</sup> <a name="packageManager" id="projen-modules.JsiiProjectOptions.property.packageManager"></a>
 
 ```typescript
@@ -4963,6 +5678,18 @@ public readonly packageName: string;
 - *Default:* defaults to project name
 
 The "name" in package.json.
+
+---
+
+##### `parent`<sup>Optional</sup> <a name="parent" id="projen-modules.JsiiProjectOptions.property.parent"></a>
+
+```typescript
+public readonly parent: Project;
+```
+
+- *Type:* projen.Project
+
+The parent project, if this project is part of a bigger project.
 
 ---
 
@@ -5018,152 +5745,6 @@ The version of PNPM to use if using PNPM as a package manager.
 
 ---
 
-##### `repository`<sup>Optional</sup> <a name="repository" id="projen-modules.JsiiProjectOptions.property.repository"></a>
-
-```typescript
-public readonly repository: string;
-```
-
-- *Type:* string
-
-The repository is the location where the actual code for your package lives.
-
-See https://classic.yarnpkg.com/en/docs/package-json/#toc-repository
-
----
-
-##### `repositoryDirectory`<sup>Optional</sup> <a name="repositoryDirectory" id="projen-modules.JsiiProjectOptions.property.repositoryDirectory"></a>
-
-```typescript
-public readonly repositoryDirectory: string;
-```
-
-- *Type:* string
-
-If the package.json for your package is not in the root directory (for example if it is part of a monorepo), you can specify the directory in which it lives.
-
----
-
-##### `scopedPackagesOptions`<sup>Optional</sup> <a name="scopedPackagesOptions" id="projen-modules.JsiiProjectOptions.property.scopedPackagesOptions"></a>
-
-```typescript
-public readonly scopedPackagesOptions: ScopedPackagesOptions[];
-```
-
-- *Type:* projen.javascript.ScopedPackagesOptions[]
-- *Default:* fetch all scoped packages from the public npm registry
-
-Options for privately hosted scoped packages.
-
----
-
-##### ~~`scripts`~~<sup>Optional</sup> <a name="scripts" id="projen-modules.JsiiProjectOptions.property.scripts"></a>
-
-- *Deprecated:* use `project.addTask()` or `package.setScript()`
-
-```typescript
-public readonly scripts: {[ key: string ]: string};
-```
-
-- *Type:* {[ key: string ]: string}
-- *Default:* {}
-
-npm scripts to include.
-
-If a script has the same name as a standard script,
-the standard script will be overwritten.
-Also adds the script as a task.
-
----
-
-##### `stability`<sup>Optional</sup> <a name="stability" id="projen-modules.JsiiProjectOptions.property.stability"></a>
-
-```typescript
-public readonly stability: string;
-```
-
-- *Type:* string
-
-Package's Stability.
-
----
-
-##### `yarnBerryOptions`<sup>Optional</sup> <a name="yarnBerryOptions" id="projen-modules.JsiiProjectOptions.property.yarnBerryOptions"></a>
-
-```typescript
-public readonly yarnBerryOptions: YarnBerryOptions;
-```
-
-- *Type:* projen.javascript.YarnBerryOptions
-- *Default:* Yarn Berry v4 with all default options
-
-Options for Yarn Berry.
-
----
-
-##### `jsiiReleaseVersion`<sup>Optional</sup> <a name="jsiiReleaseVersion" id="projen-modules.JsiiProjectOptions.property.jsiiReleaseVersion"></a>
-
-```typescript
-public readonly jsiiReleaseVersion: string;
-```
-
-- *Type:* string
-- *Default:* "latest"
-
-Version requirement of `publib` which is used to publish modules to npm.
-
----
-
-##### `majorVersion`<sup>Optional</sup> <a name="majorVersion" id="projen-modules.JsiiProjectOptions.property.majorVersion"></a>
-
-```typescript
-public readonly majorVersion: number;
-```
-
-- *Type:* number
-- *Default:* Major version is not enforced.
-
-Major version to release from the default branch.
-
-If this is specified, we bump the latest version of this major version line.
-If not specified, we bump the global latest version.
-
----
-
-##### `minMajorVersion`<sup>Optional</sup> <a name="minMajorVersion" id="projen-modules.JsiiProjectOptions.property.minMajorVersion"></a>
-
-```typescript
-public readonly minMajorVersion: number;
-```
-
-- *Type:* number
-- *Default:* No minimum version is being enforced
-
-Minimal Major version to release.
-
-This can be useful to set to 1, as breaking changes before the 1.x major
-release are not incrementing the major version number.
-
-Can not be set together with `majorVersion`.
-
----
-
-##### `npmDistTag`<sup>Optional</sup> <a name="npmDistTag" id="projen-modules.JsiiProjectOptions.property.npmDistTag"></a>
-
-```typescript
-public readonly npmDistTag: string;
-```
-
-- *Type:* string
-- *Default:* "latest"
-
-The npmDistTag to use when publishing from the default branch.
-
-To set the npm dist-tag for release branches, set the `npmDistTag` property
-for each branch.
-
----
-
 ##### `postBuildSteps`<sup>Optional</sup> <a name="postBuildSteps" id="projen-modules.JsiiProjectOptions.property.postBuildSteps"></a>
 
 ```typescript
@@ -5187,6 +5768,196 @@ public readonly prerelease: string;
 - *Default:* normal semantic versions
 
 Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pre").
+
+---
+
+##### `prettier`<sup>Optional</sup> <a name="prettier" id="projen-modules.JsiiProjectOptions.property.prettier"></a>
+
+```typescript
+public readonly prettier: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Setup prettier.
+
+---
+
+##### `prettierOptions`<sup>Optional</sup> <a name="prettierOptions" id="projen-modules.JsiiProjectOptions.property.prettierOptions"></a>
+
+```typescript
+public readonly prettierOptions: PrettierOptions;
+```
+
+- *Type:* projen.javascript.PrettierOptions
+- *Default:* default options
+
+Prettier options.
+
+---
+
+##### ~~`projectType`~~<sup>Optional</sup> <a name="projectType" id="projen-modules.JsiiProjectOptions.property.projectType"></a>
+
+- *Deprecated:* no longer supported at the base project level
+
+```typescript
+public readonly projectType: ProjectType;
+```
+
+- *Type:* projen.ProjectType
+- *Default:* ProjectType.UNKNOWN
+
+Which type of project this is (library/app).
+
+---
+
+##### `projenCommand`<sup>Optional</sup> <a name="projenCommand" id="projen-modules.JsiiProjectOptions.property.projenCommand"></a>
+
+```typescript
+public readonly projenCommand: string;
+```
+
+- *Type:* string
+- *Default:* "npx projen"
+
+The shell command to use in order to run the projen CLI.
+
+Can be used to customize in special environments.
+
+---
+
+##### `projenCredentials`<sup>Optional</sup> <a name="projenCredentials" id="projen-modules.JsiiProjectOptions.property.projenCredentials"></a>
+
+```typescript
+public readonly projenCredentials: GithubCredentials;
+```
+
+- *Type:* projen.github.GithubCredentials
+- *Default:* use a personal access token named PROJEN_GITHUB_TOKEN
+
+Choose a method of providing GitHub API access for projen workflows.
+
+---
+
+##### `projenDevDependency`<sup>Optional</sup> <a name="projenDevDependency" id="projen-modules.JsiiProjectOptions.property.projenDevDependency"></a>
+
+```typescript
+public readonly projenDevDependency: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true if not a subproject
+
+Indicates of "projen" should be installed as a devDependency.
+
+---
+
+##### `projenrcJs`<sup>Optional</sup> <a name="projenrcJs" id="projen-modules.JsiiProjectOptions.property.projenrcJs"></a>
+
+```typescript
+public readonly projenrcJs: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true if projenrcJson is false
+
+Generate (once) .projenrc.js (in JavaScript). Set to `false` in order to disable .projenrc.js generation.
+
+---
+
+##### `projenrcJson`<sup>Optional</sup> <a name="projenrcJson" id="projen-modules.JsiiProjectOptions.property.projenrcJson"></a>
+
+```typescript
+public readonly projenrcJson: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Generate (once) .projenrc.json (in JSON). Set to `false` in order to disable .projenrc.json generation.
+
+---
+
+##### `projenrcJsonOptions`<sup>Optional</sup> <a name="projenrcJsonOptions" id="projen-modules.JsiiProjectOptions.property.projenrcJsonOptions"></a>
+
+```typescript
+public readonly projenrcJsonOptions: ProjenrcJsonOptions;
+```
+
+- *Type:* projen.ProjenrcJsonOptions
+- *Default:* default options
+
+Options for .projenrc.json.
+
+---
+
+##### `projenrcJsOptions`<sup>Optional</sup> <a name="projenrcJsOptions" id="projen-modules.JsiiProjectOptions.property.projenrcJsOptions"></a>
+
+```typescript
+public readonly projenrcJsOptions: ProjenrcOptions;
+```
+
+- *Type:* projen.javascript.ProjenrcOptions
+- *Default:* default options
+
+Options for .projenrc.js.
+
+---
+
+##### `projenrcTs`<sup>Optional</sup> <a name="projenrcTs" id="projen-modules.JsiiProjectOptions.property.projenrcTs"></a>
+
+```typescript
+public readonly projenrcTs: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Use TypeScript for your projenrc file (`.projenrc.ts`).
+
+---
+
+##### `projenrcTsOptions`<sup>Optional</sup> <a name="projenrcTsOptions" id="projen-modules.JsiiProjectOptions.property.projenrcTsOptions"></a>
+
+```typescript
+public readonly projenrcTsOptions: ProjenrcOptions;
+```
+
+- *Type:* projen.typescript.ProjenrcOptions
+
+Options for .projenrc.ts.
+
+---
+
+##### ~~`projenTokenSecret`~~<sup>Optional</sup> <a name="projenTokenSecret" id="projen-modules.JsiiProjectOptions.property.projenTokenSecret"></a>
+
+- *Deprecated:* use `projenCredentials`
+
+```typescript
+public readonly projenTokenSecret: string;
+```
+
+- *Type:* string
+- *Default:* "PROJEN_GITHUB_TOKEN"
+
+The name of a secret which includes a GitHub Personal Access Token to be used by projen workflows.
+
+This token needs to have the `repo`, `workflows`
+and `packages` scope.
+
+---
+
+##### `projenVersion`<sup>Optional</sup> <a name="projenVersion" id="projen-modules.JsiiProjectOptions.property.projenVersion"></a>
+
+```typescript
+public readonly projenVersion: string;
+```
+
+- *Type:* string
+- *Default:* Defaults to the latest version.
+
+Version of projen to install.
 
 ---
 
@@ -5219,6 +5990,108 @@ in order to create a publishing task for each publishing activity.
 
 ---
 
+##### `publishToGo`<sup>Optional</sup> <a name="publishToGo" id="projen-modules.JsiiProjectOptions.property.publishToGo"></a>
+
+```typescript
+public readonly publishToGo: JsiiGoTarget;
+```
+
+- *Type:* projen.cdk.JsiiGoTarget
+- *Default:* no publishing
+
+Publish Go bindings to a git repository.
+
+---
+
+##### `publishToMaven`<sup>Optional</sup> <a name="publishToMaven" id="projen-modules.JsiiProjectOptions.property.publishToMaven"></a>
+
+```typescript
+public readonly publishToMaven: JsiiJavaTarget;
+```
+
+- *Type:* projen.cdk.JsiiJavaTarget
+- *Default:* no publishing
+
+Publish to maven.
+
+---
+
+##### `publishToNuget`<sup>Optional</sup> <a name="publishToNuget" id="projen-modules.JsiiProjectOptions.property.publishToNuget"></a>
+
+```typescript
+public readonly publishToNuget: JsiiDotNetTarget;
+```
+
+- *Type:* projen.cdk.JsiiDotNetTarget
+- *Default:* no publishing
+
+Publish to NuGet.
+
+---
+
+##### `publishToPypi`<sup>Optional</sup> <a name="publishToPypi" id="projen-modules.JsiiProjectOptions.property.publishToPypi"></a>
+
+```typescript
+public readonly publishToPypi: JsiiPythonTarget;
+```
+
+- *Type:* projen.cdk.JsiiPythonTarget
+- *Default:* no publishing
+
+Publish to pypi.
+
+---
+
+##### `pullRequestTemplate`<sup>Optional</sup> <a name="pullRequestTemplate" id="projen-modules.JsiiProjectOptions.property.pullRequestTemplate"></a>
+
+```typescript
+public readonly pullRequestTemplate: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Include a GitHub pull request template.
+
+---
+
+##### `pullRequestTemplateContents`<sup>Optional</sup> <a name="pullRequestTemplateContents" id="projen-modules.JsiiProjectOptions.property.pullRequestTemplateContents"></a>
+
+```typescript
+public readonly pullRequestTemplateContents: string[];
+```
+
+- *Type:* string[]
+- *Default:* default content
+
+The contents of the pull request template.
+
+---
+
+##### ~~`python`~~<sup>Optional</sup> <a name="python" id="projen-modules.JsiiProjectOptions.property.python"></a>
+
+- *Deprecated:* use `publishToPyPi`
+
+```typescript
+public readonly python: JsiiPythonTarget;
+```
+
+- *Type:* projen.cdk.JsiiPythonTarget
+
+---
+
+##### `readme`<sup>Optional</sup> <a name="readme" id="projen-modules.JsiiProjectOptions.property.readme"></a>
+
+```typescript
+public readonly readme: ReadmeProps;
+```
+
+- *Type:* <a href="#projen-modules.ReadmeProps">ReadmeProps</a>
+
+Readme configuration.
+
+---
+
 ##### `releasableCommits`<sup>Optional</sup> <a name="releasableCommits" id="projen-modules.JsiiProjectOptions.property.releasableCommits"></a>
 
 ```typescript
@@ -5229,6 +6102,19 @@ public readonly releasableCommits: ReleasableCommits;
 - *Default:* ReleasableCommits.everyCommit()
 
 Find commits that should be considered releasable Used to decide if a release is required.
+
+---
+
+##### `release`<sup>Optional</sup> <a name="release" id="projen-modules.JsiiProjectOptions.property.release"></a>
+
+```typescript
+public readonly release: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true (false for subprojects)
+
+Add release management to this project.
 
 ---
 
@@ -5319,12 +6205,26 @@ public readonly releaseTagPrefix: string;
 - *Type:* string
 - *Default:* "v"
 
-Automatically add the given prefix to release tags. Useful if you are releasing on multiple branches with overlapping version numbers.
+Automatically add the given prefix to release tags.
 
+Useful if you are releasing on multiple branches with overlapping version numbers.
 Note: this prefix is used to detect the latest tagged version
 when bumping, so if you change this on a project with an existing version
 history, you may need to manually tag your latest release
 with the new prefix.
+
+---
+
+##### `releaseToNpm`<sup>Optional</sup> <a name="releaseToNpm" id="projen-modules.JsiiProjectOptions.property.releaseToNpm"></a>
+
+```typescript
+public readonly releaseToNpm: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Automatically release to npm when new versions are introduced.
 
 ---
 
@@ -5338,6 +6238,21 @@ public readonly releaseTrigger: ReleaseTrigger;
 - *Default:* Continuous releases (`ReleaseTrigger.continuous()`)
 
 The release trigger to use.
+
+---
+
+##### ~~`releaseWorkflow`~~<sup>Optional</sup> <a name="releaseWorkflow" id="projen-modules.JsiiProjectOptions.property.releaseWorkflow"></a>
+
+- *Deprecated:* see `release`.
+
+```typescript
+public readonly releaseWorkflow: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true if not a subproject
+
+DEPRECATED: renamed to `release`.
 
 ---
 
@@ -5366,709 +6281,66 @@ A set of workflow steps to execute in order to setup the workflow container.
 
 ---
 
-##### `versionrcOptions`<sup>Optional</sup> <a name="versionrcOptions" id="projen-modules.JsiiProjectOptions.property.versionrcOptions"></a>
+##### `renovatebot`<sup>Optional</sup> <a name="renovatebot" id="projen-modules.JsiiProjectOptions.property.renovatebot"></a>
 
 ```typescript
-public readonly versionrcOptions: {[ key: string ]: any};
-```
-
-- *Type:* {[ key: string ]: any}
-- *Default:* standard configuration applicable for GitHub repositories
-
-Custom configuration used when creating changelog with standard-version package.
-
-Given values either append to default configuration or overwrite values in it.
-
----
-
-##### `workflowContainerImage`<sup>Optional</sup> <a name="workflowContainerImage" id="projen-modules.JsiiProjectOptions.property.workflowContainerImage"></a>
-
-```typescript
-public readonly workflowContainerImage: string;
-```
-
-- *Type:* string
-- *Default:* default image
-
-Container image to use for GitHub workflows.
-
----
-
-##### `workflowRunsOn`<sup>Optional</sup> <a name="workflowRunsOn" id="projen-modules.JsiiProjectOptions.property.workflowRunsOn"></a>
-
-```typescript
-public readonly workflowRunsOn: string[];
-```
-
-- *Type:* string[]
-- *Default:* ["ubuntu-latest"]
-
-Github Runner selection labels.
-
----
-
-##### `workflowRunsOnGroup`<sup>Optional</sup> <a name="workflowRunsOnGroup" id="projen-modules.JsiiProjectOptions.property.workflowRunsOnGroup"></a>
-
-```typescript
-public readonly workflowRunsOnGroup: GroupRunnerOptions;
-```
-
-- *Type:* projen.GroupRunnerOptions
-
-Github Runner Group selection options.
-
----
-
-##### `defaultReleaseBranch`<sup>Required</sup> <a name="defaultReleaseBranch" id="projen-modules.JsiiProjectOptions.property.defaultReleaseBranch"></a>
-
-```typescript
-public readonly defaultReleaseBranch: string;
-```
-
-- *Type:* string
-- *Default:* "main"
-
-The name of the main release branch.
-
----
-
-##### `artifactsDirectory`<sup>Optional</sup> <a name="artifactsDirectory" id="projen-modules.JsiiProjectOptions.property.artifactsDirectory"></a>
-
-```typescript
-public readonly artifactsDirectory: string;
-```
-
-- *Type:* string
-- *Default:* "dist"
-
-A directory which will contain build artifacts.
-
----
-
-##### `autoApproveUpgrades`<sup>Optional</sup> <a name="autoApproveUpgrades" id="projen-modules.JsiiProjectOptions.property.autoApproveUpgrades"></a>
-
-```typescript
-public readonly autoApproveUpgrades: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configued).
-
-Throw if set to true but `autoApproveOptions` are not defined.
-
----
-
-##### `buildWorkflow`<sup>Optional</sup> <a name="buildWorkflow" id="projen-modules.JsiiProjectOptions.property.buildWorkflow"></a>
-
-```typescript
-public readonly buildWorkflow: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true if not a subproject
-
-Define a GitHub workflow for building PRs.
-
----
-
-##### `buildWorkflowOptions`<sup>Optional</sup> <a name="buildWorkflowOptions" id="projen-modules.JsiiProjectOptions.property.buildWorkflowOptions"></a>
-
-```typescript
-public readonly buildWorkflowOptions: BuildWorkflowOptions;
-```
-
-- *Type:* projen.javascript.BuildWorkflowOptions
-
-Options for PR build workflow.
-
----
-
-##### ~~`buildWorkflowTriggers`~~<sup>Optional</sup> <a name="buildWorkflowTriggers" id="projen-modules.JsiiProjectOptions.property.buildWorkflowTriggers"></a>
-
-- *Deprecated:* - Use `buildWorkflowOptions.workflowTriggers`
-
-```typescript
-public readonly buildWorkflowTriggers: Triggers;
-```
-
-- *Type:* projen.github.workflows.Triggers
-- *Default:* "{ pullRequest: {}, workflowDispatch: {} }"
-
-Build workflow triggers.
-
----
-
-##### `bundlerOptions`<sup>Optional</sup> <a name="bundlerOptions" id="projen-modules.JsiiProjectOptions.property.bundlerOptions"></a>
-
-```typescript
-public readonly bundlerOptions: BundlerOptions;
-```
-
-- *Type:* projen.javascript.BundlerOptions
-
-Options for `Bundler`.
-
----
-
-##### `checkLicenses`<sup>Optional</sup> <a name="checkLicenses" id="projen-modules.JsiiProjectOptions.property.checkLicenses"></a>
-
-```typescript
-public readonly checkLicenses: LicenseCheckerOptions;
-```
-
-- *Type:* projen.javascript.LicenseCheckerOptions
-- *Default:* no license checks are run during the build and all licenses will be accepted
-
-Configure which licenses should be deemed acceptable for use by dependencies.
-
-This setting will cause the build to fail, if any prohibited or not allowed licenses ares encountered.
-
----
-
-##### `codeCov`<sup>Optional</sup> <a name="codeCov" id="projen-modules.JsiiProjectOptions.property.codeCov"></a>
-
-```typescript
-public readonly codeCov: boolean;
+public readonly renovatebot: boolean;
 ```
 
 - *Type:* boolean
 - *Default:* false
 
-Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v4 A secret is required for private repos. Configured with `@codeCovTokenSecret`.
+Use renovatebot to handle dependency upgrades.
 
 ---
 
-##### `codeCovTokenSecret`<sup>Optional</sup> <a name="codeCovTokenSecret" id="projen-modules.JsiiProjectOptions.property.codeCovTokenSecret"></a>
+##### `renovatebotOptions`<sup>Optional</sup> <a name="renovatebotOptions" id="projen-modules.JsiiProjectOptions.property.renovatebotOptions"></a>
 
 ```typescript
-public readonly codeCovTokenSecret: string;
+public readonly renovatebotOptions: RenovatebotOptions;
 ```
 
-- *Type:* string
-- *Default:* if this option is not specified, only public repositories are supported
-
-Define the secret name for a specified https://codecov.io/ token A secret is required to send coverage for private repositories.
-
----
-
-##### `copyrightOwner`<sup>Optional</sup> <a name="copyrightOwner" id="projen-modules.JsiiProjectOptions.property.copyrightOwner"></a>
-
-```typescript
-public readonly copyrightOwner: string;
-```
-
-- *Type:* string
-- *Default:* defaults to the value of authorName or "" if `authorName` is undefined.
-
-License copyright owner.
-
----
-
-##### `copyrightPeriod`<sup>Optional</sup> <a name="copyrightPeriod" id="projen-modules.JsiiProjectOptions.property.copyrightPeriod"></a>
-
-```typescript
-public readonly copyrightPeriod: string;
-```
-
-- *Type:* string
-- *Default:* current year
-
-The copyright years to put in the LICENSE file.
-
----
-
-##### `dependabot`<sup>Optional</sup> <a name="dependabot" id="projen-modules.JsiiProjectOptions.property.dependabot"></a>
-
-```typescript
-public readonly dependabot: boolean;
-```
-
-- *Type:* boolean
-- *Default:* false
-
-Use dependabot to handle dependency upgrades.
-
-Cannot be used in conjunction with `depsUpgrade`.
-
----
-
-##### `dependabotOptions`<sup>Optional</sup> <a name="dependabotOptions" id="projen-modules.JsiiProjectOptions.property.dependabotOptions"></a>
-
-```typescript
-public readonly dependabotOptions: DependabotOptions;
-```
-
-- *Type:* projen.github.DependabotOptions
+- *Type:* projen.RenovatebotOptions
 - *Default:* default options
 
-Options for dependabot.
+Options for renovatebot.
 
 ---
 
-##### `depsUpgrade`<sup>Optional</sup> <a name="depsUpgrade" id="projen-modules.JsiiProjectOptions.property.depsUpgrade"></a>
+##### `repository`<sup>Optional</sup> <a name="repository" id="projen-modules.JsiiProjectOptions.property.repository"></a>
 
 ```typescript
-public readonly depsUpgrade: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-Use tasks and github workflows to handle dependency upgrades.
-
-Cannot be used in conjunction with `dependabot`.
-
----
-
-##### `depsUpgradeOptions`<sup>Optional</sup> <a name="depsUpgradeOptions" id="projen-modules.JsiiProjectOptions.property.depsUpgradeOptions"></a>
-
-```typescript
-public readonly depsUpgradeOptions: UpgradeDependenciesOptions;
-```
-
-- *Type:* projen.javascript.UpgradeDependenciesOptions
-- *Default:* default options
-
-Options for `UpgradeDependencies`.
-
----
-
-##### `gitignore`<sup>Optional</sup> <a name="gitignore" id="projen-modules.JsiiProjectOptions.property.gitignore"></a>
-
-```typescript
-public readonly gitignore: string[];
-```
-
-- *Type:* string[]
-
-Additional entries to .gitignore.
-
----
-
-##### `jest`<sup>Optional</sup> <a name="jest" id="projen-modules.JsiiProjectOptions.property.jest"></a>
-
-```typescript
-public readonly jest: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-Setup jest unit tests.
-
----
-
-##### `jestOptions`<sup>Optional</sup> <a name="jestOptions" id="projen-modules.JsiiProjectOptions.property.jestOptions"></a>
-
-```typescript
-public readonly jestOptions: JestOptions;
-```
-
-- *Type:* projen.javascript.JestOptions
-- *Default:* default options
-
-Jest options.
-
----
-
-##### ~~`mutableBuild`~~<sup>Optional</sup> <a name="mutableBuild" id="projen-modules.JsiiProjectOptions.property.mutableBuild"></a>
-
-- *Deprecated:* - Use `buildWorkflowOptions.mutableBuild`
-
-```typescript
-public readonly mutableBuild: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-Automatically update files modified during builds to pull-request branches.
-
-This means
-that any files synthesized by projen or e.g. test snapshots will always be up-to-date
-before a PR is merged.
-
-Implies that PR builds do not have anti-tamper checks.
-
----
-
-##### ~~`npmignore`~~<sup>Optional</sup> <a name="npmignore" id="projen-modules.JsiiProjectOptions.property.npmignore"></a>
-
-- *Deprecated:* - use `project.addPackageIgnore`
-
-```typescript
-public readonly npmignore: string[];
-```
-
-- *Type:* string[]
-
-Additional entries to .npmignore.
-
----
-
-##### `npmignoreEnabled`<sup>Optional</sup> <a name="npmignoreEnabled" id="projen-modules.JsiiProjectOptions.property.npmignoreEnabled"></a>
-
-```typescript
-public readonly npmignoreEnabled: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-Defines an .npmignore file. Normally this is only needed for libraries that are packaged as tarballs.
-
----
-
-##### `npmIgnoreOptions`<sup>Optional</sup> <a name="npmIgnoreOptions" id="projen-modules.JsiiProjectOptions.property.npmIgnoreOptions"></a>
-
-```typescript
-public readonly npmIgnoreOptions: IgnoreFileOptions;
-```
-
-- *Type:* projen.IgnoreFileOptions
-
-Configuration options for .npmignore file.
-
----
-
-##### `package`<sup>Optional</sup> <a name="package" id="projen-modules.JsiiProjectOptions.property.package"></a>
-
-```typescript
-public readonly package: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-Defines a `package` task that will produce an npm tarball under the artifacts directory (e.g. `dist`).
-
----
-
-##### `prettier`<sup>Optional</sup> <a name="prettier" id="projen-modules.JsiiProjectOptions.property.prettier"></a>
-
-```typescript
-public readonly prettier: boolean;
-```
-
-- *Type:* boolean
-- *Default:* false
-
-Setup prettier.
-
----
-
-##### `prettierOptions`<sup>Optional</sup> <a name="prettierOptions" id="projen-modules.JsiiProjectOptions.property.prettierOptions"></a>
-
-```typescript
-public readonly prettierOptions: PrettierOptions;
-```
-
-- *Type:* projen.javascript.PrettierOptions
-- *Default:* default options
-
-Prettier options.
-
----
-
-##### `projenDevDependency`<sup>Optional</sup> <a name="projenDevDependency" id="projen-modules.JsiiProjectOptions.property.projenDevDependency"></a>
-
-```typescript
-public readonly projenDevDependency: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true if not a subproject
-
-Indicates of "projen" should be installed as a devDependency.
-
----
-
-##### `projenrcJs`<sup>Optional</sup> <a name="projenrcJs" id="projen-modules.JsiiProjectOptions.property.projenrcJs"></a>
-
-```typescript
-public readonly projenrcJs: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true if projenrcJson is false
-
-Generate (once) .projenrc.js (in JavaScript). Set to `false` in order to disable .projenrc.js generation.
-
----
-
-##### `projenrcJsOptions`<sup>Optional</sup> <a name="projenrcJsOptions" id="projen-modules.JsiiProjectOptions.property.projenrcJsOptions"></a>
-
-```typescript
-public readonly projenrcJsOptions: ProjenrcOptions;
-```
-
-- *Type:* projen.javascript.ProjenrcOptions
-- *Default:* default options
-
-Options for .projenrc.js.
-
----
-
-##### `projenVersion`<sup>Optional</sup> <a name="projenVersion" id="projen-modules.JsiiProjectOptions.property.projenVersion"></a>
-
-```typescript
-public readonly projenVersion: string;
+public readonly repository: string;
 ```
 
 - *Type:* string
-- *Default:* Defaults to the latest version.
 
-Version of projen to install.
+The repository is the location where the actual code for your package lives.
 
----
-
-##### `pullRequestTemplate`<sup>Optional</sup> <a name="pullRequestTemplate" id="projen-modules.JsiiProjectOptions.property.pullRequestTemplate"></a>
-
-```typescript
-public readonly pullRequestTemplate: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-Include a GitHub pull request template.
+See https://classic.yarnpkg.com/en/docs/package-json/#toc-repository
 
 ---
 
-##### `pullRequestTemplateContents`<sup>Optional</sup> <a name="pullRequestTemplateContents" id="projen-modules.JsiiProjectOptions.property.pullRequestTemplateContents"></a>
+##### `repositoryDirectory`<sup>Optional</sup> <a name="repositoryDirectory" id="projen-modules.JsiiProjectOptions.property.repositoryDirectory"></a>
 
 ```typescript
-public readonly pullRequestTemplateContents: string[];
-```
-
-- *Type:* string[]
-- *Default:* default content
-
-The contents of the pull request template.
-
----
-
-##### `release`<sup>Optional</sup> <a name="release" id="projen-modules.JsiiProjectOptions.property.release"></a>
-
-```typescript
-public readonly release: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true (false for subprojects)
-
-Add release management to this project.
-
----
-
-##### `releaseToNpm`<sup>Optional</sup> <a name="releaseToNpm" id="projen-modules.JsiiProjectOptions.property.releaseToNpm"></a>
-
-```typescript
-public readonly releaseToNpm: boolean;
-```
-
-- *Type:* boolean
-- *Default:* false
-
-Automatically release to npm when new versions are introduced.
-
----
-
-##### ~~`releaseWorkflow`~~<sup>Optional</sup> <a name="releaseWorkflow" id="projen-modules.JsiiProjectOptions.property.releaseWorkflow"></a>
-
-- *Deprecated:* see `release`.
-
-```typescript
-public readonly releaseWorkflow: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true if not a subproject
-
-DEPRECATED: renamed to `release`.
-
----
-
-##### `workflowBootstrapSteps`<sup>Optional</sup> <a name="workflowBootstrapSteps" id="projen-modules.JsiiProjectOptions.property.workflowBootstrapSteps"></a>
-
-```typescript
-public readonly workflowBootstrapSteps: JobStep[];
-```
-
-- *Type:* projen.github.workflows.JobStep[]
-- *Default:* "yarn install --frozen-lockfile && yarn projen"
-
-Workflow steps to use in order to bootstrap this repo.
-
----
-
-##### `workflowGitIdentity`<sup>Optional</sup> <a name="workflowGitIdentity" id="projen-modules.JsiiProjectOptions.property.workflowGitIdentity"></a>
-
-```typescript
-public readonly workflowGitIdentity: GitIdentity;
-```
-
-- *Type:* projen.github.GitIdentity
-- *Default:* GitHub Actions
-
-The git identity to use in workflows.
-
----
-
-##### `workflowNodeVersion`<sup>Optional</sup> <a name="workflowNodeVersion" id="projen-modules.JsiiProjectOptions.property.workflowNodeVersion"></a>
-
-```typescript
-public readonly workflowNodeVersion: string;
+public readonly repositoryDirectory: string;
 ```
 
 - *Type:* string
-- *Default:* same as `minNodeVersion`
 
-The node version to use in GitHub workflows.
-
----
-
-##### `workflowPackageCache`<sup>Optional</sup> <a name="workflowPackageCache" id="projen-modules.JsiiProjectOptions.property.workflowPackageCache"></a>
-
-```typescript
-public readonly workflowPackageCache: boolean;
-```
-
-- *Type:* boolean
-- *Default:* false
-
-Enable Node.js package cache in GitHub workflows.
+If the package.json for your package is not in the root directory (for example if it is part of a monorepo), you can specify the directory in which it lives.
 
 ---
 
-##### `disableTsconfig`<sup>Optional</sup> <a name="disableTsconfig" id="projen-modules.JsiiProjectOptions.property.disableTsconfig"></a>
+##### `rootdir`<sup>Optional</sup> <a name="rootdir" id="projen-modules.JsiiProjectOptions.property.rootdir"></a>
 
 ```typescript
-public readonly disableTsconfig: boolean;
-```
-
-- *Type:* boolean
-- *Default:* false
-
-Do not generate a `tsconfig.json` file (used by jsii projects since tsconfig.json is generated by the jsii compiler).
-
----
-
-##### `disableTsconfigDev`<sup>Optional</sup> <a name="disableTsconfigDev" id="projen-modules.JsiiProjectOptions.property.disableTsconfigDev"></a>
-
-```typescript
-public readonly disableTsconfigDev: boolean;
-```
-
-- *Type:* boolean
-- *Default:* false
-
-Do not generate a `tsconfig.dev.json` file.
-
----
-
-##### `docgen`<sup>Optional</sup> <a name="docgen" id="projen-modules.JsiiProjectOptions.property.docgen"></a>
-
-```typescript
-public readonly docgen: boolean;
-```
-
-- *Type:* boolean
-- *Default:* false
-
-Docgen by Typedoc.
-
----
-
-##### `docsDirectory`<sup>Optional</sup> <a name="docsDirectory" id="projen-modules.JsiiProjectOptions.property.docsDirectory"></a>
-
-```typescript
-public readonly docsDirectory: string;
+public readonly rootdir: string;
 ```
 
 - *Type:* string
-- *Default:* "docs"
-
-Docs directory.
-
----
-
-##### `entrypointTypes`<sup>Optional</sup> <a name="entrypointTypes" id="projen-modules.JsiiProjectOptions.property.entrypointTypes"></a>
-
-```typescript
-public readonly entrypointTypes: string;
-```
-
-- *Type:* string
-- *Default:* .d.ts file derived from the project's entrypoint (usually lib/index.d.ts)
-
-The .d.ts file that includes the type declarations for this module.
-
----
-
-##### `eslint`<sup>Optional</sup> <a name="eslint" id="projen-modules.JsiiProjectOptions.property.eslint"></a>
-
-```typescript
-public readonly eslint: boolean;
-```
-
-- *Type:* boolean
-- *Default:* true
-
-Setup eslint.
-
----
-
-##### `eslintOptions`<sup>Optional</sup> <a name="eslintOptions" id="projen-modules.JsiiProjectOptions.property.eslintOptions"></a>
-
-```typescript
-public readonly eslintOptions: EslintOptions;
-```
-
-- *Type:* projen.javascript.EslintOptions
-- *Default:* opinionated default options
-
-Eslint options.
-
----
-
-##### `libdir`<sup>Optional</sup> <a name="libdir" id="projen-modules.JsiiProjectOptions.property.libdir"></a>
-
-```typescript
-public readonly libdir: string;
-```
-
-- *Type:* string
-- *Default:* "lib"
-
-Typescript  artifacts output directory.
-
----
-
-##### `projenrcTs`<sup>Optional</sup> <a name="projenrcTs" id="projen-modules.JsiiProjectOptions.property.projenrcTs"></a>
-
-```typescript
-public readonly projenrcTs: boolean;
-```
-
-- *Type:* boolean
-- *Default:* false
-
-Use TypeScript for your projenrc file (`.projenrc.ts`).
-
----
-
-##### `projenrcTsOptions`<sup>Optional</sup> <a name="projenrcTsOptions" id="projen-modules.JsiiProjectOptions.property.projenrcTsOptions"></a>
-
-```typescript
-public readonly projenrcTsOptions: ProjenrcOptions;
-```
-
-- *Type:* projen.typescript.ProjenrcOptions
-
-Options for .projenrc.ts.
+- *Default:* "."
 
 ---
 
@@ -6085,6 +6357,38 @@ Generate one-time sample in `src/` and `test/` if there are no files there.
 
 ---
 
+##### `scopedPackagesOptions`<sup>Optional</sup> <a name="scopedPackagesOptions" id="projen-modules.JsiiProjectOptions.property.scopedPackagesOptions"></a>
+
+```typescript
+public readonly scopedPackagesOptions: ScopedPackagesOptions[];
+```
+
+- *Type:* projen.javascript.ScopedPackagesOptions[]
+- *Default:* fetch all scoped packages from the public npm registry
+
+Options for privately hosted scoped packages.
+
+---
+
+##### ~~`scripts`~~<sup>Optional</sup> <a name="scripts" id="projen-modules.JsiiProjectOptions.property.scripts"></a>
+
+- *Deprecated:* use `project.addTask()` or `package.setScript()`
+
+```typescript
+public readonly scripts: {[ key: string ]: string};
+```
+
+- *Type:* {[ key: string ]: string}
+- *Default:* {}
+
+npm scripts to include.
+
+If a script has the same name as a standard script,
+the standard script will be overwritten.
+Also adds the script as a task.
+
+---
+
 ##### `srcdir`<sup>Optional</sup> <a name="srcdir" id="projen-modules.JsiiProjectOptions.property.srcdir"></a>
 
 ```typescript
@@ -6098,6 +6402,48 @@ Typescript sources directory.
 
 ---
 
+##### `stability`<sup>Optional</sup> <a name="stability" id="projen-modules.JsiiProjectOptions.property.stability"></a>
+
+```typescript
+public readonly stability: string;
+```
+
+- *Type:* string
+
+Package's Stability.
+
+---
+
+##### `stale`<sup>Optional</sup> <a name="stale" id="projen-modules.JsiiProjectOptions.property.stale"></a>
+
+```typescript
+public readonly stale: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Auto-close of stale issues and pull request.
+
+See `staleOptions` for options.
+
+---
+
+##### `staleOptions`<sup>Optional</sup> <a name="staleOptions" id="projen-modules.JsiiProjectOptions.property.staleOptions"></a>
+
+```typescript
+public readonly staleOptions: StaleOptions;
+```
+
+- *Type:* projen.github.StaleOptions
+- *Default:* see defaults in `StaleOptions`
+
+Auto-close stale issues and pull requests.
+
+To disable set `stale` to `false`.
+
+---
+
 ##### `testdir`<sup>Optional</sup> <a name="testdir" id="projen-modules.JsiiProjectOptions.property.testdir"></a>
 
 ```typescript
@@ -6107,8 +6453,9 @@ public readonly testdir: string;
 - *Type:* string
 - *Default:* "test"
 
-Jest tests directory. Tests files should be named `xxx.test.ts`.
+Jest tests directory.
 
+Tests files should be named `xxx.test.ts`.
 If this directory is under `srcdir` (e.g. `src/test`, `src/__tests__`),
 then tests are going to be compiled into `lib/` and executed as javascript.
 If the test directory is outside of `src`, then we configure jest to
@@ -6183,235 +6530,136 @@ same minor, so we recommend using a `~` dependency (e.g. `~1.2.3`).
 
 ---
 
-##### `author`<sup>Required</sup> <a name="author" id="projen-modules.JsiiProjectOptions.property.author"></a>
+##### `versionrcOptions`<sup>Optional</sup> <a name="versionrcOptions" id="projen-modules.JsiiProjectOptions.property.versionrcOptions"></a>
 
 ```typescript
-public readonly author: string;
+public readonly versionrcOptions: {[ key: string ]: any};
 ```
 
-- *Type:* string
-- *Default:* $GIT_USER_NAME
+- *Type:* {[ key: string ]: any}
+- *Default:* standard configuration applicable for GitHub repositories
 
-The name of the library author.
+Custom configuration used when creating changelog with standard-version package.
+
+Given values either append to default configuration or overwrite values in it.
 
 ---
 
-##### `authorAddress`<sup>Required</sup> <a name="authorAddress" id="projen-modules.JsiiProjectOptions.property.authorAddress"></a>
+##### `vscode`<sup>Optional</sup> <a name="vscode" id="projen-modules.JsiiProjectOptions.property.vscode"></a>
 
 ```typescript
-public readonly authorAddress: string;
+public readonly vscode: boolean;
 ```
 
-- *Type:* string
-- *Default:* $GIT_USER_EMAIL
+- *Type:* boolean
+- *Default:* true
 
-Email or URL of the library author.
+Enable VSCode integration.
+
+Enabled by default for root projects. Disabled for non-root projects.
 
 ---
 
-##### `repositoryUrl`<sup>Required</sup> <a name="repositoryUrl" id="projen-modules.JsiiProjectOptions.property.repositoryUrl"></a>
+##### `workflowBootstrapSteps`<sup>Optional</sup> <a name="workflowBootstrapSteps" id="projen-modules.JsiiProjectOptions.property.workflowBootstrapSteps"></a>
 
 ```typescript
-public readonly repositoryUrl: string;
+public readonly workflowBootstrapSteps: JobStep[];
 ```
 
-- *Type:* string
-- *Default:* $GIT_REMOTE
+- *Type:* projen.github.workflows.JobStep[]
+- *Default:* "yarn install --frozen-lockfile && yarn projen"
 
-Git repository URL.
+Workflow steps to use in order to bootstrap this repo.
 
 ---
 
-##### `compat`<sup>Optional</sup> <a name="compat" id="projen-modules.JsiiProjectOptions.property.compat"></a>
+##### `workflowContainerImage`<sup>Optional</sup> <a name="workflowContainerImage" id="projen-modules.JsiiProjectOptions.property.workflowContainerImage"></a>
 
 ```typescript
-public readonly compat: boolean;
+public readonly workflowContainerImage: string;
+```
+
+- *Type:* string
+- *Default:* default image
+
+Container image to use for GitHub workflows.
+
+---
+
+##### `workflowGitIdentity`<sup>Optional</sup> <a name="workflowGitIdentity" id="projen-modules.JsiiProjectOptions.property.workflowGitIdentity"></a>
+
+```typescript
+public readonly workflowGitIdentity: GitIdentity;
+```
+
+- *Type:* projen.github.GitIdentity
+- *Default:* GitHub Actions
+
+The git identity to use in workflows.
+
+---
+
+##### `workflowNodeVersion`<sup>Optional</sup> <a name="workflowNodeVersion" id="projen-modules.JsiiProjectOptions.property.workflowNodeVersion"></a>
+
+```typescript
+public readonly workflowNodeVersion: string;
+```
+
+- *Type:* string
+- *Default:* same as `minNodeVersion`
+
+The node version to use in GitHub workflows.
+
+---
+
+##### `workflowPackageCache`<sup>Optional</sup> <a name="workflowPackageCache" id="projen-modules.JsiiProjectOptions.property.workflowPackageCache"></a>
+
+```typescript
+public readonly workflowPackageCache: boolean;
 ```
 
 - *Type:* boolean
 - *Default:* false
 
-Automatically run API compatibility test against the latest version published to npm after compilation.
-
-You can manually run compatibility tests using `yarn compat` if this feature is disabled.
-- You can ignore compatibility failures by adding lines to a ".compatignore" file.
+Enable Node.js package cache in GitHub workflows.
 
 ---
 
-##### `compatIgnore`<sup>Optional</sup> <a name="compatIgnore" id="projen-modules.JsiiProjectOptions.property.compatIgnore"></a>
+##### `workflowRunsOn`<sup>Optional</sup> <a name="workflowRunsOn" id="projen-modules.JsiiProjectOptions.property.workflowRunsOn"></a>
 
 ```typescript
-public readonly compatIgnore: string;
-```
-
-- *Type:* string
-- *Default:* ".compatignore"
-
-Name of the ignore file for API compatibility tests.
-
----
-
-##### `compressAssembly`<sup>Optional</sup> <a name="compressAssembly" id="projen-modules.JsiiProjectOptions.property.compressAssembly"></a>
-
-```typescript
-public readonly compressAssembly: boolean;
-```
-
-- *Type:* boolean
-- *Default:* false
-
-Emit a compressed version of the assembly.
-
----
-
-##### `docgenFilePath`<sup>Optional</sup> <a name="docgenFilePath" id="projen-modules.JsiiProjectOptions.property.docgenFilePath"></a>
-
-```typescript
-public readonly docgenFilePath: string;
-```
-
-- *Type:* string
-- *Default:* "API.md"
-
-File path for generated docs.
-
----
-
-##### ~~`dotnet`~~<sup>Optional</sup> <a name="dotnet" id="projen-modules.JsiiProjectOptions.property.dotnet"></a>
-
-- *Deprecated:* use `publishToNuget`
-
-```typescript
-public readonly dotnet: JsiiDotNetTarget;
-```
-
-- *Type:* projen.cdk.JsiiDotNetTarget
-
----
-
-##### `excludeTypescript`<sup>Optional</sup> <a name="excludeTypescript" id="projen-modules.JsiiProjectOptions.property.excludeTypescript"></a>
-
-```typescript
-public readonly excludeTypescript: string[];
+public readonly workflowRunsOn: string[];
 ```
 
 - *Type:* string[]
+- *Default:* ["ubuntu-latest"]
 
-Accepts a list of glob patterns.
-
-Files matching any of those patterns will be excluded from the TypeScript compiler input.
-
-By default, jsii will include all *.ts files (except .d.ts files) in the TypeScript compiler input.
-This can be problematic for example when the package's build or test procedure generates .ts files
-that cannot be compiled with jsii's compiler settings.
+Github Runner selection labels.
 
 ---
 
-##### `jsiiVersion`<sup>Optional</sup> <a name="jsiiVersion" id="projen-modules.JsiiProjectOptions.property.jsiiVersion"></a>
+##### `workflowRunsOnGroup`<sup>Optional</sup> <a name="workflowRunsOnGroup" id="projen-modules.JsiiProjectOptions.property.workflowRunsOnGroup"></a>
 
 ```typescript
-public readonly jsiiVersion: string;
+public readonly workflowRunsOnGroup: GroupRunnerOptions;
 ```
 
-- *Type:* string
-- *Default:* "1.x"
+- *Type:* projen.GroupRunnerOptions
 
-Version of the jsii compiler to use.
-
-Set to "*" if you want to manually manage the version of jsii in your
-project by managing updates to `package.json` on your own.
-
-NOTE: The jsii compiler releases since 5.0.0 are not semantically versioned
-and should remain on the same minor, so we recommend using a `~` dependency
-(e.g. `~5.0.0`).
+Github Runner Group selection options.
 
 ---
 
-##### `publishToGo`<sup>Optional</sup> <a name="publishToGo" id="projen-modules.JsiiProjectOptions.property.publishToGo"></a>
+##### `yarnBerryOptions`<sup>Optional</sup> <a name="yarnBerryOptions" id="projen-modules.JsiiProjectOptions.property.yarnBerryOptions"></a>
 
 ```typescript
-public readonly publishToGo: JsiiGoTarget;
+public readonly yarnBerryOptions: YarnBerryOptions;
 ```
 
-- *Type:* projen.cdk.JsiiGoTarget
-- *Default:* no publishing
+- *Type:* projen.javascript.YarnBerryOptions
+- *Default:* Yarn Berry v4 with all default options
 
-Publish Go bindings to a git repository.
-
----
-
-##### `publishToMaven`<sup>Optional</sup> <a name="publishToMaven" id="projen-modules.JsiiProjectOptions.property.publishToMaven"></a>
-
-```typescript
-public readonly publishToMaven: JsiiJavaTarget;
-```
-
-- *Type:* projen.cdk.JsiiJavaTarget
-- *Default:* no publishing
-
-Publish to maven.
-
----
-
-##### `publishToNuget`<sup>Optional</sup> <a name="publishToNuget" id="projen-modules.JsiiProjectOptions.property.publishToNuget"></a>
-
-```typescript
-public readonly publishToNuget: JsiiDotNetTarget;
-```
-
-- *Type:* projen.cdk.JsiiDotNetTarget
-- *Default:* no publishing
-
-Publish to NuGet.
-
----
-
-##### `publishToPypi`<sup>Optional</sup> <a name="publishToPypi" id="projen-modules.JsiiProjectOptions.property.publishToPypi"></a>
-
-```typescript
-public readonly publishToPypi: JsiiPythonTarget;
-```
-
-- *Type:* projen.cdk.JsiiPythonTarget
-- *Default:* no publishing
-
-Publish to pypi.
-
----
-
-##### ~~`python`~~<sup>Optional</sup> <a name="python" id="projen-modules.JsiiProjectOptions.property.python"></a>
-
-- *Deprecated:* use `publishToPyPi`
-
-```typescript
-public readonly python: JsiiPythonTarget;
-```
-
-- *Type:* projen.cdk.JsiiPythonTarget
-
----
-
-##### `rootdir`<sup>Optional</sup> <a name="rootdir" id="projen-modules.JsiiProjectOptions.property.rootdir"></a>
-
-```typescript
-public readonly rootdir: string;
-```
-
-- *Type:* string
-- *Default:* "."
-
----
-
-##### `codeOwners`<sup>Required</sup> <a name="codeOwners" id="projen-modules.JsiiProjectOptions.property.codeOwners"></a>
-
-```typescript
-public readonly codeOwners: string[];
-```
-
-- *Type:* string[]
-- *Default:* []
-
-List of teams used to generate the CODEOWNERS file.
+Options for Yarn Berry.
 
 ---
 
@@ -9556,6 +9804,124 @@ public readonly pullRequestTemplateContents: string[];
 - *Default:* default content
 
 The contents of the pull request template.
+
+---
+
+### ReadmeOptions <a name="ReadmeOptions" id="projen-modules.ReadmeOptions"></a>
+
+#### Initializer <a name="Initializer" id="projen-modules.ReadmeOptions.Initializer"></a>
+
+```typescript
+import { ReadmeOptions } from 'projen-modules'
+
+const readmeOptions: ReadmeOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#projen-modules.ReadmeOptions.property.filename">filename</a></code> | <code>string</code> | The name of the README.md file. |
+| <code><a href="#projen-modules.ReadmeOptions.property.lines">lines</a></code> | <code>string[]</code> | List lines to add to the file. |
+
+---
+
+##### `filename`<sup>Optional</sup> <a name="filename" id="projen-modules.ReadmeOptions.property.filename"></a>
+
+```typescript
+public readonly filename: string;
+```
+
+- *Type:* string
+- *Default:* "README.md"
+
+The name of the README.md file.
+
+---
+
+*Example*
+
+```typescript
+"ANOTHER_README.md"
+```
+
+
+##### `lines`<sup>Optional</sup> <a name="lines" id="projen-modules.ReadmeOptions.property.lines"></a>
+
+```typescript
+public readonly lines: string[];
+```
+
+- *Type:* string[]
+- *Default:* []
+
+List lines to add to the file.
+
+---
+
+### ReadmeProps <a name="ReadmeProps" id="projen-modules.ReadmeProps"></a>
+
+#### Initializer <a name="Initializer" id="projen-modules.ReadmeProps.Initializer"></a>
+
+```typescript
+import { ReadmeProps } from 'projen-modules'
+
+const readmeProps: ReadmeProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#projen-modules.ReadmeProps.property.enable">enable</a></code> | <code>boolean</code> | If false, the README.md file will not be generated. |
+| <code><a href="#projen-modules.ReadmeProps.property.filename">filename</a></code> | <code>string</code> | The name of the README.md file. |
+| <code><a href="#projen-modules.ReadmeProps.property.lines">lines</a></code> | <code>string[]</code> | List lines to add to the README file. |
+
+---
+
+##### `enable`<sup>Optional</sup> <a name="enable" id="projen-modules.ReadmeProps.property.enable"></a>
+
+```typescript
+public readonly enable: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+If false, the README.md file will not be generated.
+
+---
+
+##### `filename`<sup>Optional</sup> <a name="filename" id="projen-modules.ReadmeProps.property.filename"></a>
+
+```typescript
+public readonly filename: string;
+```
+
+- *Type:* string
+- *Default:* "README.md"
+
+The name of the README.md file.
+
+---
+
+*Example*
+
+```typescript
+"ANOTHER_README.md"
+```
+
+
+##### `lines`<sup>Optional</sup> <a name="lines" id="projen-modules.ReadmeProps.property.lines"></a>
+
+```typescript
+public readonly lines: string[];
+```
+
+- *Type:* string[]
+- *Default:* []
+
+List lines to add to the README file.
 
 ---
 
