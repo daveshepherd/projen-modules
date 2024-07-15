@@ -5,7 +5,6 @@ describe('NPM Package', () => {
   it('synthesizes', () => {
     const project = new NpmPackage({
       codeOwners: ['test'],
-      defaultReleaseBranch: 'main',
       name: 'test',
     });
 

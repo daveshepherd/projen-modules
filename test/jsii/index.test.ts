@@ -7,7 +7,6 @@ describe('JSII Package', () => {
       author: 'Test',
       authorAddress: 'test@example.com',
       codeOwners: ['test'],
-      defaultReleaseBranch: 'main',
       name: 'test',
       repositoryUrl: 'test.com',
     });
@@ -15,6 +14,8 @@ describe('JSII Package', () => {
     const output = synthSnapshot(project);
 
     expect(output.CODEOWNERS).toBeDefined();
+    expect(output['README.md']).toBeDefined();
+    expect(output['.github/pull_request_template.md']).toBeDefined();
     expect(output).toMatchSnapshot();
   });
   it('disable README', () => {
@@ -22,7 +23,6 @@ describe('JSII Package', () => {
       author: 'Test',
       authorAddress: 'test@example.com',
       codeOwners: ['test'],
-      defaultReleaseBranch: 'main',
       name: 'test',
       readme: {
         enable: false,

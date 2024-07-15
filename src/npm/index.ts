@@ -1,16 +1,10 @@
 import { typescript } from 'projen';
+import { NpmPackageOptions } from './npm-package-options';
 import { NpmCircleCi } from '../circleci';
+import { Readme } from '../components/readme';
 import { CodeOwners } from '../github/codeowners';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../github/pull-request-template';
 import { mergeOptions } from '../utils/merge-options';
-
-export interface NpmPackageOptions extends typescript.TypeScriptProjectOptions {
-  /**
-   * List of teams used to generate the CODEOWNERS file
-   * @defaultValue []
-   */
-  readonly codeOwners: Array<string>;
-}
 
 function getOptions(options: NpmPackageOptions) {
   const { name } = options;
@@ -26,11 +20,9 @@ function getOptions(options: NpmPackageOptions) {
     pullRequestTemplateContents: DEFAULT_PULL_REQUEST_TEMPLATE,
     projenrcTs: true,
     readme: {
+      enable: true,
       filename: 'README.md',
-      contents: `# ${name}
-
-Example README
-    `,
+      lines: [],
     },
   } satisfies Partial<NpmPackageOptions>;
 
@@ -44,14 +36,24 @@ Example README
  * @pjid npm-package
  */
 export class NpmPackage extends typescript.TypeScriptProject {
+  readme?: Readme;
+
   constructor(options: NpmPackageOptions) {
     const mergedOptions = getOptions(options);
 
     super({
       ...mergedOptions,
     });
+    if (mergedOptions.readme.enable) {
+      this.readme = new Readme(this, {
+        filename: mergedOptions.readme.filename,
+        lines: mergedOptions.readme.lines,
+      });
+    }
 
     new CodeOwners(this, mergedOptions.codeOwners);
     new NpmCircleCi(this);
   }
 }
+
+export * from './npm-package-options';

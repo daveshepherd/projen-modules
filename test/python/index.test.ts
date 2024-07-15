@@ -15,6 +15,8 @@ describe('Python Package', () => {
     const output = synthSnapshot(project);
 
     expect(output.CODEOWNERS).toBeDefined();
+    expect(output['README.md']).toBeDefined();
+    expect(output['.github/pull_request_template.md']).toBeDefined();
     expect(output).toMatchSnapshot();
   });
 });

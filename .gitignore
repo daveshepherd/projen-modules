@@ -54,3 +54,5 @@ tsconfig.json
 !/CODEOWNERS
 !/.projenrc.ts
 !/src/jsii/jsii-project-options.ts
+!/src/npm/npm-package-options.ts
+!/src/python/python-package-options.ts

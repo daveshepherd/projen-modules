@@ -5,26 +5,6 @@ import { CodeOwners } from '../github/codeowners';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../github/pull-request-template';
 import { mergeOptions } from '../utils/merge-options';
 
-export interface ReadmeProps {
-  /**
-   * If false, the README.md file will not be generated
-   * @defaultValue true
-   */
-  readonly enable?: boolean;
-  /**
-   * The name of the README.md file
-   *
-   * @defaultValue "README.md"
-   * @example "ANOTHER_README.md"
-   */
-  readonly filename?: string;
-  /**
-   * List lines to add to the README file
-   * @defaultValue []
-   */
-  readonly lines?: Array<string>;
-}
-
 function getOptions(options: JsiiProjectOptions) {
   const { name } = options;
 

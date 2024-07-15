@@ -3,6 +3,11 @@ import { FileBase, IResolver } from 'projen';
 
 export interface ReadmeOptions {
   /**
+   * If false, the README.md file will not be generated
+   * @defaultValue true
+   */
+  readonly enable?: boolean;
+  /**
    * The name of the README.md file
    *
    * @defaultValue "README.md"

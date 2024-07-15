@@ -1,28 +1,9 @@
-import { PythonProject, PythonProjectOptions } from 'projen/lib/python';
+import { PythonProject } from 'projen/lib/python';
+import { PythonPackageOptions } from './python-package-options';
+import { Readme } from '../components';
 import { CodeOwners } from '../github/codeowners';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../github/pull-request-template';
 import { mergeOptions } from '../utils/merge-options';
-
-export interface PythonPackageOptions extends PythonProjectOptions {
-  /**
-   * List of teams used to generate the CODEOWNERS file
-   * @defaultValue []
-   */
-  readonly codeOwners: Array<string>;
-  /**
-   * Include a GitHub pull request template.
-   *
-   * @default true
-   */
-  readonly pullRequestTemplate?: boolean;
-
-  /**
-   * The contents of the pull request template.
-   *
-   * @default - default content
-   */
-  readonly pullRequestTemplateContents?: string[];
-}
 
 function getOptions(options: PythonPackageOptions) {
   const { name } = options;
@@ -32,11 +13,9 @@ function getOptions(options: PythonPackageOptions) {
     pullRequestTemplate: true,
     pullRequestTemplateContents: DEFAULT_PULL_REQUEST_TEMPLATE,
     readme: {
+      enable: true,
       filename: 'README.md',
-      contents: `# ${name}
-
-Example README
-    `,
+      lines: [],
     },
   } satisfies Partial<PythonPackageOptions>;
 
@@ -50,12 +29,20 @@ Example README
  * @pjid python-package
  */
 export class PythonPackage extends PythonProject {
+  readme?: Readme;
+
   constructor(options: PythonPackageOptions) {
     const mergedOptions = getOptions(options);
 
     super({
       ...mergedOptions,
     });
+    if (mergedOptions.readme.enable) {
+      this.readme = new Readme(this, {
+        filename: mergedOptions.readme.filename,
+        lines: mergedOptions.readme.lines,
+      });
+    }
 
     new CodeOwners(this, mergedOptions.codeOwners);
     if (mergedOptions.pullRequestTemplate ?? true) {
@@ -65,3 +52,5 @@ export class PythonPackage extends PythonProject {
     }
   }
 }
+
+export * from './python-package-options';

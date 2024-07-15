@@ -8,7 +8,6 @@ describe('CodeOwners', () => {
       author: 'Test Person',
       authorAddress: 'test@example.com',
       codeOwners: ['test-team'],
-      defaultReleaseBranch: 'main',
       name: 'test',
       repositoryUrl: 'https://github.com/example/example.git',
     });
@@ -21,7 +20,6 @@ describe('CodeOwners', () => {
   it('matches the snapshot and includes CODEOWNERS in the npmignore file', () => {
     const project = new NpmPackage({
       codeOwners: ['test-team'],
-      defaultReleaseBranch: 'main',
       name: 'test',
     });
 
