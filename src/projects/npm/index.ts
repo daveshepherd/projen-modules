@@ -1,10 +1,10 @@
 import { typescript } from 'projen';
 import { NpmPackageOptions } from './npm-package-options';
-import { NpmCircleCi } from '../circleci';
-import { Readme } from '../components/readme';
-import { CodeOwners } from '../github/codeowners';
-import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../github/pull-request-template';
-import { mergeOptions } from '../utils/merge-options';
+import { NpmCircleCi } from '../../circleci';
+import { CodeOwners } from '../../components/github/codeowners';
+import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
+import { Readme } from '../../components/readme';
+import { mergeOptions } from '../../utils/merge-options';
 
 function getOptions(options: NpmPackageOptions) {
   const { name } = options;

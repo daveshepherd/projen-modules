@@ -1,5 +1,5 @@
 import { synthSnapshot } from 'projen/lib/util/synth';
-import { JsiiProject } from '../../src/jsii';
+import { JsiiProject } from '../../../src/projects/jsii';
 
 describe('JSII Package', () => {
   it('synthesizes', () => {

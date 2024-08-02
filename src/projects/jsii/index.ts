@@ -1,9 +1,9 @@
 import { cdk } from 'projen';
 import { JsiiProjectOptions } from './jsii-project-options';
-import { Readme } from '../components/readme';
-import { CodeOwners } from '../github/codeowners';
-import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../github/pull-request-template';
-import { mergeOptions } from '../utils/merge-options';
+import { CodeOwners } from '../../components/github/codeowners';
+import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
+import { Readme } from '../../components/readme';
+import { mergeOptions } from '../../utils/merge-options';
 
 function getOptions(options: JsiiProjectOptions) {
   const { name } = options;

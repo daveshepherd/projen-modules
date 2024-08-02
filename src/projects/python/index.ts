@@ -1,9 +1,9 @@
 import { PythonProject } from 'projen/lib/python';
 import { PythonPackageOptions } from './python-package-options';
-import { Readme } from '../components';
-import { CodeOwners } from '../github/codeowners';
-import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../github/pull-request-template';
-import { mergeOptions } from '../utils/merge-options';
+import { CodeOwners } from '../../components/github/codeowners';
+import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
+import { Readme } from '../../components/readme';
+import { mergeOptions } from '../../utils/merge-options';
 
 function getOptions(options: PythonPackageOptions) {
   const { name } = options;

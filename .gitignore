@@ -53,6 +53,6 @@ tsconfig.json
 !/README.md
 !/CODEOWNERS
 !/.projenrc.ts
-!/src/jsii/jsii-project-options.ts
-!/src/npm/npm-package-options.ts
-!/src/python/python-package-options.ts
+!/src/projects/jsii/jsii-project-options.ts
+!/src/projects/npm/npm-package-options.ts
+!/src/projects/python/python-package-options.ts

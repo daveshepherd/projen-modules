@@ -19,8 +19,8 @@
 /LICENSE linguist-generated
 /package.json linguist-generated
 /README.md linguist-generated
-/src/jsii/jsii-project-options.ts linguist-generated
-/src/npm/npm-package-options.ts linguist-generated
-/src/python/python-package-options.ts linguist-generated
+/src/projects/jsii/jsii-project-options.ts linguist-generated
+/src/projects/npm/npm-package-options.ts linguist-generated
+/src/projects/python/python-package-options.ts linguist-generated
 /tsconfig.dev.json linguist-generated
 /yarn.lock linguist-generated

@@ -1,7 +1,7 @@
 import { CollectionKind, PrimitiveType } from '@jsii/spec';
 import { ProjenStruct, Struct } from '@mrgrain/jsii-struct-builder';
 import { github } from 'projen';
-import { JsiiProject } from './src/jsii';
+import { JsiiProject } from './src/projects/jsii';
 
 const project = new JsiiProject({
   author: 'Dave Shepherd',
@@ -60,7 +60,7 @@ npx projen build
 });
 new ProjenStruct(project, {
   name: 'JsiiProjectOptions',
-  filePath: 'src/jsii/jsii-project-options.ts',
+  filePath: 'src/projects/jsii/jsii-project-options.ts',
 })
   .mixin(Struct.fromFqn('projen.cdk.JsiiProjectOptions'))
   .update('defaultReleaseBranch', { optional: true })
@@ -88,7 +88,7 @@ new ProjenStruct(project, {
   });
 new ProjenStruct(project, {
   name: 'NpmPackageOptions',
-  filePath: 'src/npm/npm-package-options.ts',
+  filePath: 'src/projects/npm/npm-package-options.ts',
 })
   .mixin(Struct.fromFqn('projen.typescript.TypeScriptProjectOptions'))
   .update('defaultReleaseBranch', { optional: true })
@@ -116,7 +116,7 @@ new ProjenStruct(project, {
   });
 new ProjenStruct(project, {
   name: 'PythonPackageOptions',
-  filePath: 'src/python/python-package-options.ts',
+  filePath: 'src/projects/python/python-package-options.ts',
 })
   .mixin(Struct.fromFqn('projen.python.PythonProjectOptions'))
   .replace('readme', {
