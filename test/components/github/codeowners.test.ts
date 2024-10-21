@@ -1,6 +1,6 @@
 import { synthSnapshot } from 'projen/lib/util/synth';
-import { JsiiProject } from '../../src/jsii';
-import { NpmPackage } from '../../src/npm';
+import { JsiiProject } from '../../../src/projects/jsii';
+import { NpmPackage } from '../../../src/projects/npm';
 
 describe('CodeOwners', () => {
   it('matches the snapshot with a CODEOWERS file', () => {

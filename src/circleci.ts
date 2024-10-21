@@ -1,5 +1,5 @@
 import { circleci } from 'projen';
-import { NpmPackage } from './npm';
+import { NpmPackage } from './projects/npm';
 
 export class NpmCircleCi extends circleci.Circleci {
   constructor(project: NpmPackage) {

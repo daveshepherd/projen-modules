@@ -1,12 +1,15 @@
 import { synthSnapshot } from 'projen/lib/util/synth';
-import { NpmPackage } from '../../src/npm';
+import { JsiiProject } from '../../../src/projects/jsii';
 
-describe('NPM Package', () => {
+describe('JSII Package', () => {
   it('synthesizes', () => {
-    const project = new NpmPackage({
+    const project = new JsiiProject({
+      author: 'Test',
+      authorAddress: 'test@example.com',
       codeOwners: ['test'],
       defaultReleaseBranch: 'main',
       name: 'test',
+      repositoryUrl: 'test.com',
     });
 
     const output = synthSnapshot(project);
