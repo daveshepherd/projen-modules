@@ -1,5 +1,5 @@
 import { synthSnapshot } from 'projen/lib/util/synth';
-import { PythonPackage } from '../../src/python';
+import { PythonPackage } from '../../../src/projects/python';
 
 describe('Python Package', () => {
   it('synthesizes', () => {
