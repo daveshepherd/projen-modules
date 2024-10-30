@@ -15,7 +15,14 @@ describe('JSII Package', () => {
     const output = synthSnapshot(project);
 
     expect(output.CODEOWNERS).toBeDefined();
-    expect(output['README.md']).toBe('# test-project');
+    expect(output['README.md']).toBe(`# test-project
+
+## Getting Started
+
+\`\`\`sh
+yarn install
+npx projen build
+\`\`\``);
     expect(output).toMatchSnapshot();
   });
 });

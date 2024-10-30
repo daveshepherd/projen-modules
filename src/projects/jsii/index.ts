@@ -35,7 +35,11 @@ export class JsiiProject extends cdk.JsiiProject {
     });
 
     new CodeOwners(this, mergedOptions.codeOwners);
-    new Readme(this);
+    const readme = new Readme(this);
+    readme.addSection(
+      'Getting Started',
+      '```sh\nyarn install\nnpx projen build\n```',
+    );
   }
 }
 

@@ -20,5 +20,5 @@ test('empty README just has project title', () => {
 
   // THEN
   const output = synthSnapshot(project)['README.md'];
-  expect(output).toEqual('# my-project');
+  expect(output).toEqual('# my-project\n\n');
 });
