@@ -13,6 +13,7 @@
     ".projen/tasks.json",
     "CODEOWNERS",
     "LICENSE",
+    "README.md",
     "src/projects/jsii/jsii-project-options.ts",
     "src/projects/npm/npm-package-options.ts",
     "src/projects/python/python-package-options.ts",

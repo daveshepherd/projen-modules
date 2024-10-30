@@ -51,6 +51,7 @@ junit.xml
 tsconfig.json
 !/API.md
 !/CODEOWNERS
+!/README.md
 !/.projenrc.ts
 !/src/projects/jsii/jsii-project-options.ts
 !/src/projects/npm/npm-package-options.ts

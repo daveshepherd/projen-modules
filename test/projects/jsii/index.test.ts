@@ -8,13 +8,14 @@ describe('JSII Package', () => {
       authorAddress: 'test@example.com',
       codeOwners: ['test'],
       defaultReleaseBranch: 'main',
-      name: 'test',
+      name: 'test-project',
       repositoryUrl: 'test.com',
     });
 
     const output = synthSnapshot(project);
 
     expect(output.CODEOWNERS).toBeDefined();
+    expect(output['README.md']).toBe('# test-project');
     expect(output).toMatchSnapshot();
   });
 });

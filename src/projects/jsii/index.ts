@@ -2,6 +2,7 @@ import { cdk } from 'projen';
 import { JsiiProjectOptions } from './jsii-project-options';
 import { CodeOwners } from '../../components/github/codeowners';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
+import { Readme } from '../../components/readme';
 import { mergeOptions } from '../../utils/merge-options';
 
 function getOptions(options: JsiiProjectOptions) {
@@ -34,6 +35,7 @@ export class JsiiProject extends cdk.JsiiProject {
     });
 
     new CodeOwners(this, mergedOptions.codeOwners);
+    new Readme(this);
   }
 }
 
