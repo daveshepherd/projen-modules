@@ -6,12 +6,31 @@ describe('NPM Package', () => {
     const project = new NpmPackage({
       codeOwners: ['test'],
       defaultReleaseBranch: 'main',
-      name: 'test',
+      name: 'test-npm',
     });
 
     const output = synthSnapshot(project);
 
     expect(output.CODEOWNERS).toBeDefined();
     expect(output).toMatchSnapshot();
+  });
+
+  it('has readme with project details', () => {
+    const project = new NpmPackage({
+      codeOwners: ['test'],
+      defaultReleaseBranch: 'main',
+      name: 'test-npm',
+    });
+
+    const output = synthSnapshot(project);
+
+    expect(output['README.md']).toBe(`# test-npm
+
+## Getting Started
+
+\`\`\`sh
+yarn install
+npx projen build
+\`\`\``);
   });
 });

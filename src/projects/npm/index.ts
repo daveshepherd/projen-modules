@@ -3,6 +3,7 @@ import { NpmPackageOptions } from './npm-package-options';
 import { NpmCircleCi } from '../../circleci';
 import { CodeOwners } from '../../components/github/codeowners';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
+import { Readme } from '../../components/readme';
 import { mergeOptions } from '../../utils/merge-options';
 
 function getOptions(options: NpmPackageOptions) {
@@ -39,6 +40,11 @@ export class NpmPackage extends typescript.TypeScriptProject {
 
     new CodeOwners(this, mergedOptions.codeOwners);
     new NpmCircleCi(this);
+    const readme = new Readme(this);
+    readme.addSection(
+      'Getting Started',
+      '```sh\nyarn install\nnpx projen build\n```',
+    );
   }
 }
 
