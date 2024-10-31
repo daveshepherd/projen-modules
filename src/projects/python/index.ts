@@ -2,6 +2,7 @@ import { PythonProject } from 'projen/lib/python';
 import { PythonPackageOptions } from './python-package-options';
 import { CodeOwners } from '../../components/github/codeowners';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
+import { Readme } from '../../components/readme';
 import { mergeOptions } from '../../utils/merge-options';
 
 function getOptions(options: PythonPackageOptions) {
@@ -36,6 +37,11 @@ export class PythonPackage extends PythonProject {
         ...(mergedOptions.pullRequestTemplateContents ?? []),
       );
     }
+    const readme = new Readme(this);
+    readme.addSection(
+      'Getting Started',
+      '```sh\nyarn install\nnpx projen build\n```',
+    );
   }
 }
 
