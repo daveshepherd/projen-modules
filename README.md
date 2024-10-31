@@ -1,8 +1,15 @@
-# Projen Modules
+# projen-modules
 
-## Getting started
+## Getting Started
 
-```
+```sh
 yarn install
 npx projen build
+```
+
+## Creating a New Project
+
+
+```
+npx projen new NpmPackage --from projen-project
 ```
