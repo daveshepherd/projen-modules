@@ -1356,7 +1356,7 @@ UNEXPECTED BREAKING CHANGES: add keys such as 'removed:constructs.Node.of' to .c
    See the License for the specific language governing permissions and
    limitations under the License.
 ",
-  "README.md": "# test-project
+  "README.md": "# test-jsii
 
 ## Getting Started
 
@@ -1446,7 +1446,7 @@ npx projen build
     },
     "license": "Apache-2.0",
     "main": "lib/index.js",
-    "name": "test-project",
+    "name": "test-jsii",
     "publishConfig": {
       "access": "public",
     },

@@ -8,14 +8,29 @@ describe('JSII Package', () => {
       authorAddress: 'test@example.com',
       codeOwners: ['test'],
       defaultReleaseBranch: 'main',
-      name: 'test-project',
+      name: 'test-jsii',
       repositoryUrl: 'test.com',
     });
 
     const output = synthSnapshot(project);
 
     expect(output.CODEOWNERS).toBeDefined();
-    expect(output['README.md']).toBe(`# test-project
+    expect(output).toMatchSnapshot();
+  });
+
+  it('has readme with project details', () => {
+    const project = new JsiiProject({
+      author: 'Test',
+      authorAddress: 'test@example.com',
+      codeOwners: ['test'],
+      defaultReleaseBranch: 'main',
+      name: 'test-jsii',
+      repositoryUrl: 'test.com',
+    });
+
+    const output = synthSnapshot(project);
+
+    expect(output['README.md']).toBe(`# test-jsii
 
 ## Getting Started
 
@@ -23,6 +38,5 @@ describe('JSII Package', () => {
 yarn install
 npx projen build
 \`\`\``);
-    expect(output).toMatchSnapshot();
   });
 });
