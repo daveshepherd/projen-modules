@@ -27,6 +27,8 @@ function getOptions(options: JsiiProjectOptions) {
  * @pjid jsii-project
  */
 export class JsiiProject extends cdk.JsiiProject {
+  readme: Readme;
+
   constructor(options: JsiiProjectOptions) {
     const mergedOptions = getOptions(options);
 
@@ -35,8 +37,8 @@ export class JsiiProject extends cdk.JsiiProject {
     });
 
     new CodeOwners(this, mergedOptions.codeOwners);
-    const readme = new Readme(this);
-    readme.addSection(
+    this.readme = new Readme(this);
+    this.readme.addSection(
       'Getting Started',
       '```sh\nyarn install\nnpx projen build\n```',
     );

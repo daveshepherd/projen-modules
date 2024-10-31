@@ -1,5 +1,5 @@
 import { FileBase, IResolver, Project } from 'projen';
-import { Section } from './element/section';
+import { Section } from './elements/section';
 
 export class Readme extends FileBase {
   sections: Array<Section> = [];

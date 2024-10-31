@@ -1,4 +1,4 @@
-import { Section } from '../../../../src/components/readme/element/section';
+import { Section } from '../../../../src/components/readme/elements/section';
 
 test('basic section', () => {
   // GIVEN

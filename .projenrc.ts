@@ -23,6 +23,14 @@ const project = new JsiiProject({
   },
   repositoryUrl: 'https://github.com/daveshepherd/projen-modules.git',
 });
+project.readme?.addSection(
+  'Creating a New Project',
+  `
+\`\`\`
+npx projen new NpmPackage --from projen-project
+\`\`\`
+`,
+);
 new ProjenStruct(project, {
   name: 'JsiiProjectOptions',
   filePath: 'src/projects/jsii/jsii-project-options.ts',

@@ -722,6 +722,7 @@ When given a project, this it the project itself.
 | <code><a href="#projen-modules.JsiiProject.property.eslint">eslint</a></code> | <code>projen.javascript.Eslint</code> | *No description.* |
 | <code><a href="#projen-modules.JsiiProject.property.tsconfig">tsconfig</a></code> | <code>projen.javascript.TypescriptConfig</code> | *No description.* |
 | <code><a href="#projen-modules.JsiiProject.property.tsconfigEslint">tsconfigEslint</a></code> | <code>projen.javascript.TypescriptConfig</code> | *No description.* |
+| <code><a href="#projen-modules.JsiiProject.property.readme">readme</a></code> | <code><a href="#projen-modules.Readme">Readme</a></code> | *No description.* |
 
 ---
 
@@ -1472,6 +1473,16 @@ public readonly tsconfigEslint: TypescriptConfig;
 ```
 
 - *Type:* projen.javascript.TypescriptConfig
+
+---
+
+##### `readme`<sup>Required</sup> <a name="readme" id="projen-modules.JsiiProject.property.readme"></a>
+
+```typescript
+public readonly readme: Readme;
+```
+
+- *Type:* <a href="#projen-modules.Readme">Readme</a>
 
 ---
 
@@ -3952,6 +3963,276 @@ Normally
 this task should synthesize the project files.
 
 ---
+
+### Readme <a name="Readme" id="projen-modules.Readme"></a>
+
+#### Initializers <a name="Initializers" id="projen-modules.Readme.Initializer"></a>
+
+```typescript
+import { Readme } from 'projen-modules'
+
+new Readme(project: Project)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#projen-modules.Readme.Initializer.parameter.project">project</a></code> | <code>projen.Project</code> | *No description.* |
+
+---
+
+##### `project`<sup>Required</sup> <a name="project" id="projen-modules.Readme.Initializer.parameter.project"></a>
+
+- *Type:* projen.Project
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#projen-modules.Readme.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#projen-modules.Readme.postSynthesize">postSynthesize</a></code> | Called after synthesis. |
+| <code><a href="#projen-modules.Readme.preSynthesize">preSynthesize</a></code> | Called before synthesis. |
+| <code><a href="#projen-modules.Readme.synthesize">synthesize</a></code> | Writes the file to the project's output directory. |
+| <code><a href="#projen-modules.Readme.addSection">addSection</a></code> | *No description.* |
+
+---
+
+##### `toString` <a name="toString" id="projen-modules.Readme.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `postSynthesize` <a name="postSynthesize" id="projen-modules.Readme.postSynthesize"></a>
+
+```typescript
+public postSynthesize(): void
+```
+
+Called after synthesis.
+
+Order is *not* guaranteed.
+
+##### `preSynthesize` <a name="preSynthesize" id="projen-modules.Readme.preSynthesize"></a>
+
+```typescript
+public preSynthesize(): void
+```
+
+Called before synthesis.
+
+##### `synthesize` <a name="synthesize" id="projen-modules.Readme.synthesize"></a>
+
+```typescript
+public synthesize(): void
+```
+
+Writes the file to the project's output directory.
+
+##### `addSection` <a name="addSection" id="projen-modules.Readme.addSection"></a>
+
+```typescript
+public addSection(title: string, body: string): void
+```
+
+###### `title`<sup>Required</sup> <a name="title" id="projen-modules.Readme.addSection.parameter.title"></a>
+
+- *Type:* string
+
+---
+
+###### `body`<sup>Required</sup> <a name="body" id="projen-modules.Readme.addSection.parameter.body"></a>
+
+- *Type:* string
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#projen-modules.Readme.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#projen-modules.Readme.isComponent">isComponent</a></code> | Test whether the given construct is a component. |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="projen-modules.Readme.isConstruct"></a>
+
+```typescript
+import { Readme } from 'projen-modules'
+
+Readme.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="projen-modules.Readme.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `isComponent` <a name="isComponent" id="projen-modules.Readme.isComponent"></a>
+
+```typescript
+import { Readme } from 'projen-modules'
+
+Readme.isComponent(x: any)
+```
+
+Test whether the given construct is a component.
+
+###### `x`<sup>Required</sup> <a name="x" id="projen-modules.Readme.isComponent.parameter.x"></a>
+
+- *Type:* any
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#projen-modules.Readme.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#projen-modules.Readme.property.project">project</a></code> | <code>projen.Project</code> | *No description.* |
+| <code><a href="#projen-modules.Readme.property.absolutePath">absolutePath</a></code> | <code>string</code> | The absolute path of this file. |
+| <code><a href="#projen-modules.Readme.property.path">path</a></code> | <code>string</code> | The file path, relative to the project's outdir. |
+| <code><a href="#projen-modules.Readme.property.changed">changed</a></code> | <code>boolean</code> | Indicates if the file has been changed during synthesis. |
+| <code><a href="#projen-modules.Readme.property.marker">marker</a></code> | <code>string</code> | The projen marker, used to identify files as projen-generated. |
+| <code><a href="#projen-modules.Readme.property.executable">executable</a></code> | <code>boolean</code> | Indicates if the file should be marked as executable. |
+| <code><a href="#projen-modules.Readme.property.readonly">readonly</a></code> | <code>boolean</code> | Indicates if the file should be read-only or read-write. |
+| <code><a href="#projen-modules.Readme.property.sections">sections</a></code> | <code><a href="#projen-modules.Section">Section</a>[]</code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="projen-modules.Readme.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `project`<sup>Required</sup> <a name="project" id="projen-modules.Readme.property.project"></a>
+
+```typescript
+public readonly project: Project;
+```
+
+- *Type:* projen.Project
+
+---
+
+##### `absolutePath`<sup>Required</sup> <a name="absolutePath" id="projen-modules.Readme.property.absolutePath"></a>
+
+```typescript
+public readonly absolutePath: string;
+```
+
+- *Type:* string
+
+The absolute path of this file.
+
+---
+
+##### `path`<sup>Required</sup> <a name="path" id="projen-modules.Readme.property.path"></a>
+
+```typescript
+public readonly path: string;
+```
+
+- *Type:* string
+
+The file path, relative to the project's outdir.
+
+---
+
+##### `changed`<sup>Optional</sup> <a name="changed" id="projen-modules.Readme.property.changed"></a>
+
+```typescript
+public readonly changed: boolean;
+```
+
+- *Type:* boolean
+
+Indicates if the file has been changed during synthesis.
+
+This property is
+only available in `postSynthesize()` hooks. If this is `undefined`, the
+file has not been synthesized yet.
+
+---
+
+##### `marker`<sup>Optional</sup> <a name="marker" id="projen-modules.Readme.property.marker"></a>
+
+```typescript
+public readonly marker: string;
+```
+
+- *Type:* string
+
+The projen marker, used to identify files as projen-generated.
+
+Value is undefined if the project is being ejected.
+
+---
+
+##### `executable`<sup>Required</sup> <a name="executable" id="projen-modules.Readme.property.executable"></a>
+
+```typescript
+public readonly executable: boolean;
+```
+
+- *Type:* boolean
+
+Indicates if the file should be marked as executable.
+
+---
+
+##### `readonly`<sup>Required</sup> <a name="readonly" id="projen-modules.Readme.property.readonly"></a>
+
+```typescript
+public readonly readonly: boolean;
+```
+
+- *Type:* boolean
+
+Indicates if the file should be read-only or read-write.
+
+---
+
+##### `sections`<sup>Required</sup> <a name="sections" id="projen-modules.Readme.property.sections"></a>
+
+```typescript
+public readonly sections: Section[];
+```
+
+- *Type:* <a href="#projen-modules.Section">Section</a>[]
+
+---
+
 
 ## Structs <a name="Structs" id="Structs"></a>
 
@@ -9501,5 +9782,97 @@ Enabled by default for root projects. Disabled for non-root projects.
 
 ---
 
+## Classes <a name="Classes" id="Classes"></a>
 
+### Section <a name="Section" id="projen-modules.Section"></a>
+
+#### Initializers <a name="Initializers" id="projen-modules.Section.Initializer"></a>
+
+```typescript
+import { Section } from 'projen-modules'
+
+new Section(options: ISectionOptions)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#projen-modules.Section.Initializer.parameter.options">options</a></code> | <code><a href="#projen-modules.ISectionOptions">ISectionOptions</a></code> | *No description.* |
+
+---
+
+##### `options`<sup>Required</sup> <a name="options" id="projen-modules.Section.Initializer.parameter.options"></a>
+
+- *Type:* <a href="#projen-modules.ISectionOptions">ISectionOptions</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#projen-modules.Section.synth">synth</a></code> | *No description.* |
+
+---
+
+##### `synth` <a name="synth" id="projen-modules.Section.synth"></a>
+
+```typescript
+public synth(): string
+```
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#projen-modules.Section.property.options">options</a></code> | <code><a href="#projen-modules.ISectionOptions">ISectionOptions</a></code> | *No description.* |
+
+---
+
+##### `options`<sup>Required</sup> <a name="options" id="projen-modules.Section.property.options"></a>
+
+```typescript
+public readonly options: ISectionOptions;
+```
+
+- *Type:* <a href="#projen-modules.ISectionOptions">ISectionOptions</a>
+
+---
+
+
+## Protocols <a name="Protocols" id="Protocols"></a>
+
+### ISectionOptions <a name="ISectionOptions" id="projen-modules.ISectionOptions"></a>
+
+- *Implemented By:* <a href="#projen-modules.ISectionOptions">ISectionOptions</a>
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#projen-modules.ISectionOptions.property.body">body</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#projen-modules.ISectionOptions.property.title">title</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `body`<sup>Required</sup> <a name="body" id="projen-modules.ISectionOptions.property.body"></a>
+
+```typescript
+public readonly body: string;
+```
+
+- *Type:* string
+
+---
+
+##### `title`<sup>Required</sup> <a name="title" id="projen-modules.ISectionOptions.property.title"></a>
+
+```typescript
+public readonly title: string;
+```
+
+- *Type:* string
+
+---
 

@@ -1,11 +1,11 @@
-export interface SectionOptions {
+export interface ISectionOptions {
   title: string;
   body: string;
 }
 
 export class Section {
-  readonly options: SectionOptions;
-  constructor(options: SectionOptions) {
+  readonly options: ISectionOptions;
+  constructor(options: ISectionOptions) {
     this.options = options;
   }
   synth() {
