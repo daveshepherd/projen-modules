@@ -42,7 +42,23 @@ export class JsiiProject extends cdk.JsiiProject {
     });
     this.readme.addSection(
       'Getting Started',
-      '```sh\nyarn install\nnpx projen build\n```',
+      `\`\`\`sh\nyarn install\nnpx projen build\n\`\`\`\n
+This will:
+* Install the dependencies
+* Apply any projen changes
+* Run tests
+* Package project locally
+
+Any files changed by projen should be committed to git.
+
+Running the tests like this will update any snapshot files, this should be reviewed and committed to git.`,
+    );
+    this.readme.addSection(
+      'Testing',
+      `Types of testing:
+* Snapshot - projen project outputs are stored as a snapshot in the corresponding \`__snapshots__\` directory. When the project changes then it is expected that these snapshots change too and should be reviewed committed alongside the project.
+* Unit tests - these assert on specific functionality of the project and should be written for any new functionality added.
+`,
     );
   }
 }

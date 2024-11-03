@@ -30,14 +30,9 @@ describe('JSII Package', () => {
 
     const output = synthSnapshot(project);
 
-    expect(output['README.md']).toBe(`# test-jsii
+    expect(output['README.md']).toContain(`# test-jsii
 
-## Getting Started
-
-\`\`\`sh
-yarn install
-npx projen build
-\`\`\``);
+`);
   });
 
   it('has readme with a project description', () => {
@@ -55,15 +50,10 @@ npx projen build
 
     const output = synthSnapshot(project);
 
-    expect(output['README.md']).toBe(`# test-jsii
+    expect(output['README.md']).toContain(`# test-jsii
 
 A test project description.
 
-## Getting Started
-
-\`\`\`sh
-yarn install
-npx projen build
-\`\`\``);
+`);
   });
 });

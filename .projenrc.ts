@@ -32,9 +32,27 @@ project.readme?.addSection(
   'Creating a New Project',
   `
 \`\`\`
-npx projen new NpmPackage --from projen-project
+npx projen new {project} --from projen-modules
 \`\`\`
-`,
+
+Some projects may have required fields that need to be specified as part of this command, review any errors for details what needs to be specified.
+
+### Project Types
+
+| Project type                            | Description               |
+| --------------------------------------- | ------------------------- |
+| [npm-package](API.md#npmpackage-)       | A typescript npm package  |
+| [python-package](API.md#pythonpackage-) | A python package          |
+| [jsii-package](API.md#jsiiproject-)     | A typescript JSII package |`,
+);
+project.readme?.addSection(
+  'Project Structure',
+  `All source is located in \`src\` and is grouped by:
+* \`components\` - these are common building blocks that can be used by projects to implement specific project functionality.
+* \`projects\` - these are projects that can be built from this project (see #something)
+* \`utils\` - these are helper functions that are often reused
+
+\`test\` contains tests, and mirrors the \`src\` directory structure. Within here there are \`__snapshots__\` which contain snapshots of project tests (see #section).`,
 );
 new ProjenStruct(project, {
   name: 'JsiiProjectOptions',
