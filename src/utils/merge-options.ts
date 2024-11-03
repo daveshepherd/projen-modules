@@ -17,7 +17,7 @@ export function mergeOptions<
     }
 
     const result: Record<string, any> = { ...prev };
-    Object.keys(obj).map((key) => {
+    Object.keys(obj).forEach((key) => {
       const pVal = prev[key];
       const oVal = obj[key];
 
@@ -28,7 +28,6 @@ export function mergeOptions<
       } else {
         result[key] = oVal;
       }
-      return result;
     });
 
     return result;
