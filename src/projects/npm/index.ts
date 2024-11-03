@@ -31,17 +31,21 @@ function getOptions(options: NpmPackageOptions) {
  * @pjid npm-package
  */
 export class NpmPackage extends typescript.TypeScriptProject {
+  readme: Readme;
+
   constructor(options: NpmPackageOptions) {
     const mergedOptions = getOptions(options);
 
     super({
       ...mergedOptions,
-    });
+    } as typescript.TypeScriptProjectOptions);
 
     new CodeOwners(this, mergedOptions.codeOwners);
     new NpmCircleCi(this);
-    const readme = new Readme(this);
-    readme.addSection(
+    this.readme = new Readme(this, {
+      description: mergedOptions.readme?.description,
+    });
+    this.readme.addSection(
       'Getting Started',
       '```sh\nyarn install\nnpx projen build\n```',
     );

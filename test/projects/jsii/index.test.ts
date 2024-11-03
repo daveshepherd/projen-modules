@@ -39,4 +39,31 @@ yarn install
 npx projen build
 \`\`\``);
   });
+
+  it('has readme with a project description', () => {
+    const project = new JsiiProject({
+      author: 'Test',
+      authorAddress: 'test@example.com',
+      codeOwners: ['test'],
+      defaultReleaseBranch: 'main',
+      name: 'test-jsii',
+      readme: {
+        description: 'A test project description.',
+      },
+      repositoryUrl: 'test.com',
+    });
+
+    const output = synthSnapshot(project);
+
+    expect(output['README.md']).toBe(`# test-jsii
+
+A test project description.
+
+## Getting Started
+
+\`\`\`sh
+yarn install
+npx projen build
+\`\`\``);
+  });
 });

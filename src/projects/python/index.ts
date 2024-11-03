@@ -1,4 +1,4 @@
-import { PythonProject } from 'projen/lib/python';
+import { PythonProject, PythonProjectOptions } from 'projen/lib/python';
 import { PythonPackageOptions } from './python-package-options';
 import { CodeOwners } from '../../components/github/codeowners';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
@@ -24,12 +24,14 @@ function getOptions(options: PythonPackageOptions) {
  * @pjid python-package
  */
 export class PythonPackage extends PythonProject {
+  readme: Readme;
+
   constructor(options: PythonPackageOptions) {
     const mergedOptions = getOptions(options);
 
     super({
       ...mergedOptions,
-    });
+    } as PythonProjectOptions);
 
     new CodeOwners(this, mergedOptions.codeOwners);
     if (mergedOptions.pullRequestTemplate ?? true) {
@@ -37,8 +39,10 @@ export class PythonPackage extends PythonProject {
         ...(mergedOptions.pullRequestTemplateContents ?? []),
       );
     }
-    const readme = new Readme(this);
-    readme.addSection(
+    this.readme = new Readme(this, {
+      description: mergedOptions.readme?.description,
+    });
+    this.readme.addSection(
       'Getting Started',
       '```sh\nyarn install\nnpx projen build\n```',
     );

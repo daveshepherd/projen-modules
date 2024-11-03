@@ -34,10 +34,12 @@ export class JsiiProject extends cdk.JsiiProject {
 
     super({
       ...mergedOptions,
-    });
+    } as cdk.JsiiProjectOptions);
 
     new CodeOwners(this, mergedOptions.codeOwners);
-    this.readme = new Readme(this);
+    this.readme = new Readme(this, {
+      description: mergedOptions.readme?.description,
+    });
     this.readme.addSection(
       'Getting Started',
       '```sh\nyarn install\nnpx projen build\n```',

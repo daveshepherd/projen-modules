@@ -2240,6 +2240,7 @@ When given a project, this it the project itself.
 | <code><a href="#projen-modules.NpmPackage.property.eslint">eslint</a></code> | <code>projen.javascript.Eslint</code> | *No description.* |
 | <code><a href="#projen-modules.NpmPackage.property.tsconfig">tsconfig</a></code> | <code>projen.javascript.TypescriptConfig</code> | *No description.* |
 | <code><a href="#projen-modules.NpmPackage.property.tsconfigEslint">tsconfigEslint</a></code> | <code>projen.javascript.TypescriptConfig</code> | *No description.* |
+| <code><a href="#projen-modules.NpmPackage.property.readme">readme</a></code> | <code><a href="#projen-modules.Readme">Readme</a></code> | *No description.* |
 
 ---
 
@@ -2993,6 +2994,16 @@ public readonly tsconfigEslint: TypescriptConfig;
 
 ---
 
+##### `readme`<sup>Required</sup> <a name="readme" id="projen-modules.NpmPackage.property.readme"></a>
+
+```typescript
+public readonly readme: Readme;
+```
+
+- *Type:* <a href="#projen-modules.Readme">Readme</a>
+
+---
+
 #### Constants <a name="Constants" id="Constants"></a>
 
 | **Name** | **Type** | **Description** |
@@ -3489,6 +3500,7 @@ When given a project, this it the project itself.
 | <code><a href="#projen-modules.PythonPackage.property.version">version</a></code> | <code>string</code> | Version of the package for distribution (should follow semver). |
 | <code><a href="#projen-modules.PythonPackage.property.packagingManager">packagingManager</a></code> | <code>projen.python.IPythonPackaging</code> | API for managing packaging the project as a library. |
 | <code><a href="#projen-modules.PythonPackage.property.pytest">pytest</a></code> | <code>projen.python.Pytest</code> | Pytest component. |
+| <code><a href="#projen-modules.PythonPackage.property.readme">readme</a></code> | <code><a href="#projen-modules.Readme">Readme</a></code> | *No description.* |
 
 ---
 
@@ -3941,6 +3953,16 @@ Pytest component.
 
 ---
 
+##### `readme`<sup>Required</sup> <a name="readme" id="projen-modules.PythonPackage.property.readme"></a>
+
+```typescript
+public readonly readme: Readme;
+```
+
+- *Type:* <a href="#projen-modules.Readme">Readme</a>
+
+---
+
 #### Constants <a name="Constants" id="Constants"></a>
 
 | **Name** | **Type** | **Description** |
@@ -3971,18 +3993,25 @@ this task should synthesize the project files.
 ```typescript
 import { Readme } from 'projen-modules'
 
-new Readme(project: Project)
+new Readme(project: Project, options?: ReadmeOptions)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#projen-modules.Readme.Initializer.parameter.project">project</a></code> | <code>projen.Project</code> | *No description.* |
+| <code><a href="#projen-modules.Readme.Initializer.parameter.options">options</a></code> | <code><a href="#projen-modules.ReadmeOptions">ReadmeOptions</a></code> | *No description.* |
 
 ---
 
 ##### `project`<sup>Required</sup> <a name="project" id="projen-modules.Readme.Initializer.parameter.project"></a>
 
 - *Type:* projen.Project
+
+---
+
+##### `options`<sup>Optional</sup> <a name="options" id="projen-modules.Readme.Initializer.parameter.options"></a>
+
+- *Type:* <a href="#projen-modules.ReadmeOptions">ReadmeOptions</a>
 
 ---
 
@@ -4120,6 +4149,7 @@ Test whether the given construct is a component.
 | <code><a href="#projen-modules.Readme.property.executable">executable</a></code> | <code>boolean</code> | Indicates if the file should be marked as executable. |
 | <code><a href="#projen-modules.Readme.property.readonly">readonly</a></code> | <code>boolean</code> | Indicates if the file should be read-only or read-write. |
 | <code><a href="#projen-modules.Readme.property.sections">sections</a></code> | <code><a href="#projen-modules.Section">Section</a>[]</code> | *No description.* |
+| <code><a href="#projen-modules.Readme.property.description">description</a></code> | <code>string</code> | *No description.* |
 
 ---
 
@@ -4230,6 +4260,16 @@ public readonly sections: Section[];
 ```
 
 - *Type:* <a href="#projen-modules.Section">Section</a>[]
+
+---
+
+##### `description`<sup>Optional</sup> <a name="description" id="projen-modules.Readme.property.description"></a>
+
+```typescript
+public readonly description: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -4372,6 +4412,7 @@ const jsiiProjectOptions: JsiiProjectOptions = { ... }
 | <code><a href="#projen-modules.JsiiProjectOptions.property.pullRequestTemplate">pullRequestTemplate</a></code> | <code>boolean</code> | Include a GitHub pull request template. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.pullRequestTemplateContents">pullRequestTemplateContents</a></code> | <code>string[]</code> | The contents of the pull request template. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.python">python</a></code> | <code>projen.cdk.JsiiPythonTarget</code> | *No description.* |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.readme">readme</a></code> | <code><a href="#projen-modules.ReadmeOptions">ReadmeOptions</a></code> | Configuration of the README.md file. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.releasableCommits">releasableCommits</a></code> | <code>projen.ReleasableCommits</code> | Find commits that should be considered releasable Used to decide if a release is required. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.release">release</a></code> | <code>boolean</code> | Add release management to this project. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.releaseBranches">releaseBranches</a></code> | <code>{[ key: string ]: projen.release.BranchOptions}</code> | Defines additional release branches. |
@@ -6111,6 +6152,18 @@ public readonly python: JsiiPythonTarget;
 
 ---
 
+##### `readme`<sup>Optional</sup> <a name="readme" id="projen-modules.JsiiProjectOptions.property.readme"></a>
+
+```typescript
+public readonly readme: ReadmeOptions;
+```
+
+- *Type:* <a href="#projen-modules.ReadmeOptions">ReadmeOptions</a>
+
+Configuration of the README.md file.
+
+---
+
 ##### `releasableCommits`<sup>Optional</sup> <a name="releasableCommits" id="projen-modules.JsiiProjectOptions.property.releasableCommits"></a>
 
 ```typescript
@@ -6805,6 +6858,7 @@ const npmPackageOptions: NpmPackageOptions = { ... }
 | <code><a href="#projen-modules.NpmPackageOptions.property.publishTasks">publishTasks</a></code> | <code>boolean</code> | Define publishing tasks that can be executed manually as well as workflows. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.pullRequestTemplate">pullRequestTemplate</a></code> | <code>boolean</code> | Include a GitHub pull request template. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.pullRequestTemplateContents">pullRequestTemplateContents</a></code> | <code>string[]</code> | The contents of the pull request template. |
+| <code><a href="#projen-modules.NpmPackageOptions.property.readme">readme</a></code> | <code><a href="#projen-modules.ReadmeOptions">ReadmeOptions</a></code> | Configuration of the README.md file. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.releasableCommits">releasableCommits</a></code> | <code>projen.ReleasableCommits</code> | Find commits that should be considered releasable Used to decide if a release is required. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.release">release</a></code> | <code>boolean</code> | Add release management to this project. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.releaseBranches">releaseBranches</a></code> | <code>{[ key: string ]: projen.release.BranchOptions}</code> | Defines additional release branches. |
@@ -8337,6 +8391,18 @@ The contents of the pull request template.
 
 ---
 
+##### `readme`<sup>Optional</sup> <a name="readme" id="projen-modules.NpmPackageOptions.property.readme"></a>
+
+```typescript
+public readonly readme: ReadmeOptions;
+```
+
+- *Type:* <a href="#projen-modules.ReadmeOptions">ReadmeOptions</a>
+
+Configuration of the README.md file.
+
+---
+
 ##### `releasableCommits`<sup>Optional</sup> <a name="releasableCommits" id="projen-modules.NpmPackageOptions.property.releasableCommits"></a>
 
 ```typescript
@@ -8964,6 +9030,7 @@ const pythonPackageOptions: PythonPackageOptions = { ... }
 | <code><a href="#projen-modules.PythonPackageOptions.property.pytest">pytest</a></code> | <code>boolean</code> | Include pytest tests. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.pytestOptions">pytestOptions</a></code> | <code>projen.python.PytestOptions</code> | pytest options. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.pythonExec">pythonExec</a></code> | <code>string</code> | Path to the python executable to use. |
+| <code><a href="#projen-modules.PythonPackageOptions.property.readme">readme</a></code> | <code><a href="#projen-modules.ReadmeOptions">ReadmeOptions</a></code> | Configuration of the README.md file. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.renovatebot">renovatebot</a></code> | <code>boolean</code> | Use renovatebot to handle dependency upgrades. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.renovatebotOptions">renovatebotOptions</a></code> | <code>projen.RenovatebotOptions</code> | Options for renovatebot. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.sample">sample</a></code> | <code>boolean</code> | Include sample code and test if the relevant directories don't exist. |
@@ -9647,6 +9714,18 @@ Path to the python executable to use.
 
 ---
 
+##### `readme`<sup>Optional</sup> <a name="readme" id="projen-modules.PythonPackageOptions.property.readme"></a>
+
+```typescript
+public readonly readme: ReadmeOptions;
+```
+
+- *Type:* <a href="#projen-modules.ReadmeOptions">ReadmeOptions</a>
+
+Configuration of the README.md file.
+
+---
+
 ##### `renovatebot`<sup>Optional</sup> <a name="renovatebot" id="projen-modules.PythonPackageOptions.property.renovatebot"></a>
 
 ```typescript
@@ -9779,6 +9858,36 @@ public readonly vscode: boolean;
 Enable VSCode integration.
 
 Enabled by default for root projects. Disabled for non-root projects.
+
+---
+
+### ReadmeOptions <a name="ReadmeOptions" id="projen-modules.ReadmeOptions"></a>
+
+#### Initializer <a name="Initializer" id="projen-modules.ReadmeOptions.Initializer"></a>
+
+```typescript
+import { ReadmeOptions } from 'projen-modules'
+
+const readmeOptions: ReadmeOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#projen-modules.ReadmeOptions.property.description">description</a></code> | <code>string</code> | The description of the project. |
+
+---
+
+##### `description`<sup>Optional</sup> <a name="description" id="projen-modules.ReadmeOptions.property.description"></a>
+
+```typescript
+public readonly description: string;
+```
+
+- *Type:* string
+
+The description of the project.
 
 ---
 

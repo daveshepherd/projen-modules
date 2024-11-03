@@ -1,5 +1,6 @@
 {
   "name": "projen-modules",
+  "description": "A collection of projen modules",
   "repository": {
     "type": "git",
     "url": "https://github.com/daveshepherd/projen-modules.git"

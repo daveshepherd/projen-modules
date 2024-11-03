@@ -33,4 +33,28 @@ yarn install
 npx projen build
 \`\`\``);
   });
+
+  it('has readme with a project description', () => {
+    const project = new NpmPackage({
+      codeOwners: ['test'],
+      defaultReleaseBranch: 'main',
+      name: 'test-npm',
+      readme: {
+        description: 'A test project description.',
+      },
+    });
+
+    const output = synthSnapshot(project);
+
+    expect(output['README.md']).toBe(`# test-npm
+
+A test project description.
+
+## Getting Started
+
+\`\`\`sh
+yarn install
+npx projen build
+\`\`\``);
+  });
 });

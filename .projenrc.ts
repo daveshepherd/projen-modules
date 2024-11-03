@@ -8,6 +8,7 @@ const project = new JsiiProject({
   authorAddress: 'dave.shepherd@endor.me.uk',
   codeOwners: ['sabre'],
   defaultReleaseBranch: 'main',
+  description: 'A collection of projen modules',
   devDeps: ['@mrgrain/jsii-struct-builder', 'constructs', 'projen'],
   gitignore: ['.npmrc', '.vscode'],
   githubOptions: {
@@ -20,6 +21,10 @@ const project = new JsiiProject({
   publishToPypi: {
     distName: 'projen_modules',
     module: 'projen_modules',
+  },
+  readme: {
+    description:
+      'A collection of custom projen modules, that can be used to bootstrap and maintain consistent project configuration, tooling, dependencies, and builds.',
   },
   repositoryUrl: 'https://github.com/daveshepherd/projen-modules.git',
 });
@@ -37,7 +42,14 @@ new ProjenStruct(project, {
 })
   .mixin(Struct.fromFqn('projen.cdk.JsiiProjectOptions'))
   .update('defaultReleaseBranch', { optional: true })
-  .omit('readme')
+  .replace('readme', {
+    docs: {
+      summary: 'Configuration of the README.md file',
+    },
+    name: 'readme',
+    optional: true,
+    type: { fqn: 'projen-modules.ReadmeOptions' },
+  })
   .add({
     docs: {
       summary: 'List of teams used to generate the CODEOWNERS file',
@@ -58,7 +70,14 @@ new ProjenStruct(project, {
 })
   .mixin(Struct.fromFqn('projen.typescript.TypeScriptProjectOptions'))
   .update('defaultReleaseBranch', { optional: true })
-  .omit('readme')
+  .replace('readme', {
+    docs: {
+      summary: 'Configuration of the README.md file',
+    },
+    name: 'readme',
+    optional: true,
+    type: { fqn: 'projen-modules.ReadmeOptions' },
+  })
   .add({
     docs: {
       summary: 'List of teams used to generate the CODEOWNERS file',
@@ -78,7 +97,14 @@ new ProjenStruct(project, {
   filePath: 'src/projects/python/python-package-options.ts',
 })
   .mixin(Struct.fromFqn('projen.python.PythonProjectOptions'))
-  .omit('readme')
+  .replace('readme', {
+    docs: {
+      summary: 'Configuration of the README.md file',
+    },
+    name: 'readme',
+    optional: true,
+    type: { fqn: 'projen-modules.ReadmeOptions' },
+  })
   .add({
     docs: {
       summary: 'List of teams used to generate the CODEOWNERS file',

@@ -1,5 +1,7 @@
 # projen-modules
 
+A collection of custom projen modules, that can be used to bootstrap and maintain consistent project configuration, tooling, dependencies, and builds.
+
 ## Getting Started
 
 ```sh
