@@ -3497,6 +3497,7 @@ When given a project, this it the project itself.
 | <code><a href="#projen-modules.PythonPackage.property.depsManager">depsManager</a></code> | <code>projen.python.IPythonDeps</code> | API for managing dependencies. |
 | <code><a href="#projen-modules.PythonPackage.property.envManager">envManager</a></code> | <code>projen.python.IPythonEnv</code> | API for mangaging the Python runtime environment. |
 | <code><a href="#projen-modules.PythonPackage.property.moduleName">moduleName</a></code> | <code>string</code> | Python module name (the project name, with any hyphens or periods replaced with underscores). |
+| <code><a href="#projen-modules.PythonPackage.property.sampleTestdir">sampleTestdir</a></code> | <code>string</code> | Directory where sample tests are located. |
 | <code><a href="#projen-modules.PythonPackage.property.version">version</a></code> | <code>string</code> | Version of the package for distribution (should follow semver). |
 | <code><a href="#projen-modules.PythonPackage.property.packagingManager">packagingManager</a></code> | <code>projen.python.IPythonPackaging</code> | API for managing packaging the project as a library. |
 | <code><a href="#projen-modules.PythonPackage.property.pytest">pytest</a></code> | <code>projen.python.Pytest</code> | Pytest component. |
@@ -3915,6 +3916,19 @@ Python module name (the project name, with any hyphens or periods replaced with 
 
 ---
 
+##### `sampleTestdir`<sup>Required</sup> <a name="sampleTestdir" id="projen-modules.PythonPackage.property.sampleTestdir"></a>
+
+```typescript
+public readonly sampleTestdir: string;
+```
+
+- *Type:* string
+- *Default:* "tests"
+
+Directory where sample tests are located.
+
+---
+
 ##### `version`<sup>Required</sup> <a name="version" id="projen-modules.PythonPackage.property.version"></a>
 
 ```typescript
@@ -4314,6 +4328,7 @@ const jsiiProjectOptions: JsiiProjectOptions = { ... }
 | <code><a href="#projen-modules.JsiiProjectOptions.property.buildWorkflow">buildWorkflow</a></code> | <code>boolean</code> | Define a GitHub workflow for building PRs. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.buildWorkflowOptions">buildWorkflowOptions</a></code> | <code>projen.javascript.BuildWorkflowOptions</code> | Options for PR build workflow. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.buildWorkflowTriggers">buildWorkflowTriggers</a></code> | <code>projen.github.workflows.Triggers</code> | Build workflow triggers. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.bumpPackage">bumpPackage</a></code> | <code>string</code> | The `commit-and-tag-version` compatible package used to bump the package version, as a dependency string. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.bundledDeps">bundledDeps</a></code> | <code>string[]</code> | List of dependencies to bundle into this module. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.bundlerOptions">bundlerOptions</a></code> | <code>projen.javascript.BundlerOptions</code> | Options for `Bundler`. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.checkLicenses">checkLicenses</a></code> | <code>projen.javascript.LicenseCheckerOptions</code> | Configure which licenses should be deemed acceptable for use by dependencies. |
@@ -4370,6 +4385,7 @@ const jsiiProjectOptions: JsiiProjectOptions = { ... }
 | <code><a href="#projen-modules.JsiiProjectOptions.property.minMajorVersion">minMajorVersion</a></code> | <code>number</code> | Minimal Major version to release. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.minNodeVersion">minNodeVersion</a></code> | <code>string</code> | The minimum node version required by this package to function. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.mutableBuild">mutableBuild</a></code> | <code>boolean</code> | Automatically update files modified during builds to pull-request branches. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.nextVersionCommand">nextVersionCommand</a></code> | <code>string</code> | A shell command to control the next version to release. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.npmAccess">npmAccess</a></code> | <code>projen.javascript.NpmAccess</code> | Access level of the npm package. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.npmDistTag">npmDistTag</a></code> | <code>string</code> | The npmDistTag to use when publishing from the default branch. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.npmignore">npmignore</a></code> | <code>string[]</code> | Additional entries to .npmignore. |
@@ -4748,6 +4764,21 @@ public readonly buildWorkflowTriggers: Triggers;
 - *Default:* "{ pullRequest: {}, workflowDispatch: {} }"
 
 Build workflow triggers.
+
+---
+
+##### `bumpPackage`<sup>Optional</sup> <a name="bumpPackage" id="projen-modules.JsiiProjectOptions.property.bumpPackage"></a>
+
+```typescript
+public readonly bumpPackage: string;
+```
+
+- *Type:* string
+- *Default:* A recent version of "commit-and-tag-version"
+
+The `commit-and-tag-version` compatible package used to bump the package version, as a dependency string.
+
+This can be any compatible package version, including the deprecated `standard-version@9`.
 
 ---
 
@@ -5563,6 +5594,37 @@ that any files synthesized by projen or e.g. test snapshots will always be up-to
 before a PR is merged.
 
 Implies that PR builds do not have anti-tamper checks.
+
+---
+
+##### `nextVersionCommand`<sup>Optional</sup> <a name="nextVersionCommand" id="projen-modules.JsiiProjectOptions.property.nextVersionCommand"></a>
+
+```typescript
+public readonly nextVersionCommand: string;
+```
+
+- *Type:* string
+- *Default:* The next version will be determined based on the commit history and project settings.
+
+A shell command to control the next version to release.
+
+If present, this shell command will be run before the bump is executed, and
+it determines what version to release. It will be executed in the following
+environment:
+
+- Working directory: the project directory.
+- `$VERSION`: the current version. Looks like `1.2.3`.
+- `$LATEST_TAG`: the most recent tag. Looks like `prefix-v1.2.3`, or may be unset.
+
+The command should print one of the following to `stdout`:
+
+- Nothing: the next version number will be determined based on commit history.
+- `x.y.z`: the next version number will be `x.y.z`.
+- `major|minor|patch`: the next version number will be the current version number
+  with the indicated component bumped.
+
+This setting cannot be specified together with `minMajorVersion`; the invoked
+script can be used to achieve the effects of `minMajorVersion`.
 
 ---
 
@@ -6772,6 +6834,7 @@ const npmPackageOptions: NpmPackageOptions = { ... }
 | <code><a href="#projen-modules.NpmPackageOptions.property.buildWorkflow">buildWorkflow</a></code> | <code>boolean</code> | Define a GitHub workflow for building PRs. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.buildWorkflowOptions">buildWorkflowOptions</a></code> | <code>projen.javascript.BuildWorkflowOptions</code> | Options for PR build workflow. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.buildWorkflowTriggers">buildWorkflowTriggers</a></code> | <code>projen.github.workflows.Triggers</code> | Build workflow triggers. |
+| <code><a href="#projen-modules.NpmPackageOptions.property.bumpPackage">bumpPackage</a></code> | <code>string</code> | The `commit-and-tag-version` compatible package used to bump the package version, as a dependency string. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.bundledDeps">bundledDeps</a></code> | <code>string[]</code> | List of dependencies to bundle into this module. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.bundlerOptions">bundlerOptions</a></code> | <code>projen.javascript.BundlerOptions</code> | Options for `Bundler`. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.checkLicenses">checkLicenses</a></code> | <code>projen.javascript.LicenseCheckerOptions</code> | Configure which licenses should be deemed acceptable for use by dependencies. |
@@ -6821,6 +6884,7 @@ const npmPackageOptions: NpmPackageOptions = { ... }
 | <code><a href="#projen-modules.NpmPackageOptions.property.minMajorVersion">minMajorVersion</a></code> | <code>number</code> | Minimal Major version to release. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.minNodeVersion">minNodeVersion</a></code> | <code>string</code> | The minimum node version required by this package to function. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.mutableBuild">mutableBuild</a></code> | <code>boolean</code> | Automatically update files modified during builds to pull-request branches. |
+| <code><a href="#projen-modules.NpmPackageOptions.property.nextVersionCommand">nextVersionCommand</a></code> | <code>string</code> | A shell command to control the next version to release. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.npmAccess">npmAccess</a></code> | <code>projen.javascript.NpmAccess</code> | Access level of the npm package. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.npmDistTag">npmDistTag</a></code> | <code>string</code> | The npmDistTag to use when publishing from the default branch. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.npmignore">npmignore</a></code> | <code>string[]</code> | Additional entries to .npmignore. |
@@ -7154,6 +7218,21 @@ public readonly buildWorkflowTriggers: Triggers;
 - *Default:* "{ pullRequest: {}, workflowDispatch: {} }"
 
 Build workflow triggers.
+
+---
+
+##### `bumpPackage`<sup>Optional</sup> <a name="bumpPackage" id="projen-modules.NpmPackageOptions.property.bumpPackage"></a>
+
+```typescript
+public readonly bumpPackage: string;
+```
+
+- *Type:* string
+- *Default:* A recent version of "commit-and-tag-version"
+
+The `commit-and-tag-version` compatible package used to bump the package version, as a dependency string.
+
+This can be any compatible package version, including the deprecated `standard-version@9`.
 
 ---
 
@@ -7866,6 +7945,37 @@ that any files synthesized by projen or e.g. test snapshots will always be up-to
 before a PR is merged.
 
 Implies that PR builds do not have anti-tamper checks.
+
+---
+
+##### `nextVersionCommand`<sup>Optional</sup> <a name="nextVersionCommand" id="projen-modules.NpmPackageOptions.property.nextVersionCommand"></a>
+
+```typescript
+public readonly nextVersionCommand: string;
+```
+
+- *Type:* string
+- *Default:* The next version will be determined based on the commit history and project settings.
+
+A shell command to control the next version to release.
+
+If present, this shell command will be run before the bump is executed, and
+it determines what version to release. It will be executed in the following
+environment:
+
+- Working directory: the project directory.
+- `$VERSION`: the current version. Looks like `1.2.3`.
+- `$LATEST_TAG`: the most recent tag. Looks like `prefix-v1.2.3`, or may be unset.
+
+The command should print one of the following to `stdout`:
+
+- Nothing: the next version number will be determined based on commit history.
+- `x.y.z`: the next version number will be `x.y.z`.
+- `major|minor|patch`: the next version number will be the current version number
+  with the indicated component bumped.
+
+This setting cannot be specified together with `minMajorVersion`; the invoked
+script can be used to achieve the effects of `minMajorVersion`.
 
 ---
 
@@ -9034,6 +9144,7 @@ const pythonPackageOptions: PythonPackageOptions = { ... }
 | <code><a href="#projen-modules.PythonPackageOptions.property.renovatebot">renovatebot</a></code> | <code>boolean</code> | Use renovatebot to handle dependency upgrades. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.renovatebotOptions">renovatebotOptions</a></code> | <code>projen.RenovatebotOptions</code> | Options for renovatebot. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.sample">sample</a></code> | <code>boolean</code> | Include sample code and test if the relevant directories don't exist. |
+| <code><a href="#projen-modules.PythonPackageOptions.property.sampleTestdir">sampleTestdir</a></code> | <code>string</code> | Location of sample tests. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.setupConfig">setupConfig</a></code> | <code>{[ key: string ]: any}</code> | Additional fields to pass in the setup() function if using setuptools. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.setuptools">setuptools</a></code> | <code>boolean</code> | Use setuptools with a setup.py script for packaging and publishing. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.stale">stale</a></code> | <code>boolean</code> | Auto-close of stale issues and pull request. |
@@ -9762,6 +9873,21 @@ public readonly sample: boolean;
 - *Default:* true
 
 Include sample code and test if the relevant directories don't exist.
+
+---
+
+##### `sampleTestdir`<sup>Optional</sup> <a name="sampleTestdir" id="projen-modules.PythonPackageOptions.property.sampleTestdir"></a>
+
+```typescript
+public readonly sampleTestdir: string;
+```
+
+- *Type:* string
+- *Default:* "tests"
+
+Location of sample tests.
+
+Typically the same directory where project tests will be located.
 
 ---
 
