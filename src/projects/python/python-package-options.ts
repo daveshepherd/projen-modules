@@ -27,6 +27,13 @@ export interface PythonPackageOptions {
    */
   readonly setuptools?: boolean;
   /**
+   * Location of sample tests.
+   * Typically the same directory where project tests will be located.
+   * @default "tests"
+   * @stability experimental
+   */
+  readonly sampleTestdir?: string;
+  /**
    * Include sample code and test if the relevant directories don't exist.
    * @default true
    * @stability experimental
