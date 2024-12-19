@@ -731,12 +731,10 @@ CODEOWNERS
       {
         "name": "@types/jest",
         "type": "build",
-        "version": "^27",
       },
       {
         "name": "@types/node",
         "type": "build",
-        "version": "^16 <= 16.18.78",
       },
       {
         "name": "@typescript-eslint/eslint-plugin",
@@ -772,14 +770,13 @@ CODEOWNERS
         "version": "^9",
       },
       {
+        "name": "jest",
+        "type": "build",
+      },
+      {
         "name": "jest-junit",
         "type": "build",
         "version": "^15",
-      },
-      {
-        "name": "jest",
-        "type": "build",
-        "version": "^27",
       },
       {
         "name": "jsii-diff",
@@ -797,12 +794,12 @@ CODEOWNERS
       {
         "name": "jsii-rosetta",
         "type": "build",
-        "version": "1.x",
+        "version": "~5.6.0",
       },
       {
         "name": "jsii",
         "type": "build",
-        "version": "1.x",
+        "version": "~5.6.0",
       },
       {
         "name": "projen",
@@ -811,7 +808,6 @@ CODEOWNERS
       {
         "name": "ts-jest",
         "type": "build",
-        "version": "^27",
       },
       {
         "name": "ts-node",
@@ -820,16 +816,6 @@ CODEOWNERS
       {
         "name": "typescript",
         "type": "build",
-      },
-      {
-        "name": "@types/babel__traverse",
-        "type": "override",
-        "version": "7.18.2",
-      },
-      {
-        "name": "@types/prettier",
-        "type": "override",
-        "version": "2.6.0",
       },
     ],
   },
@@ -1134,13 +1120,13 @@ UNEXPECTED BREAKING CHANGES: add keys such as 'removed:constructs.Node.of' to .c
         "name": "upgrade",
         "steps": [
           {
-            "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=eslint-import-resolver-typescript,eslint-plugin-import,jsii-diff,jsii-pacmak,projen,ts-node,typescript",
+            "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/jest,@types/node,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,typescript",
           },
           {
             "exec": "yarn install --check-files",
           },
           {
-            "exec": "yarn upgrade @stylistic/eslint-plugin @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version constructs eslint-import-resolver-typescript eslint-plugin-import eslint jest-junit jest jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen ts-jest ts-node typescript",
+            "exec": "yarn upgrade @stylistic/eslint-plugin @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version constructs eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen ts-jest ts-node typescript",
           },
           {
             "exec": "npx projen",
@@ -1399,8 +1385,8 @@ Types of testing:
     },
     "devDependencies": {
       "@stylistic/eslint-plugin": "^2",
-      "@types/jest": "^27",
-      "@types/node": "^16 <= 16.18.78",
+      "@types/jest": "*",
+      "@types/node": "*",
       "@typescript-eslint/eslint-plugin": "^8",
       "@typescript-eslint/parser": "^8",
       "commit-and-tag-version": "^12",
@@ -1408,15 +1394,15 @@ Types of testing:
       "eslint": "^9",
       "eslint-import-resolver-typescript": "*",
       "eslint-plugin-import": "*",
-      "jest": "^27",
+      "jest": "*",
       "jest-junit": "^15",
-      "jsii": "1.x",
+      "jsii": "~5.6.0",
       "jsii-diff": "*",
       "jsii-docgen": "^10.5.0",
       "jsii-pacmak": "*",
-      "jsii-rosetta": "1.x",
+      "jsii-rosetta": "~5.6.0",
       "projen": "*",
-      "ts-jest": "^27",
+      "ts-jest": "*",
       "ts-node": "*",
       "typescript": "*",
     },
@@ -1435,12 +1421,6 @@ Types of testing:
         "cobertura",
         "text",
       ],
-      "globals": {
-        "ts-jest": {
-          "tsconfig": "tsconfig.dev.json",
-        },
-      },
-      "preset": "ts-jest",
       "reporters": [
         "default",
         [
@@ -1459,6 +1439,14 @@ Types of testing:
       "testPathIgnorePatterns": [
         "/node_modules/",
       ],
+      "transform": {
+        "^.+\\.[t]sx?$": [
+          "ts-jest",
+          {
+            "tsconfig": "tsconfig.dev.json",
+          },
+        ],
+      },
       "watchPathIgnorePatterns": [
         "/node_modules/",
       ],
@@ -1480,10 +1468,6 @@ Types of testing:
     "repository": {
       "type": "git",
       "url": "test.com",
-    },
-    "resolutions": {
-      "@types/babel__traverse": "7.18.2",
-      "@types/prettier": "2.6.0",
     },
     "scripts": {
       "build": "npx projen build",
