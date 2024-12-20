@@ -591,7 +591,7 @@ export interface NpmPackageOptions {
   readonly repository?: string;
   /**
    * The version of PNPM to use if using PNPM as a package manager.
-   * @default "7"
+   * @default "9"
    * @stability experimental
    */
   readonly pnpmVersion?: string;
