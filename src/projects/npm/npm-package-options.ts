@@ -774,6 +774,12 @@ export interface NpmPackageOptions {
    */
   readonly codeArtifactOptions?: javascript.CodeArtifactOptions;
   /**
+   * The version of Bun to use if using Bun as a package manager.
+   * @default "latest"
+   * @stability experimental
+   */
+  readonly bunVersion?: string;
+  /**
    * List of dependencies to bundle into this module.
    * These modules will be
    * added both to the `dependencies` section and `bundledDependencies` section of
