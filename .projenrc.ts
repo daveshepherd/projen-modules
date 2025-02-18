@@ -14,6 +14,7 @@ const project = new JsiiProject({
   githubOptions: {
     projenCredentials: github.GithubCredentials.fromApp({}),
   },
+  autoMerge: true,
   name: 'projen-modules',
   peerDeps: ['constructs', 'projen'],
   projenrcTs: true,
