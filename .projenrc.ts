@@ -14,7 +14,6 @@ const project = new JsiiProject({
   githubOptions: {
     projenCredentials: github.GithubCredentials.fromApp({}),
   },
-  jsiiVersion: '~5.4.0',
   name: 'projen-modules',
   peerDeps: ['constructs', 'projen'],
   projenrcTs: true,
