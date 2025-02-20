@@ -168,9 +168,9 @@ project.github?.mergify?.addRule({
   name: 'Automatic approval for projen upgrade pull requests',
   conditions: [
     'author=endor-projen[bot]',
-    'status-success=build',
-    'status-success=package-js',
-    'status-success=package-python',
+    ...(project.buildWorkflow?.buildJobIds?.map(
+      (id) => `status-success=${id}`,
+    ) ?? []),
   ],
   actions: {
     review: {
