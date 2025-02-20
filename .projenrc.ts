@@ -9,12 +9,11 @@ const project = new JsiiProject({
   codeOwners: ['sabre'],
   defaultReleaseBranch: 'main',
   description: 'A collection of projen modules',
-  devDeps: ['@mrgrain/jsii-struct-builder', 'constructs', 'projen'],
+  devDeps: ['@mrgrain/jsii-struct-builder', 'constructs', 'projen', 'yaml'],
   gitignore: ['.npmrc', '.vscode'],
   githubOptions: {
     projenCredentials: github.GithubCredentials.fromApp({}),
   },
-  autoMerge: true,
   name: 'projen-modules',
   peerDeps: ['constructs', 'projen'],
   projenrcTs: true,
@@ -164,19 +163,4 @@ new ProjenStruct(project, {
       },
     },
   });
-project.github?.mergify?.addRule({
-  name: 'Automatic approval for projen upgrade pull requests',
-  conditions: [
-    'author=endor-projen[bot]',
-    ...(project.buildWorkflow?.buildJobIds?.map(
-      (id) => `status-success=${id}`,
-    ) ?? []),
-  ],
-  actions: {
-    review: {
-      type: 'APPROVE',
-      message: 'Automatically approving projen upgrade',
-    },
-  },
-});
 project.synth();

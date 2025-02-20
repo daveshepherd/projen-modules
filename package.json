@@ -57,7 +57,8 @@
     "projen": "0.91.12",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "yaml": "^2.7.0"
   },
   "peerDependencies": {
     "constructs": "10.4.2",
