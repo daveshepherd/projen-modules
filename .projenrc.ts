@@ -164,4 +164,19 @@ new ProjenStruct(project, {
       },
     },
   });
+project.github?.mergify?.addRule({
+  name: 'Automatic approval for projen upgrade pull requests',
+  conditions: [
+    'author=endor-projen[bot]',
+    'status-success=build',
+    'status-success=package-js',
+    'status-success=package-python',
+  ],
+  actions: {
+    review: {
+      type: 'APPROVE',
+      message: 'Automatically approving projen upgrade',
+    },
+  },
+});
 project.synth();
