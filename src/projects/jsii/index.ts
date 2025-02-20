@@ -10,7 +10,7 @@ function getOptions(options: JsiiProjectOptions) {
 
   const defaults = {
     name,
-    autoMerge: false,
+    autoMerge: true,
     defaultReleaseBranch: 'main',
     gitignore: ['.npmrc', '.vscode'],
     pullRequestTemplateContents: DEFAULT_PULL_REQUEST_TEMPLATE,
@@ -60,6 +60,23 @@ Running the tests like this will update any snapshot files, this should be revie
 * Unit tests - these assert on specific functionality of the project and should be written for any new functionality added.
 `,
     );
+    if (this.autoMerge) {
+      this.github?.mergify?.addRule({
+        name: 'Automatic approval for projen upgrade pull requests',
+        conditions: [
+          'author=endor-projen[bot]',
+          ...(this.buildWorkflow?.buildJobIds?.map(
+            (id) => `status-success=${id}`,
+          ) ?? []),
+        ],
+        actions: {
+          review: {
+            type: 'APPROVE',
+            message: 'Automatically approving projen upgrade',
+          },
+        },
+      });
+    }
   }
 }
 

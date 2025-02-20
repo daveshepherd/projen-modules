@@ -99,6 +99,10 @@
       "type": "build"
     },
     {
+      "name": "yaml",
+      "type": "build"
+    },
+    {
       "name": "constructs",
       "type": "peer"
     },
