@@ -50,7 +50,7 @@ export interface JsiiProjectOptions {
    * (e.g. `~5.0.0`).
    * @default "~5.6.0"
    * @stability experimental
-   * @pjnew "~5.7.0"
+   * @pjnew "~5.8.0"
    */
   readonly jsiiVersion?: string;
   /**
