@@ -11,7 +11,6 @@ function getOptions(options: NpmPackageOptions) {
 
   const defaults = {
     name,
-    autoMerge: false,
     defaultReleaseBranch: 'main',
     githubOptions: {
       workflows: false,
@@ -49,6 +48,23 @@ export class NpmPackage extends typescript.TypeScriptProject {
       'Getting Started',
       '```sh\nyarn install\nnpx projen build\n```',
     );
+    if (this.autoMerge) {
+      this.github?.mergify?.addRule({
+        name: 'Automatic approval for projen upgrade pull requests',
+        conditions: [
+          'author=endor-projen[bot]',
+          ...(this.buildWorkflow?.buildJobIds?.map(
+            (id) => `status-success=${id}`,
+          ) ?? []),
+        ],
+        actions: {
+          review: {
+            type: 'APPROVE',
+            message: 'Automatically approving projen upgrade',
+          },
+        },
+      });
+    }
   }
 }
 
