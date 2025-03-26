@@ -1,6 +1,7 @@
 import { cdk } from 'projen';
 import { JsiiProjectOptions } from './jsii-project-options';
 import { CodeOwners } from '../../components/github/codeowners';
+import { CodeQL } from '../../components/github/codeql';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
 import { Readme } from '../../components/readme';
 import { mergeOptions } from '../../utils/merge-options';
@@ -86,6 +87,7 @@ Running the tests like this will update any snapshot files, this should be revie
         },
       });
     }
+    new CodeQL(this);
   }
 }
 

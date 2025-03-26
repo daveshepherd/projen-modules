@@ -1,15 +1,6 @@
-import { Project, ProjectOptions } from 'projen';
 import { synthSnapshot } from 'projen/lib/util/synth';
 import { Readme } from '../../../src/components/readme';
-
-class TestProject extends Project {
-  constructor(options: Omit<ProjectOptions, 'name'> = {}) {
-    super({
-      name: 'my-project',
-      ...options,
-    });
-  }
-}
+import { TestProject } from '../../utils/test-project';
 
 describe('README generation', () => {
   it('has a README with just has project title if nothing else is specified', () => {
