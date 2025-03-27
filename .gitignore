@@ -53,6 +53,7 @@ tsconfig.json
 !/API.md
 !/CODEOWNERS
 !/README.md
+!/.github/workflows/codeql.yml
 !/.projenrc.ts
 !/src/projects/jsii/jsii-project-options.ts
 !/src/projects/npm/npm-package-options.ts

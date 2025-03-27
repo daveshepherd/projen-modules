@@ -2,6 +2,7 @@ import { typescript } from 'projen';
 import { NpmPackageOptions } from './npm-package-options';
 import { NpmCircleCi } from '../../circleci';
 import { CodeOwners } from '../../components/github/codeowners';
+import { CodeQL } from '../../components/github/codeql';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
 import { Readme } from '../../components/readme';
 import { mergeOptions } from '../../utils/merge-options';
@@ -49,6 +50,7 @@ export class NpmPackage extends typescript.TypeScriptProject {
       'Getting Started',
       '```sh\nyarn install\nnpx projen build\n```',
     );
+    new CodeQL(this);
   }
 }
 
