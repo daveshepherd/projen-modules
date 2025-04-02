@@ -306,7 +306,7 @@ cython_debug/
       },
     },
   },
-  "CODEOWNERS": "* @unibuddy/test",
+  "CODEOWNERS": "* test",
   "README.md": "# test-python
 
 ## Getting Started
