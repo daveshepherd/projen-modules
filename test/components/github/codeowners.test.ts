@@ -15,7 +15,7 @@ describe('CodeOwners', () => {
 
     const output = synthSnapshot(project);
 
-    expect(output.CODEOWNERS).toContain('* @unibuddy/test-team');
+    expect(output.CODEOWNERS).toContain('* test-team');
   });
 
   it('matches the snapshot and includes CODEOWNERS in the npmignore file', () => {

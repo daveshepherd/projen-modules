@@ -9,7 +9,7 @@ export class CodeOwners {
     }
 
     new TextFile(project, 'CODEOWNERS', {
-      lines: codeOwners.map((owner) => `* @unibuddy/${owner}`),
+      lines: codeOwners.map((owner) => `* ${owner}`),
     });
   }
 }
