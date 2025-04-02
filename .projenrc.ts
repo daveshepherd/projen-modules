@@ -6,7 +6,7 @@ import { JsiiProject } from './src/projects/jsii';
 const project = new JsiiProject({
   author: 'Dave Shepherd',
   authorAddress: 'dave.shepherd@endor.me.uk',
-  codeOwners: ['sabre'],
+  codeOwners: ['daveshepherd'],
   defaultReleaseBranch: 'main',
   description: 'A collection of projen modules',
   devDeps: ['@mrgrain/jsii-struct-builder', 'constructs', 'projen', 'yaml'],

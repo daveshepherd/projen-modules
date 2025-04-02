@@ -65,6 +65,15 @@ export class CdkTypeScriptApp extends AwsCdkTypeScriptApp {
           },
         },
       });
+      this.github?.mergify?.addRule({
+        name: 'Assign PR when check fails',
+        conditions: ['#check-failure > 0'],
+        actions: {
+          assign: {
+            add_users: ['daveshepherd'],
+          },
+        },
+      });
     }
   }
 }
