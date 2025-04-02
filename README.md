@@ -37,11 +37,12 @@ Some projects may have required fields that need to be specified as part of this
 
 ### Project Types
 
-| Project type                            | Description               |
-| --------------------------------------- | ------------------------- |
-| [npm-package](API.md#npmpackage-)       | A typescript npm package  |
-| [python-package](API.md#pythonpackage-) | A python package          |
-| [jsii-package](API.md#jsiiproject-)     | A typescript JSII package |
+| Project type                                   | Description                |
+| ---------------------------------------------- | -------------------------- |
+| [cdk-typescript-app](API.md#cdktypescriptapp-) | A typescript CDK app |
+| [npm-package](API.md#npmpackage-)              | A typescript npm package   |
+| [python-package](API.md#pythonpackage-)        | A python package           |
+| [jsii-package](API.md#jsiiproject-)            | A typescript JSII package  |
 
 ## Project Structure
 
