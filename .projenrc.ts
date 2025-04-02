@@ -38,11 +38,12 @@ Some projects may have required fields that need to be specified as part of this
 
 ### Project Types
 
-| Project type                            | Description               |
-| --------------------------------------- | ------------------------- |
-| [npm-package](API.md#npmpackage-)       | A typescript npm package  |
-| [python-package](API.md#pythonpackage-) | A python package          |
-| [jsii-package](API.md#jsiiproject-)     | A typescript JSII package |`,
+| Project type                                   | Description                |
+| ---------------------------------------------- | -------------------------- |
+| [cdk-typescript-app](API.md#cdktypescriptapp-) | A typescript CDK app |
+| [npm-package](API.md#npmpackage-)              | A typescript npm package   |
+| [python-package](API.md#pythonpackage-)        | A python package           |
+| [jsii-package](API.md#jsiiproject-)            | A typescript JSII package  |`,
 );
 project.readme?.addSection(
   'Project Structure',
@@ -53,6 +54,34 @@ project.readme?.addSection(
 
 \`test\` contains tests, and mirrors the \`src\` directory structure. Within here there are \`__snapshots__\` which contain snapshots of project tests (see #section).`,
 );
+new ProjenStruct(project, {
+  name: 'CdkTypeScriptAppOptions',
+  filePath: 'src/projects/cdk-ts/cdk-typescript-app-options.ts',
+})
+  .mixin(Struct.fromFqn('projen.awscdk.AwsCdkTypeScriptAppOptions'))
+  .update('defaultReleaseBranch', { optional: true })
+  .replace('readme', {
+    docs: {
+      summary: 'Configuration of the README.md file',
+    },
+    name: 'readme',
+    optional: true,
+    type: { fqn: 'projen-modules.ReadmeOptions' },
+  })
+  .add({
+    docs: {
+      summary: 'List of teams used to generate the CODEOWNERS file',
+    },
+    name: 'codeOwners',
+    type: {
+      collection: {
+        kind: CollectionKind.Array,
+        elementtype: {
+          primitive: PrimitiveType.String,
+        },
+      },
+    },
+  });
 new ProjenStruct(project, {
   name: 'JsiiProjectOptions',
   filePath: 'src/projects/jsii/jsii-project-options.ts',
