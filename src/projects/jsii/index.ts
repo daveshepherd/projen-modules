@@ -76,6 +76,15 @@ Running the tests like this will update any snapshot files, this should be revie
           },
         },
       });
+      this.github?.mergify?.addRule({
+        name: 'Assign PR when check fails',
+        conditions: ['#check-failure > 0'],
+        actions: {
+          assign: {
+            add_users: ['daveshepherd'],
+          },
+        },
+      });
     }
   }
 }
