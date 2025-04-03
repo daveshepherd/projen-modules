@@ -14,9 +14,6 @@ function getOptions(options: CdkTypeScriptAppOptions) {
   const defaults = {
     name,
     defaultReleaseBranch: 'main',
-    githubOptions: {
-      workflows: false,
-    },
     gitignore: ['.npmrc', '.vscode'],
     pullRequestTemplateContents: DEFAULT_PULL_REQUEST_TEMPLATE,
     projenrcTs: true,
