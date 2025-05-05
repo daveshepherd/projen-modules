@@ -724,10 +724,10 @@
     zod "^3.23.8"
     zod-to-json-schema "^3.24.1"
 
-"@mrgrain/jsii-struct-builder@^0.7.54":
-  version "0.7.54"
-  resolved "https://registry.yarnpkg.com/@mrgrain/jsii-struct-builder/-/jsii-struct-builder-0.7.54.tgz#ac8ebed6d66c2d23c748b2ccc16edb0b6d448d1f"
-  integrity sha512-8d7YqwEDS3HhFfKBttiUoJbSLmDGQafRg4lrB1O1lM15jwAbPrP4S5v2OpNY3GNspojLbqXSkHexg99MrBbZQw==
+"@mrgrain/jsii-struct-builder@^0.7.55":
+  version "0.7.55"
+  resolved "https://registry.yarnpkg.com/@mrgrain/jsii-struct-builder/-/jsii-struct-builder-0.7.55.tgz#fba7768d8e8aa465060dc068760807e596c27947"
+  integrity sha512-R6wDbZTkVH3fATOp99QUExDK8BZJ5rDPXJwgyNPGyJY6iODXG4Y4ZeCIiARWe6pXcW67J3/JVXWu+qzfJR9OHQ==
   dependencies:
     "@jsii/spec" "^1.111.0"
 
@@ -6172,6 +6172,6 @@ zod-to-json-schema@^3.24.1:
   integrity sha512-/AuWwMP+YqiPbsJx5D6TfgRTc4kTLjsh5SOcd4bLsfUg2RcEXrFMJl1DGgdHy2aCfsIA/cr/1JM0xcB2GZji8g==
 
 zod@^3.23.8, zod@^3.24.2:
-  version "3.24.3"
-  resolved "https://registry.yarnpkg.com/zod/-/zod-3.24.3.tgz#1f40f750a05e477396da64438e0e1c0995dafd87"
-  integrity sha512-HhY1oqzWCQWuUqvBFnsyrtZRhyPeR7SUGv+C4+MsisMuVfSPx8HpwWqH8tRahSlt6M3PiFAcoeFhZAqIXTxoSg==
+  version "3.24.4"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-3.24.4.tgz#e2e2cca5faaa012d76e527d0d36622e0a90c315f"
+  integrity sha512-OdqJE9UDRPwWsrHjLN2F8bPxvwJBK22EHLWtanu0LSYr5YqzsaaW3RMgmjwr8Rypg5k+meEJdSPXJZXE/yqOMg==
