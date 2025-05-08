@@ -16,7 +16,7 @@ const project = new JsiiProject({
   },
   majorVersion: 1,
   name: 'projen-modules',
-  peerDeps: ['constructs', 'projen'],
+  peerDeps: ['constructs', 'projen@^0.92.0'],
   projenrcTs: true,
   publishToPypi: {
     distName: 'projen_modules',
