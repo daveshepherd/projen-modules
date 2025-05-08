@@ -9,7 +9,7 @@ const isObject = (obj: unknown) => obj && typeof obj === 'object';
  */
 export function mergeOptions<
   Defaults extends Record<string, any>,
-  Options extends Record<string, any>
+  Options extends Record<string, any>,
 >(defaults: Defaults, options?: Options): Defaults & Options {
   return [defaults, options].reduce<Record<string, any>>((prev, obj) => {
     if (obj === undefined) {

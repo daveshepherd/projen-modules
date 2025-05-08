@@ -43,11 +43,101 @@ exports[`CDK Typescript App synthesizes 1`] = `
     ],
     "root": true,
     "rules": {
+      "@stylistic/array-bracket-newline": [
+        "error",
+        "consistent",
+      ],
+      "@stylistic/array-bracket-spacing": [
+        "error",
+        "never",
+      ],
+      "@stylistic/brace-style": [
+        "error",
+        "1tbs",
+        {
+          "allowSingleLine": true,
+        },
+      ],
+      "@stylistic/comma-dangle": [
+        "error",
+        "always-multiline",
+      ],
+      "@stylistic/comma-spacing": [
+        "error",
+        {
+          "after": true,
+          "before": false,
+        },
+      ],
       "@stylistic/indent": [
         "error",
         2,
       ],
+      "@stylistic/key-spacing": [
+        "error",
+      ],
+      "@stylistic/keyword-spacing": [
+        "error",
+      ],
+      "@stylistic/max-len": [
+        "error",
+        {
+          "code": 150,
+          "ignoreComments": true,
+          "ignoreRegExpLiterals": true,
+          "ignoreStrings": true,
+          "ignoreTemplateLiterals": true,
+          "ignoreUrls": true,
+        },
+      ],
       "@stylistic/member-delimiter-style": [
+        "error",
+      ],
+      "@stylistic/no-multi-spaces": [
+        "error",
+        {
+          "ignoreEOLComments": false,
+        },
+      ],
+      "@stylistic/no-multiple-empty-lines": [
+        "error",
+      ],
+      "@stylistic/no-trailing-spaces": [
+        "error",
+      ],
+      "@stylistic/object-curly-newline": [
+        "error",
+        {
+          "consistent": true,
+          "multiline": true,
+        },
+      ],
+      "@stylistic/object-curly-spacing": [
+        "error",
+        "always",
+      ],
+      "@stylistic/object-property-newline": [
+        "error",
+        {
+          "allowAllPropertiesOnSameLine": true,
+        },
+      ],
+      "@stylistic/quote-props": [
+        "error",
+        "consistent-as-needed",
+      ],
+      "@stylistic/quotes": [
+        "error",
+        "single",
+        {
+          "avoidEscape": true,
+        },
+      ],
+      "@stylistic/semi": [
+        "error",
+        "always",
+      ],
+      "@stylistic/space-before-blocks": [
         "error",
       ],
       "@typescript-eslint/member-ordering": [
@@ -66,44 +156,10 @@ exports[`CDK Typescript App synthesizes 1`] = `
           ],
         },
       ],
-      "@typescript-eslint/no-floating-promises": [
-        "error",
-      ],
-      "@typescript-eslint/no-require-imports": [
-        "error",
-      ],
-      "@typescript-eslint/no-shadow": [
-        "error",
-      ],
-      "@typescript-eslint/return-await": [
-        "error",
-      ],
-      "array-bracket-newline": [
-        "error",
-        "consistent",
-      ],
-      "array-bracket-spacing": [
-        "error",
-        "never",
-      ],
-      "brace-style": [
-        "error",
-        "1tbs",
-        {
-          "allowSingleLine": true,
-        },
-      ],
-      "comma-dangle": [
-        "error",
-        "always-multiline",
-      ],
-      "comma-spacing": [
-        "error",
-        {
-          "after": true,
-          "before": false,
-        },
-      ],
+      "@typescript-eslint/no-floating-promises": "error",
+      "@typescript-eslint/no-require-imports": "error",
+      "@typescript-eslint/no-shadow": "error",
+      "@typescript-eslint/return-await": "error",
       "curly": [
         "error",
         "multi-line",
@@ -144,36 +200,7 @@ exports[`CDK Typescript App synthesizes 1`] = `
           ],
         },
       ],
-      "indent": [
-        "off",
-      ],
-      "key-spacing": [
-        "error",
-      ],
-      "keyword-spacing": [
-        "error",
-      ],
-      "max-len": [
-        "error",
-        {
-          "code": 150,
-          "ignoreComments": true,
-          "ignoreRegExpLiterals": true,
-          "ignoreStrings": true,
-          "ignoreTemplateLiterals": true,
-          "ignoreUrls": true,
-        },
-      ],
       "no-bitwise": [
-        "error",
-      ],
-      "no-multi-spaces": [
-        "error",
-        {
-          "ignoreEOLComments": false,
-        },
-      ],
-      "no-multiple-empty-lines": [
         "error",
       ],
       "no-return-await": [
@@ -181,44 +208,6 @@ exports[`CDK Typescript App synthesizes 1`] = `
       ],
       "no-shadow": [
         "off",
-      ],
-      "no-trailing-spaces": [
-        "error",
-      ],
-      "object-curly-newline": [
-        "error",
-        {
-          "consistent": true,
-          "multiline": true,
-        },
-      ],
-      "object-curly-spacing": [
-        "error",
-        "always",
-      ],
-      "object-property-newline": [
-        "error",
-        {
-          "allowAllPropertiesOnSameLine": true,
-        },
-      ],
-      "quote-props": [
-        "error",
-        "consistent-as-needed",
-      ],
-      "quotes": [
-        "error",
-        "single",
-        {
-          "avoidEscape": true,
-        },
-      ],
-      "semi": [
-        "error",
-        "always",
-      ],
-      "space-before-blocks": [
-        "error",
       ],
     },
     "settings": {
@@ -1316,25 +1305,30 @@ test('Snapshot', () => {
       "inlineSourceMap": true,
       "inlineSources": true,
       "lib": [
-        "es2020",
+        "es2022",
       ],
-      "module": "CommonJS",
+      "module": "NodeNext",
+      "moduleResolution": "nodenext",
       "noEmitOnError": false,
-      "noFallthroughCasesInSwitch": true,
+      "noFallthroughCasesInSwitch": false,
       "noImplicitAny": true,
       "noImplicitReturns": true,
       "noImplicitThis": true,
-      "noUnusedLocals": true,
-      "noUnusedParameters": true,
+      "noUnusedLocals": false,
+      "noUnusedParameters": false,
       "resolveJsonModule": true,
       "strict": true,
       "strictNullChecks": true,
-      "strictPropertyInitialization": true,
+      "strictPropertyInitialization": false,
       "stripInternal": true,
-      "target": "ES2020",
+      "target": "ES2022",
+      "typeRoots": [
+        "./node_modules/@types",
+      ],
     },
     "exclude": [
       "node_modules",
+      "cdk.out",
     ],
     "include": [
       "src/**/*.ts",
@@ -1352,26 +1346,33 @@ test('Snapshot', () => {
       "inlineSourceMap": true,
       "inlineSources": true,
       "lib": [
-        "es2020",
+        "es2022",
       ],
-      "module": "CommonJS",
+      "module": "NodeNext",
+      "moduleResolution": "nodenext",
       "noEmitOnError": false,
-      "noFallthroughCasesInSwitch": true,
+      "noFallthroughCasesInSwitch": false,
       "noImplicitAny": true,
       "noImplicitReturns": true,
       "noImplicitThis": true,
-      "noUnusedLocals": true,
-      "noUnusedParameters": true,
+      "noUnusedLocals": false,
+      "noUnusedParameters": false,
       "outDir": "lib",
       "resolveJsonModule": true,
       "rootDir": "src",
       "strict": true,
       "strictNullChecks": true,
-      "strictPropertyInitialization": true,
+      "strictPropertyInitialization": false,
       "stripInternal": true,
-      "target": "ES2020",
+      "target": "ES2022",
+      "typeRoots": [
+        "./node_modules/@types",
+      ],
     },
-    "exclude": [],
+    "exclude": [
+      "node_modules",
+      "cdk.out",
+    ],
     "include": [
       "src/**/*.ts",
     ],
