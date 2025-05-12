@@ -732,12 +732,12 @@
     zod "^3.23.8"
     zod-to-json-schema "^3.24.1"
 
-"@mrgrain/jsii-struct-builder@^0.7.55":
-  version "0.7.55"
-  resolved "https://registry.yarnpkg.com/@mrgrain/jsii-struct-builder/-/jsii-struct-builder-0.7.55.tgz#fba7768d8e8aa465060dc068760807e596c27947"
-  integrity sha512-R6wDbZTkVH3fATOp99QUExDK8BZJ5rDPXJwgyNPGyJY6iODXG4Y4ZeCIiARWe6pXcW67J3/JVXWu+qzfJR9OHQ==
+"@mrgrain/jsii-struct-builder@^0.7.56":
+  version "0.7.56"
+  resolved "https://registry.yarnpkg.com/@mrgrain/jsii-struct-builder/-/jsii-struct-builder-0.7.56.tgz#bcc5a40950b4773335461cbccc7c2a0e8ceb6103"
+  integrity sha512-+foJf1f3AzUcNP9udNHgnGh2r+xaN8dz/+58Zde913D8H/v2GzBuU4VX1bByHz7RIxgnKBSHDiyx6bMrS9U3Yg==
   dependencies:
-    "@jsii/spec" "^1.111.0"
+    "@jsii/spec" "^1.112.0"
 
 "@napi-rs/wasm-runtime@^0.2.9":
   version "0.2.9"
