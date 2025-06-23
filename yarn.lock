@@ -715,10 +715,10 @@
   dependencies:
     ajv "^8.17.1"
 
-"@mrgrain/jsii-struct-builder@^0.7.62":
-  version "0.7.62"
-  resolved "https://registry.yarnpkg.com/@mrgrain/jsii-struct-builder/-/jsii-struct-builder-0.7.62.tgz#b04284daac950eb719aed74eaa63e2a99b3913dc"
-  integrity sha512-9qw22vQ3HjsqxLDYVVblTWUMV6MRUPk4e6fdF0jkT+2t2AXY3FMjAgTrA7azxXb3jxC4AYTV9HfWbq0qwxoLXg==
+"@mrgrain/jsii-struct-builder@^0.7.63":
+  version "0.7.63"
+  resolved "https://registry.yarnpkg.com/@mrgrain/jsii-struct-builder/-/jsii-struct-builder-0.7.63.tgz#c7c53940b8f9c2c980db331b8a3c78de87663c70"
+  integrity sha512-EDsr8hC2aMwq2WUGLHHMYZFymwo6nhuf+riUihdZ5pOSJh41ZiOyn2J1TRsYn/PXQ2NZCgAK5UVQow8BPIZqlQ==
   dependencies:
     "@jsii/spec" "^1.112.0"
 
