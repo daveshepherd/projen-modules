@@ -62,7 +62,7 @@
   },
   "peerDependencies": {
     "constructs": "10.4.2",
-    "projen": "^0.92.0"
+    "projen": "0.* >=0.92.0"
   },
   "main": "lib/index.js",
   "license": "Apache-2.0",
