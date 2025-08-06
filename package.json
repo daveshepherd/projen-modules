@@ -58,7 +58,7 @@
     "ts-jest": "^29.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2",
-    "yaml": "^2.8.0"
+    "yaml": "^2.8.1"
   },
   "peerDependencies": {
     "constructs": "10.4.2",
