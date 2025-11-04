@@ -85,7 +85,7 @@ export interface NpmPackageOptions {
   readonly eslintOptions?: javascript.EslintOptions;
   /**
    * Setup eslint.
-   * @default true
+   * @default - true, unless biome is enabled
    * @stability experimental
    */
   readonly eslint?: boolean;
@@ -134,7 +134,7 @@ export interface NpmPackageOptions {
   readonly workflowNodeVersion?: string;
   /**
    * The git identity to use in workflows.
-   * @default - GitHub Actions
+   * @default - default GitHub Actions user
    * @stability experimental
    */
   readonly workflowGitIdentity?: github.GitIdentity;
@@ -302,13 +302,13 @@ export interface NpmPackageOptions {
    */
   readonly copyrightOwner?: string;
   /**
-   * Define the secret name for a specified https://codecov.io/ token A secret is required to send coverage for private repositories.
-   * @default - if this option is not specified, only public repositories are supported
+   * Define the secret name for a specified https://codecov.io/ token.
+   * @default - OIDC auth is used
    * @stability experimental
    */
   readonly codeCovTokenSecret?: string;
   /**
-   * Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v4 A secret is required for private repos. Configured with `@codeCovTokenSecret`.
+   * Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v5 By default, OIDC auth is used. Alternatively a token can be provided via `codeCovTokenSecret`.
    * @default false
    * @stability experimental
    */
@@ -414,6 +414,12 @@ export interface NpmPackageOptions {
    */
   readonly releaseWorkflowName?: string;
   /**
+   * Build environment variables for release workflows.
+   * @default {}
+   * @stability experimental
+   */
+  readonly releaseWorkflowEnv?: Record<string, string>;
+  /**
    * The release trigger to use.
    * @default - Continuous releases (`ReleaseTrigger.continuous()`)
    * @stability experimental
@@ -456,6 +462,17 @@ export interface NpmPackageOptions {
    * @stability deprecated
    */
   readonly releaseEveryCommit?: boolean;
+  /**
+   * The GitHub Actions environment used for the release.
+   * This can be used to add an explicit approval step to the release
+   * or limit who can initiate a release through environment protection rules.
+   *
+   * When multiple artifacts are released, the environment can be overwritten
+   * on a per artifact basis.
+   * @default - no environment used, unless set at the artifact level
+   * @stability experimental
+   */
+  readonly releaseEnvironment?: string;
   /**
    * Defines additional release branches.
    * A workflow will be created for each
@@ -645,6 +662,12 @@ export interface NpmPackageOptions {
    * @stability experimental
    */
   readonly packageManager?: javascript.NodePackageManager;
+  /**
+   * Use trusted publishing for publishing to npmjs.com Needs to be pre-configured on npm.js to work.
+   * @default - false
+   * @stability experimental
+   */
+  readonly npmTrustedPublishing?: boolean;
   /**
    * GitHub secret which contains the NPM token to use when publishing packages.
    * @default "NPM_TOKEN"
