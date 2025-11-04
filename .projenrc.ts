@@ -22,6 +22,7 @@ const project = new JsiiProject({
   publishToPypi: {
     distName: 'projen_modules',
     module: 'projen_modules',
+    trustedPublishing: true,
   },
   readme: {
     description:
