@@ -230,7 +230,7 @@ exports[`JSII Package synthesizes 1`] = `
 
 * text=auto eol=lf
 *.snap linguist-generated
-/.eslintrc.json linguist-generated
+/.eslintrc.json linguist-generated linguist-language=JSON-with-Comments
 /.gitattributes linguist-generated
 /.github/pull_request_template.md linguist-generated
 /.github/workflows/build.yml linguist-generated
@@ -249,7 +249,7 @@ exports[`JSII Package synthesizes 1`] = `
 /LICENSE linguist-generated
 /package.json linguist-generated
 /README.md linguist-generated
-/tsconfig.dev.json linguist-generated
+/tsconfig.dev.json linguist-generated linguist-language=JSON-with-Comments
 /yarn.lock linguist-generated",
   ".github/pull_request_template.md": "### Background
 _Short description of issue being resolved or a feature being added._",
@@ -1003,6 +1003,7 @@ UNEXPECTED BREAKING CHANGES: add keys such as 'removed:constructs.Node.of' to .c
         "description": "Runs eslint against the codebase",
         "env": {
           "ESLINT_USE_FLAT_CONFIG": "false",
+          "NODE_NO_WARNINGS": "1",
         },
         "name": "eslint",
         "steps": [
@@ -1150,7 +1151,7 @@ UNEXPECTED BREAKING CHANGES: add keys such as 'removed:constructs.Node.of' to .c
         "name": "upgrade",
         "steps": [
           {
-            "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/jest,@types/node,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,typescript",
+            "exec": "npx npm-check-updates@18 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/jest,@types/node,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,typescript",
           },
           {
             "exec": "yarn install --check-files",

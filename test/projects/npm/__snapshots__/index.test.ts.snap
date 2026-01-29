@@ -258,7 +258,7 @@ workflows:
 * text=auto eol=lf
 *.snap linguist-generated
 /.circleci/config.yml linguist-generated
-/.eslintrc.json linguist-generated
+/.eslintrc.json linguist-generated linguist-language=JSON-with-Comments
 /.gitattributes linguist-generated
 /.github/pull_request_template.md linguist-generated
 /.gitignore linguist-generated
@@ -272,8 +272,8 @@ workflows:
 /LICENSE linguist-generated
 /package.json linguist-generated
 /README.md linguist-generated
-/tsconfig.dev.json linguist-generated
-/tsconfig.json linguist-generated
+/tsconfig.dev.json linguist-generated linguist-language=JSON-with-Comments
+/tsconfig.json linguist-generated linguist-language=JSON-with-Comments
 /yarn.lock linguist-generated",
   ".github/pull_request_template.md": "### Background
 _Short description of issue being resolved or a feature being added._",
@@ -609,6 +609,7 @@ CODEOWNERS
         "description": "Runs eslint against the codebase",
         "env": {
           "ESLINT_USE_FLAT_CONFIG": "false",
+          "NODE_NO_WARNINGS": "1",
         },
         "name": "eslint",
         "steps": [
@@ -731,7 +732,7 @@ CODEOWNERS
         "name": "upgrade",
         "steps": [
           {
-            "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/jest,@types/node,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,ts-jest,ts-node,typescript",
+            "exec": "npx npm-check-updates@18 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/jest,@types/node,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,ts-jest,ts-node,typescript",
           },
           {
             "exec": "yarn install --check-files",
