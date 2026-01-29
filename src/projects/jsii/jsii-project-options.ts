@@ -378,7 +378,7 @@ export interface JsiiProjectOptions {
   /**
    * Use tasks and github workflows to handle dependency upgrades.
    * Cannot be used in conjunction with `dependabot`.
-   * @default true
+   * @default - `true` for root projects, `false` for subprojects
    * @stability experimental
    */
   readonly depsUpgrade?: boolean;
@@ -462,12 +462,27 @@ export interface JsiiProjectOptions {
    */
   readonly biome?: boolean;
   /**
-   * Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configued).
+   * Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configured).
    * Throw if set to true but `autoApproveOptions` are not defined.
    * @default - true
    * @stability experimental
    */
   readonly autoApproveUpgrades?: boolean;
+  /**
+   * Security audit options.
+   * @default - default options
+   * @stability experimental
+   */
+  readonly auditDepsOptions?: javascript.AuditOptions;
+  /**
+   * Run security audit on dependencies.
+   * When enabled, creates an "audit" task that checks for known security vulnerabilities
+   * in dependencies. By default, runs during every build and checks for "high" severity
+   * vulnerabilities or above in all dependencies (including dev dependencies).
+   * @default false
+   * @stability experimental
+   */
+  readonly auditDeps?: boolean;
   /**
    * A directory which will contain build artifacts.
    * @default "dist"
@@ -1133,6 +1148,12 @@ export interface JsiiProjectOptions {
    * @stability experimental
    */
   readonly projenCommand?: string;
+  /**
+   * Generate a project tree file (`.projen/tree.json`) that shows all components and their relationships. Useful for understanding your project structure and debugging.
+   * @default false
+   * @stability experimental
+   */
+  readonly projectTree?: boolean;
   /**
    * The parent project, if this project is part of a bigger project.
    * @stability experimental

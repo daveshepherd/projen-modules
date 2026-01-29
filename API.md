@@ -5126,7 +5126,7 @@ When given a project, this it the project itself.
 | <code><a href="#projen-modules.PythonPackage.property.gitpod">gitpod</a></code> | <code>projen.Gitpod</code> | Access for Gitpod. |
 | <code><a href="#projen-modules.PythonPackage.property.vscode">vscode</a></code> | <code>projen.vscode.VsCode</code> | Access all VSCode components. |
 | <code><a href="#projen-modules.PythonPackage.property.depsManager">depsManager</a></code> | <code>projen.python.IPythonDeps</code> | API for managing dependencies. |
-| <code><a href="#projen-modules.PythonPackage.property.envManager">envManager</a></code> | <code>projen.python.IPythonEnv</code> | API for mangaging the Python runtime environment. |
+| <code><a href="#projen-modules.PythonPackage.property.envManager">envManager</a></code> | <code>projen.python.IPythonEnv</code> | API for managing the Python runtime environment. |
 | <code><a href="#projen-modules.PythonPackage.property.moduleName">moduleName</a></code> | <code>string</code> | Python module name (the project name, with any hyphens or periods replaced with underscores). |
 | <code><a href="#projen-modules.PythonPackage.property.sampleTestdir">sampleTestdir</a></code> | <code>string</code> | Directory where sample tests are located. |
 | <code><a href="#projen-modules.PythonPackage.property.version">version</a></code> | <code>string</code> | Version of the package for distribution (should follow semver). |
@@ -5531,7 +5531,7 @@ public readonly envManager: IPythonEnv;
 
 - *Type:* projen.python.IPythonEnv
 
-API for mangaging the Python runtime environment.
+API for managing the Python runtime environment.
 
 ---
 
@@ -5944,12 +5944,14 @@ const cdkTypeScriptAppOptions: CdkTypeScriptAppOptions = { ... }
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.app">app</a></code> | <code>string</code> | The command line to execute in order to synthesize the CDK application (language specific). |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.appEntrypoint">appEntrypoint</a></code> | <code>string</code> | The CDK app's entrypoint (relative to the source directory, which is "src" by default). |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.artifactsDirectory">artifactsDirectory</a></code> | <code>string</code> | A directory which will contain build artifacts. |
+| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.auditDeps">auditDeps</a></code> | <code>boolean</code> | Run security audit on dependencies. |
+| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.auditDepsOptions">auditDepsOptions</a></code> | <code>projen.javascript.AuditOptions</code> | Security audit options. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.authorEmail">authorEmail</a></code> | <code>string</code> | Author's e-mail. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.authorName">authorName</a></code> | <code>string</code> | Author's name. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.authorOrganization">authorOrganization</a></code> | <code>boolean</code> | Is the author an organization. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.authorUrl">authorUrl</a></code> | <code>string</code> | Author's URL / Website. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.autoApproveOptions">autoApproveOptions</a></code> | <code>projen.github.AutoApproveOptions</code> | Enable and configure the 'auto approve' workflow. |
-| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.autoApproveUpgrades">autoApproveUpgrades</a></code> | <code>boolean</code> | Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configued). |
+| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.autoApproveUpgrades">autoApproveUpgrades</a></code> | <code>boolean</code> | Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configured). |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.autoDetectBin">autoDetectBin</a></code> | <code>boolean</code> | Automatically add all executables under the `bin` directory to your `package.json` file under the `bin` section. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.autoMerge">autoMerge</a></code> | <code>boolean</code> | Enable automatic merging on GitHub. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.autoMergeOptions">autoMergeOptions</a></code> | <code>projen.github.AutoMergeOptions</code> | Configure options for automatic merging on GitHub. |
@@ -6053,6 +6055,7 @@ const cdkTypeScriptAppOptions: CdkTypeScriptAppOptions = { ... }
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.prerelease">prerelease</a></code> | <code>string</code> | Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pre"). |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.prettier">prettier</a></code> | <code>boolean</code> | Setup prettier. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.prettierOptions">prettierOptions</a></code> | <code>projen.javascript.PrettierOptions</code> | Prettier options. |
+| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.projectTree">projectTree</a></code> | <code>boolean</code> | Generate a project tree file (`.projen/tree.json`) that shows all components and their relationships. Useful for understanding your project structure and debugging. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.projectType">projectType</a></code> | <code>projen.ProjectType</code> | Which type of project this is (library/app). |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.projenCommand">projenCommand</a></code> | <code>string</code> | The shell command to use in order to run the projen CLI. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.projenCredentials">projenCredentials</a></code> | <code>projen.github.GithubCredentials</code> | Choose a method of providing GitHub API access for projen workflows. |
@@ -6210,6 +6213,36 @@ A directory which will contain build artifacts.
 
 ---
 
+##### `auditDeps`<sup>Optional</sup> <a name="auditDeps" id="projen-modules.CdkTypeScriptAppOptions.property.auditDeps"></a>
+
+```typescript
+public readonly auditDeps: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Run security audit on dependencies.
+
+When enabled, creates an "audit" task that checks for known security vulnerabilities
+in dependencies. By default, runs during every build and checks for "high" severity
+vulnerabilities or above in all dependencies (including dev dependencies).
+
+---
+
+##### `auditDepsOptions`<sup>Optional</sup> <a name="auditDepsOptions" id="projen-modules.CdkTypeScriptAppOptions.property.auditDepsOptions"></a>
+
+```typescript
+public readonly auditDepsOptions: AuditOptions;
+```
+
+- *Type:* projen.javascript.AuditOptions
+- *Default:* default options
+
+Security audit options.
+
+---
+
 ##### `authorEmail`<sup>Optional</sup> <a name="authorEmail" id="projen-modules.CdkTypeScriptAppOptions.property.authorEmail"></a>
 
 ```typescript
@@ -6280,7 +6313,7 @@ public readonly autoApproveUpgrades: boolean;
 - *Type:* boolean
 - *Default:* true
 
-Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configued).
+Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configured).
 
 Throw if set to true but `autoApproveOptions` are not defined.
 
@@ -6848,7 +6881,7 @@ public readonly depsUpgrade: boolean;
 ```
 
 - *Type:* boolean
-- *Default:* true
+- *Default:* `true` for root projects, `false` for subprojects
 
 Use tasks and github workflows to handle dependency upgrades.
 
@@ -7788,6 +7821,19 @@ Prettier options.
 
 ---
 
+##### `projectTree`<sup>Optional</sup> <a name="projectTree" id="projen-modules.CdkTypeScriptAppOptions.property.projectTree"></a>
+
+```typescript
+public readonly projectTree: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Generate a project tree file (`.projen/tree.json`) that shows all components and their relationships. Useful for understanding your project structure and debugging.
+
+---
+
 ##### ~~`projectType`~~<sup>Optional</sup> <a name="projectType" id="projen-modules.CdkTypeScriptAppOptions.property.projectType"></a>
 
 - *Deprecated:* no longer supported at the base project level
@@ -8675,12 +8721,14 @@ const jsiiProjectOptions: JsiiProjectOptions = { ... }
 | <code><a href="#projen-modules.JsiiProjectOptions.property.repositoryUrl">repositoryUrl</a></code> | <code>string</code> | Git repository URL. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.allowLibraryDependencies">allowLibraryDependencies</a></code> | <code>boolean</code> | Allow the project to include `peerDependencies` and `bundledDependencies`. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.artifactsDirectory">artifactsDirectory</a></code> | <code>string</code> | A directory which will contain build artifacts. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.auditDeps">auditDeps</a></code> | <code>boolean</code> | Run security audit on dependencies. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.auditDepsOptions">auditDepsOptions</a></code> | <code>projen.javascript.AuditOptions</code> | Security audit options. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.authorEmail">authorEmail</a></code> | <code>string</code> | Author's e-mail. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.authorName">authorName</a></code> | <code>string</code> | Author's name. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.authorOrganization">authorOrganization</a></code> | <code>boolean</code> | Is the author an organization. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.authorUrl">authorUrl</a></code> | <code>string</code> | Author's URL / Website. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.autoApproveOptions">autoApproveOptions</a></code> | <code>projen.github.AutoApproveOptions</code> | Enable and configure the 'auto approve' workflow. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.autoApproveUpgrades">autoApproveUpgrades</a></code> | <code>boolean</code> | Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configued). |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.autoApproveUpgrades">autoApproveUpgrades</a></code> | <code>boolean</code> | Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configured). |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.autoDetectBin">autoDetectBin</a></code> | <code>boolean</code> | Automatically add all executables under the `bin` directory to your `package.json` file under the `bin` section. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.autoMerge">autoMerge</a></code> | <code>boolean</code> | Enable automatic merging on GitHub. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.autoMergeOptions">autoMergeOptions</a></code> | <code>projen.github.AutoMergeOptions</code> | Configure options for automatic merging on GitHub. |
@@ -8773,6 +8821,7 @@ const jsiiProjectOptions: JsiiProjectOptions = { ... }
 | <code><a href="#projen-modules.JsiiProjectOptions.property.prerelease">prerelease</a></code> | <code>string</code> | Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pre"). |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.prettier">prettier</a></code> | <code>boolean</code> | Setup prettier. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.prettierOptions">prettierOptions</a></code> | <code>projen.javascript.PrettierOptions</code> | Prettier options. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.projectTree">projectTree</a></code> | <code>boolean</code> | Generate a project tree file (`.projen/tree.json`) that shows all components and their relationships. Useful for understanding your project structure and debugging. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.projectType">projectType</a></code> | <code>projen.ProjectType</code> | Which type of project this is (library/app). |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.projenCommand">projenCommand</a></code> | <code>string</code> | The shell command to use in order to run the projen CLI. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.projenCredentials">projenCredentials</a></code> | <code>projen.github.GithubCredentials</code> | Choose a method of providing GitHub API access for projen workflows. |
@@ -8934,6 +8983,36 @@ A directory which will contain build artifacts.
 
 ---
 
+##### `auditDeps`<sup>Optional</sup> <a name="auditDeps" id="projen-modules.JsiiProjectOptions.property.auditDeps"></a>
+
+```typescript
+public readonly auditDeps: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Run security audit on dependencies.
+
+When enabled, creates an "audit" task that checks for known security vulnerabilities
+in dependencies. By default, runs during every build and checks for "high" severity
+vulnerabilities or above in all dependencies (including dev dependencies).
+
+---
+
+##### `auditDepsOptions`<sup>Optional</sup> <a name="auditDepsOptions" id="projen-modules.JsiiProjectOptions.property.auditDepsOptions"></a>
+
+```typescript
+public readonly auditDepsOptions: AuditOptions;
+```
+
+- *Type:* projen.javascript.AuditOptions
+- *Default:* default options
+
+Security audit options.
+
+---
+
 ##### `authorEmail`<sup>Optional</sup> <a name="authorEmail" id="projen-modules.JsiiProjectOptions.property.authorEmail"></a>
 
 ```typescript
@@ -9004,7 +9083,7 @@ public readonly autoApproveUpgrades: boolean;
 - *Type:* boolean
 - *Default:* true
 
-Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configued).
+Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configured).
 
 Throw if set to true but `autoApproveOptions` are not defined.
 
@@ -9442,7 +9521,7 @@ public readonly depsUpgrade: boolean;
 ```
 
 - *Type:* boolean
-- *Default:* true
+- *Default:* `true` for root projects, `false` for subprojects
 
 Use tasks and github workflows to handle dependency upgrades.
 
@@ -10349,6 +10428,19 @@ public readonly prettierOptions: PrettierOptions;
 - *Default:* default options
 
 Prettier options.
+
+---
+
+##### `projectTree`<sup>Optional</sup> <a name="projectTree" id="projen-modules.JsiiProjectOptions.property.projectTree"></a>
+
+```typescript
+public readonly projectTree: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Generate a project tree file (`.projen/tree.json`) that shows all components and their relationships. Useful for understanding your project structure and debugging.
 
 ---
 
@@ -11272,12 +11364,14 @@ const npmPackageOptions: NpmPackageOptions = { ... }
 | <code><a href="#projen-modules.NpmPackageOptions.property.name">name</a></code> | <code>string</code> | This is the name of your project. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.allowLibraryDependencies">allowLibraryDependencies</a></code> | <code>boolean</code> | Allow the project to include `peerDependencies` and `bundledDependencies`. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.artifactsDirectory">artifactsDirectory</a></code> | <code>string</code> | A directory which will contain build artifacts. |
+| <code><a href="#projen-modules.NpmPackageOptions.property.auditDeps">auditDeps</a></code> | <code>boolean</code> | Run security audit on dependencies. |
+| <code><a href="#projen-modules.NpmPackageOptions.property.auditDepsOptions">auditDepsOptions</a></code> | <code>projen.javascript.AuditOptions</code> | Security audit options. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.authorEmail">authorEmail</a></code> | <code>string</code> | Author's e-mail. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.authorName">authorName</a></code> | <code>string</code> | Author's name. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.authorOrganization">authorOrganization</a></code> | <code>boolean</code> | Is the author an organization. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.authorUrl">authorUrl</a></code> | <code>string</code> | Author's URL / Website. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.autoApproveOptions">autoApproveOptions</a></code> | <code>projen.github.AutoApproveOptions</code> | Enable and configure the 'auto approve' workflow. |
-| <code><a href="#projen-modules.NpmPackageOptions.property.autoApproveUpgrades">autoApproveUpgrades</a></code> | <code>boolean</code> | Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configued). |
+| <code><a href="#projen-modules.NpmPackageOptions.property.autoApproveUpgrades">autoApproveUpgrades</a></code> | <code>boolean</code> | Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configured). |
 | <code><a href="#projen-modules.NpmPackageOptions.property.autoDetectBin">autoDetectBin</a></code> | <code>boolean</code> | Automatically add all executables under the `bin` directory to your `package.json` file under the `bin` section. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.autoMerge">autoMerge</a></code> | <code>boolean</code> | Enable automatic merging on GitHub. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.autoMergeOptions">autoMergeOptions</a></code> | <code>projen.github.AutoMergeOptions</code> | Configure options for automatic merging on GitHub. |
@@ -11363,6 +11457,7 @@ const npmPackageOptions: NpmPackageOptions = { ... }
 | <code><a href="#projen-modules.NpmPackageOptions.property.prerelease">prerelease</a></code> | <code>string</code> | Bump versions from the default branch as pre-releases (e.g. "beta", "alpha", "pre"). |
 | <code><a href="#projen-modules.NpmPackageOptions.property.prettier">prettier</a></code> | <code>boolean</code> | Setup prettier. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.prettierOptions">prettierOptions</a></code> | <code>projen.javascript.PrettierOptions</code> | Prettier options. |
+| <code><a href="#projen-modules.NpmPackageOptions.property.projectTree">projectTree</a></code> | <code>boolean</code> | Generate a project tree file (`.projen/tree.json`) that shows all components and their relationships. Useful for understanding your project structure and debugging. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.projectType">projectType</a></code> | <code>projen.ProjectType</code> | Which type of project this is (library/app). |
 | <code><a href="#projen-modules.NpmPackageOptions.property.projenCommand">projenCommand</a></code> | <code>string</code> | The shell command to use in order to run the projen CLI. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.projenCredentials">projenCredentials</a></code> | <code>projen.github.GithubCredentials</code> | Choose a method of providing GitHub API access for projen workflows. |
@@ -11479,6 +11574,36 @@ A directory which will contain build artifacts.
 
 ---
 
+##### `auditDeps`<sup>Optional</sup> <a name="auditDeps" id="projen-modules.NpmPackageOptions.property.auditDeps"></a>
+
+```typescript
+public readonly auditDeps: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Run security audit on dependencies.
+
+When enabled, creates an "audit" task that checks for known security vulnerabilities
+in dependencies. By default, runs during every build and checks for "high" severity
+vulnerabilities or above in all dependencies (including dev dependencies).
+
+---
+
+##### `auditDepsOptions`<sup>Optional</sup> <a name="auditDepsOptions" id="projen-modules.NpmPackageOptions.property.auditDepsOptions"></a>
+
+```typescript
+public readonly auditDepsOptions: AuditOptions;
+```
+
+- *Type:* projen.javascript.AuditOptions
+- *Default:* default options
+
+Security audit options.
+
+---
+
 ##### `authorEmail`<sup>Optional</sup> <a name="authorEmail" id="projen-modules.NpmPackageOptions.property.authorEmail"></a>
 
 ```typescript
@@ -11549,7 +11674,7 @@ public readonly autoApproveUpgrades: boolean;
 - *Type:* boolean
 - *Default:* true
 
-Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configued).
+Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configured).
 
 Throw if set to true but `autoApproveOptions` are not defined.
 
@@ -11945,7 +12070,7 @@ public readonly depsUpgrade: boolean;
 ```
 
 - *Type:* boolean
-- *Default:* true
+- *Default:* `true` for root projects, `false` for subprojects
 
 Use tasks and github workflows to handle dependency upgrades.
 
@@ -12791,6 +12916,19 @@ public readonly prettierOptions: PrettierOptions;
 - *Default:* default options
 
 Prettier options.
+
+---
+
+##### `projectTree`<sup>Optional</sup> <a name="projectTree" id="projen-modules.NpmPackageOptions.property.projectTree"></a>
+
+```typescript
+public readonly projectTree: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Generate a project tree file (`.projen/tree.json`) that shows all components and their relationships. Useful for understanding your project structure and debugging.
 
 ---
 
@@ -13667,6 +13805,7 @@ const pythonPackageOptions: PythonPackageOptions = { ... }
 | <code><a href="#projen-modules.PythonPackageOptions.property.pip">pip</a></code> | <code>boolean</code> | Use pip with a requirements.txt file to track project dependencies. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.poetry">poetry</a></code> | <code>boolean</code> | Use poetry to manage your project dependencies, virtual environment, and (optional) packaging/publishing. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.poetryOptions">poetryOptions</a></code> | <code>projen.python.PoetryPyprojectOptionsWithoutDeps</code> | Additional options to set for poetry if using poetry. |
+| <code><a href="#projen-modules.PythonPackageOptions.property.projectTree">projectTree</a></code> | <code>boolean</code> | Generate a project tree file (`.projen/tree.json`) that shows all components and their relationships. Useful for understanding your project structure and debugging. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.projectType">projectType</a></code> | <code>projen.ProjectType</code> | Which type of project this is (library/app). |
 | <code><a href="#projen-modules.PythonPackageOptions.property.projenCommand">projenCommand</a></code> | <code>string</code> | The shell command to use in order to run the projen CLI. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.projenCredentials">projenCredentials</a></code> | <code>projen.github.GithubCredentials</code> | Choose a method of providing GitHub API access for projen workflows. |
@@ -13693,6 +13832,8 @@ const pythonPackageOptions: PythonPackageOptions = { ... }
 | <code><a href="#projen-modules.PythonPackageOptions.property.setuptools">setuptools</a></code> | <code>boolean</code> | Use setuptools with a setup.py script for packaging and publishing. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.stale">stale</a></code> | <code>boolean</code> | Auto-close of stale issues and pull request. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.staleOptions">staleOptions</a></code> | <code>projen.github.StaleOptions</code> | Auto-close stale issues and pull requests. |
+| <code><a href="#projen-modules.PythonPackageOptions.property.uv">uv</a></code> | <code>boolean</code> | Use uv to manage your project dependencies, virtual environment, and (optional) packaging/publishing. |
+| <code><a href="#projen-modules.PythonPackageOptions.property.uvOptions">uvOptions</a></code> | <code>projen.python.UvOptions</code> | Additional options to set for uv if using uv. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.venv">venv</a></code> | <code>boolean</code> | Use venv to manage a virtual environment for installing dependencies inside. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.venvOptions">venvOptions</a></code> | <code>projen.python.VenvOptions</code> | Venv options. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.vscode">vscode</a></code> | <code>boolean</code> | Enable VSCode integration. |
@@ -14130,6 +14271,19 @@ Additional options to set for poetry if using poetry.
 
 ---
 
+##### `projectTree`<sup>Optional</sup> <a name="projectTree" id="projen-modules.PythonPackageOptions.property.projectTree"></a>
+
+```typescript
+public readonly projectTree: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Generate a project tree file (`.projen/tree.json`) that shows all components and their relationships. Useful for understanding your project structure and debugging.
+
+---
+
 ##### ~~`projectType`~~<sup>Optional</sup> <a name="projectType" id="projen-modules.PythonPackageOptions.property.projectType"></a>
 
 - *Deprecated:* no longer supported at the base project level
@@ -14487,6 +14641,31 @@ public readonly staleOptions: StaleOptions;
 Auto-close stale issues and pull requests.
 
 To disable set `stale` to `false`.
+
+---
+
+##### `uv`<sup>Optional</sup> <a name="uv" id="projen-modules.PythonPackageOptions.property.uv"></a>
+
+```typescript
+public readonly uv: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Use uv to manage your project dependencies, virtual environment, and (optional) packaging/publishing.
+
+---
+
+##### `uvOptions`<sup>Optional</sup> <a name="uvOptions" id="projen-modules.PythonPackageOptions.property.uvOptions"></a>
+
+```typescript
+public readonly uvOptions: UvOptions;
+```
+
+- *Type:* projen.python.UvOptions
+
+Additional options to set for uv if using uv.
 
 ---
 
