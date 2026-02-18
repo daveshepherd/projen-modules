@@ -31,6 +31,7 @@ new CdkTypeScriptApp(options: CdkTypeScriptAppOptions)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#projen-modules.CdkTypeScriptApp.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#projen-modules.CdkTypeScriptApp.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#projen-modules.CdkTypeScriptApp.addExcludeFromCleanup">addExcludeFromCleanup</a></code> | Exclude the matching files from pre-synth cleanup. |
 | <code><a href="#projen-modules.CdkTypeScriptApp.addGitIgnore">addGitIgnore</a></code> | Adds a .gitignore pattern. |
 | <code><a href="#projen-modules.CdkTypeScriptApp.addPackageIgnore">addPackageIgnore</a></code> | Adds patterns to be ignored by npm. |
@@ -71,6 +72,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="projen-modules.CdkTypeScriptApp.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="projen-modules.CdkTypeScriptApp.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addExcludeFromCleanup` <a name="addExcludeFromCleanup" id="projen-modules.CdkTypeScriptApp.addExcludeFromCleanup"></a>
 
@@ -1640,6 +1662,7 @@ new JsiiProject(options: JsiiProjectOptions)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#projen-modules.JsiiProject.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#projen-modules.JsiiProject.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#projen-modules.JsiiProject.addExcludeFromCleanup">addExcludeFromCleanup</a></code> | Exclude the matching files from pre-synth cleanup. |
 | <code><a href="#projen-modules.JsiiProject.addGitIgnore">addGitIgnore</a></code> | Adds a .gitignore pattern. |
 | <code><a href="#projen-modules.JsiiProject.addPackageIgnore">addPackageIgnore</a></code> | Adds patterns to be ignored by npm. |
@@ -1679,6 +1702,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="projen-modules.JsiiProject.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="projen-modules.JsiiProject.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addExcludeFromCleanup` <a name="addExcludeFromCleanup" id="projen-modules.JsiiProject.addExcludeFromCleanup"></a>
 
@@ -3169,6 +3213,7 @@ new NpmPackage(options: NpmPackageOptions)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#projen-modules.NpmPackage.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#projen-modules.NpmPackage.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#projen-modules.NpmPackage.addExcludeFromCleanup">addExcludeFromCleanup</a></code> | Exclude the matching files from pre-synth cleanup. |
 | <code><a href="#projen-modules.NpmPackage.addGitIgnore">addGitIgnore</a></code> | Adds a .gitignore pattern. |
 | <code><a href="#projen-modules.NpmPackage.addPackageIgnore">addPackageIgnore</a></code> | Adds patterns to be ignored by npm. |
@@ -3208,6 +3253,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="projen-modules.NpmPackage.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="projen-modules.NpmPackage.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addExcludeFromCleanup` <a name="addExcludeFromCleanup" id="projen-modules.NpmPackage.addExcludeFromCleanup"></a>
 
@@ -4698,6 +4764,7 @@ new PythonPackage(options: PythonPackageOptions)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#projen-modules.PythonPackage.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#projen-modules.PythonPackage.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#projen-modules.PythonPackage.addExcludeFromCleanup">addExcludeFromCleanup</a></code> | Exclude the matching files from pre-synth cleanup. |
 | <code><a href="#projen-modules.PythonPackage.addGitIgnore">addGitIgnore</a></code> | Adds a .gitignore pattern. |
 | <code><a href="#projen-modules.PythonPackage.addPackageIgnore">addPackageIgnore</a></code> | Exclude these files from the bundled package. |
@@ -4725,6 +4792,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="projen-modules.PythonPackage.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="projen-modules.PythonPackage.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `addExcludeFromCleanup` <a name="addExcludeFromCleanup" id="projen-modules.PythonPackage.addExcludeFromCleanup"></a>
 
@@ -5665,6 +5753,7 @@ new Readme(project: Project, options?: ReadmeOptions)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#projen-modules.Readme.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#projen-modules.Readme.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#projen-modules.Readme.postSynthesize">postSynthesize</a></code> | Called after synthesis. |
 | <code><a href="#projen-modules.Readme.preSynthesize">preSynthesize</a></code> | Called before synthesis. |
 | <code><a href="#projen-modules.Readme.synthesize">synthesize</a></code> | Writes the file to the project's output directory. |
@@ -5679,6 +5768,27 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="projen-modules.Readme.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="projen-modules.Readme.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+The mixins to apply.
+
+---
 
 ##### `postSynthesize` <a name="postSynthesize" id="projen-modules.Readme.postSynthesize"></a>
 
