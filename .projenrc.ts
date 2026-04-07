@@ -1,6 +1,7 @@
 import { CollectionKind, PrimitiveType } from '@jsii/spec';
 import { ProjenStruct, Struct } from '@mrgrain/jsii-struct-builder';
 import { github } from 'projen';
+import { NodePackageManager } from 'projen/lib/javascript';
 import { JsiiProject } from './src/projects/jsii';
 
 const project = new JsiiProject({
@@ -9,14 +10,15 @@ const project = new JsiiProject({
   codeOwners: ['daveshepherd'],
   defaultReleaseBranch: 'main',
   description: 'A collection of projen modules',
-  devDeps: ['@mrgrain/jsii-struct-builder', 'constructs', 'projen@0.* >=0.99.9', 'yaml'],
+  devDeps: ['@mrgrain/jsii-struct-builder', 'constructs', 'projen@0.* >=0.99.36', 'yaml'],
   gitignore: ['.npmrc', '.vscode'],
   githubOptions: {
     projenCredentials: github.GithubCredentials.fromApp({}),
   },
   majorVersion: 1,
   name: 'projen-modules',
-  peerDeps: ['constructs', 'projen@0.* >=0.99.9'],
+  packageManager: NodePackageManager.YARN_CLASSIC,
+  peerDeps: ['constructs', 'projen@0.* >=0.99.36'],
   projenrcTs: true,
   npmTrustedPublishing: true,
   publishToPypi: {

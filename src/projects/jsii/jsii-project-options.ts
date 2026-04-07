@@ -48,7 +48,7 @@ export interface JsiiProjectOptions {
    * NOTE: The jsii compiler releases since 5.0.0 are not semantically versioned
    * and should remain on the same minor, so we recommend using a `~` dependency
    * (e.g. `~5.0.0`).
-   * @default "~5.8.0"
+   * @default "~5.9.0"
    * @stability experimental
    * @pjnew "~5.9.0"
    */
@@ -779,8 +779,9 @@ export interface JsiiProjectOptions {
   readonly packageName?: string;
   /**
    * The Node Package Manager used to execute scripts.
-   * @default NodePackageManager.YARN_CLASSIC
+   * @default - Detected from the calling process or `YARN_CLASSIC` if detection fails.
    * @stability experimental
+   * @pjnew $PACKAGE_MANAGER
    */
   readonly packageManager?: javascript.NodePackageManager;
   /**
@@ -886,17 +887,25 @@ export interface JsiiProjectOptions {
    */
   readonly entrypoint?: string;
   /**
+   * Configure the `devEngines` field in `package.json`.
+   * The `devEngines.packageManager` field is automatically populated based on
+   * the resolved `packageManager` value. Any fields provided here are merged
+   * with the auto-populated `packageManager` entry.
+   * @stability experimental
+   */
+  readonly devEngines?: javascript.DevEngines;
+  /**
    * Build dependencies for this module.
    * These dependencies will only be
    * available in your build environment but will not be fetched when this
    * module is consumed.
    *
    * The recommendation is to only specify the module name here (e.g.
-   * `express`). This will behave similar to `yarn add` or `npm install` in the
+   * `express`). This will behave similar to `pnpm add` or `npm install` in the
    * sense that it will add the module as a dependency to your `package.json`
    * file with the latest version (`^`). You can specify semver requirements in
-   * the same syntax passed to `npm i` or `yarn add` (e.g. `express@^2`) and
-   * this will be what you `package.json` will eventually include.
+   * the same syntax passed to `pnpm add` or `npm i` (e.g. `express@^2`) and
+   * this will be what your `package.json` will eventually include.
    * @default []
    * @stability experimental
    * @featured true
@@ -913,16 +922,26 @@ export interface JsiiProjectOptions {
   /**
    * Runtime dependencies of this module.
    * The recommendation is to only specify the module name here (e.g.
-   * `express`). This will behave similar to `yarn add` or `npm install` in the
+   * `express`). This will behave similar to `pnpm add` or `npm install` in the
    * sense that it will add the module as a dependency to your `package.json`
    * file with the latest version (`^`). You can specify semver requirements in
-   * the same syntax passed to `npm i` or `yarn add` (e.g. `express@^2`) and
-   * this will be what you `package.json` will eventually include.
+   * the same syntax passed to `pnpm add` or `npm i` (e.g. `express@^2`) and
+   * this will be what your `package.json` will eventually include.
    * @default []
    * @stability experimental
    * @featured true
    */
   readonly deps?: Array<string>;
+  /**
+   * Automatically delete lockfiles from package managers that are not the active one.
+   * Only triggered when the lockfile for the configured package
+   * manager already exists.
+   *
+   * This is useful when migrating between package managers to avoid conflicts.
+   * @default true
+   * @stability experimental
+   */
+  readonly deleteOrphanedLockFiles?: boolean;
   /**
    * Options for npm packages using AWS CodeArtifact.
    * This is required if publishing packages to, or installing scoped packages from AWS CodeArtifact
@@ -943,11 +962,11 @@ export interface JsiiProjectOptions {
    * your `package.json`.
    *
    * The recommendation is to only specify the module name here (e.g.
-   * `express`). This will behave similar to `yarn add` or `npm install` in the
+   * `express`). This will behave similar to `pnpm add` or `npm install` in the
    * sense that it will add the module as a dependency to your `package.json`
    * file with the latest version (`^`). You can specify semver requirements in
-   * the same syntax passed to `npm i` or `yarn add` (e.g. `express@^2`) and
-   * this will be what you `package.json` will eventually include.
+   * the same syntax passed to `pnpm add` or `npm i` (e.g. `express@^2`) and
+   * this will be what your `package.json` will eventually include.
    * @stability experimental
    */
   readonly bundledDeps?: Array<string>;
@@ -1003,6 +1022,12 @@ export interface JsiiProjectOptions {
    * @stability experimental
    */
   readonly allowLibraryDependencies?: boolean;
+  /**
+   * Automatically add the resolved `packageManager` to `devEngines.packageManager` in `package.json`, setting `onFail` to `ignore`.
+   * @default true
+   * @stability experimental
+   */
+  readonly addPackageManagerToDevEngines?: boolean;
   /**
    * Enable VSCode integration.
    * Enabled by default for root projects. Disabled for non-root projects.
