@@ -4,6 +4,7 @@ import {
 } from 'projen/lib/awscdk';
 import { CdkTypeScriptAppOptions } from './cdk-typescript-app-options';
 import { CodeOwners } from '../../components/github/codeowners';
+import { configureMergify } from '../../components/github/mergify';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
 import { Readme } from '../../components/readme';
 import { mergeOptions } from '../../utils/merge-options';
@@ -47,30 +48,7 @@ export class CdkTypeScriptApp extends AwsCdkTypeScriptApp {
       '```sh\nyarn install\nnpx projen build\n```',
     );
     if (this.autoMerge) {
-      this.github?.mergify?.addRule({
-        name: 'Automatic approval for projen upgrade pull requests',
-        conditions: [
-          'author=endor-projen[bot]',
-          ...(this.buildWorkflow?.buildJobIds?.map(
-            (id) => `status-success=${id}`,
-          ) ?? []),
-        ],
-        actions: {
-          review: {
-            type: 'APPROVE',
-            message: 'Automatically approving projen upgrade',
-          },
-        },
-      });
-      this.github?.mergify?.addRule({
-        name: 'Assign PR when check fails',
-        conditions: ['#check-failure > 0'],
-        actions: {
-          assign: {
-            add_users: ['daveshepherd'],
-          },
-        },
-      });
+      configureMergify(this);
     }
   }
 }
