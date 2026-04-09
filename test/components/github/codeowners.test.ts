@@ -3,7 +3,7 @@ import { JsiiProject } from '../../../src/projects/jsii';
 import { NpmPackage } from '../../../src/projects/npm';
 
 describe('CodeOwners', () => {
-  it('matches the snapshot with a CODEOWERS file', () => {
+  it('matches the snapshot with a CODEOWNERS file', () => {
     const project = new JsiiProject({
       author: 'Test Person',
       authorAddress: 'test@example.com',
