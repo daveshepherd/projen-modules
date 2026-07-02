@@ -33,7 +33,12 @@ exports[`CDK Typescript App synthesizes 1`] = `
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
       "ecmaVersion": 2018,
-      "project": "./tsconfig.dev.json",
+      "projectService": {
+        "allowDefaultProject": [
+          ".projenrc.ts",
+        ],
+        "defaultProject": "./tsconfig.json",
+      },
       "sourceType": "module",
     },
     "plugins": [
@@ -221,7 +226,7 @@ exports[`CDK Typescript App synthesizes 1`] = `
         "node": {},
         "typescript": {
           "alwaysTryTypes": true,
-          "project": "./tsconfig.dev.json",
+          "project": "./tsconfig.json",
         },
       },
     },
@@ -247,8 +252,9 @@ exports[`CDK Typescript App synthesizes 1`] = `
 /CODEOWNERS linguist-generated
 /LICENSE linguist-generated
 /package.json linguist-generated
+/projenrc/tsconfig.json linguist-generated linguist-language=JSON-with-Comments
 /README.md linguist-generated
-/tsconfig.dev.json linguist-generated linguist-language=JSON-with-Comments
+/test/tsconfig.json linguist-generated linguist-language=JSON-with-Comments
 /tsconfig.json linguist-generated linguist-language=JSON-with-Comments
 /yarn.lock linguist-generated",
   ".github/pull_request_template.md": "### Background
@@ -490,11 +496,12 @@ junit.xml
 !/.github/pull_request_template.md
 !/test/
 !/tsconfig.json
-!/tsconfig.dev.json
+!/test/tsconfig.json
 !/src/
 /lib
 /dist/
 !/.eslintrc.json
+!/projenrc/tsconfig.json
 /assets/
 !/cdk.json
 /cdk.out/
@@ -555,7 +562,7 @@ junit.xml
 permissions-backup.acl
 /.mergify.yml
 /test/
-/tsconfig.dev.json
+/test/tsconfig.json
 /src/
 !/lib/
 !/lib/**/*.js
@@ -568,6 +575,7 @@ dist
 /.projenrc.js
 tsconfig.tsbuildinfo
 /.eslintrc.json
+/projenrc/tsconfig.json
 !/assets/
 cdk.out/
 .cdk.staging/
@@ -631,7 +639,7 @@ CODEOWNERS
       {
         "name": "jest-junit",
         "type": "build",
-        "version": "^16",
+        "version": "^17",
       },
       {
         "name": "projen",
@@ -679,8 +687,9 @@ CODEOWNERS
       "cdk.json",
       "CODEOWNERS",
       "LICENSE",
+      "projenrc/tsconfig.json",
       "README.md",
-      "tsconfig.dev.json",
+      "test/tsconfig.json",
       "tsconfig.json",
     ],
   },
@@ -689,6 +698,7 @@ CODEOWNERS
     "env": {
       "PATH": "$(npx -c "node --print process.env.PATH")",
     },
+    "manifestVersion": 3,
     "tasks": {
       "build": {
         "description": "Full release build",
@@ -759,7 +769,12 @@ CODEOWNERS
         "name": "default",
         "steps": [
           {
-            "exec": "ts-node --project tsconfig.dev.json .projenrc.ts",
+            "execArgs": [
+              "ts-node",
+              "--project",
+              "projenrc/tsconfig.json",
+              ".projenrc.ts",
+            ],
           },
         ],
       },
@@ -768,7 +783,10 @@ CODEOWNERS
         "name": "deploy",
         "steps": [
           {
-            "exec": "cdk deploy",
+            "execArgs": [
+              "cdk",
+              "deploy",
+            ],
             "receiveArgs": true,
           },
         ],
@@ -778,7 +796,10 @@ CODEOWNERS
         "name": "destroy",
         "steps": [
           {
-            "exec": "cdk destroy",
+            "execArgs": [
+              "cdk",
+              "destroy",
+            ],
             "receiveArgs": true,
           },
         ],
@@ -788,7 +809,10 @@ CODEOWNERS
         "name": "diff",
         "steps": [
           {
-            "exec": "cdk diff",
+            "execArgs": [
+              "cdk",
+              "diff",
+            ],
           },
         ],
       },
@@ -862,7 +886,10 @@ CODEOWNERS
         "name": "synth",
         "steps": [
           {
-            "exec": "cdk synth",
+            "execArgs": [
+              "cdk",
+              "synth",
+            ],
           },
         ],
       },
@@ -871,7 +898,11 @@ CODEOWNERS
         "name": "synth:silent",
         "steps": [
           {
-            "exec": "cdk synth -q",
+            "execArgs": [
+              "cdk",
+              "synth",
+              "-q",
+            ],
           },
         ],
       },
@@ -905,7 +936,7 @@ CODEOWNERS
         "name": "upgrade",
         "steps": [
           {
-            "exec": "npx npm-check-updates@18 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/jest,@types/node,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,ts-jest,ts-node,typescript",
+            "exec": "npx npm-check-updates@20 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/jest,@types/node,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,ts-jest,ts-node,typescript",
           },
           {
             "exec": "yarn install --check-files",
@@ -926,10 +957,17 @@ CODEOWNERS
         "name": "watch",
         "steps": [
           {
-            "exec": "cdk deploy --hotswap",
+            "execArgs": [
+              "cdk",
+              "deploy",
+              "--hotswap",
+            ],
           },
           {
-            "exec": "cdk watch",
+            "execArgs": [
+              "cdk",
+              "watch",
+            ],
           },
         ],
       },
@@ -1187,7 +1225,7 @@ npx projen build
       "eslint-import-resolver-typescript": "*",
       "eslint-plugin-import": "*",
       "jest": "*",
-      "jest-junit": "^16",
+      "jest-junit": "^17",
       "projen": "*",
       "ts-jest": "*",
       "ts-node": "*",
@@ -1230,7 +1268,7 @@ npx projen build
         "^.+\\.[t]sx?$": [
           "ts-jest",
           {
-            "tsconfig": "tsconfig.dev.json",
+            "tsconfig": "test/tsconfig.json",
           },
         ],
       },
@@ -1244,29 +1282,43 @@ npx projen build
       "access": "public",
     },
     "scripts": {
-      "build": "npx projen build",
-      "bundle": "npx projen bundle",
-      "clobber": "npx projen clobber",
-      "compile": "npx projen compile",
-      "default": "npx projen default",
-      "deploy": "npx projen deploy",
-      "destroy": "npx projen destroy",
-      "diff": "npx projen diff",
-      "eject": "npx projen eject",
-      "eslint": "npx projen eslint",
-      "package": "npx projen package",
-      "post-compile": "npx projen post-compile",
-      "post-upgrade": "npx projen post-upgrade",
-      "pre-compile": "npx projen pre-compile",
-      "projen": "npx projen",
-      "synth": "npx projen synth",
-      "synth:silent": "npx projen synth:silent",
-      "test": "npx projen test",
-      "test:watch": "npx projen test:watch",
-      "upgrade": "npx projen upgrade",
-      "watch": "npx projen watch",
+      "build": "projen build",
+      "bundle": "projen bundle",
+      "clobber": "projen clobber",
+      "compile": "projen compile",
+      "default": "projen default",
+      "deploy": "projen deploy",
+      "destroy": "projen destroy",
+      "diff": "projen diff",
+      "eject": "projen eject",
+      "eslint": "projen eslint",
+      "package": "projen package",
+      "post-compile": "projen post-compile",
+      "post-upgrade": "projen post-upgrade",
+      "pre-compile": "projen pre-compile",
+      "projen": "projen",
+      "synth": "projen synth",
+      "synth:silent": "projen synth:silent",
+      "test": "projen test",
+      "test:watch": "projen test:watch",
+      "upgrade": "projen upgrade",
+      "watch": "projen watch",
     },
     "version": "0.0.0",
+  },
+  "projenrc/tsconfig.json": {
+    "compilerOptions": {
+      "noEmit": true,
+      "rootDir": "..",
+    },
+    "exclude": [
+      "node_modules",
+    ],
+    "extends": "../tsconfig.json",
+    "include": [
+      "**/*.ts",
+      "../.projenrc.ts",
+    ],
   },
   "src/main.ts": "import { App, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
@@ -1302,49 +1354,17 @@ test('Snapshot', () => {
   const template = Template.fromStack(stack);
   expect(template.toJSON()).toMatchSnapshot();
 });",
-  "tsconfig.dev.json": {
+  "test/tsconfig.json": {
     "compilerOptions": {
-      "alwaysStrict": true,
-      "declaration": true,
-      "esModuleInterop": true,
-      "experimentalDecorators": true,
-      "inlineSourceMap": true,
-      "inlineSources": true,
-      "lib": [
-        "es2022",
-      ],
-      "module": "NodeNext",
-      "moduleResolution": "nodenext",
-      "noEmitOnError": false,
-      "noFallthroughCasesInSwitch": false,
-      "noImplicitAny": true,
-      "noImplicitReturns": true,
-      "noImplicitThis": true,
-      "noUnusedLocals": false,
-      "noUnusedParameters": false,
-      "resolveJsonModule": true,
-      "strict": true,
-      "strictNullChecks": true,
-      "strictPropertyInitialization": false,
-      "stripInternal": true,
-      "target": "ES2022",
-      "typeRoots": [
-        "./node_modules/@types",
-      ],
-      "types": [
-        "jest",
-        "node",
-      ],
+      "noEmit": true,
+      "rootDir": "..",
     },
     "exclude": [
       "node_modules",
-      "cdk.out",
     ],
+    "extends": "../tsconfig.json",
     "include": [
-      "src/**/*.ts",
-      "test/**/*.ts",
-      ".projenrc.ts",
-      "projenrc/**/*.ts",
+      "**/*.ts",
     ],
   },
   "tsconfig.json": {

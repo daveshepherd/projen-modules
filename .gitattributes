@@ -20,10 +20,12 @@
 /CODEOWNERS linguist-generated
 /LICENSE linguist-generated
 /package.json linguist-generated
+/projenrc/tsconfig.json linguist-generated linguist-language=JSON-with-Comments
 /README.md linguist-generated
 /src/projects/cdk-ts/cdk-typescript-app-options.ts linguist-generated
 /src/projects/jsii/jsii-project-options.ts linguist-generated
 /src/projects/npm/npm-package-options.ts linguist-generated
 /src/projects/python/python-package-options.ts linguist-generated
-/tsconfig.dev.json linguist-generated linguist-language=JSON-with-Comments
+/test/tsconfig.json linguist-generated linguist-language=JSON-with-Comments
+/tsconfig.json linguist-generated
 /yarn.lock linguist-generated
