@@ -18,7 +18,7 @@ const project = new JsiiProject({
   majorVersion: 1,
   name: 'projen-modules',
   packageManager: NodePackageManager.YARN_CLASSIC,
-  peerDeps: ['constructs', 'projen@0.* >=0.99.36'],
+  peerDeps: ['constructs', 'projen@0.* >=0.101.4'],
   projenrcTs: true,
   npmTrustedPublishing: true,
   publishToPypi: {

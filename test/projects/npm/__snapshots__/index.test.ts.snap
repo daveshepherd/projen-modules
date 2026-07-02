@@ -60,7 +60,12 @@ workflows:
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
       "ecmaVersion": 2018,
-      "project": "./tsconfig.dev.json",
+      "projectService": {
+        "allowDefaultProject": [
+          ".projenrc.ts",
+        ],
+        "defaultProject": "./tsconfig.json",
+      },
       "sourceType": "module",
     },
     "plugins": [
@@ -248,7 +253,7 @@ workflows:
         "node": {},
         "typescript": {
           "alwaysTryTypes": true,
-          "project": "./tsconfig.dev.json",
+          "project": "./tsconfig.json",
         },
       },
     },
@@ -271,8 +276,9 @@ workflows:
 /CODEOWNERS linguist-generated
 /LICENSE linguist-generated
 /package.json linguist-generated
+/projenrc/tsconfig.json linguist-generated linguist-language=JSON-with-Comments
 /README.md linguist-generated
-/tsconfig.dev.json linguist-generated linguist-language=JSON-with-Comments
+/test/tsconfig.json linguist-generated linguist-language=JSON-with-Comments
 /tsconfig.json linguist-generated linguist-language=JSON-with-Comments
 /yarn.lock linguist-generated",
   ".github/pull_request_template.md": "### Background
@@ -319,11 +325,12 @@ junit.xml
 !/.github/pull_request_template.md
 !/test/
 !/tsconfig.json
-!/tsconfig.dev.json
+!/test/tsconfig.json
 !/src/
 /lib
 /dist/
 !/.eslintrc.json
+!/projenrc/tsconfig.json
 !/CODEOWNERS
 !/.circleci/config.yml
 !/README.md
@@ -382,7 +389,7 @@ permissions-backup.acl
 /dist/version.txt
 /.mergify.yml
 /test/
-/tsconfig.dev.json
+/test/tsconfig.json
 /src/
 !/lib/
 !/lib/**/*.js
@@ -395,6 +402,7 @@ dist
 /.projenrc.js
 tsconfig.tsbuildinfo
 /.eslintrc.json
+/projenrc/tsconfig.json
 CODEOWNERS
 /.gitattributes
 /.projenrc.ts
@@ -456,7 +464,7 @@ CODEOWNERS
       {
         "name": "jest-junit",
         "type": "build",
-        "version": "^16",
+        "version": "^17",
       },
       {
         "name": "projen",
@@ -491,8 +499,9 @@ CODEOWNERS
       ".projen/tasks.json",
       "CODEOWNERS",
       "LICENSE",
+      "projenrc/tsconfig.json",
       "README.md",
-      "tsconfig.dev.json",
+      "test/tsconfig.json",
       "tsconfig.json",
     ],
   },
@@ -501,6 +510,7 @@ CODEOWNERS
     "env": {
       "PATH": "$(npx -c "node --print process.env.PATH")",
     },
+    "manifestVersion": 3,
     "tasks": {
       "build": {
         "description": "Full release build",
@@ -581,7 +591,10 @@ CODEOWNERS
         "name": "compile",
         "steps": [
           {
-            "exec": "tsc --build",
+            "execArgs": [
+              "tsc",
+              "--build",
+            ],
           },
         ],
       },
@@ -590,7 +603,12 @@ CODEOWNERS
         "name": "default",
         "steps": [
           {
-            "exec": "ts-node --project tsconfig.dev.json .projenrc.ts",
+            "execArgs": [
+              "ts-node",
+              "--project",
+              "projenrc/tsconfig.json",
+              ".projenrc.ts",
+            ],
           },
         ],
       },
@@ -643,10 +661,19 @@ CODEOWNERS
         "name": "package",
         "steps": [
           {
-            "exec": "mkdir -p dist/js",
+            "execArgs": [
+              "mkdir",
+              "-p",
+              "dist/js",
+            ],
           },
           {
-            "exec": "npm pack --pack-destination dist/js",
+            "execArgs": [
+              "npm",
+              "pack",
+              "--pack-destination",
+              "dist/js",
+            ],
           },
         ],
       },
@@ -733,7 +760,7 @@ CODEOWNERS
         "name": "upgrade",
         "steps": [
           {
-            "exec": "npx npm-check-updates@18 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/jest,@types/node,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,ts-jest,ts-node,typescript",
+            "exec": "npx npm-check-updates@20 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/jest,@types/node,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,ts-jest,ts-node,typescript",
           },
           {
             "exec": "yarn install --check-files",
@@ -754,7 +781,11 @@ CODEOWNERS
         "name": "watch",
         "steps": [
           {
-            "exec": "tsc --build -w",
+            "execArgs": [
+              "tsc",
+              "--build",
+              "-w",
+            ],
           },
         ],
       },
@@ -986,7 +1017,7 @@ npx projen build
       "eslint-import-resolver-typescript": "*",
       "eslint-plugin-import": "*",
       "jest": "*",
-      "jest-junit": "^16",
+      "jest-junit": "^17",
       "projen": "*",
       "ts-jest": "*",
       "ts-node": "*",
@@ -1029,7 +1060,7 @@ npx projen build
         "^.+\\.[t]sx?$": [
           "ts-jest",
           {
-            "tsconfig": "tsconfig.dev.json",
+            "tsconfig": "test/tsconfig.json",
           },
         ],
       },
@@ -1044,76 +1075,58 @@ npx projen build
       "access": "public",
     },
     "scripts": {
-      "build": "npx projen build",
-      "bump": "npx projen bump",
-      "clobber": "npx projen clobber",
-      "compile": "npx projen compile",
-      "default": "npx projen default",
-      "eject": "npx projen eject",
-      "eslint": "npx projen eslint",
-      "package": "npx projen package",
-      "post-compile": "npx projen post-compile",
-      "post-upgrade": "npx projen post-upgrade",
-      "pre-compile": "npx projen pre-compile",
-      "projen": "npx projen",
-      "release": "npx projen release",
-      "test": "npx projen test",
-      "test:watch": "npx projen test:watch",
-      "unbump": "npx projen unbump",
-      "upgrade": "npx projen upgrade",
-      "watch": "npx projen watch",
+      "build": "projen build",
+      "bump": "projen bump",
+      "clobber": "projen clobber",
+      "compile": "projen compile",
+      "default": "projen default",
+      "eject": "projen eject",
+      "eslint": "projen eslint",
+      "package": "projen package",
+      "post-compile": "projen post-compile",
+      "post-upgrade": "projen post-upgrade",
+      "pre-compile": "projen pre-compile",
+      "projen": "projen",
+      "release": "projen release",
+      "test": "projen test",
+      "test:watch": "projen test:watch",
+      "unbump": "projen unbump",
+      "upgrade": "projen upgrade",
+      "watch": "projen watch",
     },
     "types": "lib/index.d.ts",
     "version": "0.0.0",
+  },
+  "projenrc/tsconfig.json": {
+    "compilerOptions": {
+      "noEmit": true,
+      "rootDir": "..",
+    },
+    "exclude": [
+      "node_modules",
+    ],
+    "extends": "../tsconfig.json",
+    "include": [
+      "**/*.ts",
+      "../.projenrc.ts",
+    ],
   },
   "src/index.ts": "export class Hello {
   public sayHello() {
     return 'hello, world!';
   }
 }",
-  "test/hello.test.ts": "import { Hello } from '../src';
-
-test('hello', () => {
-  expect(new Hello().sayHello()).toBe('hello, world!');
-});",
-  "tsconfig.dev.json": {
+  "test/tsconfig.json": {
     "compilerOptions": {
-      "alwaysStrict": true,
-      "declaration": true,
-      "esModuleInterop": true,
-      "experimentalDecorators": true,
-      "inlineSourceMap": true,
-      "inlineSources": true,
-      "lib": [
-        "es2020",
-      ],
-      "module": "CommonJS",
-      "noEmitOnError": false,
-      "noFallthroughCasesInSwitch": true,
-      "noImplicitAny": true,
-      "noImplicitReturns": true,
-      "noImplicitThis": true,
-      "noUnusedLocals": true,
-      "noUnusedParameters": true,
-      "resolveJsonModule": true,
-      "strict": true,
-      "strictNullChecks": true,
-      "strictPropertyInitialization": true,
-      "stripInternal": true,
-      "target": "ES2020",
-      "types": [
-        "jest",
-        "node",
-      ],
+      "noEmit": true,
+      "rootDir": "..",
     },
     "exclude": [
       "node_modules",
     ],
+    "extends": "../tsconfig.json",
     "include": [
-      "src/**/*.ts",
-      "test/**/*.ts",
-      ".projenrc.ts",
-      "projenrc/**/*.ts",
+      "**/*.ts",
     ],
   },
   "tsconfig.json": {
@@ -1148,7 +1161,9 @@ test('hello', () => {
         "node",
       ],
     },
-    "exclude": [],
+    "exclude": [
+      "node_modules",
+    ],
     "include": [
       "src/**/*.ts",
     ],
