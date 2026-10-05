@@ -1,6 +1,6 @@
 import { CollectionKind, PrimitiveType } from '@jsii/spec';
 import { ProjenStruct, Struct } from '@mrgrain/jsii-struct-builder';
-import { github, JsonPatch } from 'projen';
+import { github, JsonFile, JsonPatch } from 'projen';
 import { NodePackageManager } from 'projen/lib/javascript';
 import { JsiiProject } from './src/projects/jsii';
 
@@ -44,6 +44,26 @@ project.addDevDeps('eslint-import-resolver-typescript@^4');
 project.github
   ?.tryFindWorkflow('release')
   ?.file?.patch(JsonPatch.replace('/jobs/release_npm/steps/0/with/node-version', 'lts/*'));
+
+// projen's built-in auditDeps cannot allowlist advisories, so audit-ci is used instead
+project.addDevDeps('audit-ci@^7');
+new JsonFile(project, 'audit-ci.json', {
+  obj: {
+    '$schema': 'https://github.com/IBM/audit-ci/raw/main/docs/schema.json',
+    'high': true,
+    'report-type': 'summary',
+    'allowlist': [
+      // braces <=3.0.3 (CVE-2026-93687), via jsii-docgen > fast-glob > micromatch.
+      // Build-time only and no patched release exists. Accepted 2026-10-05; review by 2027-01-05.
+      'GHSA-vfj7-8cjw-p6xm',
+    ],
+  },
+});
+const auditTask = project.addTask('audit', {
+  description: 'Fail on high or critical advisories not in the audit-ci.json allowlist',
+  exec: 'audit-ci --config audit-ci.json',
+});
+project.preCompileTask.spawn(auditTask);
 project.readme?.addSection(
   'Creating a New Project',
   `

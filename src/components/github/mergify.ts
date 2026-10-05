@@ -3,6 +3,12 @@ import { github, Project } from 'projen';
 export interface MergifyOptions {
   readonly assignUsers?: Array<string>;
   readonly reportingMethod?: string;
+  /**
+   * Author of the projen upgrade pull requests that are automatically approved
+   *
+   * @default 'endor-projen[bot]'
+   */
+  readonly upgradeAuthor?: string;
 }
 
 type MergifyProject = Project & {
@@ -16,15 +22,18 @@ export function configureMergify(
   project: MergifyProject,
   options: MergifyOptions = {},
 ) {
-  const reportingMethod = options.reportingMethod ?? 'deployments';
+  const mergify = project.github?.mergify;
+  if (!mergify) {
+    return;
+  }
 
-  project.github?.mergify?.addRule({
+  const buildJobIds = project.buildWorkflow?.buildJobIds ?? [];
+
+  mergify.addRule({
     name: 'Automatic approval for projen upgrade pull requests',
     conditions: [
-      'author=endor-projen[bot]',
-      ...(project.buildWorkflow?.buildJobIds?.map(
-        (id) => `status-success=${id}`,
-      ) ?? []),
+      `author=${options.upgradeAuthor ?? 'endor-projen[bot]'}`,
+      ...buildJobIds.map((id) => `status-success=${id}`),
     ],
     actions: {
       review: {
@@ -34,7 +43,7 @@ export function configureMergify(
     },
   });
 
-  project.github?.mergify?.addRule({
+  mergify.addRule({
     name: 'Assign PR when check fails',
     conditions: ['#check-failure > 0'],
     actions: {
@@ -46,6 +55,6 @@ export function configureMergify(
 
   project.tryFindObjectFile('.mergify.yml')?.addOverride(
     'merge_protections_settings.reporting_method',
-    reportingMethod,
+    options.reportingMethod ?? 'deployments',
   );
 }

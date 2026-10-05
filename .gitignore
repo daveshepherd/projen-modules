@@ -54,6 +54,7 @@ junit.xml
 !/API.md
 !/CODEOWNERS
 !/README.md
+!/audit-ci.json
 !/.projenrc.ts
 !/src/projects/cdk-ts/cdk-typescript-app-options.ts
 !/src/projects/jsii/jsii-project-options.ts
