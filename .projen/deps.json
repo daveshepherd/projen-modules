@@ -106,6 +106,7 @@
     },
     {
       "name": "typescript",
+      "version": "~6.0.0",
       "type": "build"
     },
     {
@@ -118,7 +119,7 @@
     },
     {
       "name": "projen",
-      "version": "0.* >=0.103.26",
+      "version": "0.* >=0.104.0",
       "type": "peer"
     }
   ],

@@ -291,7 +291,7 @@ _Short description of issue being resolved or a feature being added._",
 !/package.json
 !/LICENSE
 !/.npmignore
-logs
+/logs
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -736,6 +736,7 @@ CODEOWNERS
         "name": "pre-compile",
       },
       "release": {
+        "condition": "git log --oneline -1 | grep -v "chore(release):" > /dev/null",
         "description": "Prepare a release from "main" branch",
         "env": {
           "RELEASE": "true",

@@ -22,7 +22,7 @@ const project = new JsiiProject({
   minNodeVersion: '22.0.0',
   name: 'projen-modules',
   packageManager: NodePackageManager.YARN_CLASSIC,
-  peerDeps: ['constructs', 'projen@0.* >=0.103.26'],
+  peerDeps: ['constructs', 'projen@0.* >=0.104.0'],
   projenrcTs: true,
   npmTrustedPublishing: true,
   publishToPypi: {
@@ -35,6 +35,8 @@ const project = new JsiiProject({
       'A collection of custom projen modules, that can be used to bootstrap and maintain consistent project configuration, tooling, dependencies, and builds.',
   },
   repositoryUrl: 'https://github.com/daveshepherd/projen-modules.git',
+  // matches the compiler bundled with jsii 6.0; ts-jest 29 does not support TypeScript 7
+  typescriptVersion: '~6.0.0',
   workflowNodeVersion: '22.x',
 });
 // projen's eslint component adds this unversioned, so the major must be set after construction
