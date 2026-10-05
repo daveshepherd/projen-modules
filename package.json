@@ -57,15 +57,15 @@
     "jsii-docgen": "^10.5.0",
     "jsii-pacmak": "^1.141.0",
     "jsii-rosetta": "~6.0.0",
-    "projen": "0.103.26",
+    "projen": "0.104.0",
     "ts-jest": "^29",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3",
+    "typescript": "~6.0.0",
     "yaml": "^2.9.1"
   },
   "peerDependencies": {
     "constructs": "10.8.1",
-    "projen": "0.* >=0.103.26"
+    "projen": "0.* >=0.104.0"
   },
   "engines": {
     "node": ">= 22.0.0"
