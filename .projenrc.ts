@@ -1,6 +1,6 @@
 import { CollectionKind, PrimitiveType } from '@jsii/spec';
 import { ProjenStruct, Struct } from '@mrgrain/jsii-struct-builder';
-import { github } from 'projen';
+import { github, JsonPatch } from 'projen';
 import { NodePackageManager } from 'projen/lib/javascript';
 import { JsiiProject } from './src/projects/jsii';
 
@@ -39,6 +39,11 @@ const project = new JsiiProject({
 });
 // projen's eslint component adds this unversioned, so the major must be set after construction
 project.addDevDeps('eslint-import-resolver-typescript@^4');
+// npm trusted publishing needs npm >= 11.5.1, which Node 22 does not ship, so only the npm
+// publish job runs on the latest LTS; builds and tests stay on the minimum Node version
+project.github
+  ?.tryFindWorkflow('release')
+  ?.file?.patch(JsonPatch.replace('/jobs/release_npm/steps/0/with/node-version', 'lts/*'));
 project.readme?.addSection(
   'Creating a New Project',
   `
