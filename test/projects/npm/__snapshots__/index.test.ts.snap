@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`NPM Package synthesizes 1`] = `
 {
@@ -436,7 +436,7 @@ CODEOWNERS
       {
         "name": "commit-and-tag-version",
         "type": "build",
-        "version": "^12",
+        "version": "^13",
       },
       {
         "name": "constructs",
@@ -536,11 +536,11 @@ CODEOWNERS
         ],
       },
       "bump": {
-        "condition": "git log --oneline -1 | grep -qv "chore(release):"",
+        "condition": "git log --oneline -1 | grep -v "chore(release):" > /dev/null",
         "description": "Bumps version based on latest git tag and generates a changelog entry",
         "env": {
           "BUMPFILE": "dist/version.txt",
-          "BUMP_PACKAGE": "commit-and-tag-version@^12",
+          "BUMP_PACKAGE": "commit-and-tag-version@^13",
           "CHANGELOG": "dist/changelog.md",
           "OUTFILE": "package.json",
           "RELEASETAG": "dist/releasetag.txt",
@@ -549,7 +549,29 @@ CODEOWNERS
         "name": "bump",
         "steps": [
           {
-            "builtin": "release/bump-version",
+            "builtin": "release/resolve-latest-tag",
+            "outputEnv": "LATEST_TAG",
+          },
+          {
+            "condition": "git rev-parse --verify --quiet "refs/tags/$LATEST_TAG"",
+            "outputEnv": "RELEASABLE_COMMITS",
+            "spawn": "bump:releasable-commits",
+          },
+          {
+            "builtin": "release/suggest-version-bump",
+            "outputEnv": "SUGGESTED_BUMP",
+          },
+          {
+            "builtin": "release/apply-version-bump",
+          },
+        ],
+      },
+      "bump:releasable-commits": {
+        "description": "Print the releasable commits since the latest release",
+        "name": "bump:releasable-commits",
+        "steps": [
+          {
+            "exec": "git log --oneline $LATEST_TAG..HEAD",
           },
         ],
       },
@@ -562,22 +584,35 @@ CODEOWNERS
         "name": "clobber",
         "steps": [
           {
-            "exec": "git checkout -b scratch",
+            "execArgs": [
+              "git",
+              "checkout",
+              "-b",
+              "scratch",
+            ],
             "name": "save current HEAD in "scratch" branch",
           },
           {
-            "exec": "git checkout $BRANCH",
+            "exec": "git checkout "$BRANCH"",
           },
           {
-            "exec": "git fetch origin",
+            "execArgs": [
+              "git",
+              "fetch",
+              "origin",
+            ],
             "name": "fetch latest changes from origin",
           },
           {
-            "exec": "git reset --hard origin/$BRANCH",
+            "exec": "git reset --hard "origin/$BRANCH"",
             "name": "hard reset to origin commit",
           },
           {
-            "exec": "git clean -fdx",
+            "execArgs": [
+              "git",
+              "clean",
+              "-fdx",
+            ],
             "name": "clean all untracked files",
           },
           {
@@ -632,7 +667,19 @@ CODEOWNERS
         "name": "eslint",
         "steps": [
           {
-            "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern $@ src test build-tools projenrc .projenrc.ts",
+            "execArgs": [
+              "eslint",
+              "--ext",
+              ".ts,.tsx",
+              "--fix",
+              "--no-error-on-unmatched-pattern",
+              "$@",
+              "src",
+              "test",
+              "build-tools",
+              "projenrc",
+              ".projenrc.ts",
+            ],
             "receiveArgs": true,
           },
         ],
@@ -696,7 +743,11 @@ CODEOWNERS
         "name": "release",
         "steps": [
           {
-            "exec": "rm -fr dist",
+            "execArgs": [
+              "rm",
+              "-fr",
+              "dist",
+            ],
           },
           {
             "spawn": "bump",
@@ -717,7 +768,11 @@ CODEOWNERS
         "name": "test",
         "steps": [
           {
-            "exec": "jest --passWithNoTests --updateSnapshot",
+            "execArgs": [
+              "jest",
+              "--passWithNoTests",
+              "--updateSnapshot",
+            ],
             "receiveArgs": true,
           },
           {
@@ -730,7 +785,10 @@ CODEOWNERS
         "name": "test:watch",
         "steps": [
           {
-            "exec": "jest --watch",
+            "execArgs": [
+              "jest",
+              "--watch",
+            ],
           },
         ],
       },
@@ -738,7 +796,7 @@ CODEOWNERS
         "description": "Restores version to 0.0.0",
         "env": {
           "BUMPFILE": "dist/version.txt",
-          "BUMP_PACKAGE": "commit-and-tag-version@^12",
+          "BUMP_PACKAGE": "commit-and-tag-version@^13",
           "CHANGELOG": "dist/changelog.md",
           "OUTFILE": "package.json",
           "RELEASETAG": "dist/releasetag.txt",
@@ -1038,7 +1096,7 @@ npx projen build
       "@types/node": "*",
       "@typescript-eslint/eslint-plugin": "^8",
       "@typescript-eslint/parser": "^8",
-      "commit-and-tag-version": "^12",
+      "commit-and-tag-version": "^13",
       "constructs": "^10.0.0",
       "eslint": "^9",
       "eslint-import-resolver-typescript": "*",
@@ -1104,6 +1162,7 @@ npx projen build
     "scripts": {
       "build": "projen build",
       "bump": "projen bump",
+      "bump:releasable-commits": "projen bump:releasable-commits",
       "clobber": "projen clobber",
       "compile": "projen compile",
       "default": "projen default",
