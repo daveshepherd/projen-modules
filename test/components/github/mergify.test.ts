@@ -2,9 +2,9 @@ import { MergifyRule } from 'projen/lib/github';
 import { synthSnapshot } from 'projen/lib/util/synth';
 import * as yaml from 'yaml';
 import { configureMergify } from '../../../src/components/github/mergify';
-import { JsiiProject } from '../../../src/projects/jsii';
+import { JsiiProject, JsiiProjectOptions } from '../../../src/projects/jsii';
 
-function createProject() {
+function createProject(options: Partial<JsiiProjectOptions> = {}) {
   return new JsiiProject({
     author: 'Test Person',
     authorAddress: 'test@example.com',
@@ -13,7 +13,14 @@ function createProject() {
     defaultReleaseBranch: 'main',
     name: 'test',
     repositoryUrl: 'https://github.com/example/example.git',
+    ...options,
   });
+}
+
+function findRule(output: Record<string, any>, name: string): MergifyRule {
+  return yaml
+    .parse(output['.mergify.yml'])
+    .pull_request_rules.find((rule: MergifyRule) => rule.name === name);
 }
 
 describe('Mergify Component', () => {
@@ -78,5 +85,46 @@ describe('Mergify Component', () => {
     expect(
       mergifyConfiguration.merge_protections_settings.reporting_method,
     ).toBe('check-runs');
+  });
+
+  it('supports a custom upgrade author', () => {
+    const project = createProject();
+
+    configureMergify(project, {
+      upgradeAuthor: 'renovate[bot]',
+    });
+
+    const output = synthSnapshot(project);
+    const autoApproveUpgradeRule = findRule(
+      output,
+      'Automatic approval for projen upgrade pull requests',
+    );
+
+    expect(autoApproveUpgradeRule.conditions[0]).toBe('author=renovate[bot]');
+  });
+
+  it('only requires the author when there is no build workflow', () => {
+    const project = createProject({ buildWorkflow: false });
+
+    configureMergify(project);
+
+    const output = synthSnapshot(project);
+    const autoApproveUpgradeRule = findRule(
+      output,
+      'Automatic approval for projen upgrade pull requests',
+    );
+
+    expect(autoApproveUpgradeRule.conditions).toStrictEqual([
+      'author=endor-projen[bot]',
+    ]);
+  });
+
+  it('does nothing when the project has no mergify', () => {
+    const project = createProject({ github: false });
+
+    configureMergify(project);
+
+    const output = synthSnapshot(project);
+    expect(output['.mergify.yml']).toBeUndefined();
   });
 });

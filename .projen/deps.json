@@ -30,6 +30,11 @@
       "type": "build"
     },
     {
+      "name": "audit-ci",
+      "version": "^7",
+      "type": "build"
+    },
+    {
       "name": "commit-and-tag-version",
       "version": "^13",
       "type": "build"

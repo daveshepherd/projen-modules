@@ -66,4 +66,53 @@ yarn install
 npx projen build
 \`\`\``);
   });
+
+  it('can disable the pull request template', () => {
+    const project = new PythonPackage({
+      authorEmail: 'test@example.com',
+      authorName: 'test',
+      codeOwners: ['test'],
+      moduleName: 'test',
+      name: 'test-python',
+      pullRequestTemplate: false,
+      version: '0.1.0',
+    });
+
+    const output = synthSnapshot(project);
+
+    expect(output['.github/pull_request_template.md']).toBeUndefined();
+  });
+
+  it('keeps an empty pull request template when options are explicitly undefined', () => {
+    const project = new PythonPackage({
+      authorEmail: 'test@example.com',
+      authorName: 'test',
+      codeOwners: ['test'],
+      moduleName: 'test',
+      name: 'test-python',
+      pullRequestTemplate: undefined,
+      pullRequestTemplateContents: undefined,
+      version: '0.1.0',
+    });
+
+    const output = synthSnapshot(project);
+
+    expect(output['.github/pull_request_template.md']).toBeDefined();
+  });
+
+  it('skips the pull request template when github is disabled', () => {
+    const project = new PythonPackage({
+      authorEmail: 'test@example.com',
+      authorName: 'test',
+      codeOwners: ['test'],
+      github: false,
+      moduleName: 'test',
+      name: 'test-python',
+      version: '0.1.0',
+    });
+
+    const output = synthSnapshot(project);
+
+    expect(output['.github/pull_request_template.md']).toBeUndefined();
+  });
 });
