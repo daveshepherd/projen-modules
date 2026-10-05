@@ -253,8 +253,10 @@ Synthesize all project files into `outdir`.
 2. Delete all generated files
 3. Synthesize all subprojects
 4. Synthesize all components of this project
-5. Call "postSynthesize()" for all components of this project
-6. Call "this.postSynthesize()"
+5. Call "projectCreation()" for all components, only if the project is being created for the first time
+6. Call "postSynthesize()" for all components of this project
+7. Call "this.postSynthesize()"
+8. Call "postProjectCreation()" for all components, only if the project is being created for the first time
 
 ##### `tryFindFile` <a name="tryFindFile" id="projen-modules.CdkTypeScriptApp.tryFindFile"></a>
 
@@ -935,7 +937,9 @@ the project is being ejected.
 
 ---
 
-##### `initProject`<sup>Optional</sup> <a name="initProject" id="projen-modules.CdkTypeScriptApp.property.initProject"></a>
+##### ~~`initProject`~~<sup>Optional</sup> <a name="initProject" id="projen-modules.CdkTypeScriptApp.property.initProject"></a>
+
+- *Deprecated:* use the `initProject` argument passed to `Component.projectCreation()` instead.
 
 ```typescript
 public readonly initProject: InitProject;
@@ -1716,8 +1720,10 @@ Synthesize all project files into `outdir`.
 2. Delete all generated files
 3. Synthesize all subprojects
 4. Synthesize all components of this project
-5. Call "postSynthesize()" for all components of this project
-6. Call "this.postSynthesize()"
+5. Call "projectCreation()" for all components, only if the project is being created for the first time
+6. Call "postSynthesize()" for all components of this project
+7. Call "this.postSynthesize()"
+8. Call "postProjectCreation()" for all components, only if the project is being created for the first time
 
 ##### `tryFindFile` <a name="tryFindFile" id="projen-modules.JsiiProject.tryFindFile"></a>
 
@@ -2393,7 +2399,9 @@ the project is being ejected.
 
 ---
 
-##### `initProject`<sup>Optional</sup> <a name="initProject" id="projen-modules.JsiiProject.property.initProject"></a>
+##### ~~`initProject`~~<sup>Optional</sup> <a name="initProject" id="projen-modules.JsiiProject.property.initProject"></a>
+
+- *Deprecated:* use the `initProject` argument passed to `Component.projectCreation()` instead.
 
 ```typescript
 public readonly initProject: InitProject;
@@ -3116,8 +3124,10 @@ Synthesize all project files into `outdir`.
 2. Delete all generated files
 3. Synthesize all subprojects
 4. Synthesize all components of this project
-5. Call "postSynthesize()" for all components of this project
-6. Call "this.postSynthesize()"
+5. Call "projectCreation()" for all components, only if the project is being created for the first time
+6. Call "postSynthesize()" for all components of this project
+7. Call "this.postSynthesize()"
+8. Call "postProjectCreation()" for all components, only if the project is being created for the first time
 
 ##### `tryFindFile` <a name="tryFindFile" id="projen-modules.NpmPackage.tryFindFile"></a>
 
@@ -3793,7 +3803,9 @@ the project is being ejected.
 
 ---
 
-##### `initProject`<sup>Optional</sup> <a name="initProject" id="projen-modules.NpmPackage.property.initProject"></a>
+##### ~~`initProject`~~<sup>Optional</sup> <a name="initProject" id="projen-modules.NpmPackage.property.initProject"></a>
+
+- *Deprecated:* use the `initProject` argument passed to `Component.projectCreation()` instead.
 
 ```typescript
 public readonly initProject: InitProject;
@@ -4509,8 +4521,10 @@ Synthesize all project files into `outdir`.
 2. Delete all generated files
 3. Synthesize all subprojects
 4. Synthesize all components of this project
-5. Call "postSynthesize()" for all components of this project
-6. Call "this.postSynthesize()"
+5. Call "projectCreation()" for all components, only if the project is being created for the first time
+6. Call "postSynthesize()" for all components of this project
+7. Call "this.postSynthesize()"
+8. Call "postProjectCreation()" for all components, only if the project is being created for the first time
 
 ##### `tryFindFile` <a name="tryFindFile" id="projen-modules.PythonPackage.tryFindFile"></a>
 
@@ -4986,7 +5000,9 @@ the project is being ejected.
 
 ---
 
-##### `initProject`<sup>Optional</sup> <a name="initProject" id="projen-modules.PythonPackage.property.initProject"></a>
+##### ~~`initProject`~~<sup>Optional</sup> <a name="initProject" id="projen-modules.PythonPackage.property.initProject"></a>
+
+- *Deprecated:* use the `initProject` argument passed to `Component.projectCreation()` instead.
 
 ```typescript
 public readonly initProject: InitProject;
@@ -5239,8 +5255,10 @@ new Readme(project: Project, options?: ReadmeOptions)
 | --- | --- |
 | <code><a href="#projen-modules.Readme.toString">toString</a></code> | Returns a string representation of this construct. |
 | <code><a href="#projen-modules.Readme.with">with</a></code> | Applies one or more mixins to this construct. |
+| <code><a href="#projen-modules.Readme.postProjectCreation">postProjectCreation</a></code> | Called once, right after `postSynthesize()`, only when the project is created for the first time. |
 | <code><a href="#projen-modules.Readme.postSynthesize">postSynthesize</a></code> | Called after synthesis. |
 | <code><a href="#projen-modules.Readme.preSynthesize">preSynthesize</a></code> | Called before synthesis. |
+| <code><a href="#projen-modules.Readme.projectCreation">projectCreation</a></code> | Called once, right after `synthesize()`, only when the project is created for the first time. |
 | <code><a href="#projen-modules.Readme.synthesize">synthesize</a></code> | Writes the file to the project's output directory. |
 | <code><a href="#projen-modules.Readme.diff">diff</a></code> | Returns a unified diff of the old and new file contents with context lines and hunk headers. |
 | <code><a href="#projen-modules.Readme.addSection">addSection</a></code> | *No description.* |
@@ -5276,6 +5294,27 @@ The mixins to apply.
 
 ---
 
+##### `postProjectCreation` <a name="postProjectCreation" id="projen-modules.Readme.postProjectCreation"></a>
+
+```typescript
+public postProjectCreation(initProject: InitProject): void
+```
+
+Called once, right after `postSynthesize()`, only when the project is created for the first time.
+
+It does not run on later `projen` invocations. It only fires for `projen new` (or `Projects.createProject`).
+It is also skipped when post-synthesis steps are disabled, e.g. `--no-post` or `PROJEN_DISABLE_POST`.
+Use it for one-off setup that can be turned off by the user, like running a task to give the user immediate
+feedback on their new project. Order across components is not guaranteed.
+
+###### `initProject`<sup>Required</sup> <a name="initProject" id="projen-modules.Readme.postProjectCreation.parameter.initProject"></a>
+
+- *Type:* projen.InitProject
+
+Details about how the project was created, e.g. its type and the original CLI args.
+
+---
+
 ##### `postSynthesize` <a name="postSynthesize" id="projen-modules.Readme.postSynthesize"></a>
 
 ```typescript
@@ -5293,6 +5332,25 @@ public preSynthesize(): void
 ```
 
 Called before synthesis.
+
+##### `projectCreation` <a name="projectCreation" id="projen-modules.Readme.projectCreation"></a>
+
+```typescript
+public projectCreation(initProject: InitProject): void
+```
+
+Called once, right after `synthesize()`, only when the project is created for the first time.
+
+It does not run on later `projen` invocations. It only fires for `projen new` (or `Projects.createProject`).
+Use it for deterministic, one-off file generation. Order across components is not guaranteed.
+
+###### `initProject`<sup>Required</sup> <a name="initProject" id="projen-modules.Readme.projectCreation.parameter.initProject"></a>
+
+- *Type:* projen.InitProject
+
+Details about how the project was created, e.g. its type and the original CLI args.
+
+---
 
 ##### `synthesize` <a name="synthesize" id="projen-modules.Readme.synthesize"></a>
 
@@ -5613,13 +5671,15 @@ const cdkTypeScriptAppOptions: CdkTypeScriptAppOptions = { ... }
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.checkLicenses">checkLicenses</a></code> | <code>projen.javascript.LicenseCheckerOptions</code> | Configure which licenses should be deemed acceptable for use by dependencies. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.clobber">clobber</a></code> | <code>boolean</code> | Add a `clobber` task which resets the repo to origin. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.codeArtifactOptions">codeArtifactOptions</a></code> | <code>projen.javascript.CodeArtifactOptions</code> | Options for npm packages using AWS CodeArtifact. |
-| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.codeCov">codeCov</a></code> | <code>boolean</code> | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v5 By default, OIDC auth is used. Alternatively a token can be provided via `codeCovTokenSecret`. |
+| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.codeCov">codeCov</a></code> | <code>boolean</code> | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/. Uses codecov/codecov-action. By default, OIDC auth is used. Alternatively a token can be provided via `codeCovTokenSecret`. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.codeCovTokenSecret">codeCovTokenSecret</a></code> | <code>string</code> | Define the secret name for a specified https://codecov.io/ token. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.commitGenerated">commitGenerated</a></code> | <code>boolean</code> | Whether to commit the managed files by default. |
+| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.config">config</a></code> | <code>{[ key: string ]: any}</code> | Configuration values available to package scripts at runtime. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.constructsVersion">constructsVersion</a></code> | <code>string</code> | Minimum version of the `constructs` library to depend on. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.context">context</a></code> | <code>{[ key: string ]: any}</code> | Additional context to include in `cdk.json`. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.copyrightOwner">copyrightOwner</a></code> | <code>string</code> | License copyright owner. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.copyrightPeriod">copyrightPeriod</a></code> | <code>string</code> | The copyright years to put in the LICENSE file. |
+| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.dedupeDeps">dedupeDeps</a></code> | <code>boolean</code> | Add a `dedupe` task that deduplicates project dependencies. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.defaultReleaseBranch">defaultReleaseBranch</a></code> | <code>string</code> | The name of the main release branch. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.deleteOrphanedLockFiles">deleteOrphanedLockFiles</a></code> | <code>boolean</code> | Automatically delete lockfiles from package managers that are not the active one. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.dependabot">dependabot</a></code> | <code>boolean</code> | Use dependabot to handle dependency upgrades. |
@@ -5644,6 +5704,7 @@ const cdkTypeScriptAppOptions: CdkTypeScriptAppOptions = { ... }
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.featureFlags">featureFlags</a></code> | <code>projen.awscdk.ICdkFeatureFlags</code> | Feature flags that should be enabled in `cdk.json`. Make sure to double-check any changes to feature flags in `cdk.json` before deploying. Unexpected changes may cause breaking changes in your CDK app. You can overwrite any feature flag by passing it into the context field. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.github">github</a></code> | <code>boolean</code> | Enable GitHub integration. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.githubOptions">githubOptions</a></code> | <code>projen.github.GitHubOptions</code> | Options for GitHub integration. |
+| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.githubReleaseLatest">githubReleaseLatest</a></code> | <code>boolean</code> | Whether GitHub should explicitly mark the release from the default branch as the latest release. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.gitignore">gitignore</a></code> | <code>string[]</code> | Additional entries to .gitignore. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.gitIgnoreOptions">gitIgnoreOptions</a></code> | <code>projen.IgnoreFileOptions</code> | Configuration options for .gitignore file. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.gitOptions">gitOptions</a></code> | <code>projen.GitOptions</code> | Configuration options for git. |
@@ -5733,6 +5794,7 @@ const cdkTypeScriptAppOptions: CdkTypeScriptAppOptions = { ... }
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.tsconfigDev">tsconfigDev</a></code> | <code>projen.javascript.TypescriptConfigOptions</code> | Custom tsconfig options for the development tsconfig.json file (used for testing). |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.tsconfigDevFile">tsconfigDevFile</a></code> | <code>string</code> | The name (and path) of the development tsconfig file. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.tsJestOptions">tsJestOptions</a></code> | <code>projen.typescript.TsJestOptions</code> | Options for ts-jest. |
+| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.typecheckTests">typecheckTests</a></code> | <code>boolean</code> | Type-check the test suite as part of the `test` task. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.typescriptVersion">typescriptVersion</a></code> | <code>string</code> | TypeScript version to use. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.versionrcOptions">versionrcOptions</a></code> | <code>{[ key: string ]: any}</code> | Custom configuration used when creating changelog with commit-and-tag-version package. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.vscode">vscode</a></code> | <code>boolean</code> | Enable VSCode integration. |
@@ -6124,6 +6186,10 @@ This command will be called when
 running `cdk synth` or when `cdk watch` identifies a change in your source
 code before redeployment.
 
+The CDK CLI runs it through a shell on every synthesis, on the machine of
+anyone who checks out the project, so shell syntax in it is interpreted and
+the command should be one you would run yourself.
+
 ---
 
 ##### `buildWorkflow`<sup>Optional</sup> <a name="buildWorkflow" id="projen-modules.CdkTypeScriptAppOptions.property.buildWorkflow"></a>
@@ -6312,7 +6378,7 @@ public readonly codeCov: boolean;
 - *Type:* boolean
 - *Default:* false
 
-Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v5 By default, OIDC auth is used. Alternatively a token can be provided via `codeCovTokenSecret`.
+Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/. Uses codecov/codecov-action. By default, OIDC auth is used. Alternatively a token can be provided via `codeCovTokenSecret`.
 
 ---
 
@@ -6339,6 +6405,21 @@ public readonly commitGenerated: boolean;
 - *Default:* true
 
 Whether to commit the managed files by default.
+
+---
+
+##### `config`<sup>Optional</sup> <a name="config" id="projen-modules.CdkTypeScriptAppOptions.property.config"></a>
+
+```typescript
+public readonly config: {[ key: string ]: any};
+```
+
+- *Type:* {[ key: string ]: any}
+- *Default:* no package configuration
+
+Configuration values available to package scripts at runtime.
+
+Values should be JSON-serializable.
 
 ---
 
@@ -6379,6 +6460,10 @@ public readonly copyrightOwner: string;
 
 License copyright owner.
 
+This value is only used if the selected license text contains the
+`$copyright_owner` placeholder. For example, it has no effect on the
+MPL-2.0 license text.
+
 ---
 
 ##### `copyrightPeriod`<sup>Optional</sup> <a name="copyrightPeriod" id="projen-modules.CdkTypeScriptAppOptions.property.copyrightPeriod"></a>
@@ -6391,6 +6476,38 @@ public readonly copyrightPeriod: string;
 - *Default:* current year
 
 The copyright years to put in the LICENSE file.
+
+This value is only used if the selected license text contains the
+`$copyright_period` placeholder. For example, it has no effect on the
+MPL-2.0 license text.
+
+---
+
+##### `dedupeDeps`<sup>Optional</sup> <a name="dedupeDeps" id="projen-modules.CdkTypeScriptAppOptions.property.dedupeDeps"></a>
+
+```typescript
+public readonly dedupeDeps: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false, unless `yarnBerryOptions.dedupePackages` is set
+
+Add a `dedupe` task that deduplicates project dependencies.
+
+Deduplication prevents multiple versions of the same package from being
+installed, if a single version can satisfy all requested version ranges.
+This prevents version proliferation and reduces the size of the dependency
+tree.
+
+The behavior depends on the package manager:
+- npm: runs `npm dedupe` after every mutating install.
+- pnpm: runs `pnpm dedupe` after every mutating install.
+- Yarn Berry: runs `yarn dedupe` after every mutating install. If
+  `yarnBerryOptions.dedupePackages` is set, only the listed packages are
+  deduplicated.
+- Yarn Classic: `yarn install` already deduplicates, so the task only
+  prints an informational message.
+- Bun: not supported, enabling this option throws an error.
 
 ---
 
@@ -6733,6 +6850,22 @@ public readonly githubOptions: GitHubOptions;
 - *Default:* see GitHubOptions
 
 Options for GitHub integration.
+
+---
+
+##### `githubReleaseLatest`<sup>Optional</sup> <a name="githubReleaseLatest" id="projen-modules.CdkTypeScriptAppOptions.property.githubReleaseLatest"></a>
+
+```typescript
+public readonly githubReleaseLatest: boolean;
+```
+
+- *Type:* boolean
+- *Default:* GitHub determines the latest release based on date and semantic version.
+
+Whether GitHub should explicitly mark the release from the default branch as the latest release.
+
+Set to `true` to mark the release as latest, or `false` to explicitly not
+mark it as latest.
 
 ---
 
@@ -7388,6 +7521,10 @@ public readonly projenCommand: string;
 
 The shell command to use in order to run the projen CLI.
 
+Inserted verbatim into task steps, workflows and IDE configuration, and run
+by each of their shells - locally, in CI and in dev containers. Keep it a
+plain unquoted command, since shell syntax in it executes in all of them.
+
 Can be used to customize in special environments.
 
 ---
@@ -8000,6 +8137,21 @@ Options for ts-jest.
 
 ---
 
+##### `typecheckTests`<sup>Optional</sup> <a name="typecheckTests" id="projen-modules.CdkTypeScriptAppOptions.property.typecheckTests"></a>
+
+```typescript
+public readonly typecheckTests: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Type-check the test suite as part of the `test` task.
+
+Adds a `tsc --noEmit` step against the development tsconfig.
+
+---
+
 ##### `typescriptVersion`<sup>Optional</sup> <a name="typescriptVersion" id="projen-modules.CdkTypeScriptAppOptions.property.typescriptVersion"></a>
 
 ```typescript
@@ -8139,7 +8291,9 @@ Enable Node.js package cache in GitHub workflows.
 
 ---
 
-##### `workflowRunsOn`<sup>Optional</sup> <a name="workflowRunsOn" id="projen-modules.CdkTypeScriptAppOptions.property.workflowRunsOn"></a>
+##### ~~`workflowRunsOn`~~<sup>Optional</sup> <a name="workflowRunsOn" id="projen-modules.CdkTypeScriptAppOptions.property.workflowRunsOn"></a>
+
+- *Deprecated:* use `githubOptions.workflowRunsOn` on the project, or `runsOn` on `ReleaseOptions`
 
 ```typescript
 public readonly workflowRunsOn: string[];
@@ -8152,7 +8306,9 @@ Github Runner selection labels.
 
 ---
 
-##### `workflowRunsOnGroup`<sup>Optional</sup> <a name="workflowRunsOnGroup" id="projen-modules.CdkTypeScriptAppOptions.property.workflowRunsOnGroup"></a>
+##### ~~`workflowRunsOnGroup`~~<sup>Optional</sup> <a name="workflowRunsOnGroup" id="projen-modules.CdkTypeScriptAppOptions.property.workflowRunsOnGroup"></a>
+
+- *Deprecated:* use `githubOptions.workflowRunsOnGroup` on the project, or `runsOnGroup` on `ReleaseOptions`
 
 ```typescript
 public readonly workflowRunsOnGroup: GroupRunnerOptions;
@@ -8227,14 +8383,16 @@ const jsiiProjectOptions: JsiiProjectOptions = { ... }
 | <code><a href="#projen-modules.JsiiProjectOptions.property.checkLicenses">checkLicenses</a></code> | <code>projen.javascript.LicenseCheckerOptions</code> | Configure which licenses should be deemed acceptable for use by dependencies. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.clobber">clobber</a></code> | <code>boolean</code> | Add a `clobber` task which resets the repo to origin. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.codeArtifactOptions">codeArtifactOptions</a></code> | <code>projen.javascript.CodeArtifactOptions</code> | Options for npm packages using AWS CodeArtifact. |
-| <code><a href="#projen-modules.JsiiProjectOptions.property.codeCov">codeCov</a></code> | <code>boolean</code> | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v5 By default, OIDC auth is used. Alternatively a token can be provided via `codeCovTokenSecret`. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.codeCov">codeCov</a></code> | <code>boolean</code> | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/. Uses codecov/codecov-action. By default, OIDC auth is used. Alternatively a token can be provided via `codeCovTokenSecret`. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.codeCovTokenSecret">codeCovTokenSecret</a></code> | <code>string</code> | Define the secret name for a specified https://codecov.io/ token. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.commitGenerated">commitGenerated</a></code> | <code>boolean</code> | Whether to commit the managed files by default. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.compat">compat</a></code> | <code>boolean</code> | Automatically run API compatibility test against the latest version published to npm after compilation. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.compatIgnore">compatIgnore</a></code> | <code>string</code> | Name of the ignore file for API compatibility tests. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.compressAssembly">compressAssembly</a></code> | <code>boolean</code> | Emit a compressed version of the assembly. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.config">config</a></code> | <code>{[ key: string ]: any}</code> | Configuration values available to package scripts at runtime. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.copyrightOwner">copyrightOwner</a></code> | <code>string</code> | License copyright owner. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.copyrightPeriod">copyrightPeriod</a></code> | <code>string</code> | The copyright years to put in the LICENSE file. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.dedupeDeps">dedupeDeps</a></code> | <code>boolean</code> | Add a `dedupe` task that deduplicates project dependencies. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.defaultReleaseBranch">defaultReleaseBranch</a></code> | <code>string</code> | The name of the main release branch. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.deleteOrphanedLockFiles">deleteOrphanedLockFiles</a></code> | <code>boolean</code> | Automatically delete lockfiles from package managers that are not the active one. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.dependabot">dependabot</a></code> | <code>boolean</code> | Use dependabot to handle dependency upgrades. |
@@ -8258,6 +8416,7 @@ const jsiiProjectOptions: JsiiProjectOptions = { ... }
 | <code><a href="#projen-modules.JsiiProjectOptions.property.excludeTypescript">excludeTypescript</a></code> | <code>string[]</code> | Accepts a list of glob patterns. Files matching any of those patterns will be excluded from the TypeScript compiler input. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.github">github</a></code> | <code>boolean</code> | Enable GitHub integration. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.githubOptions">githubOptions</a></code> | <code>projen.github.GitHubOptions</code> | Options for GitHub integration. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.githubReleaseLatest">githubReleaseLatest</a></code> | <code>boolean</code> | Whether GitHub should explicitly mark the release from the default branch as the latest release. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.gitignore">gitignore</a></code> | <code>string[]</code> | Additional entries to .gitignore. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.gitIgnoreOptions">gitIgnoreOptions</a></code> | <code>projen.IgnoreFileOptions</code> | Configuration options for .gitignore file. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.gitOptions">gitOptions</a></code> | <code>projen.GitOptions</code> | Configuration options for git. |
@@ -8347,6 +8506,7 @@ const jsiiProjectOptions: JsiiProjectOptions = { ... }
 | <code><a href="#projen-modules.JsiiProjectOptions.property.tsconfigDev">tsconfigDev</a></code> | <code>projen.javascript.TypescriptConfigOptions</code> | Custom tsconfig options for the development tsconfig.json file (used for testing). |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.tsconfigDevFile">tsconfigDevFile</a></code> | <code>string</code> | The name (and path) of the development tsconfig file. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.tsJestOptions">tsJestOptions</a></code> | <code>projen.typescript.TsJestOptions</code> | Options for ts-jest. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.typecheckTests">typecheckTests</a></code> | <code>boolean</code> | Type-check the test suite as part of the `test` task. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.typescriptVersion">typescriptVersion</a></code> | <code>string</code> | TypeScript version to use. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.validateTsconfig">validateTsconfig</a></code> | <code>projen.cdk.ValidateTsconfig</code> | Level of tsconfig validation jsii should perform on the user-provided tsconfig. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.versionrcOptions">versionrcOptions</a></code> | <code>{[ key: string ]: any}</code> | Custom configuration used when creating changelog with commit-and-tag-version package. |
@@ -8863,7 +9023,7 @@ public readonly codeCov: boolean;
 - *Type:* boolean
 - *Default:* false
 
-Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v5 By default, OIDC auth is used. Alternatively a token can be provided via `codeCovTokenSecret`.
+Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/. Uses codecov/codecov-action. By default, OIDC auth is used. Alternatively a token can be provided via `codeCovTokenSecret`.
 
 ---
 
@@ -8935,6 +9095,21 @@ Emit a compressed version of the assembly.
 
 ---
 
+##### `config`<sup>Optional</sup> <a name="config" id="projen-modules.JsiiProjectOptions.property.config"></a>
+
+```typescript
+public readonly config: {[ key: string ]: any};
+```
+
+- *Type:* {[ key: string ]: any}
+- *Default:* no package configuration
+
+Configuration values available to package scripts at runtime.
+
+Values should be JSON-serializable.
+
+---
+
 ##### `copyrightOwner`<sup>Optional</sup> <a name="copyrightOwner" id="projen-modules.JsiiProjectOptions.property.copyrightOwner"></a>
 
 ```typescript
@@ -8945,6 +9120,10 @@ public readonly copyrightOwner: string;
 - *Default:* defaults to the value of authorName or "" if `authorName` is undefined.
 
 License copyright owner.
+
+This value is only used if the selected license text contains the
+`$copyright_owner` placeholder. For example, it has no effect on the
+MPL-2.0 license text.
 
 ---
 
@@ -8958,6 +9137,38 @@ public readonly copyrightPeriod: string;
 - *Default:* current year
 
 The copyright years to put in the LICENSE file.
+
+This value is only used if the selected license text contains the
+`$copyright_period` placeholder. For example, it has no effect on the
+MPL-2.0 license text.
+
+---
+
+##### `dedupeDeps`<sup>Optional</sup> <a name="dedupeDeps" id="projen-modules.JsiiProjectOptions.property.dedupeDeps"></a>
+
+```typescript
+public readonly dedupeDeps: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false, unless `yarnBerryOptions.dedupePackages` is set
+
+Add a `dedupe` task that deduplicates project dependencies.
+
+Deduplication prevents multiple versions of the same package from being
+installed, if a single version can satisfy all requested version ranges.
+This prevents version proliferation and reduces the size of the dependency
+tree.
+
+The behavior depends on the package manager:
+- npm: runs `npm dedupe` after every mutating install.
+- pnpm: runs `pnpm dedupe` after every mutating install.
+- Yarn Berry: runs `yarn dedupe` after every mutating install. If
+  `yarnBerryOptions.dedupePackages` is set, only the listed packages are
+  deduplicated.
+- Yarn Classic: `yarn install` already deduplicates, so the task only
+  prints an informational message.
+- Bun: not supported, enabling this option throws an error.
 
 ---
 
@@ -9290,6 +9501,22 @@ public readonly githubOptions: GitHubOptions;
 - *Default:* see GitHubOptions
 
 Options for GitHub integration.
+
+---
+
+##### `githubReleaseLatest`<sup>Optional</sup> <a name="githubReleaseLatest" id="projen-modules.JsiiProjectOptions.property.githubReleaseLatest"></a>
+
+```typescript
+public readonly githubReleaseLatest: boolean;
+```
+
+- *Type:* boolean
+- *Default:* GitHub determines the latest release based on date and semantic version.
+
+Whether GitHub should explicitly mark the release from the default branch as the latest release.
+
+Set to `true` to mark the release as latest, or `false` to explicitly not
+mark it as latest.
 
 ---
 
@@ -9912,6 +10139,10 @@ public readonly projenCommand: string;
 - *Default:* "npx projen"
 
 The shell command to use in order to run the projen CLI.
+
+Inserted verbatim into task steps, workflows and IDE configuration, and run
+by each of their shells - locally, in CI and in dev containers. Keep it a
+plain unquoted command, since shell syntax in it executes in all of them.
 
 Can be used to customize in special environments.
 
@@ -10562,6 +10793,21 @@ Options for ts-jest.
 
 ---
 
+##### `typecheckTests`<sup>Optional</sup> <a name="typecheckTests" id="projen-modules.JsiiProjectOptions.property.typecheckTests"></a>
+
+```typescript
+public readonly typecheckTests: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Type-check the test suite as part of the `test` task.
+
+Adds a `tsc --noEmit` step against the development tsconfig.
+
+---
+
 ##### `typescriptVersion`<sup>Optional</sup> <a name="typescriptVersion" id="projen-modules.JsiiProjectOptions.property.typescriptVersion"></a>
 
 ```typescript
@@ -10691,7 +10937,9 @@ Enable Node.js package cache in GitHub workflows.
 
 ---
 
-##### `workflowRunsOn`<sup>Optional</sup> <a name="workflowRunsOn" id="projen-modules.JsiiProjectOptions.property.workflowRunsOn"></a>
+##### ~~`workflowRunsOn`~~<sup>Optional</sup> <a name="workflowRunsOn" id="projen-modules.JsiiProjectOptions.property.workflowRunsOn"></a>
+
+- *Deprecated:* use `githubOptions.workflowRunsOn` on the project, or `runsOn` on `ReleaseOptions`
 
 ```typescript
 public readonly workflowRunsOn: string[];
@@ -10704,7 +10952,9 @@ Github Runner selection labels.
 
 ---
 
-##### `workflowRunsOnGroup`<sup>Optional</sup> <a name="workflowRunsOnGroup" id="projen-modules.JsiiProjectOptions.property.workflowRunsOnGroup"></a>
+##### ~~`workflowRunsOnGroup`~~<sup>Optional</sup> <a name="workflowRunsOnGroup" id="projen-modules.JsiiProjectOptions.property.workflowRunsOnGroup"></a>
+
+- *Deprecated:* use `githubOptions.workflowRunsOnGroup` on the project, or `runsOnGroup` on `ReleaseOptions`
 
 ```typescript
 public readonly workflowRunsOnGroup: GroupRunnerOptions;
@@ -10776,11 +11026,13 @@ const npmPackageOptions: NpmPackageOptions = { ... }
 | <code><a href="#projen-modules.NpmPackageOptions.property.checkLicenses">checkLicenses</a></code> | <code>projen.javascript.LicenseCheckerOptions</code> | Configure which licenses should be deemed acceptable for use by dependencies. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.clobber">clobber</a></code> | <code>boolean</code> | Add a `clobber` task which resets the repo to origin. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.codeArtifactOptions">codeArtifactOptions</a></code> | <code>projen.javascript.CodeArtifactOptions</code> | Options for npm packages using AWS CodeArtifact. |
-| <code><a href="#projen-modules.NpmPackageOptions.property.codeCov">codeCov</a></code> | <code>boolean</code> | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v5 By default, OIDC auth is used. Alternatively a token can be provided via `codeCovTokenSecret`. |
+| <code><a href="#projen-modules.NpmPackageOptions.property.codeCov">codeCov</a></code> | <code>boolean</code> | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/. Uses codecov/codecov-action. By default, OIDC auth is used. Alternatively a token can be provided via `codeCovTokenSecret`. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.codeCovTokenSecret">codeCovTokenSecret</a></code> | <code>string</code> | Define the secret name for a specified https://codecov.io/ token. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.commitGenerated">commitGenerated</a></code> | <code>boolean</code> | Whether to commit the managed files by default. |
+| <code><a href="#projen-modules.NpmPackageOptions.property.config">config</a></code> | <code>{[ key: string ]: any}</code> | Configuration values available to package scripts at runtime. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.copyrightOwner">copyrightOwner</a></code> | <code>string</code> | License copyright owner. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.copyrightPeriod">copyrightPeriod</a></code> | <code>string</code> | The copyright years to put in the LICENSE file. |
+| <code><a href="#projen-modules.NpmPackageOptions.property.dedupeDeps">dedupeDeps</a></code> | <code>boolean</code> | Add a `dedupe` task that deduplicates project dependencies. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.defaultReleaseBranch">defaultReleaseBranch</a></code> | <code>string</code> | The name of the main release branch. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.deleteOrphanedLockFiles">deleteOrphanedLockFiles</a></code> | <code>boolean</code> | Automatically delete lockfiles from package managers that are not the active one. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.dependabot">dependabot</a></code> | <code>boolean</code> | Use dependabot to handle dependency upgrades. |
@@ -10802,6 +11054,7 @@ const npmPackageOptions: NpmPackageOptions = { ... }
 | <code><a href="#projen-modules.NpmPackageOptions.property.eslintOptions">eslintOptions</a></code> | <code>projen.javascript.EslintOptions</code> | Eslint options. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.github">github</a></code> | <code>boolean</code> | Enable GitHub integration. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.githubOptions">githubOptions</a></code> | <code>projen.github.GitHubOptions</code> | Options for GitHub integration. |
+| <code><a href="#projen-modules.NpmPackageOptions.property.githubReleaseLatest">githubReleaseLatest</a></code> | <code>boolean</code> | Whether GitHub should explicitly mark the release from the default branch as the latest release. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.gitignore">gitignore</a></code> | <code>string[]</code> | Additional entries to .gitignore. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.gitIgnoreOptions">gitIgnoreOptions</a></code> | <code>projen.IgnoreFileOptions</code> | Configuration options for .gitignore file. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.gitOptions">gitOptions</a></code> | <code>projen.GitOptions</code> | Configuration options for git. |
@@ -10885,6 +11138,7 @@ const npmPackageOptions: NpmPackageOptions = { ... }
 | <code><a href="#projen-modules.NpmPackageOptions.property.tsconfigDev">tsconfigDev</a></code> | <code>projen.javascript.TypescriptConfigOptions</code> | Custom tsconfig options for the development tsconfig.json file (used for testing). |
 | <code><a href="#projen-modules.NpmPackageOptions.property.tsconfigDevFile">tsconfigDevFile</a></code> | <code>string</code> | The name (and path) of the development tsconfig file. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.tsJestOptions">tsJestOptions</a></code> | <code>projen.typescript.TsJestOptions</code> | Options for ts-jest. |
+| <code><a href="#projen-modules.NpmPackageOptions.property.typecheckTests">typecheckTests</a></code> | <code>boolean</code> | Type-check the test suite as part of the `test` task. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.typescriptVersion">typescriptVersion</a></code> | <code>string</code> | TypeScript version to use. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.versionrcOptions">versionrcOptions</a></code> | <code>{[ key: string ]: any}</code> | Custom configuration used when creating changelog with commit-and-tag-version package. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.vscode">vscode</a></code> | <code>boolean</code> | Enable VSCode integration. |
@@ -11361,7 +11615,7 @@ public readonly codeCov: boolean;
 - *Type:* boolean
 - *Default:* false
 
-Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v5 By default, OIDC auth is used. Alternatively a token can be provided via `codeCovTokenSecret`.
+Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/. Uses codecov/codecov-action. By default, OIDC auth is used. Alternatively a token can be provided via `codeCovTokenSecret`.
 
 ---
 
@@ -11391,6 +11645,21 @@ Whether to commit the managed files by default.
 
 ---
 
+##### `config`<sup>Optional</sup> <a name="config" id="projen-modules.NpmPackageOptions.property.config"></a>
+
+```typescript
+public readonly config: {[ key: string ]: any};
+```
+
+- *Type:* {[ key: string ]: any}
+- *Default:* no package configuration
+
+Configuration values available to package scripts at runtime.
+
+Values should be JSON-serializable.
+
+---
+
 ##### `copyrightOwner`<sup>Optional</sup> <a name="copyrightOwner" id="projen-modules.NpmPackageOptions.property.copyrightOwner"></a>
 
 ```typescript
@@ -11401,6 +11670,10 @@ public readonly copyrightOwner: string;
 - *Default:* defaults to the value of authorName or "" if `authorName` is undefined.
 
 License copyright owner.
+
+This value is only used if the selected license text contains the
+`$copyright_owner` placeholder. For example, it has no effect on the
+MPL-2.0 license text.
 
 ---
 
@@ -11414,6 +11687,38 @@ public readonly copyrightPeriod: string;
 - *Default:* current year
 
 The copyright years to put in the LICENSE file.
+
+This value is only used if the selected license text contains the
+`$copyright_period` placeholder. For example, it has no effect on the
+MPL-2.0 license text.
+
+---
+
+##### `dedupeDeps`<sup>Optional</sup> <a name="dedupeDeps" id="projen-modules.NpmPackageOptions.property.dedupeDeps"></a>
+
+```typescript
+public readonly dedupeDeps: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false, unless `yarnBerryOptions.dedupePackages` is set
+
+Add a `dedupe` task that deduplicates project dependencies.
+
+Deduplication prevents multiple versions of the same package from being
+installed, if a single version can satisfy all requested version ranges.
+This prevents version proliferation and reduces the size of the dependency
+tree.
+
+The behavior depends on the package manager:
+- npm: runs `npm dedupe` after every mutating install.
+- pnpm: runs `pnpm dedupe` after every mutating install.
+- Yarn Berry: runs `yarn dedupe` after every mutating install. If
+  `yarnBerryOptions.dedupePackages` is set, only the listed packages are
+  deduplicated.
+- Yarn Classic: `yarn install` already deduplicates, so the task only
+  prints an informational message.
+- Bun: not supported, enabling this option throws an error.
 
 ---
 
@@ -11717,6 +12022,22 @@ public readonly githubOptions: GitHubOptions;
 - *Default:* see GitHubOptions
 
 Options for GitHub integration.
+
+---
+
+##### `githubReleaseLatest`<sup>Optional</sup> <a name="githubReleaseLatest" id="projen-modules.NpmPackageOptions.property.githubReleaseLatest"></a>
+
+```typescript
+public readonly githubReleaseLatest: boolean;
+```
+
+- *Type:* boolean
+- *Default:* GitHub determines the latest release based on date and semantic version.
+
+Whether GitHub should explicitly mark the release from the default branch as the latest release.
+
+Set to `true` to mark the release as latest, or `false` to explicitly not
+mark it as latest.
 
 ---
 
@@ -12320,6 +12641,10 @@ public readonly projenCommand: string;
 
 The shell command to use in order to run the projen CLI.
 
+Inserted verbatim into task steps, workflows and IDE configuration, and run
+by each of their shells - locally, in CI and in dev containers. Keep it a
+plain unquoted command, since shell syntax in it executes in all of them.
+
 Can be used to customize in special environments.
 
 ---
@@ -12906,6 +13231,21 @@ Options for ts-jest.
 
 ---
 
+##### `typecheckTests`<sup>Optional</sup> <a name="typecheckTests" id="projen-modules.NpmPackageOptions.property.typecheckTests"></a>
+
+```typescript
+public readonly typecheckTests: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Type-check the test suite as part of the `test` task.
+
+Adds a `tsc --noEmit` step against the development tsconfig.
+
+---
+
 ##### `typescriptVersion`<sup>Optional</sup> <a name="typescriptVersion" id="projen-modules.NpmPackageOptions.property.typescriptVersion"></a>
 
 ```typescript
@@ -13019,7 +13359,9 @@ Enable Node.js package cache in GitHub workflows.
 
 ---
 
-##### `workflowRunsOn`<sup>Optional</sup> <a name="workflowRunsOn" id="projen-modules.NpmPackageOptions.property.workflowRunsOn"></a>
+##### ~~`workflowRunsOn`~~<sup>Optional</sup> <a name="workflowRunsOn" id="projen-modules.NpmPackageOptions.property.workflowRunsOn"></a>
+
+- *Deprecated:* use `githubOptions.workflowRunsOn` on the project, or `runsOn` on `ReleaseOptions`
 
 ```typescript
 public readonly workflowRunsOn: string[];
@@ -13032,7 +13374,9 @@ Github Runner selection labels.
 
 ---
 
-##### `workflowRunsOnGroup`<sup>Optional</sup> <a name="workflowRunsOnGroup" id="projen-modules.NpmPackageOptions.property.workflowRunsOnGroup"></a>
+##### ~~`workflowRunsOnGroup`~~<sup>Optional</sup> <a name="workflowRunsOnGroup" id="projen-modules.NpmPackageOptions.property.workflowRunsOnGroup"></a>
+
+- *Deprecated:* use `githubOptions.workflowRunsOnGroup` on the project, or `runsOnGroup` on `ReleaseOptions`
 
 ```typescript
 public readonly workflowRunsOnGroup: GroupRunnerOptions;
@@ -13560,6 +13904,10 @@ public readonly projenCommand: string;
 - *Default:* "npx projen"
 
 The shell command to use in order to run the projen CLI.
+
+Inserted verbatim into task steps, workflows and IDE configuration, and run
+by each of their shells - locally, in CI and in dev containers. Keep it a
+plain unquoted command, since shell syntax in it executes in all of them.
 
 Can be used to customize in special environments.
 

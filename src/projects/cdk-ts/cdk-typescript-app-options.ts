@@ -133,6 +133,10 @@ export interface CdkTypeScriptAppOptions {
    * This command will be called when
    * running `cdk synth` or when `cdk watch` identifies a change in your source
    * code before redeployment.
+   *
+   * The CDK CLI runs it through a shell on every synthesis, on the machine of
+   * anyone who checks out the project, so shell syntax in it is interpreted and
+   * the command should be one you would run yourself.
    * @default - no build command
    * @stability experimental
    */
@@ -145,6 +149,13 @@ export interface CdkTypeScriptAppOptions {
    * @stability experimental
    */
   readonly typescriptVersion?: string;
+  /**
+   * Type-check the test suite as part of the `test` task.
+   * Adds a `tsc --noEmit` step against the development tsconfig.
+   * @default false
+   * @stability experimental
+   */
+  readonly typecheckTests?: boolean;
   /**
    * Options for ts-jest.
    * @stability experimental
@@ -415,12 +426,18 @@ export interface CdkTypeScriptAppOptions {
   readonly defaultReleaseBranch?: string;
   /**
    * The copyright years to put in the LICENSE file.
+   * This value is only used if the selected license text contains the
+   * `$copyright_period` placeholder. For example, it has no effect on the
+   * MPL-2.0 license text.
    * @default - current year
    * @stability experimental
    */
   readonly copyrightPeriod?: string;
   /**
    * License copyright owner.
+   * This value is only used if the selected license text contains the
+   * `$copyright_owner` placeholder. For example, it has no effect on the
+   * MPL-2.0 license text.
    * @default - defaults to the value of authorName or "" if `authorName` is undefined.
    * @stability experimental
    */
@@ -432,7 +449,9 @@ export interface CdkTypeScriptAppOptions {
    */
   readonly codeCovTokenSecret?: string;
   /**
-   * Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v5 By default, OIDC auth is used. Alternatively a token can be provided via `codeCovTokenSecret`.
+   * Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/.
+   * Uses codecov/codecov-action. By default, OIDC auth is used.
+   * Alternatively a token can be provided via `codeCovTokenSecret`.
    * @default false
    * @stability experimental
    */
@@ -502,7 +521,8 @@ export interface CdkTypeScriptAppOptions {
   readonly artifactsDirectory?: string;
   /**
    * Github Runner Group selection options.
-   * @stability experimental
+   * @deprecated use `githubOptions.workflowRunsOnGroup` on the project, or `runsOnGroup` on `ReleaseOptions`
+   * @stability deprecated
    * @description Defines a target Runner Group by name and/or labels
    * @throws {Error} if both `runsOn` and `runsOnGroup` are specified
    */
@@ -510,7 +530,8 @@ export interface CdkTypeScriptAppOptions {
   /**
    * Github Runner selection labels.
    * @default ["ubuntu-latest"]
-   * @stability experimental
+   * @deprecated use `githubOptions.workflowRunsOn` on the project, or `runsOn` on `ReleaseOptions`
+   * @stability deprecated
    * @description Defines a target Runner by labels
    * @throws {Error} if both `runsOn` and `runsOnGroup` are specified
    */
@@ -686,6 +707,14 @@ export interface CdkTypeScriptAppOptions {
    * @stability experimental
    */
   readonly jsiiReleaseVersion?: string;
+  /**
+   * Whether GitHub should explicitly mark the release from the default branch as the latest release.
+   * Set to `true` to mark the release as latest, or `false` to explicitly not
+   * mark it as latest.
+   * @default - GitHub determines the latest release based on date and semantic version.
+   * @stability experimental
+   */
+  readonly githubReleaseLatest?: boolean;
   /**
    * The `commit-and-tag-version` compatible package used to bump the package version, as a dependency string.
    * This can be any compatible package version, including the deprecated `standard-version@9`.
@@ -923,6 +952,33 @@ export interface CdkTypeScriptAppOptions {
    */
   readonly deleteOrphanedLockFiles?: boolean;
   /**
+   * Add a `dedupe` task that deduplicates project dependencies.
+   * Deduplication prevents multiple versions of the same package from being
+   * installed, if a single version can satisfy all requested version ranges.
+   * This prevents version proliferation and reduces the size of the dependency
+   * tree.
+   *
+   * The behavior depends on the package manager:
+   * - npm: runs `npm dedupe` after every mutating install.
+   * - pnpm: runs `pnpm dedupe` after every mutating install.
+   * - Yarn Berry: runs `yarn dedupe` after every mutating install. If
+   *   `yarnBerryOptions.dedupePackages` is set, only the listed packages are
+   *   deduplicated.
+   * - Yarn Classic: `yarn install` already deduplicates, so the task only
+   *   prints an informational message.
+   * - Bun: not supported, enabling this option throws an error.
+   * @default - false, unless `yarnBerryOptions.dedupePackages` is set
+   * @stability experimental
+   */
+  readonly dedupeDeps?: boolean;
+  /**
+   * Configuration values available to package scripts at runtime.
+   * Values should be JSON-serializable.
+   * @default - no package configuration
+   * @stability experimental
+   */
+  readonly config?: Record<string, any>;
+  /**
    * Options for npm packages using AWS CodeArtifact.
    * This is required if publishing packages to, or installing scoped packages from AWS CodeArtifact
    * @default - undefined
@@ -1148,6 +1204,10 @@ export interface CdkTypeScriptAppOptions {
   readonly projenrcJson?: boolean;
   /**
    * The shell command to use in order to run the projen CLI.
+   * Inserted verbatim into task steps, workflows and IDE configuration, and run
+   * by each of their shells - locally, in CI and in dev containers. Keep it a
+   * plain unquoted command, since shell syntax in it executes in all of them.
+   *
    * Can be used to customize in special environments.
    * @default "npx projen"
    * @stability experimental

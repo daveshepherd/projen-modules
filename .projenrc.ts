@@ -15,10 +15,14 @@ const project = new JsiiProject({
   githubOptions: {
     projenCredentials: github.GithubCredentials.fromApp({}),
   },
-  majorVersion: 1,
+  jestOptions: {
+    jestVersion: '^30',
+  },
+  jsiiVersion: '~6.0.0',
+  minNodeVersion: '22.0.0',
   name: 'projen-modules',
   packageManager: NodePackageManager.YARN_CLASSIC,
-  peerDeps: ['constructs', 'projen@0.* >=0.101.8'],
+  peerDeps: ['constructs', 'projen@0.* >=0.103.26'],
   projenrcTs: true,
   npmTrustedPublishing: true,
   publishToPypi: {
@@ -31,7 +35,10 @@ const project = new JsiiProject({
       'A collection of custom projen modules, that can be used to bootstrap and maintain consistent project configuration, tooling, dependencies, and builds.',
   },
   repositoryUrl: 'https://github.com/daveshepherd/projen-modules.git',
+  workflowNodeVersion: '22.x',
 });
+// projen's eslint component adds this unversioned, so the major must be set after construction
+project.addDevDeps('eslint-import-resolver-typescript@^4');
 project.readme?.addSection(
   'Creating a New Project',
   `
