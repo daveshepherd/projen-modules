@@ -5684,6 +5684,7 @@ const cdkTypeScriptAppOptions: CdkTypeScriptAppOptions = { ... }
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.codeArtifactOptions">codeArtifactOptions</a></code> | <code>projen.javascript.CodeArtifactOptions</code> | Options for npm packages using AWS CodeArtifact. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.codeCov">codeCov</a></code> | <code>boolean</code> | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/. Uses codecov/codecov-action. By default, OIDC auth is used. Alternatively a token can be provided via `codeCovTokenSecret`. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.codeCovTokenSecret">codeCovTokenSecret</a></code> | <code>string</code> | Define the secret name for a specified https://codecov.io/ token. |
+| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.codeql">codeql</a></code> | <code>boolean</code> | Scan the code with CodeQL on pull requests, pushes to the default branch and weekly. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.commitGenerated">commitGenerated</a></code> | <code>boolean</code> | Whether to commit the managed files by default. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.config">config</a></code> | <code>{[ key: string ]: any}</code> | Configuration values available to package scripts at runtime. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.constructsVersion">constructsVersion</a></code> | <code>string</code> | Minimum version of the `constructs` library to depend on. |
@@ -6403,6 +6404,19 @@ public readonly codeCovTokenSecret: string;
 - *Default:* OIDC auth is used
 
 Define the secret name for a specified https://codecov.io/ token.
+
+---
+
+##### `codeql`<sup>Optional</sup> <a name="codeql" id="projen-modules.CdkTypeScriptAppOptions.property.codeql"></a>
+
+```typescript
+public readonly codeql: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Scan the code with CodeQL on pull requests, pushes to the default branch and weekly.
 
 ---
 
@@ -8396,6 +8410,7 @@ const jsiiProjectOptions: JsiiProjectOptions = { ... }
 | <code><a href="#projen-modules.JsiiProjectOptions.property.codeArtifactOptions">codeArtifactOptions</a></code> | <code>projen.javascript.CodeArtifactOptions</code> | Options for npm packages using AWS CodeArtifact. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.codeCov">codeCov</a></code> | <code>boolean</code> | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/. Uses codecov/codecov-action. By default, OIDC auth is used. Alternatively a token can be provided via `codeCovTokenSecret`. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.codeCovTokenSecret">codeCovTokenSecret</a></code> | <code>string</code> | Define the secret name for a specified https://codecov.io/ token. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.codeql">codeql</a></code> | <code>boolean</code> | Scan the code with CodeQL on pull requests, pushes to the default branch and weekly. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.commitGenerated">commitGenerated</a></code> | <code>boolean</code> | Whether to commit the managed files by default. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.compat">compat</a></code> | <code>boolean</code> | Automatically run API compatibility test against the latest version published to npm after compilation. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.compatIgnore">compatIgnore</a></code> | <code>string</code> | Name of the ignore file for API compatibility tests. |
@@ -9048,6 +9063,19 @@ public readonly codeCovTokenSecret: string;
 - *Default:* OIDC auth is used
 
 Define the secret name for a specified https://codecov.io/ token.
+
+---
+
+##### `codeql`<sup>Optional</sup> <a name="codeql" id="projen-modules.JsiiProjectOptions.property.codeql"></a>
+
+```typescript
+public readonly codeql: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Scan the code with CodeQL on pull requests, pushes to the default branch and weekly.
 
 ---
 
@@ -13439,6 +13467,7 @@ const pythonPackageOptions: PythonPackageOptions = { ... }
 | <code><a href="#projen-modules.PythonPackageOptions.property.autoMergeOptions">autoMergeOptions</a></code> | <code>projen.github.AutoMergeOptions</code> | Configure options for automatic merging on GitHub. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.classifiers">classifiers</a></code> | <code>string[]</code> | A list of PyPI trove classifiers that describe the project. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.clobber">clobber</a></code> | <code>boolean</code> | Add a `clobber` task which resets the repo to origin. |
+| <code><a href="#projen-modules.PythonPackageOptions.property.codeql">codeql</a></code> | <code>boolean</code> | Scan the code with CodeQL on pull requests, pushes to the default branch and weekly. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.commitGenerated">commitGenerated</a></code> | <code>boolean</code> | Whether to commit the managed files by default. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.deps">deps</a></code> | <code>string[]</code> | List of runtime dependencies for this project. Dependencies use the format: `<module>@<semver>`. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.description">description</a></code> | <code>string</code> | A short description of the package. |
@@ -13637,6 +13666,19 @@ public readonly clobber: boolean;
 - *Default:* true, but false for subprojects
 
 Add a `clobber` task which resets the repo to origin.
+
+---
+
+##### `codeql`<sup>Optional</sup> <a name="codeql" id="projen-modules.PythonPackageOptions.property.codeql"></a>
+
+```typescript
+public readonly codeql: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Scan the code with CodeQL on pull requests, pushes to the default branch and weekly.
 
 ---
 

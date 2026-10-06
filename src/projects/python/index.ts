@@ -2,6 +2,7 @@ import { github } from 'projen';
 import { PythonProject, PythonProjectOptions } from 'projen/lib/python';
 import { PythonPackageOptions } from './python-package-options';
 import { CodeOwners } from '../../components/github/codeowners';
+import { CodeQl } from '../../components/github/codeql';
 import { configureMergify } from '../../components/github/mergify';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
 import { Readme } from '../../components/readme';
@@ -49,6 +50,11 @@ export class PythonPackage extends PythonProject {
       'Getting Started',
       '```sh\nyarn install\nnpx projen build\n```',
     );
+    if ((mergedOptions.codeql ?? true) && this.github?.workflowsEnabled) {
+      new CodeQl(this.github, {
+        languages: ['python', 'actions'],
+      });
+    }
     // projen only wires the merge queue up for node projects
     if ((mergedOptions.autoMerge ?? true) && this.github?.mergify) {
       this.autoMerge = new github.AutoMerge(

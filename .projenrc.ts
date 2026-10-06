@@ -49,9 +49,6 @@ project.github
   ?.tryFindWorkflow('release')
   ?.file?.patch(JsonPatch.replace('/jobs/release_npm/steps/0/with/node-version', 'lts/*'));
 
-// Mergify is exempt from the branch ruleset, so the queue must enforce the CodeQL code scanning result itself
-project.autoMerge?.addConditions('status-success=CodeQL');
-
 // projen's built-in auditDeps cannot allowlist advisories, so audit-ci is used instead
 project.addDevDeps('audit-ci@^7');
 new JsonFile(project, 'audit-ci.json', {
@@ -103,6 +100,18 @@ new ProjenStruct(project, {
   filePath: 'src/projects/cdk-ts/cdk-typescript-app-options.ts',
 })
   .mixin(Struct.fromFqn('projen.awscdk.AwsCdkTypeScriptAppOptions'))
+  .add({
+    docs: {
+      default: 'true',
+      summary:
+        'Scan the code with CodeQL on pull requests, pushes to the default branch and weekly.',
+    },
+    name: 'codeql',
+    optional: true,
+    type: {
+      primitive: PrimitiveType.Boolean,
+    },
+  })
   .update('defaultReleaseBranch', { optional: true })
   .replace('readme', {
     docs: {
@@ -131,6 +140,18 @@ new ProjenStruct(project, {
   filePath: 'src/projects/jsii/jsii-project-options.ts',
 })
   .mixin(Struct.fromFqn('projen.cdk.JsiiProjectOptions'))
+  .add({
+    docs: {
+      default: 'true',
+      summary:
+        'Scan the code with CodeQL on pull requests, pushes to the default branch and weekly.',
+    },
+    name: 'codeql',
+    optional: true,
+    type: {
+      primitive: PrimitiveType.Boolean,
+    },
+  })
   .update('defaultReleaseBranch', { optional: true })
   .replace('readme', {
     docs: {
@@ -187,6 +208,18 @@ new ProjenStruct(project, {
   filePath: 'src/projects/python/python-package-options.ts',
 })
   .mixin(Struct.fromFqn('projen.python.PythonProjectOptions'))
+  .add({
+    docs: {
+      default: 'true',
+      summary:
+        'Scan the code with CodeQL on pull requests, pushes to the default branch and weekly.',
+    },
+    name: 'codeql',
+    optional: true,
+    type: {
+      primitive: PrimitiveType.Boolean,
+    },
+  })
   .replace('readme', {
     docs: {
       summary: 'Configuration of the README.md file',

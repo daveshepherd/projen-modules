@@ -43,6 +43,10 @@ In **Settings → General → Pull Requests**:
 * Untick **Allow auto-merge**, because GitHub's own auto-merge merges outside the queue.
 * Tick **Automatically delete head branches**.
 
+### Code scanning
+
+CodeQL runs from `.github/workflows/codeql.yml`, which is managed by projen. In **Settings → Advanced Security**, leave CodeQL **Default setup** off, because it cannot run alongside this workflow. Under **Protection rules**, keep the **Check run failure threshold** at **High or higher** for security alerts and **Errors** for other alerts, as this decides whether the `CodeQL` check fails. Private repositories also need GitHub Code Security enabled there for code scanning results to be uploaded.
+
 ### Branch ruleset
 
 In **Settings → Rules → Rulesets**, create a branch ruleset with enforcement **Active** that targets the default branch, and set:
@@ -51,6 +55,7 @@ In **Settings → Rules → Rulesets**, create a branch ruleset with enforcement
 * **Restrict deletions** and **Block force pushes**.
 * **Require a pull request before merging**, with 0 required approvals.
 * **Require status checks to pass**, listing the checks that `.mergify.yml` waits for: `build`, `package-js`, `package-python`. Leave **Require branches to be up to date before merging** unticked, as the queue already updates and retests each pull request.
+* **Require code scanning results**, with the tool **CodeQL**, security alerts set to **High or higher** and alerts set to **Errors**. Mergify is exempt from this rule, so `.mergify.yml` also waits for the `CodeQL` check instead.
 
 Do not enable GitHub's own **Require merge queue** rule, as it competes with Mergify.
 
