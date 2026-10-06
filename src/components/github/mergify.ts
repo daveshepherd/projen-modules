@@ -2,6 +2,14 @@ import { github, Project } from 'projen';
 import { Readme } from '../readme';
 
 export interface MergifyOptions {
+  /**
+   * Number of approving reviews the merge queue waits for, which should match
+   * `autoMergeOptions.approvedReviews`. Use 0 for a repository with a single
+   * maintainer, who cannot approve their own pull requests.
+   *
+   * @default 1
+   */
+  readonly approvedReviews?: number;
   readonly assignUsers?: Array<string>;
   readonly reportingMethod?: string;
   /**
@@ -13,6 +21,7 @@ export interface MergifyOptions {
 }
 
 type MergifyProject = Project & {
+  readonly autoMerge?: github.AutoMerge;
   readonly github?: github.GitHub;
   readonly buildWorkflow?: {
     readonly buildJobIds?: Array<string>;
@@ -20,13 +29,25 @@ type MergifyProject = Project & {
   readonly readme?: Readme;
 };
 
-function githubConfigurationSection(requiredChecks: Array<string>): string {
+function githubConfigurationSection(
+  requiredChecks: Array<string>,
+  approvedReviews: number,
+): string {
   const statusChecks = requiredChecks.length
     ? 'the checks that `.mergify.yml` waits for: `' +
       requiredChecks.join('`, `') +
       '`'
     : 'any CI checks added to the project (none are configured yet), keeping them in sync with `.mergify.yml`';
-  return `All pull requests are merged by the [Mergify](https://mergify.com) merge queue, configured in \`.mergify.yml\`. Once a pull request is approved and its checks pass, Mergify queues it, brings it up to date with the default branch, waits for the checks again and squash merges it.
+  const approvals = approvedReviews === 1 ? '1 required approval' : `${approvedReviews} required approvals`;
+  const queued = approvedReviews
+    ? 'Once a pull request is approved and its checks pass'
+    : 'Once a pull request\'s checks pass';
+  const soleMaintainer = approvedReviews
+    ? `
+
+A repository with a single maintainer, who cannot approve their own pull requests, should set \`autoMergeOptions: { approvedReviews: 0 }\` in \`.projenrc.ts\` and set the ruleset's required approvals to 0. Pull requests are then merged as soon as their checks pass.`
+    : '';
+  return `All pull requests are merged by the [Mergify](https://mergify.com) merge queue, configured in \`.mergify.yml\`. ${queued}, Mergify queues it, brings it up to date with the default branch, waits for the checks again and squash merges it. Draft pull requests and those labelled \`do-not-merge\` are not merged.
 
 The repository must be configured as below so that nothing can be merged without going through the queue.
 
@@ -47,12 +68,12 @@ In **Settings → Rules → Rulesets**, create a branch ruleset with enforcement
 * **Bypass list**: the **Mergify** app only, in **Exempt** mode. Do not add admins or other roles, as anyone on this list can merge without the queue.
 * **Restrict updates**: only bypass actors can update the branch, so pull requests cannot be merged from the GitHub UI or CLI and commits cannot be pushed directly.
 * **Restrict deletions** and **Block force pushes**.
-* **Require a pull request before merging**, with 1 required approval.
+* **Require a pull request before merging**, with ${approvals}.
 * **Require status checks to pass**, listing ${statusChecks}. Leave **Require branches to be up to date before merging** unticked, as the queue already updates and retests each pull request.
 
 Do not enable GitHub's own **Require merge queue** rule, as it competes with Mergify.
 
-If the queue is unavailable and a change has to be merged, add yourself to the bypass list temporarily and remove yourself afterwards.`;
+If the queue is unavailable and a change has to be merged, add yourself to the bypass list temporarily and remove yourself afterwards.${soleMaintainer}`;
 }
 
 export function configureMergify(
@@ -65,6 +86,8 @@ export function configureMergify(
   }
 
   const buildJobIds = project.buildWorkflow?.buildJobIds ?? [];
+
+  project.autoMerge?.addConditions('-draft');
 
   mergify.addRule({
     name: 'Automatic approval for projen upgrade pull requests',
@@ -97,6 +120,6 @@ export function configureMergify(
 
   project.readme?.addSection(
     'GitHub Configuration',
-    githubConfigurationSection(buildJobIds),
+    githubConfigurationSection(buildJobIds, options.approvedReviews ?? 1),
   );
 }

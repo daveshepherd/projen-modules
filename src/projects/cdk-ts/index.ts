@@ -48,7 +48,9 @@ export class CdkTypeScriptApp extends AwsCdkTypeScriptApp {
       '```sh\nyarn install\nnpx projen build\n```',
     );
     if (this.autoMerge) {
-      configureMergify(this);
+      configureMergify(this, {
+        approvedReviews: mergedOptions.autoMergeOptions?.approvedReviews,
+      });
     }
   }
 }

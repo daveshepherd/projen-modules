@@ -7,6 +7,8 @@ import { JsiiProject } from './src/projects/jsii';
 const project = new JsiiProject({
   author: 'Dave Shepherd',
   authorAddress: 'dave.shepherd@endor.me.uk',
+  // single maintainer, who cannot approve their own pull requests
+  autoMergeOptions: { approvedReviews: 0 },
   codeOwners: ['daveshepherd'],
   defaultReleaseBranch: 'main',
   description: 'A collection of projen modules',

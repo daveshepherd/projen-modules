@@ -26,6 +26,7 @@ function getOptions(options: PythonPackageOptions) {
  * @pjid python-package
  */
 export class PythonPackage extends PythonProject {
+  readonly autoMerge?: github.AutoMerge;
   readme: Readme;
 
   constructor(options: PythonPackageOptions) {
@@ -50,8 +51,13 @@ export class PythonPackage extends PythonProject {
     );
     // projen only wires the merge queue up for node projects
     if ((mergedOptions.autoMerge ?? true) && this.github?.mergify) {
-      new github.AutoMerge(this.github, mergedOptions.autoMergeOptions);
-      configureMergify(this);
+      this.autoMerge = new github.AutoMerge(
+        this.github,
+        mergedOptions.autoMergeOptions,
+      );
+      configureMergify(this, {
+        approvedReviews: mergedOptions.autoMergeOptions?.approvedReviews,
+      });
     }
   }
 }

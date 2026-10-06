@@ -86,6 +86,7 @@ npx projen build
     expect(mergify.queue_rules[0].queue_conditions).toStrictEqual([
       '#approved-reviews-by>=1',
       '-label~=(do-not-merge)',
+      '-draft',
     ]);
     expect(output['README.md']).toContain('## GitHub Configuration');
   });
