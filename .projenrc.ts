@@ -47,6 +47,9 @@ project.github
   ?.tryFindWorkflow('release')
   ?.file?.patch(JsonPatch.replace('/jobs/release_npm/steps/0/with/node-version', 'lts/*'));
 
+// Mergify is exempt from the branch ruleset, so the queue must enforce the CodeQL code scanning result itself
+project.autoMerge?.addConditions('status-success=CodeQL');
+
 // projen's built-in auditDeps cannot allowlist advisories, so audit-ci is used instead
 project.addDevDeps('audit-ci@^7');
 new JsonFile(project, 'audit-ci.json', {

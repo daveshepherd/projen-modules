@@ -9,6 +9,7 @@ queue_rules:
       - status-success=build
       - status-success=package-js
       - status-success=package-python
+      - status-success=CodeQL
     merge_method: squash
     commit_message_format:
       title: pr-title
@@ -24,6 +25,7 @@ pull_request_rules:
       - status-success=build
       - status-success=package-js
       - status-success=package-python
+      - status-success=CodeQL
   - name: Automatic approval for projen upgrade pull requests
     conditions:
       - author=endor-projen[bot]

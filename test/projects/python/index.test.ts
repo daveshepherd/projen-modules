@@ -1,4 +1,5 @@
 import { synthSnapshot } from 'projen/lib/util/synth';
+import * as yaml from 'yaml';
 import { PythonPackage } from '../../../src/projects/python';
 
 describe('Python Package', () => {
@@ -22,6 +23,7 @@ describe('Python Package', () => {
     const project = new PythonPackage({
       authorEmail: 'test@example.com',
       authorName: 'test',
+      autoMerge: false,
       codeOwners: ['test'],
       moduleName: 'test',
       name: 'test-python',
@@ -44,6 +46,7 @@ npx projen build
     const project = new PythonPackage({
       authorEmail: 'test@example.com',
       authorName: 'test',
+      autoMerge: false,
       codeOwners: ['test'],
       moduleName: 'test',
       name: 'test-python',
@@ -65,6 +68,43 @@ A test project description.
 yarn install
 npx projen build
 \`\`\``);
+  });
+
+  it('merges pull requests through the mergify queue', () => {
+    const project = new PythonPackage({
+      authorEmail: 'test@example.com',
+      authorName: 'test',
+      codeOwners: ['test'],
+      moduleName: 'test',
+      name: 'test-python',
+      version: '0.1.0',
+    });
+
+    const output = synthSnapshot(project);
+    const mergify = yaml.parse(output['.mergify.yml']);
+
+    expect(mergify.queue_rules[0].queue_conditions).toStrictEqual([
+      '#approved-reviews-by>=1',
+      '-label~=(do-not-merge)',
+    ]);
+    expect(output['README.md']).toContain('## GitHub Configuration');
+  });
+
+  it('can disable the mergify queue', () => {
+    const project = new PythonPackage({
+      authorEmail: 'test@example.com',
+      authorName: 'test',
+      autoMerge: false,
+      codeOwners: ['test'],
+      moduleName: 'test',
+      name: 'test-python',
+      version: '0.1.0',
+    });
+
+    const output = synthSnapshot(project);
+
+    expect(output['.mergify.yml']).toBeUndefined();
+    expect(output['README.md']).not.toContain('GitHub Configuration');
   });
 
   it('can disable the pull request template', () => {

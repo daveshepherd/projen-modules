@@ -119,6 +119,29 @@ describe('Mergify Component', () => {
     ]);
   });
 
+  it('documents the github configuration in the readme', () => {
+    const project = createProject();
+
+    configureMergify(project);
+
+    const readme: string = synthSnapshot(project)['README.md'];
+    expect(readme).toContain('## GitHub Configuration');
+    expect(readme).toContain('**Restrict updates**');
+    expect(readme).toContain(
+      'the checks that `.mergify.yml` waits for: `build`, `package-js`.',
+    );
+  });
+
+  it('documents that no checks are configured when there is no build workflow', () => {
+    const project = createProject({ buildWorkflow: false });
+
+    configureMergify(project);
+
+    expect(synthSnapshot(project)['README.md']).toContain(
+      'none are configured yet',
+    );
+  });
+
   it('does nothing when the project has no mergify', () => {
     const project = createProject({ github: false });
 
@@ -126,5 +149,6 @@ describe('Mergify Component', () => {
 
     const output = synthSnapshot(project);
     expect(output['.mergify.yml']).toBeUndefined();
+    expect(output['README.md']).not.toContain('GitHub Configuration');
   });
 });
