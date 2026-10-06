@@ -87,6 +87,7 @@ npx projen build
       '#approved-reviews-by>=1',
       '-label~=(do-not-merge)',
       '-draft',
+      'status-success=CodeQL',
     ]);
     expect(output['README.md']).toContain('## GitHub Configuration');
   });

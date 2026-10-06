@@ -1,6 +1,7 @@
 import { cdk } from 'projen';
 import { JsiiProjectOptions } from './jsii-project-options';
 import { CodeOwners } from '../../components/github/codeowners';
+import { CodeQl } from '../../components/github/codeql';
 import { configureMergify } from '../../components/github/mergify';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
 import { Readme } from '../../components/readme';
@@ -61,6 +62,12 @@ Running the tests like this will update any snapshot files, this should be revie
 * Unit tests - these assert on specific functionality of the project and should be written for any new functionality added.
 `,
     );
+    if ((mergedOptions.codeql ?? true) && this.github?.workflowsEnabled) {
+      new CodeQl(this.github, {
+        branches: [mergedOptions.defaultReleaseBranch],
+        languages: ['javascript-typescript', 'actions'],
+      });
+    }
     if (this.autoMerge) {
       configureMergify(this, {
         approvedReviews: mergedOptions.autoMergeOptions?.approvedReviews,

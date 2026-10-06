@@ -1234,6 +1234,11 @@ export interface JsiiProjectOptions {
    */
   readonly name: string;
   /**
+   * Scan the code with CodeQL on pull requests, pushes to the default branch and weekly.
+   * @default true
+   */
+  readonly codeql?: boolean;
+  /**
    * List of teams used to generate the CODEOWNERS file
    */
   readonly codeOwners: Array<string>;
