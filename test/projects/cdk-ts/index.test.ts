@@ -17,6 +17,7 @@ describe('CDK Typescript App', () => {
 
   it('has readme with project details', () => {
     const project = new CdkTypeScriptApp({
+      autoMerge: false,
       cdkVersion: '2.1.0',
       codeOwners: ['test'],
       name: 'test-cdk',
@@ -36,6 +37,7 @@ npx projen build
 
   it('has readme with a project description', () => {
     const project = new CdkTypeScriptApp({
+      autoMerge: false,
       cdkVersion: '2.1.0',
       codeOwners: ['test'],
       name: 'test-cdk',

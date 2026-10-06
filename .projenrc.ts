@@ -7,6 +7,8 @@ import { JsiiProject } from './src/projects/jsii';
 const project = new JsiiProject({
   author: 'Dave Shepherd',
   authorAddress: 'dave.shepherd@endor.me.uk',
+  // single maintainer, who cannot approve their own pull requests
+  autoMergeOptions: { approvedReviews: 0 },
   codeOwners: ['daveshepherd'],
   defaultReleaseBranch: 'main',
   description: 'A collection of projen modules',
@@ -46,6 +48,9 @@ project.addDevDeps('eslint-import-resolver-typescript@^4');
 project.github
   ?.tryFindWorkflow('release')
   ?.file?.patch(JsonPatch.replace('/jobs/release_npm/steps/0/with/node-version', 'lts/*'));
+
+// Mergify is exempt from the branch ruleset, so the queue must enforce the CodeQL code scanning result itself
+project.autoMerge?.addConditions('status-success=CodeQL');
 
 // projen's built-in auditDeps cannot allowlist advisories, so audit-ci is used instead
 project.addDevDeps('audit-ci@^7');

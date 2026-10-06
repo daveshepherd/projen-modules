@@ -17,6 +17,7 @@ describe('NPM Package', () => {
 
   it('has readme with project details', () => {
     const project = new NpmPackage({
+      autoMerge: false,
       codeOwners: ['test'],
       defaultReleaseBranch: 'main',
       name: 'test-npm',
@@ -36,6 +37,7 @@ npx projen build
 
   it('has readme with a project description', () => {
     const project = new NpmPackage({
+      autoMerge: false,
       codeOwners: ['test'],
       defaultReleaseBranch: 'main',
       name: 'test-npm',

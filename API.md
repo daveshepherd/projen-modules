@@ -4729,6 +4729,7 @@ When given a project, this it the project itself.
 | <code><a href="#projen-modules.PythonPackage.property.version">version</a></code> | <code>string</code> | Version of the package for distribution (should follow semver). |
 | <code><a href="#projen-modules.PythonPackage.property.packagingManager">packagingManager</a></code> | <code>projen.python.IPythonPackaging</code> | API for managing packaging the project as a library. |
 | <code><a href="#projen-modules.PythonPackage.property.pytest">pytest</a></code> | <code>projen.python.Pytest</code> | Pytest component. |
+| <code><a href="#projen-modules.PythonPackage.property.autoMerge">autoMerge</a></code> | <code>projen.github.AutoMerge</code> | *No description.* |
 | <code><a href="#projen-modules.PythonPackage.property.readme">readme</a></code> | <code><a href="#projen-modules.Readme">Readme</a></code> | *No description.* |
 
 ---
@@ -5184,6 +5185,16 @@ public readonly pytest: Pytest;
 - *Type:* projen.python.Pytest
 
 Pytest component.
+
+---
+
+##### `autoMerge`<sup>Optional</sup> <a name="autoMerge" id="projen-modules.PythonPackage.property.autoMerge"></a>
+
+```typescript
+public readonly autoMerge: AutoMerge;
+```
+
+- *Type:* projen.github.AutoMerge
 
 ---
 

@@ -62,7 +62,9 @@ Running the tests like this will update any snapshot files, this should be revie
 `,
     );
     if (this.autoMerge) {
-      configureMergify(this);
+      configureMergify(this, {
+        approvedReviews: mergedOptions.autoMergeOptions?.approvedReviews,
+      });
     }
   }
 }

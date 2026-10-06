@@ -119,6 +119,65 @@ describe('Mergify Component', () => {
     ]);
   });
 
+  it('documents the github configuration in the readme', () => {
+    const project = createProject();
+
+    configureMergify(project);
+
+    const readme: string = synthSnapshot(project)['README.md'];
+    expect(readme).toContain('## GitHub Configuration');
+    expect(readme).toContain('**Restrict updates**');
+    expect(readme).toContain(
+      'the checks that `.mergify.yml` waits for: `build`, `package-js`.',
+    );
+  });
+
+  it('documents that no checks are configured when there is no build workflow', () => {
+    const project = createProject({ buildWorkflow: false });
+
+    configureMergify(project);
+
+    expect(synthSnapshot(project)['README.md']).toContain(
+      'none are configured yet',
+    );
+  });
+
+  it('does not merge draft pull requests', () => {
+    const project = createProject({ autoMerge: true });
+
+    const mergify = yaml.parse(synthSnapshot(project)['.mergify.yml']);
+
+    expect(mergify.queue_rules[0].queue_conditions).toContain('-draft');
+  });
+
+  it('documents how a sole maintainer can merge without approvals', () => {
+    const project = createProject();
+
+    configureMergify(project);
+
+    const readme: string = synthSnapshot(project)['README.md'];
+    expect(readme).toContain('with 1 required approval.');
+    expect(readme).toContain('autoMergeOptions: { approvedReviews: 0 }');
+  });
+
+  it('documents merging without approvals for a sole maintainer', () => {
+    const project = createProject({
+      autoMerge: true,
+      autoMergeOptions: { approvedReviews: 0 },
+    });
+
+    const output = synthSnapshot(project);
+    const mergify = yaml.parse(output['.mergify.yml']);
+    const readme: string = output['README.md'];
+
+    expect(mergify.queue_rules[0].queue_conditions).toContain(
+      '#approved-reviews-by>=0',
+    );
+    expect(readme).toContain("Once a pull request's checks pass");
+    expect(readme).toContain('with 0 required approvals.');
+    expect(readme).not.toContain('A repository with a single maintainer');
+  });
+
   it('does nothing when the project has no mergify', () => {
     const project = createProject({ github: false });
 
@@ -126,5 +185,6 @@ describe('Mergify Component', () => {
 
     const output = synthSnapshot(project);
     expect(output['.mergify.yml']).toBeUndefined();
+    expect(output['README.md']).not.toContain('GitHub Configuration');
   });
 });

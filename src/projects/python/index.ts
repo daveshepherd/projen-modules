@@ -1,6 +1,8 @@
+import { github } from 'projen';
 import { PythonProject, PythonProjectOptions } from 'projen/lib/python';
 import { PythonPackageOptions } from './python-package-options';
 import { CodeOwners } from '../../components/github/codeowners';
+import { configureMergify } from '../../components/github/mergify';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
 import { Readme } from '../../components/readme';
 import { mergeOptions } from '../../utils/merge-options';
@@ -24,6 +26,7 @@ function getOptions(options: PythonPackageOptions) {
  * @pjid python-package
  */
 export class PythonPackage extends PythonProject {
+  readonly autoMerge?: github.AutoMerge;
   readme: Readme;
 
   constructor(options: PythonPackageOptions) {
@@ -46,6 +49,16 @@ export class PythonPackage extends PythonProject {
       'Getting Started',
       '```sh\nyarn install\nnpx projen build\n```',
     );
+    // projen only wires the merge queue up for node projects
+    if ((mergedOptions.autoMerge ?? true) && this.github?.mergify) {
+      this.autoMerge = new github.AutoMerge(
+        this.github,
+        mergedOptions.autoMergeOptions,
+      );
+      configureMergify(this, {
+        approvedReviews: mergedOptions.autoMergeOptions?.approvedReviews,
+      });
+    }
   }
 }
 
