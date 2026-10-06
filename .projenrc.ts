@@ -10,7 +10,7 @@ const project = new JsiiProject({
   codeOwners: ['daveshepherd'],
   defaultReleaseBranch: 'main',
   description: 'A collection of projen modules',
-  devDeps: ['@mrgrain/jsii-struct-builder', 'constructs', 'projen@0.* >=0.99.36', 'yaml'],
+  devDeps: ['@mrgrain/jsii-struct-builder', 'constructs', 'yaml'],
   gitignore: ['.npmrc', '.vscode'],
   githubOptions: {
     projenCredentials: github.GithubCredentials.fromApp({}),
