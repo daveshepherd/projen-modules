@@ -1130,6 +1130,11 @@ export interface NpmPackageOptions {
    */
   readonly name: string;
   /**
+   * Authors whose pull requests the merge queue merges without an approval, such as the single maintainer of a repository, who cannot approve their own pull requests.
+   * @default []
+   */
+  readonly trustedAuthors?: Array<string>;
+  /**
    * List of teams used to generate the CODEOWNERS file
    */
   readonly codeOwners: Array<string>;

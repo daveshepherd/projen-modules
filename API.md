@@ -5802,6 +5802,7 @@ const cdkTypeScriptAppOptions: CdkTypeScriptAppOptions = { ... }
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.stale">stale</a></code> | <code>boolean</code> | Auto-close of stale issues and pull request. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.staleOptions">staleOptions</a></code> | <code>projen.github.StaleOptions</code> | Auto-close stale issues and pull requests. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.testdir">testdir</a></code> | <code>string</code> | Jest tests directory. |
+| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.trustedAuthors">trustedAuthors</a></code> | <code>string[]</code> | Authors whose pull requests the merge queue merges without an approval, such as the single maintainer of a repository, who cannot approve their own pull requests. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.tsconfig">tsconfig</a></code> | <code>projen.javascript.TypescriptConfigOptions</code> | Custom TSConfig. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.tsconfigDev">tsconfigDev</a></code> | <code>projen.javascript.TypescriptConfigOptions</code> | Custom tsconfig options for the development tsconfig.json file (used for testing). |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.tsconfigDevFile">tsconfigDevFile</a></code> | <code>string</code> | The name (and path) of the development tsconfig file. |
@@ -8107,6 +8108,19 @@ compile the code in-memory.
 
 ---
 
+##### `trustedAuthors`<sup>Optional</sup> <a name="trustedAuthors" id="projen-modules.CdkTypeScriptAppOptions.property.trustedAuthors"></a>
+
+```typescript
+public readonly trustedAuthors: string[];
+```
+
+- *Type:* string[]
+- *Default:* []
+
+Authors whose pull requests the merge queue merges without an approval, such as the single maintainer of a repository, who cannot approve their own pull requests.
+
+---
+
 ##### `tsconfig`<sup>Optional</sup> <a name="tsconfig" id="projen-modules.CdkTypeScriptAppOptions.property.tsconfig"></a>
 
 ```typescript
@@ -8528,6 +8542,7 @@ const jsiiProjectOptions: JsiiProjectOptions = { ... }
 | <code><a href="#projen-modules.JsiiProjectOptions.property.stale">stale</a></code> | <code>boolean</code> | Auto-close of stale issues and pull request. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.staleOptions">staleOptions</a></code> | <code>projen.github.StaleOptions</code> | Auto-close stale issues and pull requests. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.testdir">testdir</a></code> | <code>string</code> | Jest tests directory. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.trustedAuthors">trustedAuthors</a></code> | <code>string[]</code> | Authors whose pull requests the merge queue merges without an approval, such as the single maintainer of a repository, who cannot approve their own pull requests. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.tsconfig">tsconfig</a></code> | <code>projen.javascript.TypescriptConfigOptions</code> | Custom TSConfig. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.tsconfigDev">tsconfigDev</a></code> | <code>projen.javascript.TypescriptConfigOptions</code> | Custom tsconfig options for the development tsconfig.json file (used for testing). |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.tsconfigDevFile">tsconfigDevFile</a></code> | <code>string</code> | The name (and path) of the development tsconfig file. |
@@ -10777,6 +10792,19 @@ compile the code in-memory.
 
 ---
 
+##### `trustedAuthors`<sup>Optional</sup> <a name="trustedAuthors" id="projen-modules.JsiiProjectOptions.property.trustedAuthors"></a>
+
+```typescript
+public readonly trustedAuthors: string[];
+```
+
+- *Type:* string[]
+- *Default:* []
+
+Authors whose pull requests the merge queue merges without an approval, such as the single maintainer of a repository, who cannot approve their own pull requests.
+
+---
+
 ##### `tsconfig`<sup>Optional</sup> <a name="tsconfig" id="projen-modules.JsiiProjectOptions.property.tsconfig"></a>
 
 ```typescript
@@ -11173,6 +11201,7 @@ const npmPackageOptions: NpmPackageOptions = { ... }
 | <code><a href="#projen-modules.NpmPackageOptions.property.stale">stale</a></code> | <code>boolean</code> | Auto-close of stale issues and pull request. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.staleOptions">staleOptions</a></code> | <code>projen.github.StaleOptions</code> | Auto-close stale issues and pull requests. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.testdir">testdir</a></code> | <code>string</code> | Jest tests directory. |
+| <code><a href="#projen-modules.NpmPackageOptions.property.trustedAuthors">trustedAuthors</a></code> | <code>string[]</code> | Authors whose pull requests the merge queue merges without an approval, such as the single maintainer of a repository, who cannot approve their own pull requests. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.tsconfig">tsconfig</a></code> | <code>projen.javascript.TypescriptConfigOptions</code> | Custom TSConfig. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.tsconfigDev">tsconfigDev</a></code> | <code>projen.javascript.TypescriptConfigOptions</code> | Custom tsconfig options for the development tsconfig.json file (used for testing). |
 | <code><a href="#projen-modules.NpmPackageOptions.property.tsconfigDevFile">tsconfigDevFile</a></code> | <code>string</code> | The name (and path) of the development tsconfig file. |
@@ -13215,6 +13244,19 @@ compile the code in-memory.
 
 ---
 
+##### `trustedAuthors`<sup>Optional</sup> <a name="trustedAuthors" id="projen-modules.NpmPackageOptions.property.trustedAuthors"></a>
+
+```typescript
+public readonly trustedAuthors: string[];
+```
+
+- *Type:* string[]
+- *Default:* []
+
+Authors whose pull requests the merge queue merges without an approval, such as the single maintainer of a repository, who cannot approve their own pull requests.
+
+---
+
 ##### `tsconfig`<sup>Optional</sup> <a name="tsconfig" id="projen-modules.NpmPackageOptions.property.tsconfig"></a>
 
 ```typescript
@@ -13512,6 +13554,7 @@ const pythonPackageOptions: PythonPackageOptions = { ... }
 | <code><a href="#projen-modules.PythonPackageOptions.property.setuptools">setuptools</a></code> | <code>boolean</code> | Use setuptools with a setup.py script for packaging and publishing. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.stale">stale</a></code> | <code>boolean</code> | Auto-close of stale issues and pull request. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.staleOptions">staleOptions</a></code> | <code>projen.github.StaleOptions</code> | Auto-close stale issues and pull requests. |
+| <code><a href="#projen-modules.PythonPackageOptions.property.trustedAuthors">trustedAuthors</a></code> | <code>string[]</code> | Authors whose pull requests the merge queue merges without an approval, such as the single maintainer of a repository, who cannot approve their own pull requests. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.uv">uv</a></code> | <code>boolean</code> | Use uv to manage your project dependencies, virtual environment, and (optional) packaging/publishing. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.uvOptions">uvOptions</a></code> | <code>projen.python.UvOptions</code> | Additional options to set for uv if using uv. |
 | <code><a href="#projen-modules.PythonPackageOptions.property.venv">venv</a></code> | <code>boolean</code> | Use venv to manage a virtual environment for installing dependencies inside. |
@@ -14275,6 +14318,19 @@ public readonly staleOptions: StaleOptions;
 Auto-close stale issues and pull requests.
 
 To disable set `stale` to `false`.
+
+---
+
+##### `trustedAuthors`<sup>Optional</sup> <a name="trustedAuthors" id="projen-modules.PythonPackageOptions.property.trustedAuthors"></a>
+
+```typescript
+public readonly trustedAuthors: string[];
+```
+
+- *Type:* string[]
+- *Default:* []
+
+Authors whose pull requests the merge queue merges without an approval, such as the single maintainer of a repository, who cannot approve their own pull requests.
 
 ---
 
