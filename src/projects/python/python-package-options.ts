@@ -381,6 +381,11 @@ export interface PythonPackageOptions {
    */
   readonly name: string;
   /**
+   * Authors whose pull requests the merge queue merges without an approval, such as the single maintainer of a repository, who cannot approve their own pull requests.
+   * @default []
+   */
+  readonly trustedAuthors?: Array<string>;
+  /**
    * Scan the code with CodeQL on pull requests, pushes to the default branch and weekly.
    * @default true
    */

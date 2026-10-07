@@ -2,7 +2,10 @@ import { cdk } from 'projen';
 import { JsiiProjectOptions } from './jsii-project-options';
 import { CodeOwners } from '../../components/github/codeowners';
 import { CodeQl } from '../../components/github/codeql';
-import { configureMergify } from '../../components/github/mergify';
+import {
+  autoMergeOptions,
+  configureMergify,
+} from '../../components/github/mergify';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
 import { Readme } from '../../components/readme';
 import { mergeOptions } from '../../utils/merge-options';
@@ -36,6 +39,7 @@ export class JsiiProject extends cdk.JsiiProject {
 
     super({
       ...mergedOptions,
+      autoMergeOptions: autoMergeOptions(mergedOptions),
     } as cdk.JsiiProjectOptions);
 
     new CodeOwners(this, mergedOptions.codeOwners);
@@ -71,6 +75,7 @@ Running the tests like this will update any snapshot files, this should be revie
     if (this.autoMerge) {
       configureMergify(this, {
         approvedReviews: mergedOptions.autoMergeOptions?.approvedReviews,
+        trustedAuthors: mergedOptions.trustedAuthors,
       });
     }
   }

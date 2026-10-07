@@ -3,7 +3,10 @@ import { PythonProject, PythonProjectOptions } from 'projen/lib/python';
 import { PythonPackageOptions } from './python-package-options';
 import { CodeOwners } from '../../components/github/codeowners';
 import { CodeQl } from '../../components/github/codeql';
-import { configureMergify } from '../../components/github/mergify';
+import {
+  autoMergeOptions,
+  configureMergify,
+} from '../../components/github/mergify';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
 import { Readme } from '../../components/readme';
 import { mergeOptions } from '../../utils/merge-options';
@@ -59,10 +62,11 @@ export class PythonPackage extends PythonProject {
     if ((mergedOptions.autoMerge ?? true) && this.github?.mergify) {
       this.autoMerge = new github.AutoMerge(
         this.github,
-        mergedOptions.autoMergeOptions,
+        autoMergeOptions(mergedOptions),
       );
       configureMergify(this, {
         approvedReviews: mergedOptions.autoMergeOptions?.approvedReviews,
+        trustedAuthors: mergedOptions.trustedAuthors,
       });
     }
   }

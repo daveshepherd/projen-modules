@@ -7,8 +7,6 @@ import { JsiiProject } from './src/projects/jsii';
 const project = new JsiiProject({
   author: 'Dave Shepherd',
   authorAddress: 'dave.shepherd@endor.me.uk',
-  // single maintainer, who cannot approve their own pull requests
-  autoMergeOptions: { approvedReviews: 0 },
   codeOwners: ['daveshepherd'],
   defaultReleaseBranch: 'main',
   description: 'A collection of projen modules',
@@ -37,6 +35,8 @@ const project = new JsiiProject({
       'A collection of custom projen modules, that can be used to bootstrap and maintain consistent project configuration, tooling, dependencies, and builds.',
   },
   repositoryUrl: 'https://github.com/daveshepherd/projen-modules.git',
+  // single maintainer, who cannot approve their own pull requests
+  trustedAuthors: ['daveshepherd'],
   // matches the compiler bundled with jsii 6.0; ts-jest 29 does not support TypeScript 7
   typescriptVersion: '~6.0.0',
   workflowNodeVersion: '22.x',
@@ -102,6 +102,23 @@ new ProjenStruct(project, {
   .mixin(Struct.fromFqn('projen.awscdk.AwsCdkTypeScriptAppOptions'))
   .add({
     docs: {
+      default: '[]',
+      summary:
+        'Authors whose pull requests the merge queue merges without an approval, such as the single maintainer of a repository, who cannot approve their own pull requests.',
+    },
+    name: 'trustedAuthors',
+    optional: true,
+    type: {
+      collection: {
+        kind: CollectionKind.Array,
+        elementtype: {
+          primitive: PrimitiveType.String,
+        },
+      },
+    },
+  })
+  .add({
+    docs: {
       default: 'true',
       summary:
         'Scan the code with CodeQL on pull requests, pushes to the default branch and weekly.',
@@ -142,6 +159,23 @@ new ProjenStruct(project, {
   .mixin(Struct.fromFqn('projen.cdk.JsiiProjectOptions'))
   .add({
     docs: {
+      default: '[]',
+      summary:
+        'Authors whose pull requests the merge queue merges without an approval, such as the single maintainer of a repository, who cannot approve their own pull requests.',
+    },
+    name: 'trustedAuthors',
+    optional: true,
+    type: {
+      collection: {
+        kind: CollectionKind.Array,
+        elementtype: {
+          primitive: PrimitiveType.String,
+        },
+      },
+    },
+  })
+  .add({
+    docs: {
       default: 'true',
       summary:
         'Scan the code with CodeQL on pull requests, pushes to the default branch and weekly.',
@@ -180,6 +214,23 @@ new ProjenStruct(project, {
   filePath: 'src/projects/npm/npm-package-options.ts',
 })
   .mixin(Struct.fromFqn('projen.typescript.TypeScriptProjectOptions'))
+  .add({
+    docs: {
+      default: '[]',
+      summary:
+        'Authors whose pull requests the merge queue merges without an approval, such as the single maintainer of a repository, who cannot approve their own pull requests.',
+    },
+    name: 'trustedAuthors',
+    optional: true,
+    type: {
+      collection: {
+        kind: CollectionKind.Array,
+        elementtype: {
+          primitive: PrimitiveType.String,
+        },
+      },
+    },
+  })
   .update('defaultReleaseBranch', { optional: true })
   .replace('readme', {
     docs: {
@@ -208,6 +259,23 @@ new ProjenStruct(project, {
   filePath: 'src/projects/python/python-package-options.ts',
 })
   .mixin(Struct.fromFqn('projen.python.PythonProjectOptions'))
+  .add({
+    docs: {
+      default: '[]',
+      summary:
+        'Authors whose pull requests the merge queue merges without an approval, such as the single maintainer of a repository, who cannot approve their own pull requests.',
+    },
+    name: 'trustedAuthors',
+    optional: true,
+    type: {
+      collection: {
+        kind: CollectionKind.Array,
+        elementtype: {
+          primitive: PrimitiveType.String,
+        },
+      },
+    },
+  })
   .add({
     docs: {
       default: 'true',

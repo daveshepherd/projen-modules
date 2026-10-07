@@ -2,7 +2,10 @@ import { typescript } from 'projen';
 import { NpmPackageOptions } from './npm-package-options';
 import { NpmCircleCi } from '../../circleci';
 import { CodeOwners } from '../../components/github/codeowners';
-import { configureMergify } from '../../components/github/mergify';
+import {
+  autoMergeOptions,
+  configureMergify,
+} from '../../components/github/mergify';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
 import { Readme } from '../../components/readme';
 import { mergeOptions } from '../../utils/merge-options';
@@ -38,6 +41,7 @@ export class NpmPackage extends typescript.TypeScriptProject {
 
     super({
       ...mergedOptions,
+      autoMergeOptions: autoMergeOptions(mergedOptions),
     } as typescript.TypeScriptProjectOptions);
 
     new CodeOwners(this, mergedOptions.codeOwners);
@@ -52,6 +56,7 @@ export class NpmPackage extends typescript.TypeScriptProject {
     if (this.autoMerge) {
       configureMergify(this, {
         approvedReviews: mergedOptions.autoMergeOptions?.approvedReviews,
+        trustedAuthors: mergedOptions.trustedAuthors,
       });
     }
   }
