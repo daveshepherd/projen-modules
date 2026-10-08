@@ -5727,6 +5727,7 @@ const cdkTypeScriptAppOptions: CdkTypeScriptAppOptions = { ... }
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.gitpod">gitpod</a></code> | <code>boolean</code> | Add a Gitpod development environment. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.homepage">homepage</a></code> | <code>string</code> | Package's Homepage / Website. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.integrationTestAutoDiscover">integrationTestAutoDiscover</a></code> | <code>boolean</code> | Automatically discovers and creates integration tests for each `.integ.ts` file in under your test directory. |
+| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.integRunnerVersion">integRunnerVersion</a></code> | <code>string</code> | Version of `@aws-cdk/integ-runner` to pin when `experimentalIntegRunner` is enabled. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.jest">jest</a></code> | <code>boolean</code> | Setup jest unit tests. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.jestOptions">jestOptions</a></code> | <code>projen.javascript.JestOptions</code> | Jest options. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.jsiiReleaseVersion">jsiiReleaseVersion</a></code> | <code>string</code> | Version requirement of `publib` which is used to publish modules to npm. |
@@ -6983,6 +6984,19 @@ public readonly integrationTestAutoDiscover: boolean;
 - *Default:* true
 
 Automatically discovers and creates integration tests for each `.integ.ts` file in under your test directory.
+
+---
+
+##### `integRunnerVersion`<sup>Optional</sup> <a name="integRunnerVersion" id="projen-modules.CdkTypeScriptAppOptions.property.integRunnerVersion"></a>
+
+```typescript
+public readonly integRunnerVersion: string;
+```
+
+- *Type:* string
+- *Default:* 2.205.6
+
+Version of `@aws-cdk/integ-runner` to pin when `experimentalIntegRunner` is enabled.
 
 ---
 

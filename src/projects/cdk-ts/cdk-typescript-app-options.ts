@@ -1280,6 +1280,11 @@ export interface CdkTypeScriptAppOptions {
    */
   readonly deployments?: Array<DeploymentEnvironment>;
   /**
+   * Version of `@aws-cdk/integ-runner` to pin when `experimentalIntegRunner` is enabled.
+   * @default 2.205.6
+   */
+  readonly integRunnerVersion?: string;
+  /**
    * List of teams used to generate the CODEOWNERS file
    */
   readonly codeOwners: Array<string>;

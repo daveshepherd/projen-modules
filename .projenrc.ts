@@ -169,6 +169,18 @@ new ProjenStruct(project, {
   })
   .add({
     docs: {
+      default: '2.205.6',
+      summary:
+        'Version of `@aws-cdk/integ-runner` to pin when `experimentalIntegRunner` is enabled.',
+    },
+    name: 'integRunnerVersion',
+    optional: true,
+    type: {
+      primitive: PrimitiveType.String,
+    },
+  })
+  .add({
+    docs: {
       summary: 'List of teams used to generate the CODEOWNERS file',
     },
     name: 'codeOwners',
