@@ -6,6 +6,7 @@ import {
 import { CdkTypeScriptAppOptions } from './cdk-typescript-app-options';
 import { CodeOwners } from '../../components/github/codeowners';
 import { CodeQl } from '../../components/github/codeql';
+import { addDeployments } from '../../components/github/deployments';
 import {
   autoMergeOptions,
   configureMergify,
@@ -61,6 +62,12 @@ export class CdkTypeScriptApp extends AwsCdkTypeScriptApp {
         languages: ['javascript-typescript', 'actions'],
       });
     }
+    addDeployments(this, {
+      deployments: mergedOptions.deployments ?? [],
+      nodeVersion: this.nodeVersion,
+      readme: this.readme,
+      releaseWorkflowName: mergedOptions.releaseWorkflowName,
+    });
     if (this.autoMerge) {
       configureMergify(this, {
         approvedReviews: mergedOptions.autoMergeOptions?.approvedReviews,
@@ -71,3 +78,4 @@ export class CdkTypeScriptApp extends AwsCdkTypeScriptApp {
 }
 
 export * from './cdk-typescript-app-options';
+export * from './deployment-environment';
