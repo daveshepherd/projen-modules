@@ -4,7 +4,7 @@ import { join } from 'path';
 import { github } from 'projen';
 import { LambdaRuntime } from 'projen/lib/awscdk';
 import { synthSnapshot } from 'projen/lib/util/synth';
-import { CdkTypeScriptApp } from '../../../src';
+import { CdkTypeScriptApp, DEFAULT_INTEG_RUNNER_VERSION } from '../../../src';
 
 describe('CDK Typescript App', () => {
   it('synthesizes', () => {
@@ -99,6 +99,99 @@ Deploy the CDK stack
 \`\`\`sh
 npx projen deploy
 \`\`\``);
+  });
+
+  describe('integ runner', () => {
+    const integPackages = [
+      '@aws-cdk/integ-runner',
+      '@aws-cdk/integ-tests-alpha',
+    ];
+
+    it('pins the integ dependencies and adds integ tasks', () => {
+      const project = new CdkTypeScriptApp({
+        cdkVersion: '2.272.0',
+        codeOwners: ['test'],
+        experimentalIntegRunner: true,
+        name: 'test-cdk',
+      });
+
+      const output = synthSnapshot(project);
+
+      const devDependencies = output['package.json'].devDependencies;
+      expect(devDependencies['@aws-cdk/integ-tests-alpha']).toBe(
+        '2.272.0-alpha.0',
+      );
+      expect(devDependencies['@aws-cdk/integ-runner']).toBe(
+        DEFAULT_INTEG_RUNNER_VERSION,
+      );
+      expect(DEFAULT_INTEG_RUNNER_VERSION).toBe('2.205.6');
+      for (const name of integPackages) {
+        expect(devDependencies[name]).not.toBe('latest');
+      }
+
+      const tasks = output['.projen/tasks.json'].tasks;
+      expect(tasks['integ:force'].steps).toEqual([
+        {
+          execArgs: ['integ-runner', '$@', '--language', 'typescript', '--force'],
+          receiveArgs: true,
+        },
+      ]);
+      expect(tasks['integ:watch'].steps).toEqual([
+        {
+          execArgs: ['integ-runner', '$@', '--language', 'typescript', '--watch'],
+          receiveArgs: true,
+        },
+      ]);
+      expect(tasks['integ:debug'].steps).toEqual([
+        {
+          execArgs: ['integ-runner', '$@', '--language', 'typescript', '-vv', '--inspect-failures'],
+          receiveArgs: true,
+        },
+      ]);
+
+      const upgradeFilter: string = tasks.upgrade.steps
+        .flatMap((step: { execArgs?: string[] }) => step.execArgs ?? [])
+        .find((arg: string) => arg.startsWith('--filter='));
+      expect(upgradeFilter).toBeDefined();
+      for (const name of integPackages) {
+        expect(upgradeFilter.split('=')[1].split(',')).not.toContain(name);
+      }
+
+      expect(output['README.md']).toContain('## Integration Tests');
+      expect(output).toMatchSnapshot();
+    });
+
+    it('pins integ-runner to integRunnerVersion', () => {
+      const project = new CdkTypeScriptApp({
+        cdkVersion: '2.272.0',
+        codeOwners: ['test'],
+        experimentalIntegRunner: true,
+        integRunnerVersion: '2.200.0',
+        name: 'test-cdk',
+      });
+
+      const output = synthSnapshot(project);
+
+      expect(
+        output['package.json'].devDependencies['@aws-cdk/integ-runner'],
+      ).toBe('2.200.0');
+    });
+
+    it('does not add the integ dependencies when integ runner is disabled', () => {
+      const project = new CdkTypeScriptApp({
+        cdkVersion: '2.272.0',
+        codeOwners: ['test'],
+        name: 'test-cdk',
+      });
+
+      const output = synthSnapshot(project);
+
+      for (const name of integPackages) {
+        expect(output['package.json'].devDependencies[name]).toBeUndefined();
+      }
+      expect(output['.projen/tasks.json'].tasks['integ:force']).toBeUndefined();
+      expect(output['README.md']).not.toContain('## Integration Tests');
+    });
   });
 
   describe('projen credentials', () => {
