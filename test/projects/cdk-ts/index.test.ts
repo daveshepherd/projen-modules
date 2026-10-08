@@ -1,4 +1,8 @@
+import { mkdirSync, mkdtempSync, writeFileSync } from 'fs';
+import { tmpdir } from 'os';
+import { join } from 'path';
 import { github } from 'projen';
+import { LambdaRuntime } from 'projen/lib/awscdk';
 import { synthSnapshot } from 'projen/lib/util/synth';
 import { CdkTypeScriptApp } from '../../../src';
 
@@ -33,6 +37,24 @@ describe('CDK Typescript App', () => {
 \`\`\`sh
 yarn install
 npx projen build
+\`\`\`
+
+## CDK
+
+On first run of a CDK installation:
+
+\`\`\`sh
+npx cdk bootstrap
+\`\`\`
+
+Build the project
+\`\`\`sh
+npx projen build
+\`\`\`
+
+Deploy the CDK stack
+\`\`\`sh
+npx projen deploy
 \`\`\``);
   });
 
@@ -58,6 +80,24 @@ A test project description.
 \`\`\`sh
 yarn install
 npx projen build
+\`\`\`
+
+## CDK
+
+On first run of a CDK installation:
+
+\`\`\`sh
+npx cdk bootstrap
+\`\`\`
+
+Build the project
+\`\`\`sh
+npx projen build
+\`\`\`
+
+Deploy the CDK stack
+\`\`\`sh
+npx projen deploy
 \`\`\``);
   });
 
@@ -111,6 +151,88 @@ npx projen build
       });
 
       expect(project.github?.projenCredentials).toBe(credentials);
+    });
+  });
+
+  describe('defaults', () => {
+    const baseOptions = {
+      cdkVersion: '2.1.0',
+      codeOwners: ['test'],
+      name: 'test-cdk',
+    };
+
+    const devDependencies = (project: CdkTypeScriptApp) =>
+      synthSnapshot(project)['package.json'].devDependencies;
+
+    const synthLambda = (options: Partial<typeof baseOptions> & object) => {
+      const outdir = mkdtempSync(join(tmpdir(), 'cdk-ts-'));
+      mkdirSync(join(outdir, 'src'));
+      writeFileSync(join(outdir, 'src', 'hello.lambda.ts'), '');
+      const project = new CdkTypeScriptApp({
+        ...baseOptions,
+        ...options,
+        outdir,
+        sampleCode: false,
+      });
+      return synthSnapshot(project)['src/hello-function.ts'];
+    };
+
+    it('uses the Node.js 24 lambda runtime', () => {
+      expect(synthLambda({})).toContain("new lambda.Runtime('nodejs24.x'");
+    });
+
+    it('can override the lambda runtime', () => {
+      expect(
+        synthLambda({
+          lambdaOptions: { runtime: LambdaRuntime.NODEJS_22_X },
+        }),
+      ).toContain("new lambda.Runtime('nodejs22.x'");
+    });
+
+    it('uses @types/node 24 and jest 30', () => {
+      const deps = devDependencies(new CdkTypeScriptApp(baseOptions));
+
+      expect(deps['@types/node']).toBe('^24');
+      expect(deps.jest).toBe('^30');
+      expect(deps['@types/jest']).toBe('^30');
+      expect(deps['ts-jest']).toBe('^29');
+    });
+
+    it('can override @types/node with devDeps', () => {
+      const deps = devDependencies(
+        new CdkTypeScriptApp({ ...baseOptions, devDeps: ['@types/node@^22'] }),
+      );
+
+      expect(deps['@types/node']).toBe('^22');
+    });
+
+    it('derives @types/node from minNodeVersion', () => {
+      const deps = devDependencies(
+        new CdkTypeScriptApp({ ...baseOptions, minNodeVersion: '22.0.0' }),
+      );
+
+      expect(deps['@types/node']).toBe('^22');
+    });
+
+    it('keeps jest 30 when other jest options are set', () => {
+      const project = new CdkTypeScriptApp({
+        ...baseOptions,
+        jestOptions: { jestConfig: { testTimeout: 1000 } },
+      });
+
+      expect(devDependencies(project).jest).toBe('^30');
+      expect(project.jest?.config.testTimeout).toBe(1000);
+    });
+
+    it('can override the jest version', () => {
+      const deps = devDependencies(
+        new CdkTypeScriptApp({
+          ...baseOptions,
+          jestOptions: { jestVersion: '^29' },
+        }),
+      );
+
+      expect(deps.jest).toBe('^29');
     });
   });
 });

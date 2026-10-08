@@ -6,6 +6,9 @@
 
 A CDK application in TypeScript.
 
+Defaults to the Node.js 24 Lambda runtime (`lambdaOptions.runtime`) with
+matching `@types/node`, and Jest 30 (`jestOptions.jestVersion`).
+
 #### Initializers <a name="Initializers" id="projen-modules.CdkTypeScriptApp.Initializer"></a>
 
 ```typescript

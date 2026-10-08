@@ -91,3 +91,11 @@ All source is located in `src` and is grouped by:
 * `utils` - these are helper functions that are often reused
 
 `test` contains tests, and mirrors the `src` directory structure. Within here there are `__snapshots__` which contain snapshots of project tests (see #section).
+
+## Known Issues
+
+`cdk-typescript-app` defaults to Jest 30, which hoists `@sinonjs/fake-timers` 15 whose bundled types conflict with the `@types/sinon` used by `aws-sdk-client-mock`. Projects using `aws-sdk-client-mock` can set `compilerOptions.skipLibCheck` on the test tsconfig:
+
+```ts
+project.tryFindObjectFile('test/tsconfig.json')?.addOverride('compilerOptions.skipLibCheck', true);
+```
