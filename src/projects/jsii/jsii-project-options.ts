@@ -121,7 +121,7 @@ export interface JsiiProjectOptions {
   /**
    * Type-check the test suite as part of the `test` task.
    * Adds a `tsc --noEmit` step against the development tsconfig.
-   * @default false
+   * @default true
    * @stability experimental
    */
   readonly typecheckTests?: boolean;

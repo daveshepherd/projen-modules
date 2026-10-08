@@ -59,4 +59,34 @@ yarn install
 npx projen build
 \`\`\``);
   });
+
+  it('type-checks the tests before running them', () => {
+    const project = new NpmPackage({
+      codeOwners: ['test'],
+      defaultReleaseBranch: 'main',
+      name: 'test-npm',
+    });
+
+    const output = synthSnapshot(project);
+
+    expect(output['.projen/tasks.json'].tasks.test.steps[0]).toEqual({
+      name: 'Type-check the test suite',
+      execArgs: ['tsc', '--noEmit', '-p', 'test/tsconfig.json'],
+    });
+  });
+
+  it('can disable type-checking the tests', () => {
+    const project = new NpmPackage({
+      codeOwners: ['test'],
+      defaultReleaseBranch: 'main',
+      name: 'test-npm',
+      typecheckTests: false,
+    });
+
+    const output = synthSnapshot(project);
+
+    expect(output['.projen/tasks.json'].tasks.test.steps).not.toContainEqual(
+      expect.objectContaining({ name: 'Type-check the test suite' }),
+    );
+  });
 });

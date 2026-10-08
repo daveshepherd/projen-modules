@@ -22,6 +22,9 @@ function getOptions(options: JsiiProjectOptions) {
     projenrcTs: true,
     // authenticate as the GitHub App, so mergify can approve upgrade pull requests
     projenCredentials: github.GithubCredentials.fromApp({}),
+    // ts-jest skips type-checking under the isolatedModules setting of the jsii dev tsconfig,
+    // and jsii only compiles src, so type-check the test suite first
+    typecheckTests: true,
   } satisfies Partial<JsiiProjectOptions>;
 
   return mergeOptions(defaults, options);

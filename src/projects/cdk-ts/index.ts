@@ -40,6 +40,8 @@ function getOptions(options: CdkTypeScriptAppOptions) {
     // match the lambda runtime, unless derived from minNodeVersion; a consumer
     // @types/node in devDeps is added later, so replaces this one
     devDeps: options.minNodeVersion ? [] : ['@types/node@^24'],
+    // ts-jest only reports type errors in the files a test run loads, so type-check the whole suite first
+    typecheckTests: true,
   } satisfies Partial<CdkTypeScriptAppOptions>;
 
   return mergeOptions(defaults, options);

@@ -22,6 +22,8 @@ function getOptions(options: NpmPackageOptions) {
     gitignore: ['.npmrc', '.vscode'],
     pullRequestTemplateContents: DEFAULT_PULL_REQUEST_TEMPLATE,
     projenrcTs: true,
+    // ts-jest only reports type errors in the files a test run loads, so type-check the whole suite first
+    typecheckTests: true,
   } satisfies Partial<NpmPackageOptions>;
 
   return mergeOptions(defaults, options);

@@ -118,4 +118,40 @@ A test project description.
 
     expect(output['.mergify.yml']).not.toBeDefined();
   });
+
+  it('type-checks the tests before running them', () => {
+    const project = new JsiiProject({
+      author: 'Test',
+      authorAddress: 'test@example.com',
+      codeOwners: ['test'],
+      defaultReleaseBranch: 'main',
+      name: 'test-jsii',
+      repositoryUrl: 'test.com',
+    });
+
+    const output = synthSnapshot(project);
+
+    expect(output['.projen/tasks.json'].tasks.test.steps[0]).toEqual({
+      name: 'Type-check the test suite',
+      execArgs: ['tsc', '--noEmit', '-p', 'test/tsconfig.json'],
+    });
+  });
+
+  it('can disable type-checking the tests', () => {
+    const project = new JsiiProject({
+      author: 'Test',
+      authorAddress: 'test@example.com',
+      codeOwners: ['test'],
+      defaultReleaseBranch: 'main',
+      name: 'test-jsii',
+      repositoryUrl: 'test.com',
+      typecheckTests: false,
+    });
+
+    const output = synthSnapshot(project);
+
+    expect(output['.projen/tasks.json'].tasks.test.steps).not.toContainEqual(
+      expect.objectContaining({ name: 'Type-check the test suite' }),
+    );
+  });
 });
