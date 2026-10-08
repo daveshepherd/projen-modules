@@ -18,6 +18,8 @@ function getOptions(options: PythonPackageOptions) {
     name,
     pullRequestTemplate: true,
     pullRequestTemplateContents: DEFAULT_PULL_REQUEST_TEMPLATE,
+    // authenticate as the GitHub App, so mergify can approve upgrade pull requests
+    projenCredentials: github.GithubCredentials.fromApp({}),
   } satisfies Partial<PythonPackageOptions>;
 
   return mergeOptions(defaults, options);

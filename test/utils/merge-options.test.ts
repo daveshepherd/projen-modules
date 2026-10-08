@@ -1,5 +1,9 @@
 import { mergeOptions } from '../../src/utils/merge-options';
 
+class Credentials {
+  constructor(readonly kind: string) {}
+}
+
 describe('mergeOptions', () => {
   it('should merge two objects with non-overlapping keys', () => {
     const obj1: Record<string, unknown> = { a: 1, b: 2 };
@@ -49,5 +53,25 @@ describe('mergeOptions', () => {
     const result = mergeOptions(obj1, obj2);
 
     expect(result).toEqual({ a: 1, b: 2 });
+  });
+
+  it('should replace a class instance rather than merge it', () => {
+    const obj1: Record<string, unknown> = {
+      a: { credentials: new Credentials('app') },
+    };
+    const obj2 = { a: { credentials: new Credentials('token') } };
+    const result = mergeOptions(obj1, obj2);
+
+    expect(result.a.credentials).toBeInstanceOf(Credentials);
+    expect(result.a.credentials).toBe(obj2.a.credentials);
+  });
+
+  it('should keep a default class instance when options does not set it', () => {
+    const defaults = { a: { credentials: new Credentials('app') } };
+    const result = mergeOptions(defaults, { a: { other: true } });
+
+    expect(result.a.credentials).toBeInstanceOf(Credentials);
+    expect(result.a.credentials).toBe(defaults.a.credentials);
+    expect(result.a).toEqual({ credentials: defaults.a.credentials, other: true });
   });
 });

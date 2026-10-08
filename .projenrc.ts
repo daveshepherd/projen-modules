@@ -130,6 +130,12 @@ new ProjenStruct(project, {
     },
   })
   .update('defaultReleaseBranch', { optional: true })
+  .update('projenCredentials', {
+    docs: {
+      default:
+        '- authenticate as a GitHub App using the PROJEN_APP_ID and PROJEN_APP_PRIVATE_KEY secrets',
+    },
+  })
   .replace('readme', {
     docs: {
       summary: 'Configuration of the README.md file',
@@ -187,6 +193,12 @@ new ProjenStruct(project, {
     },
   })
   .update('defaultReleaseBranch', { optional: true })
+  .update('projenCredentials', {
+    docs: {
+      default:
+        '- authenticate as a GitHub App using the PROJEN_APP_ID and PROJEN_APP_PRIVATE_KEY secrets',
+    },
+  })
   .replace('readme', {
     docs: {
       summary: 'Configuration of the README.md file',
@@ -286,6 +298,12 @@ new ProjenStruct(project, {
     optional: true,
     type: {
       primitive: PrimitiveType.Boolean,
+    },
+  })
+  .update('projenCredentials', {
+    docs: {
+      default:
+        '- authenticate as a GitHub App using the PROJEN_APP_ID and PROJEN_APP_PRIVATE_KEY secrets',
     },
   })
   .replace('readme', {

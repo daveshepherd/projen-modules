@@ -1,4 +1,4 @@
-import { cdk } from 'projen';
+import { cdk, github } from 'projen';
 import { JsiiProjectOptions } from './jsii-project-options';
 import { CodeOwners } from '../../components/github/codeowners';
 import { CodeQl } from '../../components/github/codeql';
@@ -20,6 +20,8 @@ function getOptions(options: JsiiProjectOptions) {
     gitignore: ['.npmrc', '.vscode'],
     pullRequestTemplateContents: DEFAULT_PULL_REQUEST_TEMPLATE,
     projenrcTs: true,
+    // authenticate as the GitHub App, so mergify can approve upgrade pull requests
+    projenCredentials: github.GithubCredentials.fromApp({}),
   } satisfies Partial<JsiiProjectOptions>;
 
   return mergeOptions(defaults, options);
