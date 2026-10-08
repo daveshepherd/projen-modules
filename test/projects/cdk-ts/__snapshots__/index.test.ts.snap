@@ -669,10 +669,12 @@ CODEOWNERS
       {
         "name": "@types/jest",
         "type": "build",
+        "version": "^30",
       },
       {
         "name": "@types/node",
         "type": "build",
+        "version": "^24",
       },
       {
         "name": "@typescript-eslint/eslint-plugin",
@@ -707,13 +709,14 @@ CODEOWNERS
         "version": "^9",
       },
       {
-        "name": "jest",
-        "type": "build",
-      },
-      {
         "name": "jest-junit",
         "type": "build",
         "version": "^17",
+      },
+      {
+        "name": "jest",
+        "type": "build",
+        "version": "^30",
       },
       {
         "name": "projen",
@@ -722,6 +725,7 @@ CODEOWNERS
       {
         "name": "ts-jest",
         "type": "build",
+        "version": "^29",
       },
       {
         "name": "ts-node",
@@ -1051,7 +1055,7 @@ CODEOWNERS
               "--peer",
               "--no-deprecated",
               "--dep=dev,prod,peer,optional",
-              "--filter=@types/jest,@types/node,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,ts-jest,ts-node,typescript",
+              "--filter=esbuild,eslint-import-resolver-typescript,eslint-plugin-import,projen,ts-node,typescript",
             ],
           },
           {
@@ -1071,8 +1075,8 @@ CODEOWNERS
               "eslint-import-resolver-typescript",
               "eslint-plugin-import",
               "eslint",
-              "jest",
               "jest-junit",
+              "jest",
               "projen",
               "ts-jest",
               "ts-node",
@@ -1323,6 +1327,24 @@ yarn install
 npx projen build
 \`\`\`
 
+## CDK
+
+On first run of a CDK installation:
+
+\`\`\`sh
+npx cdk bootstrap
+\`\`\`
+
+Build the project
+\`\`\`sh
+npx projen build
+\`\`\`
+
+Deploy the CDK stack
+\`\`\`sh
+npx projen deploy
+\`\`\`
+
 ## GitHub Configuration
 
 All pull requests are merged by the [Mergify](https://mergify.com) merge queue, configured in \`.mergify.yml\`. Once a pull request is approved and its checks pass, Mergify queues it, brings it up to date with the default branch, waits for the checks again and squash merges it. Draft pull requests and those labelled \`do-not-merge\` are not merged.
@@ -1393,8 +1415,8 @@ A repository with a single maintainer, who cannot approve their own pull request
     },
     "devDependencies": {
       "@stylistic/eslint-plugin": "^2",
-      "@types/jest": "*",
-      "@types/node": "*",
+      "@types/jest": "^30",
+      "@types/node": "^24",
       "@typescript-eslint/eslint-plugin": "^8",
       "@typescript-eslint/parser": "^8",
       "aws-cdk": "^2",
@@ -1402,10 +1424,10 @@ A repository with a single maintainer, who cannot approve their own pull request
       "eslint": "^9",
       "eslint-import-resolver-typescript": "*",
       "eslint-plugin-import": "*",
-      "jest": "*",
+      "jest": "^30",
       "jest-junit": "^17",
       "projen": "*",
-      "ts-jest": "*",
+      "ts-jest": "^29",
       "ts-node": "*",
       "typescript": "*",
     },
