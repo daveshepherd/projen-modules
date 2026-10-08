@@ -1090,7 +1090,7 @@ export interface JsiiProjectOptions {
   readonly readme?: ReadmeOptions;
   /**
    * Choose a method of providing GitHub API access for projen workflows.
-   * @default - use a personal access token named PROJEN_GITHUB_TOKEN
+   * @default - authenticate as a GitHub App using the PROJEN_APP_ID and PROJEN_APP_PRIVATE_KEY secrets
    * @stability experimental
    */
   readonly projenCredentials?: github.GithubCredentials;

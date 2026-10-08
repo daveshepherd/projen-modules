@@ -1,3 +1,4 @@
+import { github } from 'projen';
 import {
   AwsCdkTypeScriptApp,
   AwsCdkTypeScriptAppOptions,
@@ -22,6 +23,8 @@ function getOptions(options: CdkTypeScriptAppOptions) {
     gitignore: ['.npmrc', '.vscode'],
     pullRequestTemplateContents: DEFAULT_PULL_REQUEST_TEMPLATE,
     projenrcTs: true,
+    // authenticate as the GitHub App, so mergify can approve upgrade pull requests
+    projenCredentials: github.GithubCredentials.fromApp({}),
   } satisfies Partial<CdkTypeScriptAppOptions>;
 
   return mergeOptions(defaults, options);

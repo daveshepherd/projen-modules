@@ -7562,7 +7562,7 @@ public readonly projenCredentials: GithubCredentials;
 ```
 
 - *Type:* projen.github.GithubCredentials
-- *Default:* use a personal access token named PROJEN_GITHUB_TOKEN
+- *Default:* authenticate as a GitHub App using the PROJEN_APP_ID and PROJEN_APP_PRIVATE_KEY secrets
 
 Choose a method of providing GitHub API access for projen workflows.
 
@@ -10209,7 +10209,7 @@ public readonly projenCredentials: GithubCredentials;
 ```
 
 - *Type:* projen.github.GithubCredentials
-- *Default:* use a personal access token named PROJEN_GITHUB_TOKEN
+- *Default:* authenticate as a GitHub App using the PROJEN_APP_ID and PROJEN_APP_PRIVATE_KEY secrets
 
 Choose a method of providing GitHub API access for projen workflows.
 
@@ -14016,7 +14016,7 @@ public readonly projenCredentials: GithubCredentials;
 ```
 
 - *Type:* projen.github.GithubCredentials
-- *Default:* use a personal access token named PROJEN_GITHUB_TOKEN
+- *Default:* authenticate as a GitHub App using the PROJEN_APP_ID and PROJEN_APP_PRIVATE_KEY secrets
 
 Choose a method of providing GitHub API access for projen workflows.
 
