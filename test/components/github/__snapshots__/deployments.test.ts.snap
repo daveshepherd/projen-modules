@@ -205,6 +205,24 @@ yarn install
 npx projen build
 \`\`\`
 
+## CDK
+
+On first run of a CDK installation:
+
+\`\`\`sh
+npx cdk bootstrap
+\`\`\`
+
+Build the project
+\`\`\`sh
+npx projen build
+\`\`\`
+
+Deploy the CDK stack
+\`\`\`sh
+npx projen deploy
+\`\`\`
+
 ## Deployment
 
 After each release, the release workflow deploys to these GitHub environments in order, each after the previous one succeeds:
