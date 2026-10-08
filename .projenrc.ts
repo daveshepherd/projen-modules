@@ -137,6 +137,21 @@ new ProjenStruct(project, {
       primitive: PrimitiveType.Boolean,
     },
   })
+  .add({
+    docs: {
+      default: '[]',
+      summary:
+        'Environments to deploy to from the release workflow, one job each, chained in array order.',
+    },
+    name: 'deployments',
+    optional: true,
+    type: {
+      collection: {
+        kind: CollectionKind.Array,
+        elementtype: { fqn: 'projen-modules.DeploymentEnvironment' },
+      },
+    },
+  })
   .update('defaultReleaseBranch', { optional: true })
   .update('projenCredentials', {
     docs: {

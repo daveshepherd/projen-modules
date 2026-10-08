@@ -5699,6 +5699,7 @@ const cdkTypeScriptAppOptions: CdkTypeScriptAppOptions = { ... }
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.deleteOrphanedLockFiles">deleteOrphanedLockFiles</a></code> | <code>boolean</code> | Automatically delete lockfiles from package managers that are not the active one. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.dependabot">dependabot</a></code> | <code>boolean</code> | Use dependabot to handle dependency upgrades. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.dependabotOptions">dependabotOptions</a></code> | <code>projen.github.DependabotOptions</code> | Options for dependabot. |
+| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.deployments">deployments</a></code> | <code><a href="#projen-modules.DeploymentEnvironment">DeploymentEnvironment</a>[]</code> | Environments to deploy to from the release workflow, one job each, chained in array order. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.deps">deps</a></code> | <code>string[]</code> | Runtime dependencies of this module. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.depsUpgrade">depsUpgrade</a></code> | <code>boolean</code> | Use tasks and github workflows to handle dependency upgrades. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.depsUpgradeOptions">depsUpgradeOptions</a></code> | <code>projen.javascript.UpgradeDependenciesOptions</code> | Options for `UpgradeDependencies`. |
@@ -6596,6 +6597,19 @@ public readonly dependabotOptions: DependabotOptions;
 - *Default:* default options
 
 Options for dependabot.
+
+---
+
+##### `deployments`<sup>Optional</sup> <a name="deployments" id="projen-modules.CdkTypeScriptAppOptions.property.deployments"></a>
+
+```typescript
+public readonly deployments: DeploymentEnvironment[];
+```
+
+- *Type:* <a href="#projen-modules.DeploymentEnvironment">DeploymentEnvironment</a>[]
+- *Default:* []
+
+Environments to deploy to from the release workflow, one job each, chained in array order.
 
 ---
 
@@ -8372,6 +8386,109 @@ public readonly yarnBerryOptions: YarnBerryOptions;
 - *Default:* Yarn Berry v4 with all default options
 
 Options for Yarn Berry.
+
+---
+
+### DeploymentEnvironment <a name="DeploymentEnvironment" id="projen-modules.DeploymentEnvironment"></a>
+
+An environment that the release workflow deploys the CDK app to.
+
+#### Initializer <a name="Initializer" id="projen-modules.DeploymentEnvironment.Initializer"></a>
+
+```typescript
+import { DeploymentEnvironment } from 'projen-modules'
+
+const deploymentEnvironment: DeploymentEnvironment = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#projen-modules.DeploymentEnvironment.property.environment">environment</a></code> | <code>string</code> | The GitHub environment the deploy job runs in, which also names the job `deploy_<environment>`. |
+| <code><a href="#projen-modules.DeploymentEnvironment.property.region">region</a></code> | <code>string</code> | The AWS region to deploy to. |
+| <code><a href="#projen-modules.DeploymentEnvironment.property.env">env</a></code> | <code>{[ key: string ]: string}</code> | Environment variables for the deploy step, whose values may reference secrets, e.g. `${{ secrets.ALERT_EMAIL }}`. |
+| <code><a href="#projen-modules.DeploymentEnvironment.property.name">name</a></code> | <code>string</code> | The display name of the deploy job. |
+| <code><a href="#projen-modules.DeploymentEnvironment.property.requireApproval">requireApproval</a></code> | <code>string</code> | The `--require-approval` level passed to `cdk deploy`. |
+| <code><a href="#projen-modules.DeploymentEnvironment.property.roleSecret">roleSecret</a></code> | <code>string</code> | The secret holding the ARN of the IAM role that the deploy job assumes, through GitHub's OIDC provider. |
+
+---
+
+##### `environment`<sup>Required</sup> <a name="environment" id="projen-modules.DeploymentEnvironment.property.environment"></a>
+
+```typescript
+public readonly environment: string;
+```
+
+- *Type:* string
+
+The GitHub environment the deploy job runs in, which also names the job `deploy_<environment>`.
+
+Only letters, digits, `_` and `-` are allowed, so that it makes a valid job id.
+
+---
+
+##### `region`<sup>Required</sup> <a name="region" id="projen-modules.DeploymentEnvironment.property.region"></a>
+
+```typescript
+public readonly region: string;
+```
+
+- *Type:* string
+
+The AWS region to deploy to.
+
+---
+
+##### `env`<sup>Optional</sup> <a name="env" id="projen-modules.DeploymentEnvironment.property.env"></a>
+
+```typescript
+public readonly env: {[ key: string ]: string};
+```
+
+- *Type:* {[ key: string ]: string}
+- *Default:* {}
+
+Environment variables for the deploy step, whose values may reference secrets, e.g. `${{ secrets.ALERT_EMAIL }}`.
+
+---
+
+##### `name`<sup>Optional</sup> <a name="name" id="projen-modules.DeploymentEnvironment.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+- *Default:* 'Deploy to <Environment>'
+
+The display name of the deploy job.
+
+---
+
+##### `requireApproval`<sup>Optional</sup> <a name="requireApproval" id="projen-modules.DeploymentEnvironment.property.requireApproval"></a>
+
+```typescript
+public readonly requireApproval: string;
+```
+
+- *Type:* string
+- *Default:* 'never'
+
+The `--require-approval` level passed to `cdk deploy`.
+
+---
+
+##### `roleSecret`<sup>Optional</sup> <a name="roleSecret" id="projen-modules.DeploymentEnvironment.property.roleSecret"></a>
+
+```typescript
+public readonly roleSecret: string;
+```
+
+- *Type:* string
+- *Default:* 'AWS_DEPLOYMENT_ROLE_ARN'
+
+The secret holding the ARN of the IAM role that the deploy job assumes, through GitHub's OIDC provider.
 
 ---
 
