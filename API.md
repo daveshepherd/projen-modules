@@ -8214,7 +8214,7 @@ public readonly typecheckTests: boolean;
 ```
 
 - *Type:* boolean
-- *Default:* false
+- *Default:* true
 
 Type-check the test suite as part of the `test` task.
 
@@ -11001,7 +11001,7 @@ public readonly typecheckTests: boolean;
 ```
 
 - *Type:* boolean
-- *Default:* false
+- *Default:* true
 
 Type-check the test suite as part of the `test` task.
 
@@ -13453,7 +13453,7 @@ public readonly typecheckTests: boolean;
 ```
 
 - *Type:* boolean
-- *Default:* false
+- *Default:* true
 
 Type-check the test suite as part of the `test` task.
 

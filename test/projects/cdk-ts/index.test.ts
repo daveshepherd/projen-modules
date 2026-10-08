@@ -1,10 +1,22 @@
-import { mkdirSync, mkdtempSync, writeFileSync } from 'fs';
+import { spawnSync } from 'child_process';
+import {
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  symlinkSync,
+  writeFileSync,
+} from 'fs';
 import { tmpdir } from 'os';
-import { join } from 'path';
+import { join, resolve } from 'path';
 import { github } from 'projen';
 import { LambdaRuntime } from 'projen/lib/awscdk';
 import { synthSnapshot } from 'projen/lib/util/synth';
-import { CdkTypeScriptApp, DEFAULT_INTEG_RUNNER_VERSION } from '../../../src';
+import {
+  CdkTypeScriptApp,
+  CdkTypeScriptAppOptions,
+  DEFAULT_INTEG_RUNNER_VERSION,
+} from '../../../src';
 
 describe('CDK Typescript App', () => {
   it('synthesizes', () => {
@@ -194,6 +206,111 @@ npx projen deploy
     });
   });
 
+  it('type-checks the tests before running them', () => {
+    const project = new CdkTypeScriptApp({
+      cdkVersion: '2.1.0',
+      codeOwners: ['test'],
+      name: 'test-cdk',
+    });
+
+    const output = synthSnapshot(project);
+
+    expect(output['.projen/tasks.json'].tasks.test.steps[0]).toEqual({
+      name: 'Type-check the test suite',
+      execArgs: ['tsc', '--noEmit', '-p', 'test/tsconfig.json'],
+    });
+  });
+
+  it('can disable type-checking the tests', () => {
+    const project = new CdkTypeScriptApp({
+      cdkVersion: '2.1.0',
+      codeOwners: ['test'],
+      name: 'test-cdk',
+      typecheckTests: false,
+    });
+
+    const output = synthSnapshot(project);
+
+    expect(output['.projen/tasks.json'].tasks.test.steps).not.toContainEqual(
+      expect.objectContaining({ name: 'Type-check the test suite' }),
+    );
+  });
+
+  describe('type-check step', () => {
+    let outdir: string;
+    let typecheckArgs: string[];
+
+    beforeAll(() => {
+      outdir = mkdtempSync(join(tmpdir(), 'projen-modules-typecheck-'));
+      const project = new CdkTypeScriptApp({
+        cdkVersion: '2.1.0',
+        codeOwners: ['test'],
+        name: 'test-cdk',
+        outdir,
+        // the sample code imports aws-cdk-lib, which is not installed here
+        sampleCode: false,
+      });
+      const disablePost = process.env.PROJEN_DISABLE_POST;
+      process.env.PROJEN_DISABLE_POST = 'true';
+      try {
+        project.synth();
+      } finally {
+        if (disablePost === undefined) {
+          delete process.env.PROJEN_DISABLE_POST;
+        } else {
+          process.env.PROJEN_DISABLE_POST = disablePost;
+        }
+      }
+      // resolve the jest and node types from this repository
+      symlinkSync(
+        resolve(__dirname, '../../../node_modules'),
+        join(outdir, 'node_modules'),
+        'dir',
+      );
+      mkdirSync(join(outdir, 'test'), { recursive: true });
+
+      const tasks = JSON.parse(
+        readFileSync(join(outdir, '.projen/tasks.json'), 'utf-8'),
+      );
+      const [command, ...args] = tasks.tasks.test.steps[0].execArgs;
+      expect(command).toBe('tsc');
+      typecheckArgs = args;
+    });
+
+    afterAll(() => {
+      rmSync(outdir, { force: true, recursive: true });
+    });
+
+    function typecheck(testSource: string) {
+      writeFileSync(join(outdir, 'test/typed.test.ts'), testSource);
+      return spawnSync(
+        process.execPath,
+        [require.resolve('typescript/bin/tsc'), ...typecheckArgs],
+        { cwd: outdir, encoding: 'utf-8' },
+      );
+    }
+
+    it('passes well-typed tests', () => {
+      const result = typecheck(
+        "test('typed', () => {\n  const count: number = 1;\n  expect(count).toBe(1);\n});\n",
+      );
+
+      expect(result.stdout).toBe('');
+      expect(result.status).toBe(0);
+    });
+
+    it('fails tests with type errors', () => {
+      const result = typecheck(
+        "test('typed', () => {\n  const count: number = 'one';\n  expect(count).toBe('one');\n});\n",
+      );
+
+      expect(result.stdout).toContain(
+        "test/typed.test.ts(2,9): error TS2322: Type 'string' is not assignable to type 'number'.",
+      );
+      expect(result.status).not.toBe(0);
+    });
+  });
+
   describe('projen credentials', () => {
     const baseOptions = {
       cdkVersion: '2.1.0',
@@ -257,7 +374,7 @@ npx projen deploy
     const devDependencies = (project: CdkTypeScriptApp) =>
       synthSnapshot(project)['package.json'].devDependencies;
 
-    const synthLambda = (options: Partial<typeof baseOptions> & object) => {
+    const synthLambda = (options: Partial<CdkTypeScriptAppOptions>) => {
       const outdir = mkdtempSync(join(tmpdir(), 'cdk-ts-'));
       mkdirSync(join(outdir, 'src'));
       writeFileSync(join(outdir, 'src', 'hello.lambda.ts'), '');

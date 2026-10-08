@@ -1315,6 +1315,15 @@ CODEOWNERS
         "steps": [
           {
             "execArgs": [
+              "tsc",
+              "--noEmit",
+              "-p",
+              "test/tsconfig.json",
+            ],
+            "name": "Type-check the test suite",
+          },
+          {
+            "execArgs": [
               "jest",
               "--passWithNoTests",
               "--updateSnapshot",
