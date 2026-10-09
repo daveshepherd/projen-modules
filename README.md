@@ -26,6 +26,33 @@ Types of testing:
 * Unit tests - these assert on specific functionality of the project and should be written for any new functionality added.
 
 
+## Creating a New Project
+
+
+```
+npx projen new {project} --from projen-modules
+```
+
+Some projects may have required fields that need to be specified as part of this command, review any errors for details what needs to be specified.
+
+### Project Types
+
+| Project type                                   | Description                |
+| ---------------------------------------------- | -------------------------- |
+| [cdk-typescript-app](API.md#cdktypescriptapp-) | A typescript CDK app |
+| [npm-package](API.md#npmpackage-)              | A typescript npm package   |
+| [python-package](API.md#pythonpackage-)        | A python package           |
+| [jsii-package](API.md#jsiiproject-)            | A typescript JSII package  |
+
+## Project Structure
+
+All source is located in `src` and is grouped by:
+* `components` - these are common building blocks that can be used by projects to implement specific project functionality.
+* `projects` - these are projects that can be built from this project (see #something)
+* `utils` - these are helper functions that are often reused
+
+`test` contains tests, and mirrors the `src` directory structure. Within here there are `__snapshots__` which contain snapshots of project tests (see #section).
+
 ## GitHub Configuration
 
 All pull requests are merged by the [Mergify](https://mergify.com) merge queue, configured in `.mergify.yml`. Once a pull request is approved, or is opened by `daveshepherd`, and its checks pass, Mergify queues it, brings it up to date with the default branch, waits for the checks again and squash merges it. Draft pull requests and those labelled `do-not-merge` are not merged.
@@ -64,33 +91,6 @@ In **Settings → Rules → Rulesets**, create a branch ruleset with enforcement
 Do not enable GitHub's own **Require merge queue** rule, as it competes with Mergify.
 
 If the queue is unavailable and a change has to be merged, add yourself to the bypass list temporarily and remove yourself afterwards.
-
-## Creating a New Project
-
-
-```
-npx projen new {project} --from projen-modules
-```
-
-Some projects may have required fields that need to be specified as part of this command, review any errors for details what needs to be specified.
-
-### Project Types
-
-| Project type                                   | Description                |
-| ---------------------------------------------- | -------------------------- |
-| [cdk-typescript-app](API.md#cdktypescriptapp-) | A typescript CDK app |
-| [npm-package](API.md#npmpackage-)              | A typescript npm package   |
-| [python-package](API.md#pythonpackage-)        | A python package           |
-| [jsii-package](API.md#jsiiproject-)            | A typescript JSII package  |
-
-## Project Structure
-
-All source is located in `src` and is grouped by:
-* `components` - these are common building blocks that can be used by projects to implement specific project functionality.
-* `projects` - these are projects that can be built from this project (see #something)
-* `utils` - these are helper functions that are often reused
-
-`test` contains tests, and mirrors the `src` directory structure. Within here there are `__snapshots__` which contain snapshots of project tests (see #section).
 
 ## Known Issues
 

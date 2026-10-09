@@ -13,7 +13,8 @@ import {
   configureMergify,
 } from '../../components/github/mergify';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
-import { Readme } from '../../components/readme';
+import { Readme, ReadmeOrder } from '../../components/readme';
+import { gettingStartedCommands } from '../../components/readme/getting-started';
 import { mergeOptions } from '../../utils/merge-options';
 
 /**
@@ -70,10 +71,9 @@ export class CdkTypeScriptApp extends AwsCdkTypeScriptApp {
     this.readme = new Readme(this, {
       description: mergedOptions.readme?.description,
     });
-    this.readme.addSection(
-      'Getting Started',
-      '```sh\nyarn install\nnpx projen build\n```',
-    );
+    this.readme.addSection('Getting Started', gettingStartedCommands(this), {
+      order: ReadmeOrder.INTRODUCTION,
+    });
     this.readme.addSection(
       'CDK',
       `On first run of a CDK installation:
@@ -91,6 +91,7 @@ Deploy the CDK stack
 \`\`\`sh
 npx projen deploy
 \`\`\``,
+      { order: ReadmeOrder.USAGE },
     );
     if (mergedOptions.experimentalIntegRunner) {
       this.configureIntegRunner(
@@ -106,7 +107,6 @@ npx projen deploy
     addDeployments(this, {
       deployments: mergedOptions.deployments ?? [],
       nodeVersion: this.nodeVersion,
-      readme: this.readme,
       releaseWorkflowName: mergedOptions.releaseWorkflowName,
     });
     if (this.autoMerge) {
@@ -171,6 +171,7 @@ npx projen deploy
 \`${INTEG_RUNNER}\` is pinned to \`${integRunnerVersion}\` and \`${INTEG_TESTS_ALPHA}\` to the release matching \`cdkVersion\`, so the upgrade workflow never changes their versions: they only change when \`cdkVersion\` or \`integRunnerVersion\` is changed. This is intended, as each \`${INTEG_TESTS_ALPHA}\` release rewrites the assertion code bundled in the snapshots.
 
 integ-runner ignores changes to asset hashes, so a test whose only change is Lambda code is reported as \`UNCHANGED\` and is not deployed. Run \`npx projen integ:force\` to exercise new Lambda code end to end.`,
+      { order: ReadmeOrder.USAGE },
     );
   }
 }

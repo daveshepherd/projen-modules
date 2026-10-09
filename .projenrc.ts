@@ -2,6 +2,7 @@ import { CollectionKind, PrimitiveType } from '@jsii/spec';
 import { ProjenStruct, Struct } from '@mrgrain/jsii-struct-builder';
 import { github, JsonFile, JsonPatch } from 'projen';
 import { NodePackageManager } from 'projen/lib/javascript';
+import { ReadmeOrder } from './src/components/readme';
 import { JsiiProject } from './src/projects/jsii';
 
 const project = new JsiiProject({
@@ -102,6 +103,7 @@ project.readme?.addSection(
 \`\`\`ts
 project.tryFindObjectFile('test/tsconfig.json')?.addOverride('compilerOptions.skipLibCheck', true);
 \`\`\``,
+  { order: ReadmeOrder.REFERENCE },
 );
 new ProjenStruct(project, {
   name: 'CdkTypeScriptAppOptions',

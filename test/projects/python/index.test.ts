@@ -37,7 +37,7 @@ describe('Python Package', () => {
 ## Getting Started
 
 \`\`\`sh
-yarn install
+npx projen install
 npx projen build
 \`\`\``);
   });
@@ -65,7 +65,7 @@ A test project description.
 ## Getting Started
 
 \`\`\`sh
-yarn install
+npx projen install
 npx projen build
 \`\`\``);
   });
