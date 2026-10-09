@@ -1,6 +1,7 @@
 import { MergifyRule } from 'projen/lib/github';
 import { synthSnapshot } from 'projen/lib/util/synth';
 import * as yaml from 'yaml';
+import { CodeQl } from '../../../src/components/github/codeql';
 import { configureMergify } from '../../../src/components/github/mergify';
 import { JsiiProject, JsiiProjectOptions } from '../../../src/projects/jsii';
 
@@ -222,5 +223,80 @@ describe('Mergify Component', () => {
     const output = synthSnapshot(project);
     expect(output['.mergify.yml']).toBeUndefined();
     expect(output['README.md']).not.toContain('GitHub Configuration');
+  });
+
+  describe('build jobs added after configuration', () => {
+    const addLintJob = (project: JsiiProject) =>
+      project.buildWorkflow?.addPostBuildJob('lint', {
+        permissions: {},
+        runsOn: ['ubuntu-latest'],
+        steps: [{ run: 'echo lint' }],
+      });
+
+    it('approves upgrades only once every build job passes', () => {
+      const project = createProject();
+      configureMergify(project);
+
+      addLintJob(project);
+
+      const rule = findRule(
+        synthSnapshot(project),
+        'Automatic approval for projen upgrade pull requests',
+      );
+      expect(rule.conditions).toStrictEqual([
+        'author=endor-projen[bot]',
+        'status-success=build',
+        'status-success=package-js',
+        'status-success=lint',
+      ]);
+    });
+
+    it('lists them in the readme', () => {
+      const project = createProject();
+      configureMergify(project);
+
+      addLintJob(project);
+
+      expect(synthSnapshot(project)['README.md']).toContain(
+        'the checks that `.mergify.yml` waits for: `build`, `package-js`, `lint`.',
+      );
+    });
+
+    it('keeps a readme section the project replaced', () => {
+      const project = createProject();
+      configureMergify(project);
+      project.readme.addSection('GitHub Configuration', 'Our own setup.');
+
+      addLintJob(project);
+
+      expect(synthSnapshot(project)['README.md']).toContain(
+        '## GitHub Configuration\n\nOur own setup.',
+      );
+    });
+
+    it('keeps a readme section the project removed out', () => {
+      const project = createProject();
+      configureMergify(project);
+      project.readme.removeSection('GitHub Configuration');
+
+      addLintJob(project);
+
+      expect(synthSnapshot(project)['README.md']).not.toContain(
+        'GitHub Configuration',
+      );
+    });
+  });
+
+  it('waits for CodeQL added after configuration', () => {
+    const project = createProject({ autoMerge: true, codeql: false });
+
+    new CodeQl(project.github!, { languages: ['actions'] });
+
+    const output = synthSnapshot(project);
+    const queue = yaml.parse(output['.mergify.yml']).queue_rules[0];
+    expect(queue.queue_conditions).toContain(
+      `status-success=${CodeQl.CHECK_NAME}`,
+    );
+    expect(output['README.md']).toContain('### Code scanning');
   });
 });
