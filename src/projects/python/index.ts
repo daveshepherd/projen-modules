@@ -8,7 +8,8 @@ import {
   configureMergify,
 } from '../../components/github/mergify';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
-import { Readme } from '../../components/readme';
+import { Readme, ReadmeOrder } from '../../components/readme';
+import { gettingStartedCommands } from '../../components/readme/getting-started';
 import { mergeOptions } from '../../utils/merge-options';
 
 function getOptions(options: PythonPackageOptions) {
@@ -51,10 +52,9 @@ export class PythonPackage extends PythonProject {
     this.readme = new Readme(this, {
       description: mergedOptions.readme?.description,
     });
-    this.readme.addSection(
-      'Getting Started',
-      '```sh\nyarn install\nnpx projen build\n```',
-    );
+    this.readme.addSection('Getting Started', gettingStartedCommands(this), {
+      order: ReadmeOrder.INTRODUCTION,
+    });
     if ((mergedOptions.codeql ?? true) && this.github?.workflowsEnabled) {
       new CodeQl(this.github, {
         languages: ['python', 'actions'],

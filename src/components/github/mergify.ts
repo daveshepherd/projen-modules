@@ -1,6 +1,6 @@
 import { github, Project } from 'projen';
 import { CodeQl } from './codeql';
-import { Readme } from '../readme';
+import { Readme, ReadmeOrder } from '../readme';
 
 export interface MergifyOptions {
   /**
@@ -34,7 +34,6 @@ type MergifyProject = Project & {
   readonly buildWorkflow?: {
     readonly buildJobIds?: Array<string>;
   };
-  readonly readme?: Readme;
 };
 
 /**
@@ -207,7 +206,7 @@ export function configureMergify(
     options.reportingMethod ?? 'deployments',
   );
 
-  project.readme?.addSection(
+  Readme.of(project)?.addSection(
     'GitHub Configuration',
     githubConfigurationSection({
       approvedReviews,
@@ -215,5 +214,6 @@ export function configureMergify(
       requiredChecks: buildJobIds,
       trustedAuthors,
     }),
+    { order: ReadmeOrder.REFERENCE },
   );
 }

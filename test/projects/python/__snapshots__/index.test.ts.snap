@@ -432,7 +432,7 @@ merge_protections_settings:
 ## Getting Started
 
 \`\`\`sh
-yarn install
+npx projen install
 npx projen build
 \`\`\`
 

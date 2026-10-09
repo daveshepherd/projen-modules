@@ -4,7 +4,7 @@ import { JobPermission, JobStep } from 'projen/lib/github/workflows-model';
 import { NodePackageManager, NodeProject } from 'projen/lib/javascript';
 import { isYarnBerry, isYarnClassic } from 'projen/lib/javascript/util';
 import { DeploymentEnvironment } from '../../projects/cdk-ts/deployment-environment';
-import { Readme } from '../readme';
+import { Readme, ReadmeOrder } from '../readme';
 
 // projen only pins these by tag, so they are pinned by SHA here. Steps reference
 // them by `name@sha`, which project.github.actions resolves when the workflow is
@@ -33,7 +33,6 @@ export interface DeploymentsOptions {
    * @default - the runner's version
    */
   readonly nodeVersion?: string;
-  readonly readme?: Readme;
 }
 
 const capitalise = (value: string) =>
@@ -137,7 +136,7 @@ export function addDeployments(
     previousJobId = jobId;
   }
 
-  options.readme?.addSection(
+  Readme.of(project)?.addSection(
     'Deployment',
     [
       'After each release, the release workflow deploys to these GitHub environments in order, each after the previous one succeeds:',
@@ -151,6 +150,7 @@ export function addDeployments(
       '',
       'Each environment needs its role ARN secret, for a role that trusts GitHub\'s OIDC provider.',
     ].join('\n'),
+    { order: ReadmeOrder.USAGE },
   );
 }
 

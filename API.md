@@ -5275,7 +5275,9 @@ new Readme(project: Project, options?: ReadmeOptions)
 | <code><a href="#projen-modules.Readme.projectCreation">projectCreation</a></code> | Called once, right after `synthesize()`, only when the project is created for the first time. |
 | <code><a href="#projen-modules.Readme.synthesize">synthesize</a></code> | Writes the file to the project's output directory. |
 | <code><a href="#projen-modules.Readme.diff">diff</a></code> | Returns a unified diff of the old and new file contents with context lines and hunk headers. |
-| <code><a href="#projen-modules.Readme.addSection">addSection</a></code> | *No description.* |
+| <code><a href="#projen-modules.Readme.addSection">addSection</a></code> | Adds a section, or replaces the section with the same title. |
+| <code><a href="#projen-modules.Readme.removeSection">removeSection</a></code> | Removes the section with the given title. |
+| <code><a href="#projen-modules.Readme.tryFindSection">tryFindSection</a></code> | The section with the given title, if there is one. |
 
 ---
 
@@ -5406,8 +5408,10 @@ Number of context lines around changes.
 ##### `addSection` <a name="addSection" id="projen-modules.Readme.addSection"></a>
 
 ```typescript
-public addSection(title: string, body: string): void
+public addSection(title: string, body: string, options?: AddSectionOptions): void
 ```
+
+Adds a section, or replaces the section with the same title.
 
 ###### `title`<sup>Required</sup> <a name="title" id="projen-modules.Readme.addSection.parameter.title"></a>
 
@@ -5421,12 +5425,47 @@ public addSection(title: string, body: string): void
 
 ---
 
+###### `options`<sup>Optional</sup> <a name="options" id="projen-modules.Readme.addSection.parameter.options"></a>
+
+- *Type:* <a href="#projen-modules.AddSectionOptions">AddSectionOptions</a>
+
+---
+
+##### `removeSection` <a name="removeSection" id="projen-modules.Readme.removeSection"></a>
+
+```typescript
+public removeSection(title: string): boolean
+```
+
+Removes the section with the given title.
+
+###### `title`<sup>Required</sup> <a name="title" id="projen-modules.Readme.removeSection.parameter.title"></a>
+
+- *Type:* string
+
+---
+
+##### `tryFindSection` <a name="tryFindSection" id="projen-modules.Readme.tryFindSection"></a>
+
+```typescript
+public tryFindSection(title: string): Section
+```
+
+The section with the given title, if there is one.
+
+###### `title`<sup>Required</sup> <a name="title" id="projen-modules.Readme.tryFindSection.parameter.title"></a>
+
+- *Type:* string
+
+---
+
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#projen-modules.Readme.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
 | <code><a href="#projen-modules.Readme.isComponent">isComponent</a></code> | Test whether the given construct is a component. |
+| <code><a href="#projen-modules.Readme.of">of</a></code> | The README of a project, if it has one. |
 
 ---
 
@@ -5478,6 +5517,22 @@ Test whether the given construct is a component.
 
 ---
 
+##### `of` <a name="of" id="projen-modules.Readme.of"></a>
+
+```typescript
+import { Readme } from 'projen-modules'
+
+Readme.of(project: Project)
+```
+
+The README of a project, if it has one.
+
+###### `project`<sup>Required</sup> <a name="project" id="projen-modules.Readme.of.parameter.project"></a>
+
+- *Type:* projen.Project
+
+---
+
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
@@ -5491,7 +5546,7 @@ Test whether the given construct is a component.
 | <code><a href="#projen-modules.Readme.property.marker">marker</a></code> | <code>string</code> | The projen marker, used to identify files as projen-generated. |
 | <code><a href="#projen-modules.Readme.property.executable">executable</a></code> | <code>boolean</code> | Indicates if the file should be marked as executable. |
 | <code><a href="#projen-modules.Readme.property.readonly">readonly</a></code> | <code>boolean</code> | Indicates if the file should be read-only or read-write. |
-| <code><a href="#projen-modules.Readme.property.sections">sections</a></code> | <code><a href="#projen-modules.Section">Section</a>[]</code> | *No description.* |
+| <code><a href="#projen-modules.Readme.property.sections">sections</a></code> | <code><a href="#projen-modules.Section">Section</a>[]</code> | The sections, in the order they appear in the README. |
 | <code><a href="#projen-modules.Readme.property.description">description</a></code> | <code>string</code> | *No description.* |
 
 ---
@@ -5616,6 +5671,8 @@ public readonly sections: Section[];
 
 - *Type:* <a href="#projen-modules.Section">Section</a>[]
 
+The sections, in the order they appear in the README.
+
 ---
 
 ##### `description`<sup>Optional</sup> <a name="description" id="projen-modules.Readme.property.description"></a>
@@ -5630,6 +5687,40 @@ public readonly description: string;
 
 
 ## Structs <a name="Structs" id="Structs"></a>
+
+### AddSectionOptions <a name="AddSectionOptions" id="projen-modules.AddSectionOptions"></a>
+
+#### Initializer <a name="Initializer" id="projen-modules.AddSectionOptions.Initializer"></a>
+
+```typescript
+import { AddSectionOptions } from 'projen-modules'
+
+const addSectionOptions: AddSectionOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#projen-modules.AddSectionOptions.property.order">order</a></code> | <code>number</code> | Position of the section in the README, lowest first. |
+
+---
+
+##### `order`<sup>Optional</sup> <a name="order" id="projen-modules.AddSectionOptions.property.order"></a>
+
+```typescript
+public readonly order: number;
+```
+
+- *Type:* number
+- *Default:* `ReadmeOrder.DEFAULT`, or the existing order when replacing a section
+
+Position of the section in the README, lowest first.
+
+Sections with the
+same order keep the order they were added in.
+
+---
 
 ### CdkTypeScriptAppOptions <a name="CdkTypeScriptAppOptions" id="projen-modules.CdkTypeScriptAppOptions"></a>
 
@@ -14565,6 +14656,72 @@ The description of the project.
 ---
 
 ## Classes <a name="Classes" id="Classes"></a>
+
+### ReadmeOrder <a name="ReadmeOrder" id="projen-modules.ReadmeOrder"></a>
+
+Orders of the bands of sections in the README, leaving room for sections in between.
+
+
+
+
+#### Constants <a name="Constants" id="Constants"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#projen-modules.ReadmeOrder.property.DEFAULT">DEFAULT</a></code> | <code>number</code> | Sections added without an order. |
+| <code><a href="#projen-modules.ReadmeOrder.property.INTRODUCTION">INTRODUCTION</a></code> | <code>number</code> | Sections a reader needs first, such as getting started. |
+| <code><a href="#projen-modules.ReadmeOrder.property.REFERENCE">REFERENCE</a></code> | <code>number</code> | Reference material, such as repository configuration and known issues. |
+| <code><a href="#projen-modules.ReadmeOrder.property.USAGE">USAGE</a></code> | <code>number</code> | How to use and operate the project. |
+
+---
+
+##### `DEFAULT`<sup>Required</sup> <a name="DEFAULT" id="projen-modules.ReadmeOrder.property.DEFAULT"></a>
+
+```typescript
+public readonly DEFAULT: number;
+```
+
+- *Type:* number
+
+Sections added without an order.
+
+---
+
+##### `INTRODUCTION`<sup>Required</sup> <a name="INTRODUCTION" id="projen-modules.ReadmeOrder.property.INTRODUCTION"></a>
+
+```typescript
+public readonly INTRODUCTION: number;
+```
+
+- *Type:* number
+
+Sections a reader needs first, such as getting started.
+
+---
+
+##### `REFERENCE`<sup>Required</sup> <a name="REFERENCE" id="projen-modules.ReadmeOrder.property.REFERENCE"></a>
+
+```typescript
+public readonly REFERENCE: number;
+```
+
+- *Type:* number
+
+Reference material, such as repository configuration and known issues.
+
+---
+
+##### `USAGE`<sup>Required</sup> <a name="USAGE" id="projen-modules.ReadmeOrder.property.USAGE"></a>
+
+```typescript
+public readonly USAGE: number;
+```
+
+- *Type:* number
+
+How to use and operate the project.
+
+---
 
 ### Section <a name="Section" id="projen-modules.Section"></a>
 

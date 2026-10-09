@@ -7,7 +7,8 @@ import {
   configureMergify,
 } from '../../components/github/mergify';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
-import { Readme } from '../../components/readme';
+import { Readme, ReadmeOrder } from '../../components/readme';
+import { gettingStartedCommands } from '../../components/readme/getting-started';
 import { mergeOptions } from '../../utils/merge-options';
 
 function getOptions(options: JsiiProjectOptions) {
@@ -53,7 +54,7 @@ export class JsiiProject extends cdk.JsiiProject {
     });
     this.readme.addSection(
       'Getting Started',
-      `\`\`\`sh\nyarn install\nnpx projen build\n\`\`\`\n
+      `${gettingStartedCommands(this)}\n
 This will:
 * Install the dependencies
 * Apply any projen changes
@@ -63,6 +64,7 @@ This will:
 Any files changed by projen should be committed to git.
 
 Running the tests like this will update any snapshot files, this should be reviewed and committed to git.`,
+      { order: ReadmeOrder.INTRODUCTION },
     );
     this.readme.addSection(
       'Testing',
@@ -70,6 +72,7 @@ Running the tests like this will update any snapshot files, this should be revie
 * Snapshot - projen project outputs are stored as a snapshot in the corresponding \`__snapshots__\` directory. When the project changes then it is expected that these snapshots change too and should be reviewed committed alongside the project.
 * Unit tests - these assert on specific functionality of the project and should be written for any new functionality added.
 `,
+      { order: ReadmeOrder.USAGE },
     );
     if ((mergedOptions.codeql ?? true) && this.github?.workflowsEnabled) {
       new CodeQl(this.github, {
