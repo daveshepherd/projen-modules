@@ -5408,7 +5408,7 @@ Number of context lines around changes.
 ##### `addSection` <a name="addSection" id="projen-modules.Readme.addSection"></a>
 
 ```typescript
-public addSection(title: string, body: string, options?: AddSectionOptions): void
+public addSection(title: string, body: string, options?: AddSectionOptions): Section
 ```
 
 Adds a section, or replaces the section with the same title.
