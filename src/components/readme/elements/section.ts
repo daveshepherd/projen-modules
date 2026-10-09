@@ -1,11 +1,17 @@
-export interface ISectionOptions {
-  title: string;
-  body: string;
+export interface SectionOptions {
+  /**
+   * The heading of the section
+   */
+  readonly title: string;
+  /**
+   * The markdown content of the section
+   */
+  readonly body: string;
 }
 
 export class Section {
-  readonly options: ISectionOptions;
-  constructor(options: ISectionOptions) {
+  readonly options: SectionOptions;
+  constructor(options: SectionOptions) {
     this.options = options;
   }
   synth() {

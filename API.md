@@ -14655,6 +14655,49 @@ The description of the project.
 
 ---
 
+### SectionOptions <a name="SectionOptions" id="projen-modules.SectionOptions"></a>
+
+#### Initializer <a name="Initializer" id="projen-modules.SectionOptions.Initializer"></a>
+
+```typescript
+import { SectionOptions } from 'projen-modules'
+
+const sectionOptions: SectionOptions = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#projen-modules.SectionOptions.property.body">body</a></code> | <code>string</code> | The markdown content of the section. |
+| <code><a href="#projen-modules.SectionOptions.property.title">title</a></code> | <code>string</code> | The heading of the section. |
+
+---
+
+##### `body`<sup>Required</sup> <a name="body" id="projen-modules.SectionOptions.property.body"></a>
+
+```typescript
+public readonly body: string;
+```
+
+- *Type:* string
+
+The markdown content of the section.
+
+---
+
+##### `title`<sup>Required</sup> <a name="title" id="projen-modules.SectionOptions.property.title"></a>
+
+```typescript
+public readonly title: string;
+```
+
+- *Type:* string
+
+The heading of the section.
+
+---
+
 ## Classes <a name="Classes" id="Classes"></a>
 
 ### ReadmeOrder <a name="ReadmeOrder" id="projen-modules.ReadmeOrder"></a>
@@ -14730,18 +14773,18 @@ How to use and operate the project.
 ```typescript
 import { Section } from 'projen-modules'
 
-new Section(options: ISectionOptions)
+new Section(options: SectionOptions)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#projen-modules.Section.Initializer.parameter.options">options</a></code> | <code><a href="#projen-modules.ISectionOptions">ISectionOptions</a></code> | *No description.* |
+| <code><a href="#projen-modules.Section.Initializer.parameter.options">options</a></code> | <code><a href="#projen-modules.SectionOptions">SectionOptions</a></code> | *No description.* |
 
 ---
 
 ##### `options`<sup>Required</sup> <a name="options" id="projen-modules.Section.Initializer.parameter.options"></a>
 
-- *Type:* <a href="#projen-modules.ISectionOptions">ISectionOptions</a>
+- *Type:* <a href="#projen-modules.SectionOptions">SectionOptions</a>
 
 ---
 
@@ -14764,54 +14807,19 @@ public synth(): string
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#projen-modules.Section.property.options">options</a></code> | <code><a href="#projen-modules.ISectionOptions">ISectionOptions</a></code> | *No description.* |
+| <code><a href="#projen-modules.Section.property.options">options</a></code> | <code><a href="#projen-modules.SectionOptions">SectionOptions</a></code> | *No description.* |
 
 ---
 
 ##### `options`<sup>Required</sup> <a name="options" id="projen-modules.Section.property.options"></a>
 
 ```typescript
-public readonly options: ISectionOptions;
+public readonly options: SectionOptions;
 ```
 
-- *Type:* <a href="#projen-modules.ISectionOptions">ISectionOptions</a>
+- *Type:* <a href="#projen-modules.SectionOptions">SectionOptions</a>
 
 ---
 
 
-## Protocols <a name="Protocols" id="Protocols"></a>
-
-### ISectionOptions <a name="ISectionOptions" id="projen-modules.ISectionOptions"></a>
-
-- *Implemented By:* <a href="#projen-modules.ISectionOptions">ISectionOptions</a>
-
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#projen-modules.ISectionOptions.property.body">body</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#projen-modules.ISectionOptions.property.title">title</a></code> | <code>string</code> | *No description.* |
-
----
-
-##### `body`<sup>Required</sup> <a name="body" id="projen-modules.ISectionOptions.property.body"></a>
-
-```typescript
-public readonly body: string;
-```
-
-- *Type:* string
-
----
-
-##### `title`<sup>Required</sup> <a name="title" id="projen-modules.ISectionOptions.property.title"></a>
-
-```typescript
-public readonly title: string;
-```
-
-- *Type:* string
-
----
 
