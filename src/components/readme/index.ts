@@ -1,4 +1,4 @@
-import { FileBase, IResolver, Project } from 'projen';
+import { FileBase, IResolver, Project, SampleReadme } from 'projen';
 import { Section } from './elements/section';
 
 export interface ReadmeOptions {
@@ -62,6 +62,13 @@ export class Readme extends FileBase {
   constructor(project: Project, options: ReadmeOptions = {}) {
     super(project, 'README.md', {});
     this.description = options.description;
+
+    // projen's projects add a sample README.md, which this replaces
+    for (const sample of project.components) {
+      if (sample instanceof SampleReadme) {
+        sample.node.scope?.node.tryRemoveChild(sample.node.id);
+      }
+    }
   }
 
   /**
@@ -73,8 +80,14 @@ export class Readme extends FileBase {
 
   /**
    * Adds a section, or replaces the section with the same title
+   *
+   * @returns the section
    */
-  addSection(title: string, body: string, options: AddSectionOptions = {}) {
+  addSection(
+    title: string,
+    body: string,
+    options: AddSectionOptions = {},
+  ): Section {
     const index = this.findIndex(title);
     const order =
       options.order ??
@@ -85,6 +98,7 @@ export class Readme extends FileBase {
     } else {
       this.entries.push(entry);
     }
+    return entry.section;
   }
 
   /**
@@ -110,7 +124,8 @@ export class Readme extends FileBase {
   }
 
   protected synthesizeContent(_: IResolver): string | undefined {
-    let content = `# ${this.project.name}\n\n`;
+    let content = this.marker ? `<!-- ${this.marker} -->\n\n` : '';
+    content = content.concat(`# ${this.project.name}\n\n`);
     content = content.concat(this.description ? `${this.description}\n\n` : '');
     return content.concat(this.sections.map((s) => s.synth()).join('\n\n'));
   }

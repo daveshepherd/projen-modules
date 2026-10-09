@@ -1,4 +1,4 @@
-import { github, Project } from 'projen';
+import { Component, github, Project } from 'projen';
 import { CodeQl } from './codeql';
 import { Readme, ReadmeOrder } from '../readme';
 
@@ -154,7 +154,9 @@ export function configureMergify(
     return;
   }
 
-  const buildJobIds = project.buildWorkflow?.buildJobIds ?? [];
+  // build jobs and CodeQL can be added after this, so they are read at synthesis
+  const buildJobIds = () => project.buildWorkflow?.buildJobIds ?? [];
+  const codeScanning = () => project.components.some((c) => c instanceof CodeQl);
 
   project.autoMerge?.addConditions('-draft');
 
@@ -172,17 +174,16 @@ export function configureMergify(
   }
 
   // Mergify is exempt from the ruleset's code scanning rule, so the queue enforces it instead
-  const codeScanning = project.components.some((c) => c instanceof CodeQl);
-  if (codeScanning) {
-    project.autoMerge?.addConditions(`status-success=${CodeQl.CHECK_NAME}`);
-  }
+  project.autoMerge?.addConditionsLater({
+    render: () =>
+      codeScanning() ? [`status-success=${CodeQl.CHECK_NAME}`] : [],
+  });
 
+  const upgradeAuthor = `author=${options.upgradeAuthor ?? 'endor-projen[bot]'}`;
+  const upgradeConditions = [upgradeAuthor];
   mergify.addRule({
     name: 'Automatic approval for projen upgrade pull requests',
-    conditions: [
-      `author=${options.upgradeAuthor ?? 'endor-projen[bot]'}`,
-      ...buildJobIds.map((id) => `status-success=${id}`),
-    ],
+    conditions: upgradeConditions,
     actions: {
       review: {
         type: 'APPROVE',
@@ -206,14 +207,49 @@ export function configureMergify(
     options.reportingMethod ?? 'deployments',
   );
 
-  Readme.of(project)?.addSection(
-    'GitHub Configuration',
-    githubConfigurationSection({
-      approvedReviews,
-      codeScanning,
-      requiredChecks: buildJobIds,
-      trustedAuthors,
-    }),
-    { order: ReadmeOrder.REFERENCE },
-  );
+  const addReadmeSection = () =>
+    Readme.of(project)?.addSection(
+      GITHUB_CONFIGURATION_TITLE,
+      githubConfigurationSection({
+        approvedReviews,
+        codeScanning: codeScanning(),
+        requiredChecks: buildJobIds(),
+        trustedAuthors,
+      }),
+      { order: ReadmeOrder.REFERENCE },
+    );
+  let readmeSection = addReadmeSection();
+
+  new BeforeSynthesis(project, () => {
+    upgradeConditions.splice(
+      0,
+      upgradeConditions.length,
+      upgradeAuthor,
+      ...buildJobIds().map((id) => `status-success=${id}`),
+    );
+    // leave the section alone if the project has removed or replaced it
+    const readme = Readme.of(project);
+    if (readmeSection && readme?.tryFindSection(GITHUB_CONFIGURATION_TITLE) === readmeSection) {
+      readmeSection = addReadmeSection();
+    }
+  });
+}
+
+const GITHUB_CONFIGURATION_TITLE = 'GitHub Configuration';
+
+/**
+ * Runs a callback once every component has been added, before any file is
+ * synthesized
+ */
+class BeforeSynthesis extends Component {
+  constructor(
+    project: Project,
+    private readonly callback: () => void,
+  ) {
+    super(project);
+  }
+
+  preSynthesize() {
+    this.callback();
+  }
 }
