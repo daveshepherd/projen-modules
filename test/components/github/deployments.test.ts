@@ -39,7 +39,7 @@ describe('Deployments', () => {
           region: 'eu-west-2',
           env: {
             STAGE: 'staging',
-            API_KEY: '${{ secrets.API_KEY }}',
+            EXAMPLE_SECRET: '${{ secrets.EXAMPLE_SECRET }}',
           },
         },
         {
@@ -47,7 +47,7 @@ describe('Deployments', () => {
           region: 'eu-west-2',
           env: {
             STAGE: 'production',
-            API_KEY: '${{ secrets.API_KEY }}',
+            EXAMPLE_SECRET: '${{ secrets.EXAMPLE_SECRET }}',
           },
         },
       ],

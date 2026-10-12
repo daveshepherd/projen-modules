@@ -116,7 +116,7 @@ jobs:
         id: deploy
         env:
           STAGE: staging
-          API_KEY: \${{ secrets.API_KEY }}
+          EXAMPLE_SECRET: \${{ secrets.EXAMPLE_SECRET }}
         run: yarn deploy --require-approval never
   deploy_production:
     name: Deploy to Production
@@ -157,7 +157,7 @@ jobs:
         id: deploy
         env:
           STAGE: production
-          API_KEY: \${{ secrets.API_KEY }}
+          EXAMPLE_SECRET: \${{ secrets.EXAMPLE_SECRET }}
         run: yarn deploy --require-approval never
   release_github:
     name: Publish to GitHub Releases

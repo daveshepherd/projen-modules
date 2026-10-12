@@ -34,7 +34,7 @@ deploy_staging:
     - name: deploy
       id: deploy
       env:
-        API_KEY: ${{ secrets.API_KEY }}
+        EXAMPLE_SECRET: ${{ secrets.EXAMPLE_SECRET }}
         STAGE: staging
       run: yarn deploy --require-approval never
 deploy_production:
@@ -75,6 +75,6 @@ deploy_production:
     - name: deploy
       id: deploy
       env:
-        API_KEY: ${{ secrets.API_KEY }}
+        EXAMPLE_SECRET: ${{ secrets.EXAMPLE_SECRET }}
         STAGE: production
       run: yarn deploy --require-approval never
