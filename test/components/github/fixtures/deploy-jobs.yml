@@ -1,12 +1,10 @@
-# deploy_development and deploy_production jobs from river-levels' .github/workflows/release.yml,
-# hand-written there before projen-modules generated them
-deploy_development:
-  name: Deploy to Development
+deploy_staging:
+  name: Deploy to Staging
   needs: release
   runs-on: ubuntu-latest
   permissions:
     id-token: write
-  environment: development
+  environment: staging
   if: needs.release.outputs.tag_exists != 'true'
   steps:
     - name: Checkout
@@ -31,19 +29,19 @@ deploy_development:
       uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd
       with:
         role-to-assume: ${{ secrets.AWS_DEPLOYMENT_ROLE_ARN }}
-        role-session-name: river-levels-deploy
+        role-session-name: my-app-deploy
         aws-region: eu-west-2
     - name: deploy
       id: deploy
       env:
-        ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
-        STAGE: development
+        API_KEY: ${{ secrets.API_KEY }}
+        STAGE: staging
       run: yarn deploy --require-approval never
 deploy_production:
   name: Deploy to Production
   needs:
     - release
-    - deploy_development
+    - deploy_staging
   runs-on: ubuntu-latest
   permissions:
     id-token: write
@@ -72,11 +70,11 @@ deploy_production:
       uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd
       with:
         role-to-assume: ${{ secrets.AWS_DEPLOYMENT_ROLE_ARN }}
-        role-session-name: river-levels-deploy
+        role-session-name: my-app-deploy
         aws-region: eu-west-2
     - name: deploy
       id: deploy
       env:
-        ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
+        API_KEY: ${{ secrets.API_KEY }}
         STAGE: production
       run: yarn deploy --require-approval never

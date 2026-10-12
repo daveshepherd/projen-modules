@@ -22,24 +22,24 @@ function releaseJobs(project: CdkTypeScriptApp) {
 }
 
 describe('Deployments', () => {
-  it('generates the deploy jobs river-levels wrote by hand', () => {
+  it('chains a deploy job per environment after the release', () => {
     const project = createProject({
       cdkVersion: '2.262.2',
-      codeOwners: ['daveshepherd'],
+      codeOwners: ['test'],
       githubOptions: {
         projenCredentials: github.GithubCredentials.fromApp({}),
       },
       majorVersion: 1,
-      name: 'river-levels',
+      name: 'my-app',
       packageManager: NodePackageManager.YARN_CLASSIC,
       workflowPackageCache: true,
       deployments: [
         {
-          environment: 'development',
+          environment: 'staging',
           region: 'eu-west-2',
           env: {
-            STAGE: 'development',
-            ALERT_EMAIL: '${{ secrets.ALERT_EMAIL }}',
+            STAGE: 'staging',
+            API_KEY: '${{ secrets.API_KEY }}',
           },
         },
         {
@@ -47,7 +47,7 @@ describe('Deployments', () => {
           region: 'eu-west-2',
           env: {
             STAGE: 'production',
-            ALERT_EMAIL: '${{ secrets.ALERT_EMAIL }}',
+            API_KEY: '${{ secrets.API_KEY }}',
           },
         },
       ],
@@ -56,13 +56,13 @@ describe('Deployments', () => {
     const jobs = yaml.parse(output['.github/workflows/release.yml']).jobs;
     const expected = yaml.parse(
       fs.readFileSync(
-        path.join(__dirname, 'fixtures', 'river-levels-deploy-jobs.yml'),
+        path.join(__dirname, 'fixtures', 'deploy-jobs.yml'),
         'utf8',
       ),
     );
 
     expect({
-      deploy_development: jobs.deploy_development,
+      deploy_staging: jobs.deploy_staging,
       deploy_production: jobs.deploy_production,
     }).toStrictEqual(expected);
     expect(output['.github/workflows/release.yml']).toMatchSnapshot();
