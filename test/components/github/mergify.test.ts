@@ -24,6 +24,8 @@ function findRule(output: Record<string, any>, name: string): MergifyRule {
     .pull_request_rules.find((rule: MergifyRule) => rule.name === name);
 }
 
+const GUIDE = 'docs/github-configuration.md';
+
 describe('Mergify Component', () => {
   it('creates the default mergify rules', () => {
     const project = createProject();
@@ -120,15 +122,15 @@ describe('Mergify Component', () => {
     ]);
   });
 
-  it('documents the github configuration in the readme', () => {
+  it('documents the github configuration', () => {
     const project = createProject();
 
     configureMergify(project);
 
-    const readme: string = synthSnapshot(project)['README.md'];
-    expect(readme).toContain('## GitHub Configuration');
-    expect(readme).toContain('**Restrict updates**');
-    expect(readme).toContain(
+    const guide: string = synthSnapshot(project)[GUIDE];
+    expect(guide).toContain('# GitHub Configuration');
+    expect(guide).toContain('**Restrict updates**');
+    expect(guide).toContain(
       'the checks that `.mergify.yml` waits for: `build`, `package-js`.',
     );
   });
@@ -138,7 +140,7 @@ describe('Mergify Component', () => {
 
     configureMergify(project);
 
-    expect(synthSnapshot(project)['README.md']).toContain(
+    expect(synthSnapshot(project)[GUIDE]).toContain(
       'none are configured yet',
     );
   });
@@ -156,11 +158,11 @@ describe('Mergify Component', () => {
 
     configureMergify(project);
 
-    const readme: string = synthSnapshot(project)['README.md'];
-    expect(readme).toContain('with 1 required approval.');
-    expect(readme).toContain('should list them in `trustedAuthors`');
-    expect(readme).toContain('**Dismiss stale pull request approvals');
-    expect(readme).toContain(
+    const guide: string = synthSnapshot(project)[GUIDE];
+    expect(guide).toContain('with 1 required approval.');
+    expect(guide).toContain('should list them in `trustedAuthors`');
+    expect(guide).toContain('**Dismiss stale pull request approvals');
+    expect(guide).toContain(
       '**Require approval for all external contributors**',
     );
   });
@@ -173,7 +175,7 @@ describe('Mergify Component', () => {
 
     const output = synthSnapshot(project);
     const mergify = yaml.parse(output['.mergify.yml']);
-    const readme: string = output['README.md'];
+    const guide: string = output[GUIDE];
 
     expect(mergify.queue_rules[0].queue_conditions).toContainEqual({
       or: ['#approved-reviews-by>=1', 'author=alice', 'author=bob'],
@@ -181,11 +183,11 @@ describe('Mergify Component', () => {
     expect(mergify.queue_rules[0].queue_conditions).not.toContain(
       '#approved-reviews-by>=1',
     );
-    expect(readme).toContain(
+    expect(guide).toContain(
       'Once a pull request is approved, or is opened by `alice` or `bob`, and its checks pass',
     );
-    expect(readme).toContain('with 0 required approvals, because Mergify');
-    expect(readme).not.toContain('should list them in `trustedAuthors`');
+    expect(guide).toContain('with 0 required approvals, because Mergify');
+    expect(guide).not.toContain('should list them in `trustedAuthors`');
   });
 
   it('requires the configured approvals from untrusted authors', () => {
@@ -208,11 +210,11 @@ describe('Mergify Component', () => {
       autoMergeOptions: { approvedReviews: 0 },
     });
 
-    const readme: string = synthSnapshot(project)['README.md'];
+    const guide: string = synthSnapshot(project)[GUIDE];
 
-    expect(readme).toContain("Once a pull request's checks pass");
-    expect(readme).toContain('with 0 required approvals.');
-    expect(readme).toContain('**Warning:** no approvals are required');
+    expect(guide).toContain("Once a pull request's checks pass");
+    expect(guide).toContain('with 0 required approvals.');
+    expect(guide).toContain('**Warning:** no approvals are required');
   });
 
   it('does nothing when the project has no mergify', () => {
@@ -222,6 +224,7 @@ describe('Mergify Component', () => {
 
     const output = synthSnapshot(project);
     expect(output['.mergify.yml']).toBeUndefined();
+    expect(output[GUIDE]).toBeUndefined();
     expect(output['README.md']).not.toContain('GitHub Configuration');
   });
 
@@ -251,40 +254,17 @@ describe('Mergify Component', () => {
       ]);
     });
 
-    it('lists them in the readme', () => {
+    it('lists them in the guide', () => {
       const project = createProject();
       configureMergify(project);
 
       addLintJob(project);
 
-      expect(synthSnapshot(project)['README.md']).toContain(
+      expect(synthSnapshot(project)[GUIDE]).toContain(
         'the checks that `.mergify.yml` waits for: `build`, `package-js`, `lint`.',
       );
     });
 
-    it('keeps a readme section the project replaced', () => {
-      const project = createProject();
-      configureMergify(project);
-      project.readme.addSection('GitHub Configuration', 'Our own setup.');
-
-      addLintJob(project);
-
-      expect(synthSnapshot(project)['README.md']).toContain(
-        '## GitHub Configuration\n\nOur own setup.',
-      );
-    });
-
-    it('keeps a readme section the project removed out', () => {
-      const project = createProject();
-      configureMergify(project);
-      project.readme.removeSection('GitHub Configuration');
-
-      addLintJob(project);
-
-      expect(synthSnapshot(project)['README.md']).not.toContain(
-        'GitHub Configuration',
-      );
-    });
   });
 
   it('waits for CodeQL added after configuration', () => {
@@ -297,6 +277,46 @@ describe('Mergify Component', () => {
     expect(queue.queue_conditions).toContain(
       `status-success=${CodeQl.CHECK_NAME}`,
     );
-    expect(output['README.md']).toContain('### Code scanning');
+    expect(output[GUIDE]).toContain('\n## Code scanning\n');
+  });
+
+  describe('github configuration guide', () => {
+    it('is written to the docs directory', () => {
+      const project = createProject();
+
+      configureMergify(project);
+
+      const output = synthSnapshot(project);
+      const guide: string = output[GUIDE];
+      expect(guide).toMatch(
+        /^<!-- ~~ Generated by projen\. .* -->\n\n# GitHub Configuration\n\nAll pull requests are merged by the \[Mergify\]/,
+      );
+      expect(guide).toContain('\n## Branch ruleset\n');
+      expect(guide).not.toContain('###');
+      expect(guide).toContain(
+        'the checks that `.mergify.yml` waits for: `build`, `package-js`.',
+      );
+      expect(guide).toMatchSnapshot();
+    });
+
+    it('makes the file read-only', () => {
+      const project = createProject();
+
+      configureMergify(project);
+
+      expect(project.tryFindFile(GUIDE)?.readonly).toBe(true);
+    });
+
+    it('links to the file from the readme', () => {
+      const project = createProject();
+
+      configureMergify(project);
+
+      const readme: string = synthSnapshot(project)['README.md'];
+      expect(readme).toContain(
+        '## GitHub Configuration\n\nThe one-off configuration that this repository needs on GitHub, such as the Mergify merge queue and the branch ruleset, is described in [docs/github-configuration.md](docs/github-configuration.md).',
+      );
+      expect(readme).not.toContain('**Restrict updates**');
+    });
   });
 });

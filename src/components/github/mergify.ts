@@ -1,4 +1,4 @@
-import { Component, github, Project } from 'projen';
+import { Component, FileBase, github, IResolver, Project } from 'projen';
 import { CodeQl } from './codeql';
 import { Readme, ReadmeOrder } from '../readme';
 
@@ -89,7 +89,10 @@ A repository with a single maintainer, who cannot approve their own pull request
   return '';
 }
 
-function githubConfigurationSection(config: GithubConfiguration): string {
+/**
+ * The guide to configuring the repository on GitHub
+ */
+function githubConfigurationGuide(config: GithubConfiguration): string {
   const statusChecks = config.requiredChecks.length
     ? 'the checks that `.mergify.yml` waits for: `' +
       config.requiredChecks.join('`, `') +
@@ -116,7 +119,7 @@ function githubConfigurationSection(config: GithubConfiguration): string {
   const codeScanningSettings = config.codeScanning
     ? `
 
-### Code scanning
+## Code scanning
 
 CodeQL runs from \`.github/workflows/codeql.yml\`, which is managed by projen. In **Settings → Advanced Security**, leave CodeQL **Default setup** off, because it cannot run alongside this workflow. Under **Protection rules**, keep the **Check run failure threshold** at **High or higher** for security alerts and **Errors** for other alerts, as this decides whether the \`${CodeQl.CHECK_NAME}\` check fails. Private repositories also need GitHub Code Security enabled there for code scanning results to be uploaded.${ignoredPaths}`
     : '';
@@ -128,22 +131,22 @@ CodeQL runs from \`.github/workflows/codeql.yml\`, which is managed by projen. I
 
 The repository must be configured as below so that nothing can be merged without going through the queue.
 
-### Mergify
+## Mergify
 
 Install the [Mergify GitHub App](https://github.com/apps/mergify) and give it access to this repository.
 
-### Pull request settings
+## Pull request settings
 
 In **Settings → General → Pull Requests**:
 * Allow squash merging only (untick merge commits and rebase merging), matching the queue's merge method.
 * Untick **Allow auto-merge**, because GitHub's own auto-merge merges outside the queue.
 * Tick **Automatically delete head branches**.
 
-### Actions settings
+## Actions settings
 
 In **Settings → Actions → General**, set **Approval for running fork pull request workflows from contributors** to **Require approval for all external contributors**. A pull request from a fork runs its own copy of the workflows, so it can change how the required checks pass.${codeScanningSettings}
 
-### Branch ruleset
+## Branch ruleset
 
 In **Settings → Rules → Rulesets**, create a branch ruleset with enforcement **Active** that targets the default branch, and set:
 * **Bypass list**: the **Mergify** app only, in **Exempt** mode. Do not add admins or other roles, as anyone on this list can merge without the queue.
@@ -221,19 +224,22 @@ export function configureMergify(
     options.reportingMethod ?? 'deployments',
   );
 
-  const addReadmeSection = () =>
-    Readme.of(project)?.addSection(
-      GITHUB_CONFIGURATION_TITLE,
-      githubConfigurationSection({
-        approvedReviews,
-        codeScanning: codeScanning(),
-        codeScanningPathsIgnore: codeQl()?.pathsIgnore ?? [],
-        requiredChecks: buildJobIds(),
-        trustedAuthors,
-      }),
-      { order: ReadmeOrder.REFERENCE },
-    );
-  let readmeSection = addReadmeSection();
+  const configuration = (): GithubConfiguration => ({
+    approvedReviews,
+    codeScanning: codeScanning(),
+    codeScanningPathsIgnore: codeQl()?.pathsIgnore ?? [],
+    requiredChecks: buildJobIds(),
+    trustedAuthors,
+  });
+  // the guide is rendered when the file is synthesized, after every component has been added
+  new GithubConfigurationFile(project, () =>
+    githubConfigurationGuide(configuration()),
+  );
+  Readme.of(project)?.addSection(
+    GITHUB_CONFIGURATION_TITLE,
+    `The one-off configuration that this repository needs on GitHub, such as the Mergify merge queue and the branch ruleset, is described in [${GITHUB_CONFIGURATION_FILE}](${GITHUB_CONFIGURATION_FILE}).`,
+    { order: ReadmeOrder.REFERENCE },
+  );
 
   new BeforeSynthesis(project, () => {
     upgradeConditions.splice(
@@ -242,15 +248,33 @@ export function configureMergify(
       upgradeAuthor,
       ...buildJobIds().map((id) => `status-success=${id}`),
     );
-    // leave the section alone if the project has removed or replaced it
-    const readme = Readme.of(project);
-    if (readmeSection && readme?.tryFindSection(GITHUB_CONFIGURATION_TITLE) === readmeSection) {
-      readmeSection = addReadmeSection();
-    }
   });
 }
 
 const GITHUB_CONFIGURATION_TITLE = 'GitHub Configuration';
+
+/**
+ * Where the guide to configuring the repository on GitHub is written, in the
+ * docs directory every project uses
+ */
+const GITHUB_CONFIGURATION_FILE = 'docs/github-configuration.md';
+
+/**
+ * The guide to configuring the repository on GitHub, as its own markdown file
+ */
+class GithubConfigurationFile extends FileBase {
+  constructor(
+    project: Project,
+    private readonly body: () => string,
+  ) {
+    super(project, GITHUB_CONFIGURATION_FILE, {});
+  }
+
+  protected synthesizeContent(_: IResolver): string | undefined {
+    const marker = this.marker ? `<!-- ${this.marker} -->\n\n` : '';
+    return `${marker}# ${GITHUB_CONFIGURATION_TITLE}\n\n${this.body()}\n`;
+  }
+}
 
 /**
  * Runs a callback once every component has been added, before any file is

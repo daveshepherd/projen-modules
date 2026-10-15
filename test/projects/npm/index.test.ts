@@ -93,4 +93,22 @@ npx projen build
       expect.objectContaining({ name: 'Type-check the test suite' }),
     );
   });
+
+  it('writes the github configuration guide to the docs directory', () => {
+    const project = new NpmPackage({
+      codeOwners: ['test'],
+      defaultReleaseBranch: 'main',
+      name: 'test-npm',
+    });
+
+    const output = synthSnapshot(project);
+
+    expect(output['docs/github-configuration.md']).toContain(
+      '# GitHub Configuration\n\nAll pull requests are merged by the [Mergify]',
+    );
+    expect(output['README.md']).toContain(
+      '[docs/github-configuration.md](docs/github-configuration.md)',
+    );
+    expect(output['README.md']).not.toContain('### Branch ruleset');
+  });
 });

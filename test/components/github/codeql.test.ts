@@ -39,8 +39,8 @@ describe('CodeQL Component', () => {
     expect(mergify.queue_rules[0].queue_conditions).toContain(
       'status-success=CodeQL',
     );
-    expect(output['README.md']).toContain('### Code scanning');
-    expect(output['README.md']).toContain('**Require code scanning results**');
+    expect(output['docs/github-configuration.md']).toContain('## Code scanning');
+    expect(output['docs/github-configuration.md']).toContain('**Require code scanning results**');
   });
 
   it('can be disabled', () => {
@@ -51,7 +51,7 @@ describe('CodeQL Component', () => {
     expect(mergify.queue_rules[0].queue_conditions).not.toContain(
       'status-success=CodeQL',
     );
-    expect(output['README.md']).not.toContain('Code scanning');
+    expect(output['docs/github-configuration.md']).not.toContain('Code scanning');
   });
 
   describe('paths ignore', () => {
@@ -114,7 +114,7 @@ describe('CodeQL Component', () => {
       expect(initConfig(output)).toStrictEqual({
         'paths-ignore': ['**/*.snapshot/**'],
       });
-      expect(output['README.md']).toContain(
+      expect(output['docs/github-configuration.md']).toContain(
         'CodeQL does not scan the integ-runner snapshots (`**/*.snapshot/**`)',
       );
     });
@@ -127,17 +127,17 @@ describe('CodeQL Component', () => {
       expect(initConfig(output)).toStrictEqual({
         'paths-ignore': ['generated/**'],
       });
-      expect(output['README.md']).toContain(
+      expect(output['docs/github-configuration.md']).toContain(
         'CodeQL does not scan paths matching `generated/**`.',
       );
-      expect(output['README.md']).not.toContain('integ-runner snapshots');
+      expect(output['docs/github-configuration.md']).not.toContain('integ-runner snapshots');
     });
 
     it('scans everything when codeqlPathsIgnore is empty', () => {
       const output = synthSnapshot(createApp({ codeqlPathsIgnore: [] }));
 
       expect(initConfig(output)).toBeUndefined();
-      expect(output['README.md']).not.toContain('CodeQL does not scan');
+      expect(output['docs/github-configuration.md']).not.toContain('CodeQL does not scan');
     });
 
     it('has no workflow when CodeQL is disabled', () => {
