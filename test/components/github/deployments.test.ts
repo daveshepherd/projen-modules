@@ -217,6 +217,39 @@ describe('Deployments', () => {
     );
   });
 
+  it('lists the secrets the deploy env references after the role secret', () => {
+    const output = synthSnapshot(
+      createProject({
+        deployments: [
+          {
+            environment: 'dev',
+            region: 'eu-west-1',
+            env: {
+              STAGE: 'staging',
+              EXAMPLE_SECRET: '${{ secrets.EXAMPLE_SECRET }}',
+              CONNECTION: '${{secrets.EXAMPLE_USER}}:${{  secrets.EXAMPLE_PASSWORD  }}',
+              AGAIN: '${{ secrets.EXAMPLE_SECRET }}',
+            },
+          },
+          {
+            environment: 'prod',
+            region: 'us-east-1',
+            roleSecret: 'PROD_ROLE_ARN',
+            env: { STAGE: 'production' },
+          },
+        ],
+      }),
+    );
+
+    expect(output['README.md']).toContain(
+      '| dev | eu-west-1 | `AWS_DEPLOYMENT_ROLE_ARN`, `EXAMPLE_SECRET`, `EXAMPLE_USER`, `EXAMPLE_PASSWORD` |',
+    );
+    expect(output['README.md']).toContain(
+      '| prod | us-east-1 | `PROD_ROLE_ARN` |',
+    );
+    expect(output['README.md']).not.toContain('STAGE');
+  });
+
   it.each(['', 'my env', 'prod/eu'])(
     'rejects the environment name %p',
     (environment) => {
