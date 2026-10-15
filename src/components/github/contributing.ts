@@ -16,6 +16,14 @@ export interface ContributingOptions {
    * The project's releasable commits, which decide whether other types release
    */
   readonly releasableCommits?: ReleasableCommits;
+  /**
+   * The project's major version, which keeps releases at that major version
+   */
+  readonly majorVersion?: number;
+  /**
+   * The project's minimum major version, which keeps releases at or above it
+   */
+  readonly minMajorVersion?: number;
 }
 
 interface PullRequestTitle {
@@ -24,6 +32,7 @@ interface PullRequestTitle {
   readonly scopes: Array<string>;
   readonly release: boolean;
   readonly everyCommitReleases: boolean;
+  readonly canBePreMajor: boolean;
 }
 
 function titleParagraph(title: PullRequestTitle): string {
@@ -55,10 +64,13 @@ function releaseParagraph(title: PullRequestTitle, mergeQueue: boolean): string 
   const intro = mergeQueue
     ? 'The type decides the next release'
     : 'Once a pull request is squash merged with its title as the commit message, its type decides the next release';
-  const preMajor = title.types.includes('feat')
+  const preMajorBumps = title.types.includes('feat')
     ? 'a breaking change releases a minor version and `feat` a patch version'
     : 'a breaking change releases a minor version';
-  return `${intro}: ${bumps.length ? `${bumps.join(' and ')}, while ` : ''}a breaking change, marked by \`!\` after the type (such as \`${title.types[0]}!: ...\`) or a \`BREAKING CHANGE:\` footer, releases a major version.${others} While the version is below 1.0.0, ${preMajor}.`;
+  const preMajor = title.canBePreMajor
+    ? ` While the version is below 1.0.0, ${preMajorBumps}.`
+    : '';
+  return `${intro}: ${bumps.length ? `${bumps.join(' and ')}, while ` : ''}a breaking change, marked by \`!\` after the type (such as \`${title.types[0]}!: ...\`) or a \`BREAKING CHANGE:\` footer, releases a major version.${others}${preMajor}`;
 }
 
 /**
@@ -107,6 +119,10 @@ export class Contributing extends Component {
         this.project instanceof NodeProject &&
         this.project.release !== undefined,
       everyCommitReleases: options.releasableCommits === undefined,
+      // the version comes from git tags, so only these options rule out a
+      // version below 1.0.0
+      canBePreMajor:
+        (options.majorVersion ?? 0) < 1 && (options.minMajorVersion ?? 0) < 1,
     };
     this.render();
   }
