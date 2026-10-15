@@ -14,7 +14,7 @@ import {
 } from '../../components/github/mergify';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
 import { Readme, ReadmeOrder } from '../../components/readme';
-import { gettingStartedCommands } from '../../components/readme/getting-started';
+import { gettingStartedSection } from '../../components/readme/getting-started';
 import { mergeOptions } from '../../utils/merge-options';
 
 /**
@@ -71,9 +71,20 @@ export class CdkTypeScriptApp extends AwsCdkTypeScriptApp {
     this.readme = new Readme(this, {
       description: mergedOptions.readme?.description,
     });
-    this.readme.addSection('Getting Started', gettingStartedCommands(this), {
-      order: ReadmeOrder.INTRODUCTION,
-    });
+    // integ:debug only compares snapshots, so needs no credentials
+    const deployingTasks = mergedOptions.experimentalIntegRunner
+      ? ' and for the integration test tasks that deploy (`integ:update`, `integ:force`, `integ:watch`)'
+      : '';
+    this.readme.addSection(
+      'Getting Started',
+      gettingStartedSection(this, {
+        nodeVersion: this.nodeVersion,
+        prerequisites: [
+          `AWS credentials for the target account, needed to deploy${deployingTasks}`,
+        ],
+      }),
+      { order: ReadmeOrder.INTRODUCTION },
+    );
     this.readme.addSection(
       'CDK',
       `Bootstrap each AWS account and region once:

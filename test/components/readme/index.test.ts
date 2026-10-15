@@ -1,8 +1,12 @@
 import { Project, ProjectOptions, SampleReadme } from 'projen';
-import { NodePackageManager, NodeProject } from 'projen/lib/javascript';
+import {
+  NodePackageManager,
+  NodeProject,
+  NodeProjectOptions,
+} from 'projen/lib/javascript';
 import { synthSnapshot } from 'projen/lib/util/synth';
 import { Readme, ReadmeOrder } from '../../../src/components/readme';
-import { gettingStartedCommands } from '../../../src/components/readme/getting-started';
+import { gettingStartedSection } from '../../../src/components/readme/getting-started';
 
 class TestProject extends Project {
   constructor(options: Omit<ProjectOptions, 'name'> = {}) {
@@ -143,21 +147,88 @@ describe('README sections', () => {
 });
 
 describe('getting started', () => {
-  it('installs with the package manager of a node project', () => {
-    const project = new NodeProject({
+  function nodeProject(options: Partial<NodeProjectOptions> = {}) {
+    return new NodeProject({
       defaultReleaseBranch: 'main',
       name: 'my-project',
-      packageManager: NodePackageManager.PNPM,
+      ...options,
     });
+  }
 
-    expect(gettingStartedCommands(project)).toBe(
+  it('lists the prerequisites before the commands', () => {
+    expect(
+      gettingStartedSection(nodeProject({ minNodeVersion: '22.0.0' })),
+    ).toBe(
+      'Prerequisites:\n* Node.js 22\n* Yarn 1 (classic)\n\n```sh\nyarn install\nnpx projen build\n```',
+    );
+  });
+
+  it('installs with the package manager of a node project', () => {
+    const project = nodeProject({ packageManager: NodePackageManager.PNPM });
+
+    expect(gettingStartedSection(project)).toContain(
       '```sh\npnpm install\nnpx projen build\n```',
     );
   });
 
+  it('shows the major of the given node version', () => {
+    const project = nodeProject({
+      minNodeVersion: '20.0.0',
+      workflowNodeVersion: '24.x',
+    });
+
+    expect(gettingStartedSection(project, { nodeVersion: '24.x' })).toContain(
+      '* Node.js 24\n',
+    );
+  });
+
+  it('falls back to the minimum node version', () => {
+    expect(
+      gettingStartedSection(nodeProject({ minNodeVersion: '20.10.0' })),
+    ).toContain('* Node.js 20\n');
+  });
+
+  it('falls back to a current LTS release without a node version', () => {
+    expect(gettingStartedSection(nodeProject())).toContain(
+      '* a current Node.js LTS release\n',
+    );
+  });
+
+  it('falls back to a current LTS release for an LTS alias', () => {
+    expect(
+      gettingStartedSection(nodeProject(), { nodeVersion: 'lts/*' }),
+    ).toContain('* a current Node.js LTS release\n');
+  });
+
+  it.each([
+    [NodePackageManager.YARN, 'Yarn 1 (classic)'],
+    [NodePackageManager.YARN_CLASSIC, 'Yarn 1 (classic)'],
+    [NodePackageManager.YARN2, 'Yarn 3.6.0 (Berry)'],
+    [NodePackageManager.YARN_BERRY, 'Yarn 3.6.0 (Berry)'],
+    [NodePackageManager.NPM, 'npm'],
+    [NodePackageManager.PNPM, 'pnpm 9.1.0'],
+    [NodePackageManager.BUN, 'Bun'],
+  ])('lists the %s package manager', (packageManager, label) => {
+    const project = nodeProject({
+      packageManager,
+      pnpmVersion: '9.1.0',
+      yarnBerryOptions: { version: '3.6.0' },
+    });
+
+    expect(gettingStartedSection(project)).toContain(`* ${label}\n`);
+  });
+
+  it('lists the extra prerequisites last', () => {
+    expect(
+      gettingStartedSection(nodeProject({ packageManager: NodePackageManager.NPM }), {
+        prerequisites: ['Docker'],
+      }),
+    ).toContain('* npm\n* Docker\n\n');
+  });
+
   it('installs with projen for other projects', () => {
-    expect(gettingStartedCommands(new TestProject())).toBe(
-      '```sh\nnpx projen install\nnpx projen build\n```',
+    expect(gettingStartedSection(new TestProject())).toBe(
+      'Prerequisites:\n* a current Node.js LTS release, to run projen\n\n```sh\nnpx projen install\nnpx projen build\n```',
     );
   });
 });

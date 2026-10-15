@@ -48,6 +48,11 @@ describe('CDK Typescript App', () => {
 
 ## Getting Started
 
+Prerequisites:
+* a current Node.js LTS release
+* Yarn 1 (classic)
+* AWS credentials for the target account, needed to deploy
+
 \`\`\`sh
 yarn install
 npx projen build
@@ -91,6 +96,11 @@ A test project description.
 
 ## Getting Started
 
+Prerequisites:
+* a current Node.js LTS release
+* Yarn 1 (classic)
+* AWS credentials for the target account, needed to deploy
+
 \`\`\`sh
 yarn install
 npx projen build
@@ -111,6 +121,60 @@ npx projen deploy
 \`\`\`
 
 If the app has more than one stack, name the stacks to deploy or pass \`--all\`, as in \`npx projen deploy --all\`.`);
+  });
+
+  describe('getting started prerequisites', () => {
+    it('shows the workflow node version', () => {
+      const project = new CdkTypeScriptApp({
+        cdkVersion: '2.1.0',
+        codeOwners: ['test'],
+        minNodeVersion: '20.0.0',
+        name: 'test-cdk',
+        workflowNodeVersion: '22.x',
+      });
+
+      expect(synthSnapshot(project)['README.md']).toContain(
+        'Prerequisites:\n* Node.js 22\n* Yarn 1 (classic)\n',
+      );
+    });
+
+    it('shows the minimum node version without a workflow node version', () => {
+      const project = new CdkTypeScriptApp({
+        cdkVersion: '2.1.0',
+        codeOwners: ['test'],
+        minNodeVersion: '20.0.0',
+        name: 'test-cdk',
+      });
+
+      expect(synthSnapshot(project)['README.md']).toContain(
+        'Prerequisites:\n* Node.js 20\n',
+      );
+    });
+
+    it('needs AWS credentials to deploy', () => {
+      const project = new CdkTypeScriptApp({
+        cdkVersion: '2.1.0',
+        codeOwners: ['test'],
+        name: 'test-cdk',
+      });
+
+      expect(synthSnapshot(project)['README.md']).toContain(
+        '* AWS credentials for the target account, needed to deploy\n\n',
+      );
+    });
+
+    it('needs AWS credentials for the integ tasks that deploy', () => {
+      const project = new CdkTypeScriptApp({
+        cdkVersion: '2.272.0',
+        codeOwners: ['test'],
+        experimentalIntegRunner: true,
+        name: 'test-cdk',
+      });
+
+      expect(synthSnapshot(project)['README.md']).toContain(
+        '* AWS credentials for the target account, needed to deploy and for the integration test tasks that deploy (`integ:update`, `integ:force`, `integ:watch`)\n\n',
+      );
+    });
   });
 
   describe('integ runner', () => {
