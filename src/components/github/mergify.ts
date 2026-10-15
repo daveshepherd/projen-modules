@@ -60,6 +60,7 @@ function formatList(values: Array<string>): string {
 interface GithubConfiguration {
   readonly approvedReviews: number;
   readonly codeScanning: boolean;
+  readonly codeScanningPathsIgnore: Array<string>;
   readonly requiredChecks: Array<string>;
   readonly trustedAuthors: Array<string>;
 }
@@ -101,12 +102,23 @@ function githubConfigurationSection(config: GithubConfiguration): string {
     : config.approvedReviews === 1
       ? '1 required approval'
       : `${config.approvedReviews} required approvals`;
+  const pathsIgnore = config.codeScanningPathsIgnore;
+  const otherPathsIgnore = pathsIgnore.filter(
+    (pattern) => pattern !== CodeQl.INTEG_SNAPSHOT_PATHS,
+  );
+  const ignoredPaths =
+    (pathsIgnore.includes(CodeQl.INTEG_SNAPSHOT_PATHS)
+      ? ` CodeQL does not scan the integ-runner snapshots (\`${CodeQl.INTEG_SNAPSHOT_PATHS}\`): their assets are generated bundles of dependencies whose file names change on every \`integ:update\`, so alerts on them can neither be fixed in the repository nor dismissed for good. The source they are built from is still scanned.`
+      : '') +
+    (otherPathsIgnore.length
+      ? ` CodeQL does not scan paths matching ${formatList(otherPathsIgnore)}.`
+      : '');
   const codeScanningSettings = config.codeScanning
     ? `
 
 ### Code scanning
 
-CodeQL runs from \`.github/workflows/codeql.yml\`, which is managed by projen. In **Settings → Advanced Security**, leave CodeQL **Default setup** off, because it cannot run alongside this workflow. Under **Protection rules**, keep the **Check run failure threshold** at **High or higher** for security alerts and **Errors** for other alerts, as this decides whether the \`${CodeQl.CHECK_NAME}\` check fails. Private repositories also need GitHub Code Security enabled there for code scanning results to be uploaded.`
+CodeQL runs from \`.github/workflows/codeql.yml\`, which is managed by projen. In **Settings → Advanced Security**, leave CodeQL **Default setup** off, because it cannot run alongside this workflow. Under **Protection rules**, keep the **Check run failure threshold** at **High or higher** for security alerts and **Errors** for other alerts, as this decides whether the \`${CodeQl.CHECK_NAME}\` check fails. Private repositories also need GitHub Code Security enabled there for code scanning results to be uploaded.${ignoredPaths}`
     : '';
   const codeScanningRule = config.codeScanning
     ? `
@@ -156,7 +168,9 @@ export function configureMergify(
 
   // build jobs and CodeQL can be added after this, so they are read at synthesis
   const buildJobIds = () => project.buildWorkflow?.buildJobIds ?? [];
-  const codeScanning = () => project.components.some((c) => c instanceof CodeQl);
+  const codeQl = () =>
+    project.components.find((c): c is CodeQl => c instanceof CodeQl);
+  const codeScanning = () => codeQl() !== undefined;
 
   project.autoMerge?.addConditions('-draft');
 
@@ -213,6 +227,7 @@ export function configureMergify(
       githubConfigurationSection({
         approvedReviews,
         codeScanning: codeScanning(),
+        codeScanningPathsIgnore: codeQl()?.pathsIgnore ?? [],
         requiredChecks: buildJobIds(),
         trustedAuthors,
       }),

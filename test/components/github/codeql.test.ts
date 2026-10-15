@@ -1,5 +1,10 @@
 import { synthSnapshot } from 'projen/lib/util/synth';
 import * as yaml from 'yaml';
+import { CodeQl } from '../../../src/components/github/codeql';
+import {
+  CdkTypeScriptApp,
+  CdkTypeScriptAppOptions,
+} from '../../../src/projects/cdk-ts';
 import { JsiiProject, JsiiProjectOptions } from '../../../src/projects/jsii';
 
 function createProject(options: Partial<JsiiProjectOptions> = {}) {
@@ -47,5 +52,98 @@ describe('CodeQL Component', () => {
       'status-success=CodeQL',
     );
     expect(output['README.md']).not.toContain('Code scanning');
+  });
+
+  describe('paths ignore', () => {
+    const initStep = (output: Record<string, any>) =>
+      yaml
+        .parse(output['.github/workflows/codeql.yml'])
+        .jobs.analyze.steps.find(
+          (step: { name?: string }) => step.name === 'Initialize CodeQL',
+        );
+
+    it('scans everything by default', () => {
+      const output = synthSnapshot(createProject());
+
+      expect(initStep(output).with.config).toBeUndefined();
+    });
+
+    it('configures the paths that are not scanned', () => {
+      const project = createProject({ codeql: false });
+      const codeQl = new CodeQl(project.github!, {
+        languages: ['javascript-typescript'],
+        pathsIgnore: ['generated/**'],
+      });
+
+      codeQl.addPathsIgnore('**/*.snapshot/**');
+
+      const config = yaml.parse(initStep(synthSnapshot(project)).with.config);
+      expect(config).toStrictEqual({
+        'paths-ignore': ['generated/**', '**/*.snapshot/**'],
+      });
+      expect(codeQl.pathsIgnore).toStrictEqual([
+        'generated/**',
+        '**/*.snapshot/**',
+      ]);
+    });
+  });
+
+  describe('CDK app', () => {
+    const createApp = (options: Partial<CdkTypeScriptAppOptions> = {}) =>
+      new CdkTypeScriptApp({
+        cdkVersion: '2.1.0',
+        codeOwners: ['test'],
+        name: 'test-cdk',
+        ...options,
+      });
+
+    const initConfig = (output: Record<string, any>) => {
+      const step = yaml
+        .parse(output['.github/workflows/codeql.yml'])
+        .jobs.analyze.steps.find(
+          (s: { name?: string }) => s.name === 'Initialize CodeQL',
+        );
+      return step.with.config === undefined
+        ? undefined
+        : yaml.parse(step.with.config);
+    };
+
+    it('does not scan the integ-runner snapshots by default', () => {
+      const output = synthSnapshot(createApp());
+
+      expect(initConfig(output)).toStrictEqual({
+        'paths-ignore': ['**/*.snapshot/**'],
+      });
+      expect(output['README.md']).toContain(
+        'CodeQL does not scan the integ-runner snapshots (`**/*.snapshot/**`)',
+      );
+    });
+
+    it('replaces the default with codeqlPathsIgnore', () => {
+      const output = synthSnapshot(
+        createApp({ codeqlPathsIgnore: ['generated/**'] }),
+      );
+
+      expect(initConfig(output)).toStrictEqual({
+        'paths-ignore': ['generated/**'],
+      });
+      expect(output['README.md']).toContain(
+        'CodeQL does not scan paths matching `generated/**`.',
+      );
+      expect(output['README.md']).not.toContain('integ-runner snapshots');
+    });
+
+    it('scans everything when codeqlPathsIgnore is empty', () => {
+      const output = synthSnapshot(createApp({ codeqlPathsIgnore: [] }));
+
+      expect(initConfig(output)).toBeUndefined();
+      expect(output['README.md']).not.toContain('CodeQL does not scan');
+    });
+
+    it('has no workflow when CodeQL is disabled', () => {
+      const output = synthSnapshot(createApp({ codeql: false }));
+
+      expect(output['.github/workflows/codeql.yml']).toBeUndefined();
+    });
   });
 });

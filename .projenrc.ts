@@ -141,6 +141,23 @@ new ProjenStruct(project, {
   })
   .add({
     docs: {
+      default: '- the integ-runner snapshot directories, `[CodeQl.INTEG_SNAPSHOT_PATHS]`',
+      summary:
+        'Glob patterns of paths CodeQL does not scan, such as generated code. Setting this replaces the default.',
+    },
+    name: 'codeqlPathsIgnore',
+    optional: true,
+    type: {
+      collection: {
+        kind: CollectionKind.Array,
+        elementtype: {
+          primitive: PrimitiveType.String,
+        },
+      },
+    },
+  })
+  .add({
+    docs: {
       default: '[]',
       summary:
         'Environments to deploy to from the release workflow, one job each, chained in array order.',
