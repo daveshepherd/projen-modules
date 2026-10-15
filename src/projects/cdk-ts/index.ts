@@ -68,6 +68,12 @@ export class CdkTypeScriptApp extends AwsCdkTypeScriptApp {
       autoMergeOptions: autoMergeOptions(mergedOptions),
     } as AwsCdkTypeScriptAppOptions);
 
+    // cdk deploy rejects an app with more than one stack unless the stacks are named
+    this.cdkTasks.deploy.reset();
+    this.cdkTasks.deploy.execArgs(['cdk', 'deploy', '--all'], {
+      receiveArgs: true,
+    });
+
     new CodeOwners(this, mergedOptions.codeOwners);
     this.readme = new Readme(this, {
       description: mergedOptions.readme?.description,
@@ -100,7 +106,7 @@ Deploy the app:
 npx projen deploy
 \`\`\`
 
-If the app has more than one stack, name the stacks to deploy or pass \`--all\`, as in \`npx projen deploy --all\`.`,
+This deploys every stack in the app. To deploy a single stack, name it, as in \`npx cdk deploy <stack>\`.`,
       { order: ReadmeOrder.USAGE },
     );
     if (mergedOptions.experimentalIntegRunner) {
