@@ -4,6 +4,8 @@ import {
   CdkTypeScriptApp,
   CdkTypeScriptAppOptions,
 } from '../../../src/projects/cdk-ts';
+import { JsiiProject } from '../../../src/projects/jsii';
+import { JsiiProjectOptions } from '../../../src/projects/jsii/jsii-project-options';
 import { NpmPackage } from '../../../src/projects/npm';
 import { PythonPackage } from '../../../src/projects/python';
 
@@ -41,6 +43,58 @@ Once a pull request is approved and its checks pass, the [Mergify](https://mergi
 Once a pull request is approved and its checks pass, the [Mergify](https://mergify.com) merge queue squash merges it, with its title as the commit message. Draft pull requests and those labelled \`do-not-merge\` are not merged.
 
 The type decides the next release: \`feat\` releases a minor version and \`fix\` a patch version, while a breaking change, marked by \`!\` after the type (such as \`feat!: ...\`) or a \`BREAKING CHANGE:\` footer, releases a major version. Other types still release a patch version. While the version is below 1.0.0, a breaking change releases a minor version and \`feat\` a patch version.`);
+  });
+
+  describe('releases below 1.0.0', () => {
+    const PRE_MAJOR =
+      'While the version is below 1.0.0, a breaking change releases a minor version and `feat` a patch version.';
+
+    function createJsiiProject(options: Partial<JsiiProjectOptions> = {}) {
+      return new JsiiProject({
+        author: 'Test',
+        authorAddress: 'test@example.com',
+        codeOwners: ['test'],
+        defaultReleaseBranch: 'main',
+        name: 'test-jsii',
+        repositoryUrl: 'test.com',
+        ...options,
+      });
+    }
+
+    it('are described by default', () => {
+      expect(synthContributing(createJsiiProject())).toContain(PRE_MAJOR);
+    });
+
+    it('are described with major version 0', () => {
+      expect(
+        synthContributing(createJsiiProject({ majorVersion: 0 })),
+      ).toContain(PRE_MAJOR);
+    });
+
+    it('are not described with major version 1', () => {
+      const section = synthContributing(createJsiiProject({ majorVersion: 1 }));
+
+      expect(section).toContain('releases a major version.');
+      expect(section).not.toContain('below 1.0.0');
+    });
+
+    it('are not described with minimum major version 1', () => {
+      const section = synthContributing(
+        createJsiiProject({ minMajorVersion: 1 }),
+      );
+
+      expect(section).toContain('releases a major version.');
+      expect(section).not.toContain('below 1.0.0');
+    });
+
+    it('are not described for a cdk app with major version 1', () => {
+      const section = synthContributing(
+        createProject({ release: true, majorVersion: 1 }),
+      );
+
+      expect(section).toContain('releases a major version.');
+      expect(section).not.toContain('below 1.0.0');
+    });
   });
 
   it('comes after usage sections and before the GitHub configuration', () => {
