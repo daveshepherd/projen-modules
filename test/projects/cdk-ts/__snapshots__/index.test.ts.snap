@@ -905,6 +905,7 @@ CODEOWNERS
             "execArgs": [
               "cdk",
               "deploy",
+              "--all",
             ],
             "receiveArgs": true,
           },
@@ -1469,7 +1470,7 @@ Deploy the app:
 npx projen deploy
 \`\`\`
 
-If the app has more than one stack, name the stacks to deploy or pass \`--all\`, as in \`npx projen deploy --all\`.
+This deploys every stack in the app. To deploy a single stack, name it, as in \`npx cdk deploy <stack>\`.
 
 ## Integration Tests
 
@@ -2671,6 +2672,7 @@ CODEOWNERS
             "execArgs": [
               "cdk",
               "deploy",
+              "--all",
             ],
             "receiveArgs": true,
           },
@@ -3150,7 +3152,7 @@ Deploy the app:
 npx projen deploy
 \`\`\`
 
-If the app has more than one stack, name the stacks to deploy or pass \`--all\`, as in \`npx projen deploy --all\`.
+This deploys every stack in the app. To deploy a single stack, name it, as in \`npx cdk deploy <stack>\`.
 
 ## Contributing
 

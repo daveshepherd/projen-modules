@@ -73,7 +73,7 @@ Deploy the app:
 npx projen deploy
 \`\`\`
 
-If the app has more than one stack, name the stacks to deploy or pass \`--all\`, as in \`npx projen deploy --all\`.
+This deploys every stack in the app. To deploy a single stack, name it, as in \`npx cdk deploy <stack>\`.
 
 ## Contributing
 
@@ -125,7 +125,7 @@ Deploy the app:
 npx projen deploy
 \`\`\`
 
-If the app has more than one stack, name the stacks to deploy or pass \`--all\`, as in \`npx projen deploy --all\`.
+This deploys every stack in the app. To deploy a single stack, name it, as in \`npx cdk deploy <stack>\`.
 
 ## Contributing
 
@@ -288,6 +288,22 @@ Pull request titles must follow [Conventional Commits](https://www.conventionalc
       expect(output['.projen/tasks.json'].tasks['integ:force']).toBeUndefined();
       expect(output['README.md']).not.toContain('## Integration Tests');
     });
+  });
+
+  it('deploys every stack', () => {
+    const project = new CdkTypeScriptApp({
+      cdkVersion: '2.1.0',
+      codeOwners: ['test'],
+      name: 'test-cdk',
+    });
+
+    const output = synthSnapshot(project);
+
+    const deploy = output['.projen/tasks.json'].tasks.deploy;
+    expect(deploy.description).toEqual('Deploys your CDK app to the AWS cloud');
+    expect(deploy.steps).toEqual([
+      { execArgs: ['cdk', 'deploy', '--all'], receiveArgs: true },
+    ]);
   });
 
   it('type-checks the tests before running them', () => {
