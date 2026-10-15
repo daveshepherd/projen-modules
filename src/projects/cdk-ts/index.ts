@@ -100,6 +100,10 @@ npx projen deploy
     }
     if ((mergedOptions.codeql ?? true) && this.github?.workflowsEnabled) {
       new CodeQl(this.github, {
+        // integ-runner snapshot assets are bundles of dependencies, renamed on every update
+        pathsIgnore: mergedOptions.codeqlPathsIgnore ?? [
+          CodeQl.INTEG_SNAPSHOT_PATHS,
+        ],
         branches: [mergedOptions.defaultReleaseBranch],
         languages: ['javascript-typescript', 'actions'],
       });

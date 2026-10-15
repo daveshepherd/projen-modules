@@ -5779,6 +5779,7 @@ const cdkTypeScriptAppOptions: CdkTypeScriptAppOptions = { ... }
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.codeCov">codeCov</a></code> | <code>boolean</code> | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/. Uses codecov/codecov-action. By default, OIDC auth is used. Alternatively a token can be provided via `codeCovTokenSecret`. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.codeCovTokenSecret">codeCovTokenSecret</a></code> | <code>string</code> | Define the secret name for a specified https://codecov.io/ token. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.codeql">codeql</a></code> | <code>boolean</code> | Scan the code with CodeQL on pull requests, pushes to the default branch and weekly. |
+| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.codeqlPathsIgnore">codeqlPathsIgnore</a></code> | <code>string[]</code> | Glob patterns of paths CodeQL does not scan, such as generated code. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.commitGenerated">commitGenerated</a></code> | <code>boolean</code> | Whether to commit the managed files by default. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.config">config</a></code> | <code>{[ key: string ]: any}</code> | Configuration values available to package scripts at runtime. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.constructsVersion">constructsVersion</a></code> | <code>string</code> | Minimum version of the `constructs` library to depend on. |
@@ -6514,6 +6515,21 @@ public readonly codeql: boolean;
 - *Default:* true
 
 Scan the code with CodeQL on pull requests, pushes to the default branch and weekly.
+
+---
+
+##### `codeqlPathsIgnore`<sup>Optional</sup> <a name="codeqlPathsIgnore" id="projen-modules.CdkTypeScriptAppOptions.property.codeqlPathsIgnore"></a>
+
+```typescript
+public readonly codeqlPathsIgnore: string[];
+```
+
+- *Type:* string[]
+- *Default:* the integ-runner snapshot directories, `[CodeQl.INTEG_SNAPSHOT_PATHS]`
+
+Glob patterns of paths CodeQL does not scan, such as generated code.
+
+Setting this replaces the default.
 
 ---
 

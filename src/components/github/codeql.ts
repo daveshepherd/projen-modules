@@ -14,6 +14,13 @@ export interface CodeQlOptions {
    * @see https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/customizing-your-advanced-setup-for-code-scanning#changing-the-languages-that-are-analyzed
    */
   readonly languages: Array<string>;
+  /**
+   * Glob patterns of paths that are not scanned, such as generated code
+   *
+   * @default []
+   * @see https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/customizing-your-advanced-setup-for-code-scanning#specifying-directories-to-scan
+   */
+  readonly pathsIgnore?: Array<string>;
 }
 
 /**
@@ -25,8 +32,23 @@ export class CodeQl extends Component {
    */
   static readonly CHECK_NAME = 'CodeQL';
 
+  /**
+   * Glob of the integ-runner snapshot directories, whose assets are generated
+   * bundles of dependencies
+   */
+  static readonly INTEG_SNAPSHOT_PATHS = '**/*.snapshot/**';
+
+  private readonly _pathsIgnore: Array<string>;
+  private readonly initInputs: { [key: string]: string };
+
   constructor(gitHub: github.GitHub, options: CodeQlOptions) {
     super(gitHub.project);
+
+    this._pathsIgnore = [...(options.pathsIgnore ?? [])];
+    this.initInputs = {
+      'languages': '${{ matrix.language }}',
+      'build-mode': 'none',
+    };
 
     const branches = options.branches ?? ['main'];
     const workflow = gitHub.addWorkflow('codeql');
@@ -58,10 +80,7 @@ export class CodeQl extends Component {
           {
             name: 'Initialize CodeQL',
             uses: 'github/codeql-action/init@v4',
-            with: {
-              'languages': '${{ matrix.language }}',
-              'build-mode': 'none',
-            },
+            with: this.initInputs,
           },
           {
             name: 'Perform CodeQL Analysis',
@@ -73,5 +92,29 @@ export class CodeQl extends Component {
         ],
       },
     });
+  }
+
+  /**
+   * Glob patterns of paths that are not scanned
+   */
+  get pathsIgnore(): Array<string> {
+    return [...this._pathsIgnore];
+  }
+
+  /**
+   * Stops CodeQL scanning paths matching the glob patterns
+   */
+  addPathsIgnore(...patterns: Array<string>) {
+    this._pathsIgnore.push(...patterns);
+  }
+
+  preSynthesize() {
+    if (this._pathsIgnore.length) {
+      // JSON strings are valid YAML double-quoted scalars, so globs need no further escaping
+      this.initInputs.config = [
+        'paths-ignore:',
+        ...this._pathsIgnore.map((pattern) => `  - ${JSON.stringify(pattern)}`),
+      ].join('\n');
+    }
   }
 }

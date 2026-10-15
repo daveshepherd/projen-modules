@@ -1275,6 +1275,11 @@ export interface CdkTypeScriptAppOptions {
    */
   readonly codeql?: boolean;
   /**
+   * Glob patterns of paths CodeQL does not scan, such as generated code. Setting this replaces the default.
+   * @default - the integ-runner snapshot directories, `[CodeQl.INTEG_SNAPSHOT_PATHS]`
+   */
+  readonly codeqlPathsIgnore?: Array<string>;
+  /**
    * Environments to deploy to from the release workflow, one job each, chained in array order.
    * @default []
    */
