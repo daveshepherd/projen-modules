@@ -6,6 +6,10 @@ A collection of custom projen modules, that can be used to bootstrap and maintai
 
 ## Getting Started
 
+Prerequisites:
+* Node.js 22
+* Yarn 1 (classic)
+
 ```sh
 yarn install
 npx projen build

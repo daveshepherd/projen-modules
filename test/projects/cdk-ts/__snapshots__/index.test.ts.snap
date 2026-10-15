@@ -1434,6 +1434,11 @@ CODEOWNERS
 
 ## Getting Started
 
+Prerequisites:
+* a current Node.js LTS release
+* Yarn 1 (classic)
+* AWS credentials for the target account, needed to deploy and for the integration test tasks that deploy (\`integ:update\`, \`integ:force\`, \`integ:watch\`)
+
 \`\`\`sh
 yarn install
 npx projen build
@@ -3092,6 +3097,11 @@ CODEOWNERS
 # test-cdk
 
 ## Getting Started
+
+Prerequisites:
+* a current Node.js LTS release
+* Yarn 1 (classic)
+* AWS credentials for the target account, needed to deploy
 
 \`\`\`sh
 yarn install

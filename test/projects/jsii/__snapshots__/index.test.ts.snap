@@ -1645,6 +1645,10 @@ CODEOWNERS
 
 ## Getting Started
 
+Prerequisites:
+* a current Node.js LTS release
+* Yarn 1 (classic)
+
 \`\`\`sh
 yarn install
 npx projen build

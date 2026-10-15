@@ -1,3 +1,4 @@
+import { NodePackageManager } from 'projen/lib/javascript';
 import { synthSnapshot } from 'projen/lib/util/synth';
 import { NpmPackage } from '../../../src/projects/npm';
 
@@ -31,6 +32,10 @@ describe('NPM Package', () => {
 
 ## Getting Started
 
+Prerequisites:
+* a current Node.js LTS release
+* Yarn 1 (classic)
+
 \`\`\`sh
 yarn install
 npx projen build
@@ -58,10 +63,28 @@ A test project description.
 
 ## Getting Started
 
+Prerequisites:
+* a current Node.js LTS release
+* Yarn 1 (classic)
+
 \`\`\`sh
 yarn install
 npx projen build
 \`\`\``);
+  });
+
+  it('lists the workflow node version and package manager as prerequisites', () => {
+    const project = new NpmPackage({
+      codeOwners: ['test'],
+      defaultReleaseBranch: 'main',
+      name: 'test-npm',
+      packageManager: NodePackageManager.NPM,
+      workflowNodeVersion: '22.x',
+    });
+
+    expect(synthSnapshot(project)['README.md']).toContain(
+      'Prerequisites:\n* Node.js 22\n* npm\n\n```sh\nnpm install\n',
+    );
   });
 
   it('type-checks the tests before running them', () => {

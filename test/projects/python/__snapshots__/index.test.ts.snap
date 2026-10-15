@@ -436,6 +436,10 @@ merge_protections_settings:
 
 ## Getting Started
 
+Prerequisites:
+* Python 3
+* a current Node.js LTS release, to run projen
+
 \`\`\`sh
 npx projen install
 npx projen build
