@@ -60,21 +60,19 @@ npx projen build
 
 ## CDK
 
-On first run of a CDK installation:
+Bootstrap each AWS account and region once:
 
 \`\`\`sh
 npx cdk bootstrap
 \`\`\`
 
-Build the project
-\`\`\`sh
-npx projen build
-\`\`\`
+Deploy the app:
 
-Deploy the CDK stack
 \`\`\`sh
 npx projen deploy
-\`\`\``);
+\`\`\`
+
+If the app has more than one stack, name the stacks to deploy or pass \`--all\`, as in \`npx projen deploy --all\`.`);
   });
 
   it('has readme with a project description', () => {
@@ -110,21 +108,19 @@ npx projen build
 
 ## CDK
 
-On first run of a CDK installation:
+Bootstrap each AWS account and region once:
 
 \`\`\`sh
 npx cdk bootstrap
 \`\`\`
 
-Build the project
-\`\`\`sh
-npx projen build
-\`\`\`
+Deploy the app:
 
-Deploy the CDK stack
 \`\`\`sh
 npx projen deploy
-\`\`\``);
+\`\`\`
+
+If the app has more than one stack, name the stacks to deploy or pass \`--all\`, as in \`npx projen deploy --all\`.`);
   });
 
   describe('getting started prerequisites', () => {
@@ -238,6 +234,17 @@ npx projen deploy
       }
 
       expect(output['README.md']).toContain('## Integration Tests');
+      const integSection = output['README.md'].split('## Integration Tests')[1];
+      const [snapshotOnly, deploying] = integSection.split(
+        'These tasks deploy to AWS',
+      );
+      for (const task of ['integ', 'integ:debug']) {
+        expect(snapshotOnly).toContain(`\`npx projen ${task}\``);
+      }
+      for (const task of ['integ:update', 'integ:force', 'integ:watch']) {
+        expect(snapshotOnly).not.toContain(`\`npx projen ${task}\``);
+        expect(deploying).toContain(`\`npx projen ${task}\``);
+      }
       expect(output).toMatchSnapshot();
     });
 
