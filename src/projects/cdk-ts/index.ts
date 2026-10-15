@@ -7,6 +7,7 @@ import {
 import { CdkTypeScriptAppOptions } from './cdk-typescript-app-options';
 import { CodeOwners } from '../../components/github/codeowners';
 import { CodeQl } from '../../components/github/codeql';
+import { Contributing } from '../../components/github/contributing';
 import { addDeployments } from '../../components/github/deployments';
 import {
   autoMergeOptions,
@@ -122,6 +123,7 @@ If the app has more than one stack, name the stacks to deploy or pass \`--all\`,
       nodeVersion: this.nodeVersion,
       releaseWorkflowName: mergedOptions.releaseWorkflowName,
     });
+    Contributing.of(this).configurePullRequestTitle(mergedOptions);
     if (this.autoMerge) {
       configureMergify(this, {
         approvedReviews: mergedOptions.autoMergeOptions?.approvedReviews,

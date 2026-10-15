@@ -72,7 +72,11 @@ Deploy the app:
 npx projen deploy
 \`\`\`
 
-If the app has more than one stack, name the stacks to deploy or pass \`--all\`, as in \`npx projen deploy --all\`.`);
+If the app has more than one stack, name the stacks to deploy or pass \`--all\`, as in \`npx projen deploy --all\`.
+
+## Contributing
+
+Pull request titles must follow [Conventional Commits](https://www.conventionalcommits.org), with one of the types \`feat\`, \`fix\` or \`chore\`, such as \`feat: describe the change\`. The **Validate PR title** check fails until the title does.`);
   });
 
   it('has readme with a project description', () => {
@@ -120,7 +124,11 @@ Deploy the app:
 npx projen deploy
 \`\`\`
 
-If the app has more than one stack, name the stacks to deploy or pass \`--all\`, as in \`npx projen deploy --all\`.`);
+If the app has more than one stack, name the stacks to deploy or pass \`--all\`, as in \`npx projen deploy --all\`.
+
+## Contributing
+
+Pull request titles must follow [Conventional Commits](https://www.conventionalcommits.org), with one of the types \`feat\`, \`fix\` or \`chore\`, such as \`feat: describe the change\`. The **Validate PR title** check fails until the title does.`);
   });
 
   describe('getting started prerequisites', () => {

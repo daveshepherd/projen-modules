@@ -3,6 +3,7 @@ import { PythonProject, PythonProjectOptions } from 'projen/lib/python';
 import { PythonPackageOptions } from './python-package-options';
 import { CodeOwners } from '../../components/github/codeowners';
 import { CodeQl } from '../../components/github/codeql';
+import { Contributing } from '../../components/github/contributing';
 import {
   autoMergeOptions,
   configureMergify,
@@ -60,6 +61,7 @@ export class PythonPackage extends PythonProject {
         languages: ['python', 'actions'],
       });
     }
+    Contributing.of(this).configurePullRequestTitle(mergedOptions);
     // projen only wires the merge queue up for node projects
     if ((mergedOptions.autoMerge ?? true) && this.github?.mergify) {
       this.autoMerge = new github.AutoMerge(

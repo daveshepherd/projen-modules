@@ -14727,10 +14727,23 @@ Orders of the bands of sections in the README, leaving room for sections in betw
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#projen-modules.ReadmeOrder.property.CONTRIBUTING">CONTRIBUTING</a></code> | <code>number</code> | How to contribute, such as the pull request title format and how pull requests are merged. |
 | <code><a href="#projen-modules.ReadmeOrder.property.DEFAULT">DEFAULT</a></code> | <code>number</code> | Sections added without an order. |
 | <code><a href="#projen-modules.ReadmeOrder.property.INTRODUCTION">INTRODUCTION</a></code> | <code>number</code> | Sections a reader needs first, such as getting started. |
 | <code><a href="#projen-modules.ReadmeOrder.property.REFERENCE">REFERENCE</a></code> | <code>number</code> | Reference material, such as repository configuration and known issues. |
 | <code><a href="#projen-modules.ReadmeOrder.property.USAGE">USAGE</a></code> | <code>number</code> | How to use and operate the project. |
+
+---
+
+##### `CONTRIBUTING`<sup>Required</sup> <a name="CONTRIBUTING" id="projen-modules.ReadmeOrder.property.CONTRIBUTING"></a>
+
+```typescript
+public readonly CONTRIBUTING: number;
+```
+
+- *Type:* number
+
+How to contribute, such as the pull request title format and how pull requests are merged.
 
 ---
 

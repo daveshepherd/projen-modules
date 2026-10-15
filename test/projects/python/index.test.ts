@@ -45,7 +45,11 @@ Prerequisites:
 \`\`\`sh
 npx projen install
 npx projen build
-\`\`\``);
+\`\`\`
+
+## Contributing
+
+Pull request titles must follow [Conventional Commits](https://www.conventionalcommits.org), with one of the types \`feat\`, \`fix\` or \`chore\`, such as \`feat: describe the change\`. The **Validate PR title** check fails until the title does.`);
   });
 
   it('has readme with a project description', () => {
@@ -79,7 +83,11 @@ Prerequisites:
 \`\`\`sh
 npx projen install
 npx projen build
-\`\`\``);
+\`\`\`
+
+## Contributing
+
+Pull request titles must follow [Conventional Commits](https://www.conventionalcommits.org), with one of the types \`feat\`, \`fix\` or \`chore\`, such as \`feat: describe the change\`. The **Validate PR title** check fails until the title does.`);
   });
 
   it('merges pull requests through the mergify queue', () => {

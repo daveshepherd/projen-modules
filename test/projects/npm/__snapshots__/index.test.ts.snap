@@ -1110,6 +1110,10 @@ yarn install
 npx projen build
 \`\`\`
 
+## Contributing
+
+Once a pull request is approved and its checks pass, the [Mergify](https://mergify.com) merge queue squash merges it, with its title as the commit message. Draft pull requests and those labelled \`do-not-merge\` are not merged.
+
 ## GitHub Configuration
 
 The one-off configuration that this repository needs on GitHub, such as the Mergify merge queue and the branch ruleset, is described in [docs/github-configuration.md](docs/github-configuration.md).",
