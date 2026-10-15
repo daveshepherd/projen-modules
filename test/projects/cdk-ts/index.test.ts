@@ -12,6 +12,7 @@ import { join, resolve } from 'path';
 import { github } from 'projen';
 import { LambdaRuntime } from 'projen/lib/awscdk';
 import { synthSnapshot } from 'projen/lib/util/synth';
+import * as yaml from 'yaml';
 import {
   CdkTypeScriptApp,
   CdkTypeScriptAppOptions,
@@ -49,7 +50,7 @@ describe('CDK Typescript App', () => {
 ## Getting Started
 
 Prerequisites:
-* a current Node.js LTS release
+* Node.js 24
 * Yarn 1 (classic)
 * AWS credentials for the target account, needed to deploy
 
@@ -101,7 +102,7 @@ A test project description.
 ## Getting Started
 
 Prerequisites:
-* a current Node.js LTS release
+* Node.js 24
 * Yarn 1 (classic)
 * AWS credentials for the target account, needed to deploy
 
@@ -496,6 +497,59 @@ Pull request titles must follow [Conventional Commits](https://www.conventionalc
           lambdaOptions: { runtime: LambdaRuntime.NODEJS_22_X },
         }),
       ).toContain("new lambda.Runtime('nodejs22.x'");
+    });
+
+    const setupNodeVersion = (output: Record<string, any>) =>
+      yaml
+        .parse(output['.github/workflows/build.yml'])
+        .jobs.build.steps.find((step: { uses?: string }) =>
+          step.uses?.startsWith('actions/setup-node'),
+        )?.with?.['node-version'];
+
+    it('builds on the Node.js version of the lambda runtime', () => {
+      const output = synthSnapshot(new CdkTypeScriptApp(baseOptions));
+
+      expect(setupNodeVersion(output)).toBe('24.x');
+      expect(output['README.md']).toContain('* Node.js 24\n');
+    });
+
+    it('builds on the Node.js version of an overridden lambda runtime', () => {
+      const project = new CdkTypeScriptApp({
+        ...baseOptions,
+        lambdaOptions: { runtime: LambdaRuntime.NODEJS_22_X },
+      });
+
+      expect(setupNodeVersion(synthSnapshot(project))).toBe('22.x');
+    });
+
+    it('leaves the workflow node version unset for the regional latest runtime', () => {
+      const output = synthSnapshot(
+        new CdkTypeScriptApp({
+          ...baseOptions,
+          lambdaOptions: { runtime: LambdaRuntime.NODEJS_REGIONAL_LATEST },
+        }),
+      );
+
+      expect(setupNodeVersion(output)).toBeUndefined();
+      expect(output['README.md']).toContain('* a current Node.js LTS release\n');
+    });
+
+    it('can override the workflow node version', () => {
+      const project = new CdkTypeScriptApp({
+        ...baseOptions,
+        workflowNodeVersion: '22.11.0',
+      });
+
+      expect(setupNodeVersion(synthSnapshot(project))).toBe('22.11.0');
+    });
+
+    it('derives the workflow node version from minNodeVersion', () => {
+      const project = new CdkTypeScriptApp({
+        ...baseOptions,
+        minNodeVersion: '22.0.0',
+      });
+
+      expect(setupNodeVersion(synthSnapshot(project))).toBe('22.0.0');
     });
 
     it('uses @types/node 24 and jest 30', () => {

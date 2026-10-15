@@ -46,14 +46,31 @@ function getOptions(options: CdkTypeScriptAppOptions) {
     typecheckTests: true,
   } satisfies Partial<CdkTypeScriptAppOptions>;
 
-  return mergeOptions(defaults, options);
+  const merged = mergeOptions(defaults, options);
+  if (merged.workflowNodeVersion || merged.minNodeVersion) {
+    return merged;
+  }
+  // build and test on the Node.js version the functions run on
+  return {
+    ...merged,
+    workflowNodeVersion: lambdaNodeVersion(merged.lambdaOptions?.runtime),
+  };
+}
+
+/**
+ * The Node.js version of a Lambda runtime, such as `24.x` for `nodejs24.x`.
+ */
+function lambdaNodeVersion(runtime?: LambdaRuntime): string | undefined {
+  const major = /^nodejs(\d+)\.x$/.exec(runtime?.functionRuntime ?? '')?.[1];
+  return major ? `${major}.x` : undefined;
 }
 
 /**
  * A CDK application in TypeScript
  *
  * Defaults to the Node.js 24 Lambda runtime (`lambdaOptions.runtime`) with
- * matching `@types/node`, and Jest 30 (`jestOptions.jestVersion`).
+ * matching `@types/node`, builds and tests on the runtime's Node.js version
+ * (`workflowNodeVersion`), and Jest 30 (`jestOptions.jestVersion`).
  *
  * @pjid cdk-typescript-app
  */
