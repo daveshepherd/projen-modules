@@ -38,6 +38,22 @@ export interface DeploymentsOptions {
 const capitalise = (value: string) =>
   value.charAt(0).toUpperCase() + value.slice(1);
 
+const SECRET_REFERENCE = /\$\{\{\s*secrets\.([A-Za-z_][A-Za-z0-9_]*)\s*\}\}/g;
+
+/**
+ * The secrets a deployment needs: its role ARN secret, then those its env
+ * values reference, in order of appearance and without duplicates
+ */
+function deploymentSecrets(deployment: DeploymentEnvironment): Array<string> {
+  const secrets = new Set([deployment.roleSecret ?? DEFAULT_ROLE_SECRET]);
+  for (const value of Object.values(deployment.env ?? {})) {
+    for (const [, name] of value.matchAll(SECRET_REFERENCE)) {
+      secrets.add(name);
+    }
+  }
+  return [...secrets];
+}
+
 /**
  * Adds a job per deployment environment to the default branch's release
  * workflow, each one deploying after the release job and the previous
@@ -141,14 +157,16 @@ export function addDeployments(
     [
       'After each release, the release workflow deploys to these GitHub environments in order, each after the previous one succeeds:',
       '',
-      '| Environment | Region | Role ARN secret |',
-      '| ----------- | ------ | --------------- |',
+      '| Environment | Region | Secrets |',
+      '| ----------- | ------ | ------- |',
       ...deployments.map(
         (d) =>
-          `| ${d.environment} | ${d.region} | \`${d.roleSecret ?? DEFAULT_ROLE_SECRET}\` |`,
+          `| ${d.environment} | ${d.region} | ${deploymentSecrets(d)
+            .map((name) => `\`${name}\``)
+            .join(', ')} |`,
       ),
       '',
-      'Each environment needs its role ARN secret, for a role that trusts GitHub\'s OIDC provider.',
+      'Each environment needs these secrets set, the first being the ARN of a role that trusts GitHub\'s OIDC provider.',
     ].join('\n'),
     { order: ReadmeOrder.USAGE },
   );

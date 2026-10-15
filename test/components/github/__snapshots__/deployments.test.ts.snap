@@ -229,12 +229,12 @@ npx projen deploy
 
 After each release, the release workflow deploys to these GitHub environments in order, each after the previous one succeeds:
 
-| Environment | Region | Role ARN secret |
-| ----------- | ------ | --------------- |
-| staging | eu-west-2 | \`AWS_DEPLOYMENT_ROLE_ARN\` |
-| production | eu-west-2 | \`AWS_DEPLOYMENT_ROLE_ARN\` |
+| Environment | Region | Secrets |
+| ----------- | ------ | ------- |
+| staging | eu-west-2 | \`AWS_DEPLOYMENT_ROLE_ARN\`, \`EXAMPLE_SECRET\` |
+| production | eu-west-2 | \`AWS_DEPLOYMENT_ROLE_ARN\`, \`EXAMPLE_SECRET\` |
 
-Each environment needs its role ARN secret, for a role that trusts GitHub's OIDC provider.
+Each environment needs these secrets set, the first being the ARN of a role that trusts GitHub's OIDC provider.
 
 ## GitHub Configuration
 
