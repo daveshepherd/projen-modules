@@ -2,6 +2,7 @@ import { typescript } from 'projen';
 import { NpmPackageOptions } from './npm-package-options';
 import { NpmCircleCi } from '../../circleci';
 import { CodeOwners } from '../../components/github/codeowners';
+import { Contributing } from '../../components/github/contributing';
 import {
   autoMergeOptions,
   configureMergify,
@@ -57,6 +58,7 @@ export class NpmPackage extends typescript.TypeScriptProject {
       gettingStartedSection(this, { nodeVersion: this.nodeVersion }),
       { order: ReadmeOrder.INTRODUCTION },
     );
+    Contributing.of(this).configurePullRequestTitle(mergedOptions);
     if (this.autoMerge) {
       configureMergify(this, {
         approvedReviews: mergedOptions.autoMergeOptions?.approvedReviews,

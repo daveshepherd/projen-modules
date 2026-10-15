@@ -59,6 +59,14 @@ All source is located in `src` and is grouped by:
 
 `test` contains tests, and mirrors the `src` directory structure. Within here there are `__snapshots__` which contain snapshots of project tests (see #section).
 
+## Contributing
+
+Pull request titles must follow [Conventional Commits](https://www.conventionalcommits.org), with one of the types `feat`, `fix` or `chore`, such as `feat: describe the change`. The **Validate PR title** check fails until the title does.
+
+Once a pull request is approved, or is opened by `daveshepherd`, and its checks pass, the [Mergify](https://mergify.com) merge queue squash merges it, with its title as the commit message. Draft pull requests and those labelled `do-not-merge` are not merged.
+
+The type decides the next release: `feat` releases a minor version and `fix` a patch version, while a breaking change, marked by `!` after the type (such as `feat!: ...`) or a `BREAKING CHANGE:` footer, releases a major version. Other types still release a patch version. While the version is below 1.0.0, a breaking change releases a minor version and `feat` a patch version.
+
 ## GitHub Configuration
 
 The one-off configuration that this repository needs on GitHub, such as the Mergify merge queue and the branch ruleset, is described in [docs/github-configuration.md](docs/github-configuration.md).

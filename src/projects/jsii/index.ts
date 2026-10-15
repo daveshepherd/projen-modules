@@ -2,6 +2,7 @@ import { cdk, github } from 'projen';
 import { JsiiProjectOptions } from './jsii-project-options';
 import { CodeOwners } from '../../components/github/codeowners';
 import { CodeQl } from '../../components/github/codeql';
+import { Contributing } from '../../components/github/contributing';
 import {
   autoMergeOptions,
   configureMergify,
@@ -80,6 +81,7 @@ Running the tests like this will update any snapshot files, this should be revie
         languages: ['javascript-typescript', 'actions'],
       });
     }
+    Contributing.of(this).configurePullRequestTitle(mergedOptions);
     if (this.autoMerge) {
       configureMergify(this, {
         approvedReviews: mergedOptions.autoMergeOptions?.approvedReviews,

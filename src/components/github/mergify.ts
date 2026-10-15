@@ -1,5 +1,7 @@
 import { Component, FileBase, github, IResolver, Project } from 'projen';
 import { CodeQl } from './codeql';
+import { Contributing } from './contributing';
+import { formatList } from './format';
 import { Readme, ReadmeOrder } from '../readme';
 
 export interface MergifyOptions {
@@ -50,13 +52,6 @@ export function autoMergeOptions(options: {
   return { ...options.autoMergeOptions, approvedReviews: 0 };
 }
 
-function formatList(values: Array<string>): string {
-  const quoted = values.map((value) => '`' + value + '`');
-  return quoted.length > 1
-    ? `${quoted.slice(0, -1).join(', ')} or ${quoted[quoted.length - 1]}`
-    : quoted.join('');
-}
-
 interface GithubConfiguration {
   readonly approvedReviews: number;
   readonly codeScanning: boolean;
@@ -65,7 +60,9 @@ interface GithubConfiguration {
   readonly trustedAuthors: Array<string>;
 }
 
-function queueDescription(config: GithubConfiguration): string {
+function queueDescription(
+  config: Pick<GithubConfiguration, 'approvedReviews' | 'trustedAuthors'>,
+): string {
   if (!config.approvedReviews) {
     return "Once a pull request's checks pass";
   }
@@ -222,6 +219,10 @@ export function configureMergify(
   project.tryFindObjectFile('.mergify.yml')?.addOverride(
     'merge_protections_settings.reporting_method',
     options.reportingMethod ?? 'deployments',
+  );
+
+  Contributing.of(project).configureMergeQueue(
+    `${queueDescription({ approvedReviews, trustedAuthors })}, the [Mergify](https://mergify.com) merge queue squash merges it, with its title as the commit message. Draft pull requests and those labelled \`do-not-merge\` are not merged.`,
   );
 
   const configuration = (): GithubConfiguration => ({

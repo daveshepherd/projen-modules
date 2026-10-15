@@ -36,6 +36,11 @@ export class ReadmeOrder {
    */
   public static readonly DEFAULT = 50;
   /**
+   * How to contribute, such as the pull request title format and how pull
+   * requests are merged
+   */
+  public static readonly CONTRIBUTING = 80;
+  /**
    * Reference material, such as repository configuration and known issues
    */
   public static readonly REFERENCE = 90;
