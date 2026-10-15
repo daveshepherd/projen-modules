@@ -670,6 +670,7 @@ tsconfig.tsbuildinfo
 cdk.out/
 .cdk.staging/
 CODEOWNERS
+/docs/github-configuration.md
 /.gitattributes
 /.projenrc.ts
 /projenrc
@@ -2447,6 +2448,7 @@ tsconfig.tsbuildinfo
 cdk.out/
 .cdk.staging/
 CODEOWNERS
+/docs/github-configuration.md
 /.gitattributes
 /.projenrc.ts
 /projenrc

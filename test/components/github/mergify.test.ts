@@ -318,5 +318,15 @@ describe('Mergify Component', () => {
       );
       expect(readme).not.toContain('**Restrict updates**');
     });
+
+    it('is left out of the npm package', () => {
+      const project = createProject();
+
+      configureMergify(project);
+
+      expect(synthSnapshot(project)['.npmignore']).toContain(
+        '/docs/github-configuration.md',
+      );
+    });
   });
 });

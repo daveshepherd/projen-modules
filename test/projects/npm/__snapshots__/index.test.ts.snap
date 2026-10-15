@@ -407,6 +407,7 @@ tsconfig.tsbuildinfo
 /.eslintrc.json
 /projenrc/tsconfig.json
 CODEOWNERS
+/docs/github-configuration.md
 /.gitattributes
 /.projenrc.ts
 /projenrc

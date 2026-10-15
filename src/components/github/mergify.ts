@@ -1,4 +1,5 @@
 import { Component, FileBase, github, IResolver, Project } from 'projen';
+import { NodeProject } from 'projen/lib/javascript';
 import { CodeQl } from './codeql';
 import { Contributing } from './contributing';
 import { formatList } from './format';
@@ -269,6 +270,11 @@ class GithubConfigurationFile extends FileBase {
     private readonly body: () => string,
   ) {
     super(project, GITHUB_CONFIGURATION_FILE, {});
+
+    // the guide is for the repository's maintainers, not the package's users
+    if (project instanceof NodeProject) {
+      project.npmignore?.exclude(`/${GITHUB_CONFIGURATION_FILE}`);
+    }
   }
 
   protected synthesizeContent(_: IResolver): string | undefined {
