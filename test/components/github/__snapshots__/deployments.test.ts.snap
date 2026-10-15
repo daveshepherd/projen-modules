@@ -44,6 +44,7 @@ jobs:
         id: setup_node_js
         uses: actions/setup-node@v7.0.0
         with:
+          node-version: 24.x
           cache: yarn
           package-manager-cache: true
       - name: Install dependencies
@@ -101,6 +102,7 @@ jobs:
         id: setup_node_js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
         with:
+          node-version: 24.x
           cache: yarn
       - name: Install dependencies
         id: install_dependencies
@@ -142,6 +144,7 @@ jobs:
         id: setup_node_js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
         with:
+          node-version: 24.x
           cache: yarn
       - name: Install dependencies
         id: install_dependencies
@@ -169,7 +172,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v7.0.0
         with:
-          node-version: lts/*
+          node-version: 24.x
           package-manager-cache: false
       - name: Download build artifacts
         id: download_build_artifacts
@@ -203,7 +206,7 @@ exports[`Deployments chains a deploy job per environment after the release 2`] =
 ## Getting Started
 
 Prerequisites:
-* a current Node.js LTS release
+* Node.js 24
 * Yarn 1 (classic)
 * AWS credentials for the target account, needed to deploy
 

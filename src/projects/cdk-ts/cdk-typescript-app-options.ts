@@ -281,7 +281,7 @@ export interface CdkTypeScriptAppOptions {
   /**
    * The node version used in GitHub Actions workflows.
    * Always use this option if your GitHub Actions workflows require a specific to run.
-   * @default - `minNodeVersion` if set, otherwise `lts/*`.
+   * @default - the Node.js version of the Lambda runtime (`lambdaOptions.runtime`), such as `24.x`, unless `minNodeVersion` is set
    * @stability experimental
    */
   readonly workflowNodeVersion?: string;
