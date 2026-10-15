@@ -202,6 +202,11 @@ exports[`Deployments chains a deploy job per environment after the release 2`] =
 
 ## Getting Started
 
+Prerequisites:
+* a current Node.js LTS release
+* Yarn 1 (classic)
+* AWS credentials for the target account, needed to deploy
+
 \`\`\`sh
 yarn install
 npx projen build

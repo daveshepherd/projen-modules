@@ -8,7 +8,7 @@ import {
 } from '../../components/github/mergify';
 import { DEFAULT_PULL_REQUEST_TEMPLATE } from '../../components/github/pull-request-template';
 import { Readme, ReadmeOrder } from '../../components/readme';
-import { gettingStartedCommands } from '../../components/readme/getting-started';
+import { gettingStartedSection } from '../../components/readme/getting-started';
 import { mergeOptions } from '../../utils/merge-options';
 
 function getOptions(options: JsiiProjectOptions) {
@@ -54,7 +54,7 @@ export class JsiiProject extends cdk.JsiiProject {
     });
     this.readme.addSection(
       'Getting Started',
-      `${gettingStartedCommands(this)}\n
+      `${gettingStartedSection(this, { nodeVersion: this.nodeVersion })}\n
 This will:
 * Install the dependencies
 * Apply any projen changes

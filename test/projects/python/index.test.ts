@@ -38,6 +38,10 @@ describe('Python Package', () => {
 
 ## Getting Started
 
+Prerequisites:
+* Python 3
+* a current Node.js LTS release, to run projen
+
 \`\`\`sh
 npx projen install
 npx projen build
@@ -67,6 +71,10 @@ npx projen build
 A test project description.
 
 ## Getting Started
+
+Prerequisites:
+* Python 3
+* a current Node.js LTS release, to run projen
 
 \`\`\`sh
 npx projen install
