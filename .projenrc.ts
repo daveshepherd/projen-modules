@@ -179,6 +179,12 @@ new ProjenStruct(project, {
     },
   })
   .update('typecheckTests', { docs: { default: 'true' } })
+  .update('workflowNodeVersion', {
+    docs: {
+      default:
+        '- the Node.js version of the Lambda runtime (`lambdaOptions.runtime`), such as `24.x`, unless `minNodeVersion` is set',
+    },
+  })
   .replace('readme', {
     docs: {
       summary: 'Configuration of the README.md file',

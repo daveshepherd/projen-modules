@@ -155,14 +155,14 @@ describe('Deployments', () => {
     const jobs = releaseJobs(
       createProject({
         deployments: [{ environment: 'dev', region: 'eu-west-1' }],
-        workflowNodeVersion: '24.x',
+        workflowNodeVersion: '22.x',
       }),
     );
     const setupNode = jobs.deploy_dev.steps.find(
       (s: any) => s.name === 'Setup Node.js',
     );
 
-    expect(setupNode.with).toStrictEqual({ 'node-version': '24.x', 'cache': 'yarn' });
+    expect(setupNode.with).toStrictEqual({ 'node-version': '22.x', 'cache': 'yarn' });
   });
 
   it('uses the package manager to install and deploy', () => {

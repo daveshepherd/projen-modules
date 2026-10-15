@@ -7,7 +7,8 @@
 A CDK application in TypeScript.
 
 Defaults to the Node.js 24 Lambda runtime (`lambdaOptions.runtime`) with
-matching `@types/node`, and Jest 30 (`jestOptions.jestVersion`).
+matching `@types/node`, builds and tests on the runtime's Node.js version
+(`workflowNodeVersion`), and Jest 30 (`jestOptions.jestVersion`).
 
 #### Initializers <a name="Initializers" id="projen-modules.CdkTypeScriptApp.Initializer"></a>
 
@@ -8447,7 +8448,7 @@ public readonly workflowNodeVersion: string;
 ```
 
 - *Type:* string
-- *Default:* `minNodeVersion` if set, otherwise `lts/*`.
+- *Default:* the Node.js version of the Lambda runtime (`lambdaOptions.runtime`), such as `24.x`, unless `minNodeVersion` is set
 
 The node version used in GitHub Actions workflows.
 

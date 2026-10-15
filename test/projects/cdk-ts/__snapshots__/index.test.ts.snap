@@ -282,6 +282,11 @@ jobs:
         with:
           ref: \${{ github.event.pull_request.head.ref }}
           repository: \${{ github.event.pull_request.head.repo.full_name }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: 24.x
+          package-manager-cache: false
       - name: Install dependencies
         run: yarn install --check-files
       - name: build
@@ -446,6 +451,12 @@ jobs:
       - name: Checkout
         id: checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Setup Node.js
+        id: setup_node_js
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: 24.x
+          package-manager-cache: false
       - name: Install dependencies
         id: install_dependencies
         run: yarn install --check-files --frozen-lockfile
@@ -1437,7 +1448,7 @@ CODEOWNERS
 ## Getting Started
 
 Prerequisites:
-* a current Node.js LTS release
+* Node.js 24
 * Yarn 1 (classic)
 * AWS credentials for the target account, needed to deploy and for the integration test tasks that deploy (\`integ:update\`, \`integ:force\`, \`integ:watch\`)
 
@@ -2049,6 +2060,11 @@ jobs:
         with:
           ref: \${{ github.event.pull_request.head.ref }}
           repository: \${{ github.event.pull_request.head.repo.full_name }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: 24.x
+          package-manager-cache: false
       - name: Install dependencies
         run: yarn install --check-files
       - name: build
@@ -2213,6 +2229,12 @@ jobs:
       - name: Checkout
         id: checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Setup Node.js
+        id: setup_node_js
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: 24.x
+          package-manager-cache: false
       - name: Install dependencies
         id: install_dependencies
         run: yarn install --check-files --frozen-lockfile
@@ -3109,7 +3131,7 @@ CODEOWNERS
 ## Getting Started
 
 Prerequisites:
-* a current Node.js LTS release
+* Node.js 24
 * Yarn 1 (classic)
 * AWS credentials for the target account, needed to deploy
 
