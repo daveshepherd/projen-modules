@@ -61,11 +61,21 @@ new JsonFile(project, 'audit-ci.json', {
     'high': true,
     'report-type': 'summary',
     'allowlist': [
-      // braces <=3.0.3 (CVE-2026-93687), via jsii-docgen > fast-glob > micromatch.
-      // Build-time only and no patched release exists. Accepted 2026-10-05; review by 2027-01-05.
-      'GHSA-vfj7-8cjw-p6xm',
+      // picomatch <=4.0.7 ReDoS, via eslint, jest and micromatch. Dev-only, matching
+      // repository-controlled globs, and no patched release exists. Accepted 2026-11-17; review by 2027-02-17.
+      'GHSA-fc5q-39xc-vjpf',
     ],
   },
+});
+// jest 30 still depends on vulnerable glob and minimatch majors, so force the patched releases
+// (glob GHSA-3g3m-2fjr-6pw4, minimatch GHSA-g3hv-75wg-m249); remove once jest depends on them
+// (set directly, as addPackageResolutions splits scoped paths such as @jest/reporters at the first @)
+project.package.addField('resolutions', {
+  '**/@jest/reporters/glob': '^14.0.6',
+  '**/jest-config/glob': '^14.0.6',
+  '**/jest-runtime/glob': '^14.0.6',
+  '**/test-exclude/glob': '^14.0.6',
+  '**/test-exclude/minimatch': '^11.0.9',
 });
 const auditTask = project.addTask('audit', {
   description: 'Fail on high or critical advisories not in the audit-ci.json allowlist',

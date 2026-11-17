@@ -67,6 +67,13 @@
     "constructs": "10.8.1",
     "projen": "0.* >=0.105.2"
   },
+  "resolutions": {
+    "**/@jest/reporters/glob": "^14.0.6",
+    "**/jest-config/glob": "^14.0.6",
+    "**/jest-runtime/glob": "^14.0.6",
+    "**/test-exclude/glob": "^14.0.6",
+    "**/test-exclude/minimatch": "^11.0.9"
+  },
   "engines": {
     "node": ">= 22.0.0"
   },
