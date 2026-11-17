@@ -91,6 +91,10 @@ export interface NpmPackageOptions {
   readonly projenrcTs?: boolean;
   /**
    * Typescript  artifacts output directory.
+   * When `libdir` is changed, set `entrypoint` to match it (for example
+   * `libdir: "dist"` with `entrypoint: "dist/index.js"`). `types` follows the
+   * entrypoint rather than `libdir`, and `main` still defaults to
+   * `lib/index.js`.
    * @default "lib"
    * @stability experimental
    */
@@ -137,6 +141,20 @@ export interface NpmPackageOptions {
    * @stability experimental
    */
   readonly disableTsconfig?: boolean;
+  /**
+   * Permissions for the main build, release and dependency upgrade jobs.
+   * Defined scopes override the job defaults and automatically inferred permissions,
+   * including CodeArtifact and Codecov OIDC. Undefined scopes keep their defaults.
+   * Use `JobPermission.NONE` to explicitly remove a permission.
+   *
+   * `buildWorkflowOptions.permissions` replaces this entire set, including automatic
+   * permissions. `depsUpgradeOptions.workflowOptions.permissions` overrides individual
+   * scopes. Applies to all release branches, but not to separate package, publishing,
+   * self-mutation or pull request creation jobs, or unrelated workflows.
+   * @default - Use the job defaults and automatically inferred permissions.
+   * @stability experimental
+   */
+  readonly workflowPermissions?: github.workflows.JobPermissions;
   /**
    * Enable Node.js package cache in GitHub workflows.
    * @default false
@@ -652,6 +670,13 @@ export interface NpmPackageOptions {
    */
   readonly peerDependencyOptions?: javascript.PeerDependencyOptions;
   /**
+   * Additional information about how peer dependencies are used, rendered as `peerDependenciesMeta` in `package.json`. For example, this can mark peer dependencies as optional.
+   * Each key must also be declared as a peer dependency.
+   * @default - no `peerDependenciesMeta`
+   * @stability experimental
+   */
+  readonly peerDependenciesMeta?: Record<string, javascript.PeerDependencyMeta>;
+  /**
    * The "name" in package.json.
    * @default - defaults to project name
    * @stability experimental
@@ -666,6 +691,20 @@ export interface NpmPackageOptions {
    */
   readonly packageManager?: javascript.NodePackageManager;
   /**
+   * How long to wait, in seconds, for the published package version to be available.
+   * Requires `npmVerifyPublished` to be enabled.
+   * @default 3600
+   * @stability experimental
+   */
+  readonly npmVerifyPublishedTimeoutSeconds?: number;
+  /**
+   * Wait until the published package version is available from the npm registry before the publish job completes.
+   * Enable this when packages that depend on the published package are released right after.
+   * @default false
+   * @stability experimental
+   */
+  readonly npmVerifyPublished?: boolean;
+  /**
    * Use trusted publishing for publishing to npmjs.com Needs to be pre-configured on npm.js to work.
    * @default - false
    * @stability experimental
@@ -679,7 +718,8 @@ export interface NpmPackageOptions {
   readonly npmTokenSecret?: string;
   /**
    * The base URL of the npm package registry.
-   * Must be a URL (e.g. start with "https://" or "http://")
+   * Must be a URL (e.g. start with "https://" or "http://").
+   * A trailing slash is added if missing.
    * @default "https://registry.npmjs.org"
    * @stability experimental
    */

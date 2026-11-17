@@ -6,7 +6,7 @@
 
 A CDK application in TypeScript.
 
-Defaults to the Node.js 24 Lambda runtime (`lambdaOptions.runtime`) with
+Defaults to the Node.js 26 Lambda runtime (`lambdaOptions.runtime`) with
 matching `@types/node`, builds and tests on the runtime's Node.js version
 (`workflowNodeVersion`), and Jest 30 (`jestOptions.jestVersion`).
 
@@ -5845,11 +5845,14 @@ const cdkTypeScriptAppOptions: CdkTypeScriptAppOptions = { ... }
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.npmRegistryUrl">npmRegistryUrl</a></code> | <code>string</code> | The base URL of the npm package registry. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.npmTokenSecret">npmTokenSecret</a></code> | <code>string</code> | GitHub secret which contains the NPM token to use when publishing packages. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.npmTrustedPublishing">npmTrustedPublishing</a></code> | <code>boolean</code> | Use trusted publishing for publishing to npmjs.com Needs to be pre-configured on npm.js to work. |
+| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.npmVerifyPublished">npmVerifyPublished</a></code> | <code>boolean</code> | Wait until the published package version is available from the npm registry before the publish job completes. |
+| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.npmVerifyPublishedTimeoutSeconds">npmVerifyPublishedTimeoutSeconds</a></code> | <code>number</code> | How long to wait, in seconds, for the published package version to be available. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.outdir">outdir</a></code> | <code>string</code> | The root directory of the project. Relative to this directory, all files are synthesized. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.package">package</a></code> | <code>boolean</code> | Defines a `package` task that will produce an npm tarball under the artifacts directory (e.g. `dist`). |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.packageManager">packageManager</a></code> | <code>projen.javascript.NodePackageManager</code> | The Node Package Manager used to execute scripts. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.packageName">packageName</a></code> | <code>string</code> | The "name" in package.json. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.parent">parent</a></code> | <code>projen.Project</code> | The parent project, if this project is part of a bigger project. |
+| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.peerDependenciesMeta">peerDependenciesMeta</a></code> | <code>{[ key: string ]: projen.javascript.PeerDependencyMeta}</code> | Additional information about how peer dependencies are used, rendered as `peerDependenciesMeta` in `package.json`. For example, this can mark peer dependencies as optional. Each key must also be declared as a peer dependency. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.peerDependencyOptions">peerDependencyOptions</a></code> | <code>projen.javascript.PeerDependencyOptions</code> | Options for `peerDeps`. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.peerDeps">peerDeps</a></code> | <code>string[]</code> | Peer dependencies for this module. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.pnpmOptions">pnpmOptions</a></code> | <code>projen.javascript.PnpmOptions</code> | Options for pnpm. |
@@ -5908,6 +5911,7 @@ const cdkTypeScriptAppOptions: CdkTypeScriptAppOptions = { ... }
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.typecheckTests">typecheckTests</a></code> | <code>boolean</code> | Type-check the test suite as part of the `test` task. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.typescriptVersion">typescriptVersion</a></code> | <code>string</code> | TypeScript version to use. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.versionrcOptions">versionrcOptions</a></code> | <code>{[ key: string ]: any}</code> | Custom configuration used when creating changelog with commit-and-tag-version package. |
+| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.versionReporting">versionReporting</a></code> | <code>boolean</code> | Enable AWS CDK library version reporting. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.vscode">vscode</a></code> | <code>boolean</code> | Enable VSCode integration. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.watchExcludes">watchExcludes</a></code> | <code>string[]</code> | Glob patterns to exclude from `cdk watch`. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.watchIncludes">watchIncludes</a></code> | <code>string[]</code> | Glob patterns to include in `cdk watch`. |
@@ -5916,6 +5920,7 @@ const cdkTypeScriptAppOptions: CdkTypeScriptAppOptions = { ... }
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.workflowGitIdentity">workflowGitIdentity</a></code> | <code>projen.github.GitIdentity</code> | The git identity to use in workflows. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.workflowNodeVersion">workflowNodeVersion</a></code> | <code>string</code> | The node version used in GitHub Actions workflows. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.workflowPackageCache">workflowPackageCache</a></code> | <code>boolean</code> | Enable Node.js package cache in GitHub workflows. |
+| <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.workflowPermissions">workflowPermissions</a></code> | <code>projen.github.workflows.JobPermissions</code> | Permissions for the main build, release and dependency upgrade jobs. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.workflowRunsOn">workflowRunsOn</a></code> | <code>string[]</code> | Github Runner selection labels. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.workflowRunsOnGroup">workflowRunsOnGroup</a></code> | <code>projen.GroupRunnerOptions</code> | Github Runner Group selection options. |
 | <code><a href="#projen-modules.CdkTypeScriptAppOptions.property.yarnBerryOptions">yarnBerryOptions</a></code> | <code>projen.javascript.YarnBerryOptions</code> | Options for Yarn Berry. |
@@ -7209,6 +7214,11 @@ public readonly libdir: string;
 
 Typescript  artifacts output directory.
 
+When `libdir` is changed, set `entrypoint` to match it (for example
+`libdir: "dist"` with `entrypoint: "dist/index.js"`). `types` follows the
+entrypoint rather than `libdir`, and `main` still defaults to
+`lib/index.js`.
+
 ---
 
 ##### `license`<sup>Optional</sup> <a name="license" id="projen-modules.CdkTypeScriptAppOptions.property.license"></a>
@@ -7447,7 +7457,8 @@ public readonly npmRegistryUrl: string;
 
 The base URL of the npm package registry.
 
-Must be a URL (e.g. start with "https://" or "http://")
+Must be a URL (e.g. start with "https://" or "http://").
+A trailing slash is added if missing.
 
 ---
 
@@ -7474,6 +7485,36 @@ public readonly npmTrustedPublishing: boolean;
 - *Default:* false
 
 Use trusted publishing for publishing to npmjs.com Needs to be pre-configured on npm.js to work.
+
+---
+
+##### `npmVerifyPublished`<sup>Optional</sup> <a name="npmVerifyPublished" id="projen-modules.CdkTypeScriptAppOptions.property.npmVerifyPublished"></a>
+
+```typescript
+public readonly npmVerifyPublished: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Wait until the published package version is available from the npm registry before the publish job completes.
+
+Enable this when packages that depend on the published package are released right after.
+
+---
+
+##### `npmVerifyPublishedTimeoutSeconds`<sup>Optional</sup> <a name="npmVerifyPublishedTimeoutSeconds" id="projen-modules.CdkTypeScriptAppOptions.property.npmVerifyPublishedTimeoutSeconds"></a>
+
+```typescript
+public readonly npmVerifyPublishedTimeoutSeconds: number;
+```
+
+- *Type:* number
+- *Default:* 3600
+
+How long to wait, in seconds, for the published package version to be available.
+
+Requires `npmVerifyPublished` to be enabled.
 
 ---
 
@@ -7542,6 +7583,19 @@ public readonly parent: Project;
 - *Type:* projen.Project
 
 The parent project, if this project is part of a bigger project.
+
+---
+
+##### `peerDependenciesMeta`<sup>Optional</sup> <a name="peerDependenciesMeta" id="projen-modules.CdkTypeScriptAppOptions.property.peerDependenciesMeta"></a>
+
+```typescript
+public readonly peerDependenciesMeta: {[ key: string ]: PeerDependencyMeta};
+```
+
+- *Type:* {[ key: string ]: projen.javascript.PeerDependencyMeta}
+- *Default:* no `peerDependenciesMeta`
+
+Additional information about how peer dependencies are used, rendered as `peerDependenciesMeta` in `package.json`. For example, this can mark peer dependencies as optional. Each key must also be declared as a peer dependency.
 
 ---
 
@@ -8361,6 +8415,19 @@ Given values either append to default configuration or overwrite values in it.
 
 ---
 
+##### `versionReporting`<sup>Optional</sup> <a name="versionReporting" id="projen-modules.CdkTypeScriptAppOptions.property.versionReporting"></a>
+
+```typescript
+public readonly versionReporting: boolean;
+```
+
+- *Type:* boolean
+- *Default:* use the AWS CDK default
+
+Enable AWS CDK library version reporting.
+
+---
+
 ##### `vscode`<sup>Optional</sup> <a name="vscode" id="projen-modules.CdkTypeScriptAppOptions.property.vscode"></a>
 
 ```typescript
@@ -8448,7 +8515,7 @@ public readonly workflowNodeVersion: string;
 ```
 
 - *Type:* string
-- *Default:* the Node.js version of the Lambda runtime (`lambdaOptions.runtime`), such as `24.x`, unless `minNodeVersion` is set
+- *Default:* the Node.js version of the Lambda runtime (`lambdaOptions.runtime`), such as `26.x`, unless `minNodeVersion` is set
 
 The node version used in GitHub Actions workflows.
 
@@ -8466,6 +8533,28 @@ public readonly workflowPackageCache: boolean;
 - *Default:* false
 
 Enable Node.js package cache in GitHub workflows.
+
+---
+
+##### `workflowPermissions`<sup>Optional</sup> <a name="workflowPermissions" id="projen-modules.CdkTypeScriptAppOptions.property.workflowPermissions"></a>
+
+```typescript
+public readonly workflowPermissions: JobPermissions;
+```
+
+- *Type:* projen.github.workflows.JobPermissions
+- *Default:* Use the job defaults and automatically inferred permissions.
+
+Permissions for the main build, release and dependency upgrade jobs.
+
+Defined scopes override the job defaults and automatically inferred permissions,
+including CodeArtifact and Codecov OIDC. Undefined scopes keep their defaults.
+Use `JobPermission.NONE` to explicitly remove a permission.
+
+`buildWorkflowOptions.permissions` replaces this entire set, including automatic
+permissions. `depsUpgradeOptions.workflowOptions.permissions` overrides individual
+scopes. Applies to all release branches, but not to separate package, publishing,
+self-mutation or pull request creation jobs, or unrelated workflows.
 
 ---
 
@@ -8726,11 +8815,14 @@ const jsiiProjectOptions: JsiiProjectOptions = { ... }
 | <code><a href="#projen-modules.JsiiProjectOptions.property.npmRegistryUrl">npmRegistryUrl</a></code> | <code>string</code> | The base URL of the npm package registry. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.npmTokenSecret">npmTokenSecret</a></code> | <code>string</code> | GitHub secret which contains the NPM token to use when publishing packages. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.npmTrustedPublishing">npmTrustedPublishing</a></code> | <code>boolean</code> | Use trusted publishing for publishing to npmjs.com Needs to be pre-configured on npm.js to work. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.npmVerifyPublished">npmVerifyPublished</a></code> | <code>boolean</code> | Wait until the published package version is available from the npm registry before the publish job completes. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.npmVerifyPublishedTimeoutSeconds">npmVerifyPublishedTimeoutSeconds</a></code> | <code>number</code> | How long to wait, in seconds, for the published package version to be available. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.outdir">outdir</a></code> | <code>string</code> | The root directory of the project. Relative to this directory, all files are synthesized. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.package">package</a></code> | <code>boolean</code> | Defines a `package` task that will produce an npm tarball under the artifacts directory (e.g. `dist`). |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.packageManager">packageManager</a></code> | <code>projen.javascript.NodePackageManager</code> | The Node Package Manager used to execute scripts. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.packageName">packageName</a></code> | <code>string</code> | The "name" in package.json. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.parent">parent</a></code> | <code>projen.Project</code> | The parent project, if this project is part of a bigger project. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.peerDependenciesMeta">peerDependenciesMeta</a></code> | <code>{[ key: string ]: projen.javascript.PeerDependencyMeta}</code> | Additional information about how peer dependencies are used, rendered as `peerDependenciesMeta` in `package.json`. For example, this can mark peer dependencies as optional. Each key must also be declared as a peer dependency. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.peerDependencyOptions">peerDependencyOptions</a></code> | <code>projen.javascript.PeerDependencyOptions</code> | Options for `peerDeps`. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.peerDeps">peerDeps</a></code> | <code>string[]</code> | Peer dependencies for this module. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.pnpmOptions">pnpmOptions</a></code> | <code>projen.javascript.PnpmOptions</code> | Options for pnpm. |
@@ -8799,6 +8891,7 @@ const jsiiProjectOptions: JsiiProjectOptions = { ... }
 | <code><a href="#projen-modules.JsiiProjectOptions.property.workflowGitIdentity">workflowGitIdentity</a></code> | <code>projen.github.GitIdentity</code> | The git identity to use in workflows. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.workflowNodeVersion">workflowNodeVersion</a></code> | <code>string</code> | The node version used in GitHub Actions workflows. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.workflowPackageCache">workflowPackageCache</a></code> | <code>boolean</code> | Enable Node.js package cache in GitHub workflows. |
+| <code><a href="#projen-modules.JsiiProjectOptions.property.workflowPermissions">workflowPermissions</a></code> | <code>projen.github.workflows.JobPermissions</code> | Permissions for the main build, release and dependency upgrade jobs. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.workflowRunsOn">workflowRunsOn</a></code> | <code>string[]</code> | Github Runner selection labels. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.workflowRunsOnGroup">workflowRunsOnGroup</a></code> | <code>projen.GroupRunnerOptions</code> | Github Runner Group selection options. |
 | <code><a href="#projen-modules.JsiiProjectOptions.property.yarnBerryOptions">yarnBerryOptions</a></code> | <code>projen.javascript.YarnBerryOptions</code> | Options for Yarn Berry. |
@@ -9770,6 +9863,8 @@ By default, jsii will include all *.ts files (except .d.ts files) in the TypeScr
 This can be problematic for example when the package's build or test procedure generates .ts files
 that cannot be compiled with jsii's compiler settings.
 
+When ESLint is enabled, these patterns are also added to its ignore patterns.
+
 ---
 
 ##### `github`<sup>Optional</sup> <a name="github" id="projen-modules.JsiiProjectOptions.property.github"></a>
@@ -9958,6 +10053,11 @@ public readonly libdir: string;
 - *Default:* "lib"
 
 Typescript  artifacts output directory.
+
+When `libdir` is changed, set `entrypoint` to match it (for example
+`libdir: "dist"` with `entrypoint: "dist/index.js"`). `types` follows the
+entrypoint rather than `libdir`, and `main` still defaults to
+`lib/index.js`.
 
 ---
 
@@ -10197,7 +10297,8 @@ public readonly npmRegistryUrl: string;
 
 The base URL of the npm package registry.
 
-Must be a URL (e.g. start with "https://" or "http://")
+Must be a URL (e.g. start with "https://" or "http://").
+A trailing slash is added if missing.
 
 ---
 
@@ -10224,6 +10325,36 @@ public readonly npmTrustedPublishing: boolean;
 - *Default:* false
 
 Use trusted publishing for publishing to npmjs.com Needs to be pre-configured on npm.js to work.
+
+---
+
+##### `npmVerifyPublished`<sup>Optional</sup> <a name="npmVerifyPublished" id="projen-modules.JsiiProjectOptions.property.npmVerifyPublished"></a>
+
+```typescript
+public readonly npmVerifyPublished: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Wait until the published package version is available from the npm registry before the publish job completes.
+
+Enable this when packages that depend on the published package are released right after.
+
+---
+
+##### `npmVerifyPublishedTimeoutSeconds`<sup>Optional</sup> <a name="npmVerifyPublishedTimeoutSeconds" id="projen-modules.JsiiProjectOptions.property.npmVerifyPublishedTimeoutSeconds"></a>
+
+```typescript
+public readonly npmVerifyPublishedTimeoutSeconds: number;
+```
+
+- *Type:* number
+- *Default:* 3600
+
+How long to wait, in seconds, for the published package version to be available.
+
+Requires `npmVerifyPublished` to be enabled.
 
 ---
 
@@ -10292,6 +10423,19 @@ public readonly parent: Project;
 - *Type:* projen.Project
 
 The parent project, if this project is part of a bigger project.
+
+---
+
+##### `peerDependenciesMeta`<sup>Optional</sup> <a name="peerDependenciesMeta" id="projen-modules.JsiiProjectOptions.property.peerDependenciesMeta"></a>
+
+```typescript
+public readonly peerDependenciesMeta: {[ key: string ]: PeerDependencyMeta};
+```
+
+- *Type:* {[ key: string ]: projen.javascript.PeerDependencyMeta}
+- *Default:* no `peerDependenciesMeta`
+
+Additional information about how peer dependencies are used, rendered as `peerDependenciesMeta` in `package.json`. For example, this can mark peer dependencies as optional. Each key must also be declared as a peer dependency.
 
 ---
 
@@ -10599,6 +10743,9 @@ public readonly publishToGo: JsiiGoTarget;
 - *Default:* no publishing
 
 Publish Go bindings to a git repository.
+
+A separate repository is recommended. If `moduleName` refers to the source
+repository, set `publishToSourceRepository` to `true`.
 
 ---
 
@@ -11246,6 +11393,28 @@ Enable Node.js package cache in GitHub workflows.
 
 ---
 
+##### `workflowPermissions`<sup>Optional</sup> <a name="workflowPermissions" id="projen-modules.JsiiProjectOptions.property.workflowPermissions"></a>
+
+```typescript
+public readonly workflowPermissions: JobPermissions;
+```
+
+- *Type:* projen.github.workflows.JobPermissions
+- *Default:* Use the job defaults and automatically inferred permissions.
+
+Permissions for the main build, release and dependency upgrade jobs.
+
+Defined scopes override the job defaults and automatically inferred permissions,
+including CodeArtifact and Codecov OIDC. Undefined scopes keep their defaults.
+Use `JobPermission.NONE` to explicitly remove a permission.
+
+`buildWorkflowOptions.permissions` replaces this entire set, including automatic
+permissions. `depsUpgradeOptions.workflowOptions.permissions` overrides individual
+scopes. Applies to all release branches, but not to separate package, publishing,
+self-mutation or pull request creation jobs, or unrelated workflows.
+
+---
+
 ##### ~~`workflowRunsOn`~~<sup>Optional</sup> <a name="workflowRunsOn" id="projen-modules.JsiiProjectOptions.property.workflowRunsOn"></a>
 
 - *Deprecated:* use `githubOptions.workflowRunsOn` on the project, or `runsOn` on `ReleaseOptions`
@@ -11390,11 +11559,14 @@ const npmPackageOptions: NpmPackageOptions = { ... }
 | <code><a href="#projen-modules.NpmPackageOptions.property.npmRegistryUrl">npmRegistryUrl</a></code> | <code>string</code> | The base URL of the npm package registry. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.npmTokenSecret">npmTokenSecret</a></code> | <code>string</code> | GitHub secret which contains the NPM token to use when publishing packages. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.npmTrustedPublishing">npmTrustedPublishing</a></code> | <code>boolean</code> | Use trusted publishing for publishing to npmjs.com Needs to be pre-configured on npm.js to work. |
+| <code><a href="#projen-modules.NpmPackageOptions.property.npmVerifyPublished">npmVerifyPublished</a></code> | <code>boolean</code> | Wait until the published package version is available from the npm registry before the publish job completes. |
+| <code><a href="#projen-modules.NpmPackageOptions.property.npmVerifyPublishedTimeoutSeconds">npmVerifyPublishedTimeoutSeconds</a></code> | <code>number</code> | How long to wait, in seconds, for the published package version to be available. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.outdir">outdir</a></code> | <code>string</code> | The root directory of the project. Relative to this directory, all files are synthesized. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.package">package</a></code> | <code>boolean</code> | Defines a `package` task that will produce an npm tarball under the artifacts directory (e.g. `dist`). |
 | <code><a href="#projen-modules.NpmPackageOptions.property.packageManager">packageManager</a></code> | <code>projen.javascript.NodePackageManager</code> | The Node Package Manager used to execute scripts. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.packageName">packageName</a></code> | <code>string</code> | The "name" in package.json. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.parent">parent</a></code> | <code>projen.Project</code> | The parent project, if this project is part of a bigger project. |
+| <code><a href="#projen-modules.NpmPackageOptions.property.peerDependenciesMeta">peerDependenciesMeta</a></code> | <code>{[ key: string ]: projen.javascript.PeerDependencyMeta}</code> | Additional information about how peer dependencies are used, rendered as `peerDependenciesMeta` in `package.json`. For example, this can mark peer dependencies as optional. Each key must also be declared as a peer dependency. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.peerDependencyOptions">peerDependencyOptions</a></code> | <code>projen.javascript.PeerDependencyOptions</code> | Options for `peerDeps`. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.peerDeps">peerDeps</a></code> | <code>string[]</code> | Peer dependencies for this module. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.pnpmOptions">pnpmOptions</a></code> | <code>projen.javascript.PnpmOptions</code> | Options for pnpm. |
@@ -11457,6 +11629,7 @@ const npmPackageOptions: NpmPackageOptions = { ... }
 | <code><a href="#projen-modules.NpmPackageOptions.property.workflowGitIdentity">workflowGitIdentity</a></code> | <code>projen.github.GitIdentity</code> | The git identity to use in workflows. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.workflowNodeVersion">workflowNodeVersion</a></code> | <code>string</code> | The node version used in GitHub Actions workflows. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.workflowPackageCache">workflowPackageCache</a></code> | <code>boolean</code> | Enable Node.js package cache in GitHub workflows. |
+| <code><a href="#projen-modules.NpmPackageOptions.property.workflowPermissions">workflowPermissions</a></code> | <code>projen.github.workflows.JobPermissions</code> | Permissions for the main build, release and dependency upgrade jobs. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.workflowRunsOn">workflowRunsOn</a></code> | <code>string[]</code> | Github Runner selection labels. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.workflowRunsOnGroup">workflowRunsOnGroup</a></code> | <code>projen.GroupRunnerOptions</code> | Github Runner Group selection options. |
 | <code><a href="#projen-modules.NpmPackageOptions.property.yarnBerryOptions">yarnBerryOptions</a></code> | <code>projen.javascript.YarnBerryOptions</code> | Options for Yarn Berry. |
@@ -12474,6 +12647,11 @@ public readonly libdir: string;
 
 Typescript  artifacts output directory.
 
+When `libdir` is changed, set `entrypoint` to match it (for example
+`libdir: "dist"` with `entrypoint: "dist/index.js"`). `types` follows the
+entrypoint rather than `libdir`, and `main` still defaults to
+`lib/index.js`.
+
 ---
 
 ##### `license`<sup>Optional</sup> <a name="license" id="projen-modules.NpmPackageOptions.property.license"></a>
@@ -12712,7 +12890,8 @@ public readonly npmRegistryUrl: string;
 
 The base URL of the npm package registry.
 
-Must be a URL (e.g. start with "https://" or "http://")
+Must be a URL (e.g. start with "https://" or "http://").
+A trailing slash is added if missing.
 
 ---
 
@@ -12739,6 +12918,36 @@ public readonly npmTrustedPublishing: boolean;
 - *Default:* false
 
 Use trusted publishing for publishing to npmjs.com Needs to be pre-configured on npm.js to work.
+
+---
+
+##### `npmVerifyPublished`<sup>Optional</sup> <a name="npmVerifyPublished" id="projen-modules.NpmPackageOptions.property.npmVerifyPublished"></a>
+
+```typescript
+public readonly npmVerifyPublished: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Wait until the published package version is available from the npm registry before the publish job completes.
+
+Enable this when packages that depend on the published package are released right after.
+
+---
+
+##### `npmVerifyPublishedTimeoutSeconds`<sup>Optional</sup> <a name="npmVerifyPublishedTimeoutSeconds" id="projen-modules.NpmPackageOptions.property.npmVerifyPublishedTimeoutSeconds"></a>
+
+```typescript
+public readonly npmVerifyPublishedTimeoutSeconds: number;
+```
+
+- *Type:* number
+- *Default:* 3600
+
+How long to wait, in seconds, for the published package version to be available.
+
+Requires `npmVerifyPublished` to be enabled.
 
 ---
 
@@ -12807,6 +13016,19 @@ public readonly parent: Project;
 - *Type:* projen.Project
 
 The parent project, if this project is part of a bigger project.
+
+---
+
+##### `peerDependenciesMeta`<sup>Optional</sup> <a name="peerDependenciesMeta" id="projen-modules.NpmPackageOptions.property.peerDependenciesMeta"></a>
+
+```typescript
+public readonly peerDependenciesMeta: {[ key: string ]: PeerDependencyMeta};
+```
+
+- *Type:* {[ key: string ]: projen.javascript.PeerDependencyMeta}
+- *Default:* no `peerDependenciesMeta`
+
+Additional information about how peer dependencies are used, rendered as `peerDependenciesMeta` in `package.json`. For example, this can mark peer dependencies as optional. Each key must also be declared as a peer dependency.
 
 ---
 
@@ -13679,6 +13901,28 @@ public readonly workflowPackageCache: boolean;
 - *Default:* false
 
 Enable Node.js package cache in GitHub workflows.
+
+---
+
+##### `workflowPermissions`<sup>Optional</sup> <a name="workflowPermissions" id="projen-modules.NpmPackageOptions.property.workflowPermissions"></a>
+
+```typescript
+public readonly workflowPermissions: JobPermissions;
+```
+
+- *Type:* projen.github.workflows.JobPermissions
+- *Default:* Use the job defaults and automatically inferred permissions.
+
+Permissions for the main build, release and dependency upgrade jobs.
+
+Defined scopes override the job defaults and automatically inferred permissions,
+including CodeArtifact and Codecov OIDC. Undefined scopes keep their defaults.
+Use `JobPermission.NONE` to explicitly remove a permission.
+
+`buildWorkflowOptions.permissions` replaces this entire set, including automatic
+permissions. `depsUpgradeOptions.workflowOptions.permissions` overrides individual
+scopes. Applies to all release branches, but not to separate package, publishing,
+self-mutation or pull request creation jobs, or unrelated workflows.
 
 ---
 

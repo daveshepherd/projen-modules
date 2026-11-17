@@ -50,7 +50,7 @@ describe('CDK Typescript App', () => {
 ## Getting Started
 
 Prerequisites:
-* Node.js 24
+* Node.js 26
 * Yarn 1 (classic)
 * AWS credentials for the target account, needed to deploy
 
@@ -102,7 +102,7 @@ A test project description.
 ## Getting Started
 
 Prerequisites:
-* Node.js 24
+* Node.js 26
 * Yarn 1 (classic)
 * AWS credentials for the target account, needed to deploy
 
@@ -487,8 +487,8 @@ Pull request titles must follow [Conventional Commits](https://www.conventionalc
       return synthSnapshot(project)['src/hello-function.ts'];
     };
 
-    it('uses the Node.js 24 lambda runtime', () => {
-      expect(synthLambda({})).toContain("new lambda.Runtime('nodejs24.x'");
+    it('uses the Node.js 26 lambda runtime', () => {
+      expect(synthLambda({})).toContain("new lambda.Runtime('nodejs26.x'");
     });
 
     it('can override the lambda runtime', () => {
@@ -509,8 +509,8 @@ Pull request titles must follow [Conventional Commits](https://www.conventionalc
     it('builds on the Node.js version of the lambda runtime', () => {
       const output = synthSnapshot(new CdkTypeScriptApp(baseOptions));
 
-      expect(setupNodeVersion(output)).toBe('24.x');
-      expect(output['README.md']).toContain('* Node.js 24\n');
+      expect(setupNodeVersion(output)).toBe('26.x');
+      expect(output['README.md']).toContain('* Node.js 26\n');
     });
 
     it('builds on the Node.js version of an overridden lambda runtime', () => {
@@ -552,10 +552,10 @@ Pull request titles must follow [Conventional Commits](https://www.conventionalc
       expect(setupNodeVersion(synthSnapshot(project))).toBe('22.0.0');
     });
 
-    it('uses @types/node 24 and jest 30', () => {
+    it('uses @types/node 26 and jest 30', () => {
       const deps = devDependencies(new CdkTypeScriptApp(baseOptions));
 
-      expect(deps['@types/node']).toBe('^24');
+      expect(deps['@types/node']).toBe('^26');
       expect(deps.jest).toBe('^30');
       expect(deps['@types/jest']).toBe('^30');
       expect(deps['ts-jest']).toBe('^29');
