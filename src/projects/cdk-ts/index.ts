@@ -37,11 +37,11 @@ function getOptions(options: CdkTypeScriptAppOptions) {
     projenrcTs: true,
     // authenticate as the GitHub App, so mergify can approve upgrade pull requests
     projenCredentials: github.GithubCredentials.fromApp({}),
-    lambdaOptions: { runtime: LambdaRuntime.NODEJS_24_X },
+    lambdaOptions: { runtime: LambdaRuntime.NODEJS_26_X },
     jestOptions: { jestVersion: '^30' },
     // match the lambda runtime, unless derived from minNodeVersion; a consumer
     // @types/node in devDeps is added later, so replaces this one
-    devDeps: options.minNodeVersion ? [] : ['@types/node@^24'],
+    devDeps: options.minNodeVersion ? [] : ['@types/node@^26'],
     // ts-jest only reports type errors in the files a test run loads, so type-check the whole suite first
     typecheckTests: true,
   } satisfies Partial<CdkTypeScriptAppOptions>;
@@ -58,7 +58,7 @@ function getOptions(options: CdkTypeScriptAppOptions) {
 }
 
 /**
- * The Node.js version of a Lambda runtime, such as `24.x` for `nodejs24.x`.
+ * The Node.js version of a Lambda runtime, such as `26.x` for `nodejs26.x`.
  */
 function lambdaNodeVersion(runtime?: LambdaRuntime): string | undefined {
   const major = /^nodejs(\d+)\.x$/.exec(runtime?.functionRuntime ?? '')?.[1];
@@ -68,7 +68,7 @@ function lambdaNodeVersion(runtime?: LambdaRuntime): string | undefined {
 /**
  * A CDK application in TypeScript
  *
- * Defaults to the Node.js 24 Lambda runtime (`lambdaOptions.runtime`) with
+ * Defaults to the Node.js 26 Lambda runtime (`lambdaOptions.runtime`) with
  * matching `@types/node`, builds and tests on the runtime's Node.js version
  * (`workflowNodeVersion`), and Jest 30 (`jestOptions.jestVersion`).
  *

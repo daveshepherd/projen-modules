@@ -18,12 +18,14 @@ const project = new JsiiProject({
   },
   jestOptions: {
     jestVersion: '^30',
+    // projen requires the ESM-only dax package, which Jest only loads with this flag (on Node.js >= 24.9)
+    experimentalVmModules: true,
   },
   jsiiVersion: '~6.0.0',
   minNodeVersion: '22.0.0',
   name: 'projen-modules',
   packageManager: NodePackageManager.YARN_CLASSIC,
-  peerDeps: ['constructs', 'projen@0.* >=0.104.0'],
+  peerDeps: ['constructs', 'projen@0.* >=0.105.2'],
   projenrcTs: true,
   npmTrustedPublishing: true,
   publishToPypi: {
@@ -40,12 +42,13 @@ const project = new JsiiProject({
   trustedAuthors: ['daveshepherd'],
   // matches the compiler bundled with jsii 6.0; ts-jest 29 does not support TypeScript 7
   typescriptVersion: '~6.0.0',
-  workflowNodeVersion: '22.x',
+  // Jest needs Node.js >= 24.9 to load projen's ESM-only dependencies (see jestOptions)
+  workflowNodeVersion: '24.x',
 });
 // projen's eslint component adds this unversioned, so the major must be set after construction
 project.addDevDeps('eslint-import-resolver-typescript@^4');
-// npm trusted publishing needs npm >= 11.5.1, which Node 22 does not ship, so only the npm
-// publish job runs on the latest LTS; builds and tests stay on the minimum Node version
+// npm trusted publishing needs npm >= 11.5.1, which not every Node.js release ships, so only the npm
+// publish job runs on the latest LTS
 project.github
   ?.tryFindWorkflow('release')
   ?.file?.patch(JsonPatch.replace('/jobs/release_npm/steps/0/with/node-version', 'lts/*'));
@@ -58,11 +61,21 @@ new JsonFile(project, 'audit-ci.json', {
     'high': true,
     'report-type': 'summary',
     'allowlist': [
-      // braces <=3.0.3 (CVE-2026-93687), via jsii-docgen > fast-glob > micromatch.
-      // Build-time only and no patched release exists. Accepted 2026-10-05; review by 2027-01-05.
-      'GHSA-vfj7-8cjw-p6xm',
+      // picomatch <=4.0.7 ReDoS, via eslint, jest and micromatch. Dev-only, matching
+      // repository-controlled globs, and no patched release exists. Accepted 2026-11-17; review by 2027-02-17.
+      'GHSA-fc5q-39xc-vjpf',
     ],
   },
+});
+// jest 30 still depends on vulnerable glob and minimatch majors, so force the patched releases
+// (glob GHSA-3g3m-2fjr-6pw4, minimatch GHSA-g3hv-75wg-m249); remove once jest depends on them
+// (set directly, as addPackageResolutions splits scoped paths such as @jest/reporters at the first @)
+project.package.addField('resolutions', {
+  '**/@jest/reporters/glob': '^14.0.6',
+  '**/jest-config/glob': '^14.0.6',
+  '**/jest-runtime/glob': '^14.0.6',
+  '**/test-exclude/glob': '^14.0.6',
+  '**/test-exclude/minimatch': '^11.0.9',
 });
 const auditTask = project.addTask('audit', {
   description: 'Fail on high or critical advisories not in the audit-ci.json allowlist',
@@ -182,7 +195,7 @@ new ProjenStruct(project, {
   .update('workflowNodeVersion', {
     docs: {
       default:
-        '- the Node.js version of the Lambda runtime (`lambdaOptions.runtime`), such as `24.x`, unless `minNodeVersion` is set',
+        '- the Node.js version of the Lambda runtime (`lambdaOptions.runtime`), such as `26.x`, unless `minNodeVersion` is set',
     },
   })
   .replace('readme', {

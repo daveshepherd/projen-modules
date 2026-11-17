@@ -57,7 +57,7 @@
     "jsii-docgen": "^10.5.0",
     "jsii-pacmak": "^1.143.0",
     "jsii-rosetta": "~6.0.0",
-    "projen": "0.104.0",
+    "projen": "0.105.2",
     "ts-jest": "^29",
     "ts-node": "^10.9.2",
     "typescript": "~6.0.0",
@@ -65,7 +65,14 @@
   },
   "peerDependencies": {
     "constructs": "10.8.1",
-    "projen": "0.* >=0.104.0"
+    "projen": "0.* >=0.105.2"
+  },
+  "resolutions": {
+    "**/@jest/reporters/glob": "^14.0.6",
+    "**/jest-config/glob": "^14.0.6",
+    "**/jest-runtime/glob": "^14.0.6",
+    "**/test-exclude/glob": "^14.0.6",
+    "**/test-exclude/minimatch": "^11.0.9"
   },
   "engines": {
     "node": ">= 22.0.0"
