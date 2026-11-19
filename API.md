@@ -4,8 +4,6 @@
 
 ### CdkTypeScriptApp <a name="CdkTypeScriptApp" id="projen-modules.CdkTypeScriptApp"></a>
 
-- *Implements:* constructs.IConstruct, constructs.IDependable
-
 A CDK application in TypeScript.
 
 Defaults to the Node.js 26 Lambda runtime (`lambdaOptions.runtime`) with
@@ -1477,8 +1475,6 @@ public readonly DEFAULT_TS_JEST_TRANFORM_PATTERN: string;
 
 ### JsiiProject <a name="JsiiProject" id="projen-modules.JsiiProject"></a>
 
-- *Implements:* constructs.IConstruct, constructs.IDependable
-
 A JSII project in TypeScript.
 
 #### Initializers <a name="Initializers" id="projen-modules.JsiiProject.Initializer"></a>
@@ -2882,8 +2878,6 @@ public readonly DEFAULT_TS_JEST_TRANFORM_PATTERN: string;
 ---
 
 ### NpmPackage <a name="NpmPackage" id="projen-modules.NpmPackage"></a>
-
-- *Implements:* constructs.IConstruct, constructs.IDependable
 
 A NPM/node package in TypeScript.
 
@@ -4289,8 +4283,6 @@ public readonly DEFAULT_TS_JEST_TRANFORM_PATTERN: string;
 
 ### PythonPackage <a name="PythonPackage" id="projen-modules.PythonPackage"></a>
 
-- *Implements:* constructs.IConstruct, constructs.IDependable
-
 A Python package.
 
 #### Initializers <a name="Initializers" id="projen-modules.PythonPackage.Initializer"></a>
@@ -5244,8 +5236,6 @@ this task should synthesize the project files.
 ---
 
 ### Readme <a name="Readme" id="projen-modules.Readme"></a>
-
-- *Implements:* constructs.IConstruct, constructs.IDependable
 
 #### Initializers <a name="Initializers" id="projen-modules.Readme.Initializer"></a>
 

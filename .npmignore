@@ -25,6 +25,8 @@ tsconfig.tsbuildinfo
 !.jsii
 CODEOWNERS
 /docs/github-configuration.md
+/pnpm-workspace.yaml
+/audit-ci.json
 /.gitattributes
 /.projenrc.ts
 /projenrc
