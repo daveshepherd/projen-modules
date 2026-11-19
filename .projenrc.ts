@@ -11,7 +11,7 @@ const project = new JsiiProject({
   codeOwners: ['daveshepherd'],
   defaultReleaseBranch: 'main',
   description: 'A collection of projen modules',
-  devDeps: ['@mrgrain/jsii-struct-builder', 'constructs', 'yaml'],
+  devDeps: ['@jsii/spec', '@mrgrain/jsii-struct-builder', 'constructs', 'yaml'],
   gitignore: ['.npmrc', '.vscode'],
   githubOptions: {
     projenCredentials: github.GithubCredentials.fromApp({}),
@@ -24,7 +24,7 @@ const project = new JsiiProject({
   jsiiVersion: '~6.0.0',
   minNodeVersion: '22.0.0',
   name: 'projen-modules',
-  packageManager: NodePackageManager.YARN_CLASSIC,
+  packageManager: NodePackageManager.PNPM,
   peerDeps: ['constructs', 'projen@0.* >=0.105.2'],
   projenrcTs: true,
   npmTrustedPublishing: true,
@@ -69,13 +69,12 @@ new JsonFile(project, 'audit-ci.json', {
 });
 // jest 30 still depends on vulnerable glob and minimatch majors, so force the patched releases
 // (glob GHSA-3g3m-2fjr-6pw4, minimatch GHSA-g3hv-75wg-m249); remove once jest depends on them
-// (set directly, as addPackageResolutions splits scoped paths such as @jest/reporters at the first @)
-project.package.addField('resolutions', {
-  '**/@jest/reporters/glob': '^14.0.6',
-  '**/jest-config/glob': '^14.0.6',
-  '**/jest-runtime/glob': '^14.0.6',
-  '**/test-exclude/glob': '^14.0.6',
-  '**/test-exclude/minimatch': '^11.0.9',
+// (set directly, as addPackageResolutions cannot express version-range selectors)
+project.package.addField('pnpm', {
+  overrides: {
+    'glob@>=9.0.0 <14.0.2': '^14.0.6',
+    'minimatch@>=7.0.0 <11.0.1': '^11.0.9',
+  },
 });
 const auditTask = project.addTask('audit', {
   description: 'Fail on high or critical advisories not in the audit-ci.json allowlist',
