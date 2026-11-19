@@ -8,7 +8,7 @@ A collection of custom projen modules, that can be used to bootstrap and maintai
 
 Prerequisites:
 * Node.js 24
-* pnpm 10.33.0
+* pnpm 12.21.0
 
 ```sh
 pnpm install

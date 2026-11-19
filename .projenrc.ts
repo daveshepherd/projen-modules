@@ -25,6 +25,22 @@ const project = new JsiiProject({
   minNodeVersion: '22.0.0',
   name: 'projen-modules',
   packageManager: NodePackageManager.PNPM,
+  pnpmOptions: {
+    workspaceYamlOptions: {
+      // jest-haste-map's optional file watcher; jest runs without its native build
+      allowBuilds: { '@parcel/watcher': false },
+      // install only versions published at least a day ago, in CI and locally
+      minimumReleaseAge: 1440,
+      // jest 30 still depends on vulnerable glob and minimatch majors, so force the patched releases
+      // (glob GHSA-3g3m-2fjr-6pw4, minimatch GHSA-g3hv-75wg-m249); remove once jest depends on them
+      overrides: {
+        'glob@>=9.0.0 <14.0.2': '^14.0.6',
+        'minimatch@>=7.0.0 <11.0.1': '^11.0.9',
+      },
+    },
+  },
+  // projen's default pnpm 10 reads settings that pnpm 12 ignores; match the version maintainers run
+  pnpmVersion: '12.21.0',
   peerDeps: ['constructs', 'projen@0.* >=0.105.2'],
   projenrcTs: true,
   npmTrustedPublishing: true,
@@ -45,6 +61,11 @@ const project = new JsiiProject({
   // Jest needs Node.js >= 24.9 to load projen's ESM-only dependencies (see jestOptions)
   workflowNodeVersion: '24.x',
 });
+// projen renders an empty "pnpm" field for package resolutions, which pnpm >= 11 no longer reads
+project.package.file.addDeletionOverride('pnpm');
+// repository tooling config, not needed by consumers of the package
+project.addPackageIgnore('/pnpm-workspace.yaml');
+project.addPackageIgnore('/audit-ci.json');
 // projen's eslint component adds this unversioned, so the major must be set after construction
 project.addDevDeps('eslint-import-resolver-typescript@^4');
 // npm trusted publishing needs npm >= 11.5.1, which not every Node.js release ships, so only the npm
@@ -65,15 +86,6 @@ new JsonFile(project, 'audit-ci.json', {
       // repository-controlled globs, and no patched release exists. Accepted 2026-11-17; review by 2027-02-17.
       'GHSA-fc5q-39xc-vjpf',
     ],
-  },
-});
-// jest 30 still depends on vulnerable glob and minimatch majors, so force the patched releases
-// (glob GHSA-3g3m-2fjr-6pw4, minimatch GHSA-g3hv-75wg-m249); remove once jest depends on them
-// (set directly, as addPackageResolutions cannot express version-range selectors)
-project.package.addField('pnpm', {
-  overrides: {
-    'glob@>=9.0.0 <14.0.2': '^14.0.6',
-    'minimatch@>=7.0.0 <11.0.1': '^11.0.9',
   },
 });
 const auditTask = project.addTask('audit', {
