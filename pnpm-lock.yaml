@@ -19,70 +19,70 @@ importers:
         specifier: ^0.7.64
         version: 0.7.64(projen@0.105.2(constructs@10.8.1))
       '@stylistic/eslint-plugin':
-        specifier: ^2.13.0
+        specifier: ^2
         version: 2.13.0(eslint@9.39.5(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
       '@types/jest':
-        specifier: ^30.0.0
+        specifier: ^30
         version: 30.0.0
       '@types/node':
-        specifier: ^22.20.5
+        specifier: ^22
         version: 22.20.5
       '@typescript-eslint/eslint-plugin':
-        specifier: ^8.73.0
+        specifier: ^8
         version: 8.73.0(@typescript-eslint/parser@8.73.0(eslint@9.39.5(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint@9.39.5(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
       '@typescript-eslint/parser':
-        specifier: ^8.73.0
+        specifier: ^8
         version: 8.73.0(eslint@9.39.5(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
       audit-ci:
-        specifier: ^7.1.0
+        specifier: ^7
         version: 7.1.0
       commit-and-tag-version:
-        specifier: ^13.3.0
+        specifier: ^13
         version: 13.3.0(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.4)
       constructs:
         specifier: 10.8.1
         version: 10.8.1
       eslint:
-        specifier: ^9.39.5
+        specifier: ^9
         version: 9.39.5(supports-color@8.1.1)
       eslint-import-resolver-typescript:
-        specifier: ^4.4.5
+        specifier: ^4
         version: 4.4.5(eslint-plugin-import@2.32.0)(eslint@9.39.5(supports-color@8.1.1))(supports-color@8.1.1)
       eslint-plugin-import:
         specifier: ^2.32.0
         version: 2.32.0(@typescript-eslint/parser@8.73.0(eslint@9.39.5(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint-import-resolver-typescript@4.4.5)(eslint@9.39.5(supports-color@8.1.1))(supports-color@8.1.1)
       jest:
-        specifier: ^30.5.2
+        specifier: ^30
         version: 30.5.2(@types/node@22.20.5)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@22.20.5)(typescript@6.0.3))
       jest-junit:
-        specifier: ^17.0.0
+        specifier: ^17
         version: 17.0.0
       jsii:
-        specifier: ~6.0.25
+        specifier: ~6.0.0
         version: 6.0.25(supports-color@8.1.1)
       jsii-diff:
         specifier: ^1.143.0
         version: 1.143.0(supports-color@8.1.1)
       jsii-docgen:
-        specifier: ^10.13.4
+        specifier: ^10.5.0
         version: 10.13.4(jsii-rosetta@6.0.25(supports-color@8.1.1))
       jsii-pacmak:
         specifier: ^1.143.0
         version: 1.143.0(jsii-rosetta@6.0.25(supports-color@8.1.1))
       jsii-rosetta:
-        specifier: ~6.0.25
+        specifier: ~6.0.0
         version: 6.0.25(supports-color@8.1.1)
       projen:
         specifier: 0.105.2
         version: 0.105.2(constructs@10.8.1)
       ts-jest:
-        specifier: ^29.4.15
+        specifier: ^29
         version: 29.4.15(@babel/core@7.29.13(supports-color@8.1.1))(@jest/transform@30.5.2(supports-color@8.1.1))(@jest/types@30.5.1)(babel-jest@30.5.2(@babel/core@7.29.13(supports-color@8.1.1))(supports-color@8.1.1))(jest-util@30.5.1)(jest@30.5.2(@types/node@22.20.5)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@22.20.5)(typescript@6.0.3)))(typescript@6.0.3)
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@22.20.5)(typescript@6.0.3)
       typescript:
-        specifier: ~6.0.3
+        specifier: ~6.0.0
         version: 6.0.3
       yaml:
         specifier: ^2.9.1
